@@ -2,8 +2,10 @@ package com.tumuhairwe.prep;
 
 import java.util.Arrays;
 
-// sort the elements such that the negative elements appear at the left
-// and positives on the right .... order doesn't matter
+/**
+ * sort the elements such that the negative elements appear at the left
+ * and positives on the right .... order doesn't matter
+ */
 public class CheckReArrange {
     public static void main(String[] args) {
         int[] arr = arr = new int[]{10, -1, 20, 4, 5, -9, -6};
