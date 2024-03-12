@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.stack;
+package com.tumuhairwe.prep.strings;
 
 /**
  * Given an input, determine if its a valida palindrome

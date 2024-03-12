@@ -18,10 +18,17 @@ public class RotateAnImage {
         System.out.println("BEFORE");
         printMatrixRows(matrix);
 
+
+        // swap the columns
+        // a) find middle
+        // b) swap the positions of the rows
+        // c) swap the positions of the rows
+        //   - have 2 pointers
+        //   - have them move towards the middle
         rotatePerfectSquare(matrix);
         System.out.println("AFTER");
 
-        rotatePerfectSquareColumsn(matrix);
+        rotatePerfectSquareColumns(matrix);
 
     }
 
@@ -59,13 +66,14 @@ public class RotateAnImage {
         }
     }
 
-    private static void rotatePerfectSquareColumsn(int[][] matrix) {
+    private static void rotatePerfectSquareColumns(int[][] matrix) {
         int N = matrix.length;;
+        int middle = N / 2;
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N / 2; j++) {
+            for (int j = 0; j < middle; j++) {
                 int temp = matrix[i][j];
                 matrix[i][j] = matrix[i][N -1 -j];
-                matrix[i][N -1 -1] = temp;
+                matrix[i][N -1 -j] = temp;
             }
         }
     }

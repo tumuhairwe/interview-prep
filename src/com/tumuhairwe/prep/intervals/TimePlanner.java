@@ -3,6 +3,8 @@ package com.tumuhairwe.prep.intervals;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 /**
@@ -20,8 +22,21 @@ public class TimePlanner {
     }
     public static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
         // your code goes here
-        List<int[]> slotsOfA = Arrays.asList(slotsA);
-        List<Interval> slotAAvailability = slotsOfA
+        // List<int[]> slotsOfA = Arrays.asList(slotsA);
+        // List<int[]> slotsOfb = Arrays.asList(slotsA);
+
+        Set<Interval> slotAAvailability = new TreeSet<>();
+        for (int i = 0; i < slotsA.length; i++) {
+            slotAAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
+        }
+
+        Set<Interval> slotBAvailability = new TreeSet<>();
+        for (int i = 0; i < slotsB.length; i++) {
+            slotBAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
+        }
+
+        /*
+        List<Interval> slotAAvailability = Arrays.asList(slotsB)
                 .stream()
                 .map(arr -> new Interval(arr[0], arr[1]))
                 .sorted()
@@ -31,7 +46,7 @@ public class TimePlanner {
                 .map(arr -> new Interval(arr[0], arr[1]))
                 .sorted()
                 .collect(Collectors.toList());
-
+        */
         // find intersection between slotA and slotB
         for (Interval a : slotAAvailability){
             // if A intersects with any of B's availability

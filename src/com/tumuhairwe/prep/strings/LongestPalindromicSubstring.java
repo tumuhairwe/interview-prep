@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.stack;
+package com.tumuhairwe.prep.strings;
 
 /**
  * Brute Force
@@ -13,7 +13,7 @@ package com.tumuhairwe.prep.stack;
  * Method 1:
  * - For each word (space is separator)
  * - Find the middle_index ...
- * - Iuse that to compare if every character (going outwards to the left and the right) is equal
+ * - Use that to compare if every character (going outwards to the left and the right) is equal
  * e.g. abccba => abc_MID_cba => string.charAt( MID + counter) == string.charAt( MID - counter)
  *
  * e.g. RACECAR == middle_character needs to be accounted for if length == odd number

@@ -47,6 +47,10 @@ class Interval implements Comparable<Interval>{
         return end - start;
     }
 
+    public int getDuration(){
+        return this.end - this.start;
+    }
+
     public boolean startsBefore(Interval interval){
         return this.start < interval.start;
     }
