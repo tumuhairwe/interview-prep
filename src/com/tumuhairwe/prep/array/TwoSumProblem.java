@@ -23,8 +23,21 @@ public class TwoSumProblem {
         int [] result = twoSum(nums, 15);
         System.out.println(result[0] + " " + result[1]);
     }
+
+    /**
+     * time complexity = O(n) ... i.e. linear
+     * space complexity = O(n) ... i.e. linear space (worst case, you'd have to store all the numbers -1)
+     * @param nums
+     * @param target
+     * @return
+     */
     public static int[] twoSum(int[] nums, int target) {
 
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        //linkedList.offerFirst();
+        linkedList.peekFirst(); linkedList.peekLast();
+        linkedList.getFirst(); linkedList.getLast();
+        linkedList.pollFirst(); linkedList.pollLast();
         //int target = 10;
         Map<Integer, Integer> numMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
@@ -33,7 +46,7 @@ public class TwoSumProblem {
                 return new int[]{ numMap.get(complement), i};
             }
 
-            else numMap.put(nums[i], i);
+            else numMap.put(nums[i], i);    // key = Integer, val = index
         }
 
         throw new IllegalArgumentException("No match found");

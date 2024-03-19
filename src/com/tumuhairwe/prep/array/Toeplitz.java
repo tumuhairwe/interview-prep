@@ -4,6 +4,7 @@ package com.tumuhairwe.prep.array;
  * Summary: Given a matrix of m x n (rows x columns) ... determine if matrix is Toeplitz
  * i.e "every diagonal from left to bottom has the same elements"
  * ref: https://leetcode.com/problems/toeplitz-matrix/
+ * ref: https://www.youtube.com/watch?v=VDw9y6nX_ss
  */
 public class Toeplitz {
     public static void main(String[] args) {
