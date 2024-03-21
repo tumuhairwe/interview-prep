@@ -1,8 +1,5 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Given a 2D array of data
