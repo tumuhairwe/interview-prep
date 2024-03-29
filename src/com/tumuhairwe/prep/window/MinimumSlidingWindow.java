@@ -1,14 +1,12 @@
 package com.tumuhairwe.prep.window;
 
-import java.io.FileReader;
-import java.nio.charset.CharsetEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * LeetCode 76 (Hard)
  * Given 2 strings, s and t ... of lengths m and n (respectively),
- * return the minim substring of s ... that every character in t (including duplicates)
+ * return the minimum substring of s ... that every character in t (including duplicates)
  * is included in the window
  *
  *  Solution:
@@ -27,25 +25,34 @@ import java.util.Map;
 public class MinimumSlidingWindow {
     public static void main(String[] args) {
         String s = "ADOBECODEBANC", t = "ABC";
-        System.out.println("Given s=" + s + " and t=" + t + " ouput=" + minWindow(s, t));
+        System.out.println("Given s=" + s + " and t=" + t + " output=" + minWindow(s, t));
+
+        s = "a"; t = "a";
+        System.out.println("Given s=" + s + " and t=" + t + " output=" + minWindow(s, t));
+
+        s = "a"; t = "aa";
+        System.out.println("Given s=" + s + " and t=" + t + " output=" + minWindow(s, t));
     }
 
     // time complexity = O( t + s)
-    static String minWindow(String s, String t){
-        // 1. create frequency Map of small string
-        Map<Character, Integer>  freqMap = new HashMap<>();
-        for(char c : t.toCharArray()){
-            freqMap.putIfAbsent(c, freqMap.getOrDefault(c, 0)+1);
+    public static String minWindow(String s, String t) {
+        Map<Character, Integer> freqMap = new HashMap<>();
+
+        // 0. populate frequency map
+        for(int i=0; i<t.length(); i++){
+            Character c = t.charAt(i);
+            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
         }
 
-        // 2.
-        int rightPointer = 0, leftPointer = 0;
+        // 1. declare pointers + count
+        int leftPointer = 0, rightPointer = 0;
         int count = freqMap.size();
         int length = Double.valueOf(Double.POSITIVE_INFINITY).intValue();
         String minWindow = "";
 
-        while (rightPointer < s.length()){
-            char letter = s.charAt(rightPointer);;
+        // 2. iterate over the long string
+        while(rightPointer < s.length()){
+            char letter = s.charAt(rightPointer);
             if(freqMap.containsKey(letter)){
                 freqMap.put(letter, freqMap.get(letter) - 1);
                 if(freqMap.get(letter) == 0){
@@ -53,11 +60,12 @@ public class MinimumSlidingWindow {
                 }
             }
 
+            // move right pointer
             rightPointer++;
 
-            while (count == 0){
-                if(leftPointer - rightPointer < length){
-                    length = leftPointer - rightPointer;
+            while(count == 0){
+                if(rightPointer - leftPointer < length){
+                    length = rightPointer - leftPointer;
                     minWindow = s.substring(leftPointer, rightPointer);
                 }
 

@@ -11,7 +11,7 @@ public class IsSubsequence {
     public static void main(String[] args) {
         // Given a string S and T, determine if S is a subsequence of T
         boolean isSubsequence = isSubsequence("abcge", "ace");
-        System.out.println("Is Susquence = " + isSubsequence);
+        System.out.println("Is Subsequence = " + isSubsequence);
     }
     private static boolean isSubsequence(String entireString, String subsequence){
         if(subsequence.length() == 0) return true;

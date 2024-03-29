@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.strings;
+package com.tumuhairwe.prep.window;
 
 import java.util.*;
 

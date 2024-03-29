@@ -32,13 +32,6 @@ public class TwoSumProblem {
      * @return
      */
     public static int[] twoSum(int[] nums, int target) {
-
-        LinkedList<Integer> linkedList = new LinkedList<>();
-        //linkedList.offerFirst();
-        linkedList.peekFirst(); linkedList.peekLast();
-        linkedList.getFirst(); linkedList.getLast();
-        linkedList.pollFirst(); linkedList.pollLast();
-        //int target = 10;
         Map<Integer, Integer> numMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             int complement = target - nums[i];
