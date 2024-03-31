@@ -1,5 +1,7 @@
 package com.tumuhairwe.prep;
 
+import java.util.List;
+
 public class BinarySearch {
     public static void main(String[] args) {
         int[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 17};
@@ -168,5 +170,53 @@ public class BinarySearch {
         }
 
         return -1;
+    }
+
+    // iterative
+    // Time complexity = O(log_n)
+    // Space complexity = O (1) since no new data structure is created
+    public static int binarySearchRotated(List<Integer> nums, int target) {
+        int start = 0;
+        int end = nums.size() - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+            if (nums.get(mid) == target)
+                return mid;
+            if (nums.get(start) <= nums.get(mid)) {
+                if (nums.get(start) <= target && target < nums.get(mid)) {
+                    end = mid - 1;
+                } else
+                    start = mid + 1;
+            } else {
+                if (nums.get(mid) < target && target <= nums.get(end))
+                    start = mid + 1;
+                else
+                    end = mid - 1;
+            }
+            //List.of(nums)
+            //List<Integer> xx = Arrays.asList(new int[]{9});
+        }
+        return -1;
+    }
+
+    // recursive
+    // Time complexity = O(log_n)
+    // sapce compleixty of recursive = O(log_n) bcoz log_n is the max # of recursive calls needed to find the target
+    public static int binarySearch(List<Integer> nums, int start, int end, int target) {
+        if (start > end) return -1;
+        int mid = start + (end - start) / 2;
+        if (nums.get(mid) == target) return mid;
+        if (nums.get(start) <= nums.get(mid)) {
+            if (nums.get(start) <= target && target < nums.get(mid)) {
+                return binarySearch(nums, start, mid - 1, target);
+            }
+            return binarySearch(nums, mid + 1, end, target);
+        } else {
+            if (nums.get(mid) < target && target <= nums.get(end)) {
+                return binarySearch(nums, mid + 1, end, target);
+            }
+            return binarySearch(nums, start, mid - 1, target);
+        }
     }
 }
