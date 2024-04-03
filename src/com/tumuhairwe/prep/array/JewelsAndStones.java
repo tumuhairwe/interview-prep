@@ -27,9 +27,6 @@ public class JewelsAndStones {
                 //Map.Entry.comparingByValue(Comparator.reverseOrder());
             }
         }
-
-        char[] xx = "".toCharArray();
-        Character.isDigit(xx[0]);
         return num_jewels;
     }
 }

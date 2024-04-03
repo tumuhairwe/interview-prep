@@ -154,12 +154,12 @@ public class BinarySearch {
             int rightDiff, leftDiff = 0;
 
             if(needle < arr[endIndex]){
-                rightDiff = arr[endIndex -1];
-                leftDiff = arr[endIndex];
+                rightDiff = needle - arr[endIndex -1];
+                leftDiff = needle - arr[endIndex];
             }
             else {
-                rightDiff = arr[startIndex -1];
-                leftDiff = arr[startIndex];
+                rightDiff = needle - arr[startIndex -1];
+                leftDiff = needle - arr[startIndex];
             }
 
             if (rightDiff < leftDiff) {
