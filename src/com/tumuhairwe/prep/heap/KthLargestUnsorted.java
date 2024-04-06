@@ -1,24 +1,23 @@
 package com.tumuhairwe.prep.heap;
 
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 /**
  * Find the Kth Largest Value in a stream. Note that its the Kth element in sorted order
  * not the Kth distinct element
  *
- * ref:" https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
+ * LeetCode 703
+ * ref: https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
  * ref: https://www.youtube.com/watch?v=m6zDTNzC1bA&list=PLB7ZlVMcmjIAMEeI0p4BAeCeZvu2xxdVu
  */
-public class KthLargest {
+public class KthLargestUnsorted {
 
     private PriorityQueue<Integer> topKHeap;
     private int max;
 
     // constructor take O(n log_k) -> call the constructor N times
-    public KthLargest(int k, int[] nums){
+    public KthLargestUnsorted(int k, int[] nums){
         this.max = k;
         this.topKHeap = new PriorityQueue<>();
 
@@ -34,7 +33,7 @@ public class KthLargest {
         }
         else {
             if(val > topKHeap.peek()){   // heap will always maintain the top K largest elements .. call po() .. or peek() will get the head of the Quer i.e. Kth largest)
-                topKHeap.poll(); // remove highest element of the steream
+                topKHeap.poll(); // remove highest element of the stream
                 topKHeap.add(val);
             }
         }
@@ -56,7 +55,7 @@ public class KthLargest {
 
     public static void main(String[] args) {
         int[] arr = new int[]{4, 5, 8, 2};
-        KthLargest solution = new KthLargest(3, arr);   // Space Compleixyt = O(k) where k == size
+        KthLargestUnsorted solution = new KthLargestUnsorted(3, arr);   // Space Compleixyt = O(k) where k == size
         System.out.println("The 3rd LARGEST element in array is " + solution.getMax());
         System.out.println("The 3rd SMALLEST element in array is " + solution.getMin());
     }

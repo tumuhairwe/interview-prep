@@ -6,6 +6,9 @@ import java.util.Map;
 /**
  * Given a map with key that are either Strings, Integer or another Mpa
  * Flatten the map to produce a non-nested Map
+ *
+ * Flatten Dictionary
+ *
  * e.g.
  *
  * Key1 : a

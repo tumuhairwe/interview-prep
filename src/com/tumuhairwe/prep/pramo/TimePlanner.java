@@ -1,10 +1,9 @@
 package com.tumuhairwe.prep.pramo;
 
-import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
-class TimePlanner {
+public class TimePlanner {
 
     static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
         // your code goes here
@@ -55,7 +54,7 @@ class TimePlanner {
 
     }
 
-    static class Interval implements Comparable<Interval>{
+    public static class Interval implements Comparable<Interval>{
         int start;
         int end;
 

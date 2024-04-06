@@ -2,12 +2,12 @@ package com.tumuhairwe.prep.pramo;
 
 import java.util.*;
 
-public class LRUCache {
+public class LRUCacheV1 {
     private final int initialCapacity;
     private PriorityQueue<EntryKey> pqCache;
     //private Map<EntryKey, TimePlanner.Interval> cache;
 
-    public LRUCache(int initialCapacity){
+    public LRUCacheV1(int initialCapacity){
         this.initialCapacity = initialCapacity;
         this.pqCache = new PriorityQueue<>();
     }

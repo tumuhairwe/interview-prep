@@ -1,17 +1,15 @@
 package com.tumuhairwe.prep.pramo;
 
-import java.time.LocalDateTime;
-
-public class Entry implements Comparable<Entry>{
+public class EntryKey implements Comparable<EntryKey>{
     private int lastAccessedTime;
     private Object value;
 
-    public Entry(Object val){
+    public EntryKey(Object val){
         this.value = val;
         this.lastAccessedTime = (int) System.currentTimeMillis();
     }
     @Override
-    public int compareTo(Entry o) {
+    public int compareTo(EntryKey o) {
         return this.lastAccessedTime - o.lastAccessedTime;
     }
 }

@@ -1,6 +1,8 @@
 package com.tumuhairwe.prep;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BinarySearch {
     public static void main(String[] args) {
@@ -127,7 +129,6 @@ public class BinarySearch {
         else if(endIndex > arr.length - 1){
             throw new IllegalArgumentException("Invalid arguments");
         }
-
 
         int middle = startIndex + (endIndex - startIndex) /2;
         if(arr[startIndex] == needle ){

@@ -12,7 +12,6 @@ import java.util.*;
  *
  * Solution:
  *
- *
  * ref: https://www.youtube.com/watch?v=z9e-tGD7Z8g
  * ref: https://www.youtube.com/watch?v=DfljaUwZsOk
  * ref: https://www.youtube.com/watch?v=9BwZAwrYC7c
@@ -79,6 +78,15 @@ public class SlidingWindowMaximum {
                 result.add(nums[index.getFirst()]);
             }
         }
+        Comparator<Map.Entry<Character, Integer>> c = Comparator.comparingInt(Map.Entry::getValue);
+
+        Comparator<Map.Entry<Integer, Integer>> entryComparator = (Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) -> {
+            return entry1.getValue() - entry2.getValue();
+        };
+        Comparator<Map.Entry<Integer, Integer>> entryComparator1 = (Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) -> {
+            return entry1.getValue() - entry2.getValue();
+        };
+
         return result.stream().mapToInt(x -> x).toArray();
     }
     List<Integer> maxSlidingWindow_deque(int[] nums, int k){
