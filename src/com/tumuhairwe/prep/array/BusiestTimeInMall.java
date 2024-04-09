@@ -33,6 +33,7 @@ public class BusiestTimeInMall {
         System.out.println("The busiest time was " + busiest);
     }
     static int findBusiestPeriod(int[][] data){
+        // may need to reverse sort data (since question says ordered by asc)
         int currentOccupancy = 0;
         int peakTimestamp = 0;
         int peakCount = 0;
@@ -42,7 +43,7 @@ public class BusiestTimeInMall {
             if(currentOccupancy > peakCount){
                 peakCount = currentOccupancy;
                 peakTimestamp = data[i][0];
-            }
+            }   // remember to return earliest one
         }
 
         System.out.println("The peakCount was " + peakCount);

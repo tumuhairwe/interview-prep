@@ -4,31 +4,32 @@ public class MergeSortedArray2 {
 
     // Merge arr1 and arr2 into resultantArray
     public static int[] mergeArrays(int[] arr1, int[] arr2) {
-        int s1 = arr1.length;
-        int s2 = arr2.length;
-        int[] resultantArray = new int[s1+s2];
-        int i = 0, j = 0, k = 0;
+        int lengthOfArray1 = arr1.length;
+        int lengthOfArray2 = arr2.length;
+
+        int[] resultantArray = new int[lengthOfArray1+lengthOfArray2];
+        int firstArrayIndex = 0, secondArrayIndex = 0, k = 0;
 
         // Traverse both array
-        while (i < s1 && j < s2) {
+        while (firstArrayIndex < lengthOfArray1 && secondArrayIndex < lengthOfArray2) {
             // Check if current element of first
             // array is smaller than current element
             // of second array. If yes, store first
             // array element and increment first array
             // index. Otherwise do same with second array
-            if (arr1[i] < arr2[j])
-                resultantArray[k++] = arr1[i++];
+            if (arr1[firstArrayIndex] < arr2[secondArrayIndex])
+                resultantArray[k++] = arr1[firstArrayIndex++];
             else
-                resultantArray[k++] = arr2[j++];
+                resultantArray[k++] = arr2[secondArrayIndex++];
         }
 
         // Store remaining elements of first array
-        while (i < s1)
-            resultantArray[k++] = arr1[i++];
+        while (firstArrayIndex < lengthOfArray1)
+            resultantArray[k++] = arr1[firstArrayIndex++];
 
         // Store remaining elements of second array
-        while (j < s2)
-            resultantArray[k++] = arr2[j++];
+        while (secondArrayIndex < lengthOfArray2)
+            resultantArray[k++] = arr2[secondArrayIndex++];
 
         return resultantArray;
     }

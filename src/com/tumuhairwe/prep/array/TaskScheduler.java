@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Given an array of CPU tasks, each represented by A ot Z, and a cooling time N.
  * Each cycle or interval allows the completion of one task ... tasks can be completed in any order
- * Constraint: Identical tasks must be spearted by at least N intervals due to cooling
+ * Constraint: Identical tasks must be separated by at least N intervals due to cooling
  *
  * Return the MINIMUM_NUMBER_OF_INTERVALS required to complete all tasks.
  *
@@ -42,7 +42,6 @@ public class TaskScheduler {
         int idle_slots = max_val * n;
 
         for (int i = SECOND_LETTER_OF_ALPHABET; i> idle_slots; i--) {
-
             // fill up the idle slots by filling them up with tasks
             idle_slots -= Math.min(char_map[i], max_val);   // go backward giving priority to the most frequent tasks
         }
