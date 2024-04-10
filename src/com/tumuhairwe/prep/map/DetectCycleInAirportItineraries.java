@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.map;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Given a map with key that are either Strings, Integer or another Mpa
@@ -12,7 +10,7 @@ import java.util.Stack;
  * London : Paris, Barcelona
  * Barcelona : Vienna, Milan
  * Paris : Lisbon, Rome
- * Paris : Tokyo, Amsterdam
+ * -- Paris : Tokyo, Amsterdam
  * Tokyo : Seoul
  * Lisbon : Rome, New York
  * Vienna : Budapest
@@ -27,25 +25,99 @@ import java.util.Stack;
 public class DetectCycleInAirportItineraries {
 
     public static void main(String[] args) {
+        // does not  have cycle -> has path
+        visited = new Stack<>();
+        Map<String, List<String>> grid = new HashMap<>();
+        grid.put("London", List.of("Paris", "Barcelona"));
+        grid.put("Barcelona", List.of("Vienna", "Milan"));
+        grid.put("Paris", List.of("Lisbon", "Rome"));
+        grid.put("Tokyo", List.of("Seoul"));
+        grid.put("Lisbon", List.of("Rome", "New York"));
+        grid.put("Vienna", List.of("Budapest"));
 
+        String source = "London";
+        String destination = "Budapest";
+        double distance = getDistance(source, destination, grid);
+        printResult(source, destination, distance);
+
+        // does not have path
+        visited = new Stack<>();
+        grid = new HashMap<>();
+        source = "Nairobi";
+        destination = "Abidjan";
+        grid.put("Nairobi", List.of("Kampala", "Lagos"));
+        grid.put("Kampala", List.of("Kigali"));
+        distance = getDistance(source, destination, grid);
+        printResult(source, destination, distance);
+
+        // has cycle
+        visited = new Stack<>();
+        grid = new HashMap<>();
+        source = "Rio de Janeiro";
+        destination = "Bogota";
+        grid.put("Rio de Janeiro", List.of("Chile", "Kingston"));
+        grid.put("Kingston", List.of("Kigali"));
+        grid.put("Bogota", List.of("Port au Prince", "Rio de Janeiro"));
+
+        distance = getDistance(source, destination, grid);
+        printResult(source, destination, distance);
     }
 
-    Stack<String> visited = new Stack<>();
-    int getDistance(String source, String destination, Map<String, List<String>> airports){
+    private static void printResult(String source, String destination, double distance) {
+        if(distance == Double.POSITIVE_INFINITY){
+            System.out.println("There is no path between " + source + " and " + destination);
+        }
+        else if(distance == Double.NEGATIVE_INFINITY){
+            System.out.println("There is a cyclic dependency between " + source + " and " + destination);
+        }
+        else {
+            System.out.println("The distance between " + source + " and " + destination + " is " + distance + " units");
+        }
+    }
 
-        if(airports.containsKey(source)){
+    static Stack<String> visited;
 
+    /**
+     * Gets distance between source & destination
+     * Use BFS when given source + destination tasks
+     */
+    static double getDistance(String source, String destination, Map<String, List<String>> airports){
+
+        if(!airports.containsKey(source)){
+            return Double.POSITIVE_INFINITY;    //Integer.MIN_VALUE;
         }
 
         for (String key : airports.keySet()){
-            visited.push(source);
+//            if(visited.contains(key)){
+//                return Double.NEGATIVE_INFINITY;
+//            }
+//            else
+            visited.push(key);
 
             List<String> destinations = airports.get(source);
             if(destinations.contains(destination)){
                 return  1;
             }
-            else return  1 + getDistance(source, destination, airports);
+            else {
+                // exclude source ( to avoid cycle)
+//                List<String> nonCycleDestinations = destinations.stream()
+//                        .filter(d -> !d.equals(source))
+//                        .collect(Collectors.toList());
+//                airports.entrySet()
+//                        .stream()
+//                        .filter(entry -> entry.getValue()
+//                                .stream()
+//                                .filter(e -> e.equals(destination))
+//                                .collect(Collectors.toList()));
+                return  1 + getDistance(key, destination, airports);
+            }
         }
+
+        // find root cause (i.e. throwable with no parent cause)
+//       Optional<Throwable> thr =  Stream
+//                .iterate(new Exception(), Throwable::getCause)
+//                .filter(e -> e.getCause() == null)
+//                .findFirst();
 
         return 0;
     }

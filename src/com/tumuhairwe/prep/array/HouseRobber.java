@@ -1,7 +1,5 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.Arrays;
-
 /**
  * Given a list of non-negative integers, representing the amount of money in each
  * house, determine the maximum amount of money you can rob to night
@@ -15,8 +13,8 @@ import java.util.Arrays;
  *
  *  Hint:
  *  - Use memoization to store calculated values in an array
- *  - Useful to cache repeatitive calculations
- * LeetCode 198
+ *  - Useful to cache repetitive calculations
+ * LeetCode 198 (Medium)
  * ref: https://leetcode.com/problems/house-robber/description/
  */
 public class HouseRobber {

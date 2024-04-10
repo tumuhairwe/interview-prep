@@ -1,5 +1,11 @@
 package com.tumuhairwe.prep.pramo;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class LinkedList<T> {
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;
@@ -120,6 +126,13 @@ public class LinkedList<T> {
             current = nextNode;
         }
 
+        //int[] ints = {1,2,3};
+        //List<Integer> list = Arrays.stream(ints).boxed().collect(Collectors.toList());
+
         return previous;
+    }
+
+    public static void main(String[] args) {
+
     }
 }

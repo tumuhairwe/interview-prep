@@ -3,6 +3,18 @@ package com.tumuhairwe.prep.array;
 import java.util.Arrays;
 
 /**
+ * Given a 2D array, representing a map where
+ *  - grid[i][j] = 1 represents land and
+ *  - grid[i][j] = 0 represents water
+ *
+ *  Grid cells are connected horizontally or vertically (not diagonally).
+ *  The grid is completely surrounded by wanter and there is exactly 1 island (i.e. 1 or more connected land cells)
+ *
+ *  The island doesn't have lakes, meaning the water inside isn't connected to the water outside. One cell is swuare with side_length = 1
+ *  The grid is rectangular. with and height don't exceed 100.
+ *
+ *  Exercise: Determine the perimeter of the island
+ *
  * loop thru the grid ... for each cell that is a 1 .. increment totalPerimeter  += 4;
  *
  * Solution Summary:
@@ -11,7 +23,8 @@ import java.util.Arrays;
  *      - totalPerimeter = totalPerimeter + 4
  *      - if an occupied Neighbor above (grid[i-1][j] == 1, subtract 2 from total perimeter
  *      - if an occupied Neighbor behind (grid[i][j-1] == 1, subtract 2 from total perimeter
- * LeetCode 463
+ *
+ * LeetCode 463 Easy
  *
  *  1 = land
  *  0 = water
@@ -50,13 +63,13 @@ class IslandPerimeter {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if(grid[i][j] == LAND){
-                    totalPerimeter += 4;
+                    totalPerimeter += 4;    // add all 4 sides (top + bottom) + (left + right)
 
-                    if(i > 0 && grid[i-1][j] == LAND){
+                    if(i > 0 && grid[i-1][j] == LAND){  // if neighbor on the left == LAND
                         totalPerimeter -= 2;
                     }
 
-                    if(j > 0 && grid[i][j-1] == LAND){
+                    if(j > 0 && grid[i][j-1] == LAND){ // if neighbor on the BOTTOM
                         totalPerimeter -= 2;
                     }
                 }

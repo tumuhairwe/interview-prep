@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Given an array of sum of n integers
+ * Given an array of n integers
  * ... and 3 elements a, b, c such that a+ b + c = 0
  * Find all unique triplets in the array that give the sum of ZERO
  * i.e. find all UNIQUE Sets of 3 that add up to zero
@@ -18,7 +18,8 @@ public class ThreeSumProblem {
     public static void main(String[] args) {
         int[] nums = new int[]{-1, -2, 0, 4, 3, 7, 9};
     }
-    private static int[] threeSum(int[] nums){
+
+    private static int[] threeSum(int[] nums, int target){
         // 1. Sort
         Arrays.sort(nums);  // n2
 

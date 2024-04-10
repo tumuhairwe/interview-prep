@@ -1,12 +1,13 @@
 package com.tumuhairwe.prep.strings;
 
 /**
- * Given an input, determine if its a valida palindrome
+ * Given an input, determine if it's a valid palindrome
  * Palindrome == string that reads the same from left-to-right and right-to-left
  *
  * e.g. 121 = true
  * e.g. -121= false
  * e.g. 10 = false
+ *
  * ref: https://leetcode.com/problems/palindrome-number/description/
  *
  * Summary: Split in the middle ... and compare (as you iterate ...
@@ -21,6 +22,7 @@ public class ValidPalindrome {
         System.out.println("aabb == " + isValid("aabb"));
         System.out.println("barab == " + isValid("barab"));
         System.out.println("RACECAR == " + isValid("RACECAR"));
+        System.out.println("rotator == " + isValid("rotator"));
     }
 
     public static boolean isValid(String input){
