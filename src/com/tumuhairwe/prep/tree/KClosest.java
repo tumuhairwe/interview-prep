@@ -4,10 +4,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Find k closest elements to target
+ * Find k Closest elements to target
  *
  * Summary
- * - Compute ABSOLUTE distance between each element (in nums array0 and target
+ * - Compute ABSOLUTE distance between each element (in nums array) and target
  * - Store the distances + corresponding element in pairs (i./e. Map<Integer, Integer> == elemenb & diff
  * - Sort the Map by value (i.e. diff)
  * - return top K elements

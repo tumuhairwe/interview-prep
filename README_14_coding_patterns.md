@@ -1,0 +1,135 @@
+14 Patterns to Ace Any Coding Interview Question
+
+ref: https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
+
+- Sliding Window O(n)
+  - Definition: A problem-solving technique that involves iterating over a data structure e.g. an array while maintaining a window of elements that can expand and shrink
+    - As the window moves, elements enter and exit the window based on the problem's constraint.
+    - The window stores enough state to perform operation on the current set of elements
+    - ref: [Mastering the Sliding Window Algorithm Pattern for Technical Interviews] https://medium.com/@vidyasagarr7/mastering-the-sliding-window-algorithm-pattern-for-technical-interviews-112cbbdfe8d2
+    - ref: [Sliding Window Algorithm Explained] https://builtin.com/data-science/sliding-window-algorithm
+    - ref: [Mastering Algorithms: Sliding Window Pattern] https://www.youtube.com/watch?v=qqXOZD4zKEg
+  - Steps:
+    1. Define a condition to stop expanding the window
+    2. Expand the window until the condition is met but b4 expanding, process the element at the 'right' index
+    3. If the condition to stop expanding is met, process the current window
+    4. Contract the current window, but before contracting ... process the element at the 'left' index
+    5. Process edge cases
+  - Examples:
+    - Maximum sum subarray of size K
+    - Longest substring with K distinct characters
+
+- Two Pointers O(n)
+  - Definition: A pattern where 2 pointers iterate over a data structure in tandem or separately until they satisfy a certain condition
+    - One pointer can move slower than the other (hare and tortoise patten.)
+    - Useful when dealing with linear data structures like arrays and lists
+    - ref: [What is the 2 pointer technique] https://interviewing.io/two-pointers-interview-questions
+  - Variations
+    - Polynomial pointers: (i.e. brute force combinations -> O(n^2) -> nested loops.
+    - Fast and Slow: ("fast" and "slow" pointer aka "aka hare and tortoise" ) for cycle-detection is useful for identifying cycles in graphs and linked lists
+    - Rivaling pointers: 1 pointer starts at the beginning and the other starts at the end of the array and they shift inwardly towards each other while adhering to predefined constraints
+    - Multiple pointers: Involve more than 2 pointers that move independently or in a correlated manner based on specific logic
+    - Double input pointers: Involves 2 linear inputs with a single pointer each, rather than a single input with 2 pointers. A common example is part of the Merge Sort algorithm where we merge 2 sorted lists
+  - ref: [Coding Pattern: Two-Pointers] https://blog.stackademic.com/coding-pattern-two-pointers-ae8e581eb9e2
+  - ref: [Pattern 2: Two Pointers] https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2002%3A%20Two%20Pointers.md
+- Fast and Slow pointers
+  - Definition: Algorithm that uses 2 pointers to move thru an array/linked-lists. Useful when trying to detect a cycle in a loop
+  - ref: "Coding Patterns: Fast and Slow pointers" https://emre.me/coding-patterns/fast-slow-pointers/
+  - ref: "Pattern 3: Fast and Slow pointers" https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2003:%20Fast%20%26%20Slow%20pointers.md
+
+- Merge Intervals 
+  - Definition: Technique to deal with overlapping intervals e.g. when you have to find an intersection between to series of calendar events. It involves sorting and then traversing the intervals to carry out a particular operation e.g. merge overlapping intervals
+  - Steps:
+    - Identify which intervals overlap or are adjacent to each other
+    - Sort the intervals based on their start times
+    - Iterate thru the collection anbd compare each interval's start time with previous intervals end time
+  - ref:
+    - [Mastering Merge Interval Patterns: A Guide to solving interval-based problems] https://www.architectalgos.com/mastering-merge-interval-patterns-a-guide-to-solving-interval-based-problems-1a14ef065876
+
+- Cyclic Sort O(n^2)
+  - Definition: A technique for iterating over an array, 1 number at a time, and if the current number is not at the correct index, you swap it with the number at its expected index
+  - Hints
+    - If a problem asks you to find the missing/duplicate/smallest number in a sorted array
+    - Find the smallest missing positive numbers
+- In-place reversal of linked list
+  - Pattern that involves reversing a LinkedList, 1 node at a time
+  - Steps
+    - Define Node current & Node previous
+    - While current != null -> { temp = current.next, current.next = previous, previous = current, curent = temp }
+  - ref: [Reverse a LinkedList] https://www.geeksforgeeks.org/reverse-a-linked-list/ 
+  - ref: [Pattern 6: In-place traversal of a LinkedList] https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2006%3A%20In-place%20Reversal%20of%20a%20LinkedList.md 
+- Tree BFS
+  - Definition: A technique for reversing a tree that uses a queue tot keep track of all the nodes of a level before jumping onto the next level
+  - How it works: Push the root node to the queue and then continually iterating until the queue is empty
+    - while(!q.isEmpty()) { 
+      - node = q.pop(); 
+      - if(node.depth == expectedDepth), visitedNodes.add(node)
+      - for(child : node.getChildren()){
+        - q.add(child)
+      - return visited
+  - Hint: If you are asked to traverse a tree in a level-by-level fashion
+  - ref: [Coding Patterns: Breadth First Search (BFS)] (https://emre.me/coding-patterns/breadth-first-search)
+- Tree DFS
+  - Technique for searching a tree, depth-first
+  - ref: https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2008%3ATree%20Depth%20First%20Search.md
+- Two Heaps
+  - Definition: A patterns that utilizes both a min-heap and a max-heap simultaneously. 
+    - The min-heap stores the smaller half of the elements ordered by minimum at the tops.
+    - The max-heap stores the larger half of the elements ordered by the maximum at the top
+  - Hint
+    - Useful in solutions like Scheduling or PriorityQueue-ing
+    - Useful when you need to find the smallest/largest/median elements of a set
+  - ref: [Coding Patterns: 2 Heaps] (https://emre.me/coding-patterns/two-heaps/)
+  - ref: [Mastering the Two Heaps Algorithm] (https://medium.com/@vidyasagarr7/mastering-the-two-heaps-algorithm-pattern-for-technical-interviews-c37b2c726821)
+- Subsets
+  - Definition: A pattern that describes an efficient BFS approach to handle problems that deal with permutation and combinations of a given set of elements
+  - Hint
+    - When a problem requires you fo find the combinations or permutation of a given set e.g. subsets with duplicates
+  - ref [Patterns 10: Subsets] (https://github.com/Chanda-Abdul/Several-Coding-Patterns-for-Solving-Data-Structures-and-Algorithms-Problems-during-Interviews/blob/main/%E2%9C%85%20%20Pattern%2010%3A%20Subsets.md)
+  - Steps:
+    - Start with an empty set
+    - Add the 1st element to the exists
+- Top K elements
+  - SC: O(K) -- where the k is the number of elements to keep track of
+  - definition: A technique that finds and returns the most frequent/largest/smallest elements in a set. The pattern involves using a heap data structure to track the elements
+  - Steps
+    - Decide which heap to use (min-heap or max-heap)
+    - Maintain the size smaller than K
+    - if the heap is larger than K, extract/pop() the root element
+    - Repeat the process until all elements are processed
+  - ref: [Patterns for coding interviews - Top 'K' elements] (https://levelup.gitconnected.com/patterns-for-coding-interviews-top-k-elements-1a1368c4cbf0)
+  - ref: [Coding Patterns: Tok K Numbers] (https://emre.me/coding-patterns/top-k-numbers/)
+- K-way merge
+  - Definition: A pattern that helps you merge K sorted arrays into a single array. It exploits merged input to achieve merged order efficientlys
+  - ref: [Coding Patterns: K-way Merge] (https://emre.me/coding-patterns/k-way-merge/)
+  - TC = O(n log_k) == n == total elements
+  - SC = O(k) to store k elements in the heap
+  - Steps:
+    - Insert the 1st element of each array in a min heap
+    - Remove the min element from the heap & add it to output
+    - Insert the next element from the same array in heap
+    - Repeat steps 2 and 3 until arrays are empty 
+    - ref: [Mastering the K-Way Merge algo pattern for tech interviews] (https://medium.com/@vidyasagarr7/mastering-the-k-way-merge-algorithmic-pattern-for-technical-interviews-6db0e00a049f)
+- Topological Sort
+  - Definition: Pattern used to find a linear ordering of elements that have dependencies on each other 
+  - Main diff between topological sort and merge intervals is that topological sort is used to order vertices in a DAG while merge intervals is used to merged overlapping intervals
+    - input: {TopoSort: DAG, Merge Intervals: list of intervals}
+    - output: {TopoSort: linear ordering of vertices, Merged Intervals: list of merged intervals}
+    - application: {TopoSort: scheduling tasks with dependencies, Merge Intervals: finding the longest common interval of 2 lists}
+  - Steps:
+    - Initialization
+      - Store the graph adjacency lists by using a hashmap
+      - to find all sources,. use a HashMap to keep count of in-degrees
+      - Build the graph and find all the in-degrees of all the vertices
+    - Build the graph from the input and populate the in-degrees HashMap
+    - Find all source (all vertices with 0 in-degrees will be sources and are stored in a queue)
+    - Sort
+      - For each source:
+        - Add it to the sorted list
+        - Decrement the in-degree of ech child by 1
+        - If a child's in-degree becomes 0, add it to the sources queue
+      - Repeat until Queue is emepty
+    - How to identify
+      - The problem deals with graphs that have no directed cycles
+      - You have a class of objects that follow a particular order
+      - You are asked to update all objects in a sorted order

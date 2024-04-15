@@ -1,12 +1,9 @@
 package com.tumuhairwe.prep.heap;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
- * Given a list of points on a plan where the plan is a 2D array
+ * Given a list of points on a plane where the plane is a 2D array
  * with x and y coordinates, find the K closest points to the origin (0,0)
  *
  * Note: Here, the distance between two points on a plane is the Euclidean distance:
@@ -26,6 +23,7 @@ public class KClosestPoints {
         //Comparator<Point> comp = (p1, p2) -> p2.distFromOrigin() - p1.distFromOrigin();
         //PriorityQueue<Point> maxHeap2 = new PriorityQueue<>(comp);    // if Point wasn't comparable
 
+        // min-heap will order Comparable<Point> based on formulae defined in distanceFromOrigin()
         PriorityQueue<Point> maxHeap = new PriorityQueue<>();
         for (int i = 0; i < k; i++) {
             maxHeap.add(points[i]);

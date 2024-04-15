@@ -40,7 +40,7 @@ public class FindMaxSubArray {
 
         return globalMax;
     }
-    // integer returned must be the maximum sub-array of of arr
+    // integer returned must be the maximum sub-array of arr
     public static int maxContiguousSubArray(int[] arr){
         int beginningPointer = 0;
         int endingPointer = beginningPointer + 1;

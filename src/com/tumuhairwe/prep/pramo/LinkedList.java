@@ -1,11 +1,5 @@
 package com.tumuhairwe.prep.pramo;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 public class LinkedList<T> {
     private LinkedListNode<T> head;
     private LinkedListNode<T> tail;

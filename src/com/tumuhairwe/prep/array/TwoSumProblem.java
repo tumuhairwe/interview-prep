@@ -22,14 +22,14 @@ public class TwoSumProblem {
         int nums[] = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9};
         int [] result = twoSum(nums, 15);
         System.out.println(result[0] + " " + result[1]);
+
+        boolean has = hasPalindromePermutation("aaaaa");
+        System.out.println("Has Palindromic permutation? " + has);
     }
 
     /**
      * time complexity = O(n) ... i.e. linear
      * space complexity = O(n) ... i.e. linear space (worst case, you'd have to store all the numbers -1)
-     * @param nums
-     * @param target
-     * @return
      */
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> numMap = new HashMap<>();
@@ -43,6 +43,30 @@ public class TwoSumProblem {
         }
 
         throw new IllegalArgumentException("No match found");
+    }
+
+    /**
+     * To determine if isPalindrome:
+     *
+     * - Populate charFrequencyMap with [key=Char, value=Integer] of character (max 26 chars in alphabet)
+     * - If comparing 2 strings: Use string2 to iteratively decrement the count for each char
+     * - If just 1 string but trying to determine if it has a palindromic permutation, all chars' frequency should be mode 2 (except at most1)
+     * - At the end, there should be at most 1 char (middle) that has a count/value of 1
+     */
+    // TC =  O(n) == because we need to iterate the whole string
+    // SC = O(1) == even though map can grow up to LENGTH, teh distinct number of char is 26
+    static boolean hasPalindromePermutation(String st){
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for (int i = 0; i < st.length(); i++) {
+            int existingCount = freqMap.getOrDefault(st.charAt(i), 0);
+            freqMap.put(st.charAt(i), existingCount + 1);
+        }
+
+        long count = freqMap.entrySet()
+                .stream()
+                .filter(e -> (e.getValue() % 2) != 0)
+                .count();
+        return count <= 1;
     }
 
     // Time Complexity  = N^2

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Given a chess board of size N x N, determine how many ways N queens can be place on the board,
+ * Given a chess board of size N x N, determine how many ways N queens can be placed on the board,
  * such that no 2 queens attach each other.
  *
  * A queen can move horizontally, vertically or diagonally on a chess board. 1 queen can be attached by another
@@ -18,8 +18,14 @@ import java.util.List;
  * - Once a solution is found, backtrack to find other possible solutions
  *
  * Constraint: 1 < n < 9
+ *
+ * This uses Backtracking
+ *
+ * Diff: Dynamic Programming is a technique that solves the optimization problem
+ * using either minimum or maximum result.
+ * Backtracking uses the brute force approach without considering the optimization problem
  */
-public class NQueens {
+public class NQueensRecursive {
 
     public static int solveNQueens(int n){
         List<List<Integer>> results = new ArrayList<>();

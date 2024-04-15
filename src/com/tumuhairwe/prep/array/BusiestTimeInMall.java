@@ -46,6 +46,8 @@ public class BusiestTimeInMall {
             }   // remember to return earliest one
         }
 
+        // keep track in pq (of max_occupanc
+
         System.out.println("The peakCount was " + peakCount);
         return peakTimestamp;
     }

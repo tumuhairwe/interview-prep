@@ -9,7 +9,13 @@ import java.util.*;
  *
  * LeetCode 76 (Hard)
  * Must be solved in O(n) Complexity
- * \ref: https://www.pramp.com/question/wqNo9joKG6IJm67B6z34
+ * ref: https://www.pramp.com/question/wqNo9joKG6IJm67B6z34
+ *
+ * Solution: (Sliding window)
+ * - Create int[]128 (128 == num of ASCII chars)
+ * - populate int[] based on char-frequency of each char in full_string
+ * - Use sliding window to incrementally traverse full_string.toCharArray() and decrement each character's frequency
+ * - Keep a counter (initialized to searchString.toCharArray().length ) and increment it every time the frequency array hits Zero for a character
  */
 public class SmallestSubstringOfAllCharts {
 

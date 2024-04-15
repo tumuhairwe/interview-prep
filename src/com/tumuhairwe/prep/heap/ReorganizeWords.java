@@ -1,10 +1,9 @@
 package com.tumuhairwe.prep.heap;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
- * Reorganize words in a string so that no 2 characters are next to each othger
+ * Reorganize words in a string so that no 2 characters are next to each other
  *
  * ref: https://www.educative.io/courses/grokking-coding-interview-patterns-java/solution-reorganize-string
  */
@@ -22,11 +21,11 @@ public class ReorganizeWords {
     // The max capacity fir each data structure = 26 == constants
     // therefor the space complexity = O(1)
     public static String reOrganizeWords(String text){
-        // 0. chreate a char-frequency-map
-        Map<Character, Integer> charFreMap = new HashMap<>();
+        // 0. create a char-frequency-map
+        Map<Character, Integer> charFreqMap = new HashMap<>();
         for(char c : text.toCharArray()){
-            int newFreq = charFreMap.getOrDefault(c, 0) + 1;
-            charFreMap.put(c, newFreq);
+            int newFreq = charFreqMap.getOrDefault(c, 0) + 1;
+            charFreqMap.put(c, newFreq);
         }
 
         // 1. Create maxHeap -- PQ that order Map.Entry by frequency/value
@@ -35,7 +34,7 @@ public class ReorganizeWords {
 
         new ArrayList<>(maxCharFreqPQ);
         // 2. add all frequency-count entries
-        maxCharFreqPQ.addAll(charFreMap.entrySet());
+        maxCharFreqPQ.addAll(charFreqMap.entrySet());
 
         // 3. build string based on order of frequency
         Map.Entry<Character, Integer> previous = null;

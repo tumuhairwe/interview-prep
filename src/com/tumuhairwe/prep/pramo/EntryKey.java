@@ -8,8 +8,13 @@ public class EntryKey implements Comparable<EntryKey>{
         this.value = val;
         this.lastAccessedTime = (int) System.currentTimeMillis();
     }
+
+    public Object getValue() {
+        return value;
+    }
+
     @Override
     public int compareTo(EntryKey o) {
-        return this.lastAccessedTime - o.lastAccessedTime;
+        return Integer.compare(o.lastAccessedTime, this.lastAccessedTime);
     }
 }

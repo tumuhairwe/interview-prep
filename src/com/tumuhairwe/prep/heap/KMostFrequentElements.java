@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  *  Solution:
  *  - Create a MinHeap (PQ of Map.Entry) of size K
  *  - Create a HashMap of to store the frequency of each element <Integer, Integer>
- *  - Iterate thru the array's elements and update each elements frequency in the HashMap
+ *  - Iterate through the array's elements and update each elements frequency in the HashMap
  *  - For each element in the Map, insert a Key-Value pair of (element, frequency) into the heap
  *  - If the heap exceeds size K, pop()/poll()/remove the minimum element until it reaches size K
  *  - After processing all elements in array, Heap should have the elements with the highest frequency
