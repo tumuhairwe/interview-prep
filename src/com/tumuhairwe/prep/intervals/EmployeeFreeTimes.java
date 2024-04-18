@@ -1,7 +1,5 @@
 package com.tumuhairwe.prep.intervals;
 
-import com.tumuhairwe.prep.intervals.Interval;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +34,7 @@ public class EmployeeFreeTimes {
         aa.add(new int[]{1, 2});
         List<Interval> intervals = aa.stream()
                 .map(entry -> new Interval(entry[0], entry[1]))
+                .sorted()
                 .collect(Collectors.toList());
 
         List<Interval> allSchedulesSorted = schedule

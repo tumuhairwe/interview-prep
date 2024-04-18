@@ -1,10 +1,7 @@
 package com.tumuhairwe.prep.intervals;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -20,11 +17,10 @@ public class TimePlanner {
     public static void main(String[] args) {
 
     }
-    public static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
-        // your code goes here
-        // List<int[]> slotsOfA = Arrays.asList(slotsA);
-        // List<int[]> slotsOfb = Arrays.asList(slotsA);
 
+    // TC = O(n_squared) => bcoz we are calculating the diff between the upper bound of each
+    public static int[] meetingPlanner(int[][] slotsA, int[][] slotsB, int dur) {
+        // TreeSet will sort by Comparator of Interval (uses startTime)
         Set<Interval> slotAAvailability = new TreeSet<>();
         for (int i = 0; i < slotsA.length; i++) {
             slotAAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
