@@ -2,6 +2,11 @@ package com.tumuhairwe.prep.intervals;
 
 import java.util.Objects;
 
+/**
+ * This is a domain class intended to make it easier to solve Merge Intervals patterns
+ *
+ * ref: https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
+ */
 class Interval implements Comparable<Interval>{
     int start;
     int end;

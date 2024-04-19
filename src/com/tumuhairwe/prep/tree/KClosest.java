@@ -198,7 +198,7 @@ public class KClosest {
             //int mid = left + (left + right) /2;
             int mid = left + (right - left) /2;
 
-            // if value of mid is odd , decrement
+            // if value of mid is odd, decrement
             if(nums[mid] % 2 == 1){
                 mid--;    // make even
             }
