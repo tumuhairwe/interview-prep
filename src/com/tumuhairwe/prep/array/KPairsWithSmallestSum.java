@@ -79,6 +79,8 @@ public class KPairsWithSmallestSum {
         //Comparator<Pair> comp2 = (Pair a, Pair b) -> a.sum - b.sum;
 
         PriorityQueue<Pair> minHeap = new PriorityQueue<>(comp);
+        //PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> a - b);
+        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
 
         // 1. fill PQ with the {i, Zeroth-entry-of-list2} pairs -- PQ will order by sum & keep
         // lowest sum at the .top()
@@ -109,7 +111,9 @@ public class KPairsWithSmallestSum {
     public List<List<Integer>> kSmallestPairs2(int[] nums1, int[] nums2, int k) {
         List<List<Integer>> ans = new ArrayList<>();
 
-        PriorityQueue<Pair> minHeap = new PriorityQueue<>((Pair a, Pair b) -> a.sum - b.sum);
+        //PriorityQueue<Pair> minHeap = new PriorityQueue<>((Pair a, Pair b) -> a.sum - b.sum);
+        Comparator<Pair> comp = Comparator.comparingInt((Pair a) -> a.sum);
+        PriorityQueue<Pair> minHeap = new PriorityQueue<>(comp);
         for (int i = 0; i < Math.min(k, nums2.length); i++) {
             minHeap.offer(new Pair(nums1[i] + nums2[0], nums1[i], nums2[0]));
         }

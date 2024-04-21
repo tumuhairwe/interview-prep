@@ -34,14 +34,19 @@ public class TrieHashMapImpl {
 
     // TC = O(1) == where n = length of word
     public boolean search(String word){
-        TrieNode curr = this.root;
-        for(char c : word.toCharArray()){
-            if(!curr.children.containsKey(c)){
-                return false;
-            }
-        }
+        TrieNode result = getLast(word);
+        return (result != null && result.endOfWord);
+    }
 
-        return curr.endOfWord;
+    TrieNode getLast(String word){
+        TrieNode curr = root;
+        for (char c : word.toCharArray()){
+            if(!curr.children.containsKey(c)){
+                return null;
+            }
+            curr = curr.children.get(c);    /// get next in tree
+        }
+        return curr;
     }
 
     public boolean startsWith(String prefix){

@@ -14,20 +14,20 @@ public class LongestSubstringKDistinct {
             throw new IllegalArgumentException();
         }
         int maxLength = 0, windowStart = 0;
-        Map<Character, Integer> characterFrequencyMap = new HashMap<>();
+        Map<Character, Integer> freqMap = new HashMap<>();
         for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {    // O (N)
             char rightChar = str.charAt(windowEnd);
             // count frequency
-            characterFrequencyMap.put(rightChar, characterFrequencyMap.getOrDefault(rightChar, 0));
+            freqMap.put(rightChar, freqMap.getOrDefault(rightChar, 0) + 1);
 
             // shrink sliding window
-            while (characterFrequencyMap.size() > k){
+            while (freqMap.size() > k){
                 char leftChar = str.charAt(windowStart);
-                characterFrequencyMap.put(leftChar, characterFrequencyMap.get(leftChar)-1);
+                freqMap.put(leftChar, freqMap.get(leftChar)-1);
 
-                if(characterFrequencyMap.get(leftChar) == 0){
+                if(freqMap.get(leftChar) == 0){
                     // remove
-                    characterFrequencyMap.remove(leftChar);
+                    freqMap.remove(leftChar);
                 }
                 windowStart++;
             }

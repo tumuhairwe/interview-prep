@@ -41,19 +41,25 @@ public class TrieArrayImpl {
 
         key = key.toLowerCase();
         TrieNode currentNode = this.root;
-        int index = 0;
 
         // iterate the trie with the given characters index
         // if null, then simply create a TrieNode and go down a level
-        for(int level = 0; level < key.length(); level++){
-            index = getIndex(key.charAt(level));
-            if(currentNode.children[index] == null){
-                currentNode.children[index] = new TrieNode();
+//        for(int level = 0; level < key.length(); level++){
+//            index = getIndex(key.charAt(level));
+//            if(currentNode.children[index] == null){
+//                currentNode.children[index] = new TrieNode();
+//            }
+//            currentNode = currentNode.children[index];
+//        }
+//        int index = 0;
+        for (char x : key.toCharArray()){
+            if(currentNode.children[x - 'a'] == null){
+                currentNode.children[x - 'a'] = new TrieNode();
             }
-            currentNode = currentNode.children[index];
+            currentNode = currentNode.children[x - 'a'];
         }
 
-        currentNode.unMarkAsLeaf();
+        currentNode.markAsEndOfWord();
     }
 
     // TC: O(l) -- l == length of
@@ -62,19 +68,26 @@ public class TrieArrayImpl {
             return false;
         }
 
-        prefix = prefix.toLowerCase();
         TrieNode currentNode = this.root;
-        int index = 0;
 
         // iterate the trie with the given character index
         // if its null @ any point, stop and return false;
         // if we reach endNode/have traversed the entire array (length of prefix) ... return isEndOfWord flag at last node
-        for(int level = 0; level < prefix.length(); level++){
-            index = getIndex(prefix.charAt(level));
-            if(currentNode.children[index] == null){
+//        int index = 0;
+//        prefix = prefix.toLowerCase();
+//        for(int level = 0; level < prefix.length(); level++){
+//            index = getIndex(prefix.charAt(level));
+//            if(currentNode.children[index] == null){
+//                return false;
+//            }
+//            currentNode = currentNode.children[index];
+//        }
+
+        for (char x : prefix.toCharArray()){
+            if(currentNode.children[x - 'a'] == null){
                 return false;
             }
-            currentNode = currentNode.children[index];
+            currentNode = currentNode.children[x - 'a'];
         }
 
         return currentNode.isEndWord;
