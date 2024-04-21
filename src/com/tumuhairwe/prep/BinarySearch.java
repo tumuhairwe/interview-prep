@@ -64,7 +64,7 @@ public class BinarySearch {
     }
 
     /**
-     * Binary search that returns the INDEX (not the value) ... if not found, return -1
+     * Binary search that returns the INDEX (not the value) of target ... if not found, return -1
      *
      * iterative binary search using 2 pointers
      * a) if array is empty ... return -1
@@ -126,6 +126,7 @@ public class BinarySearch {
      * @return
      */
     static int binarySearch(int[] arr, int startIndex, int endIndex, int needle){
+        // 0. handle edge case
         if(arr.length == 0){
             return -1;
         }
@@ -134,6 +135,7 @@ public class BinarySearch {
         }
 
         int middle = startIndex + (endIndex - startIndex) /2;
+        // 1. handle terminal condition (needle is found)
         if(arr[startIndex] == needle ){
             return arr[startIndex];
         }
@@ -144,7 +146,8 @@ public class BinarySearch {
             return arr[middle];
         }
 
-        if(needle >= arr[startIndex] && needle <= arr[endIndex]){  // needle is not between  startIndex and endIndex --> recurse
+        // 2. needle is not between  startIndex and endIndex --> recurse e.g. needle=48, arr=[80, 90, 100], startIndex=0, endIndex=2
+        if(needle >= arr[startIndex] && needle <= arr[endIndex]){
             //int middle = startIndex + (endIndex - startIndex) /2;
             if(needle <= arr[middle]){
                 return binarySearch(arr, startIndex, middle, needle);
@@ -153,7 +156,7 @@ public class BinarySearch {
                 return binarySearch(arr, middle+1, endIndex, needle); // arr, 0, 3, 97
             }
         }
-        // needle is not in array ... find closest (either closest in extreme left or extreme right
+        // 3. needle is not in array ... find closest (either closest in extreme left or extreme right
         else if(arr[startIndex] != needle && arr[endIndex] != needle){   // should be moved into its own method
             int rightDiff, leftDiff = 0;
 

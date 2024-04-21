@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.intervals;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * LeetCode 920
@@ -30,9 +31,11 @@ public class MeetingRooms {
     }
 
     public int findMinimumNumberOfRoomsRequired(int[][] slotsA, int[][] slotsB){
-        Interval[] schedule = new Interval[slotsA.length];
+        int START_INDEX = 0;
+        int END_INDEX = 1;
+        //Interval[] schedule = new Interval[slotsA.length];
         Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
-        Arrays.sort(schedule, comp);
+        //Arrays.sort(schedule, comp);
 
         Set<Interval> slotAAvailability = new TreeSet<>();
         for (int i = 0; i < slotsA.length; i++) {
@@ -51,6 +54,19 @@ public class MeetingRooms {
 
         return (int) numberOfIntersections;
     }
+    static  List<Integer> getIntersection(List<Integer> l1, List<Integer> l2){
+        List<Integer> result = new ArrayList<>();
+
+        l1.stream().filter(l -> l2.contains(l)).collect(Collectors.toList());
+
+        for (Integer i : l1){
+            if (l2.contains(i)){
+                result.add(i);
+            }
+        }
+
+        return result;
+    }
     public static boolean canAPersonAttendAllTheMeetings(int[][] slotsA) {
         // 0. transform into array of intervals
         Set<Interval> schedule = new TreeSet<>();
@@ -58,13 +74,13 @@ public class MeetingRooms {
             schedule.add(new Interval(slotsA[i][0], slotsA[i][1]));
         }
 
-        // 1. sort the intervals based on start time (explicit sorting is unnecessary since Collection (TreeSet) already sorted.
+        // 1. sort the intervals based on start time (explicit sorting is unnecessary since Collection (TreeSet<Integer>) already sorted.
         // sorting is necessary only if collection is array
         // Comparator<Interval> comp = Comparator.comparingInt(Interval::getStart);
         // Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
         // Arrays.sort((Interval[]) schedule.toArray(), comp);
         Interval[] intervals = (Interval[]) schedule.toArray();
-        for (int i = 0; i < intervals.length; i++) {
+        for (int i = 0; i < intervals.length - 1; i++) {
             if(intervals[i].end > intervals[i + 1].start){
                 return false;
             }

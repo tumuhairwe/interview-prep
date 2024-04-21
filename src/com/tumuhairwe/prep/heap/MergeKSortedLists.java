@@ -12,7 +12,7 @@ import java.util.Queue;
  * LeetCode 23 (Hard)
  *
  * Description:
- * You are given an arrayof K linkedLists, each linkedList is sorted in ascending order
+ * You are given an array of K linkedLists, each linkedList is sorted in ascending order
  * Merge all the linkedLists into one sorted linked-list and return it
  *
  * ref: https://leetcode.com/problems/merge-k-sorted-lists/description/

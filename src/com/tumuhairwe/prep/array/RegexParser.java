@@ -40,7 +40,43 @@ public class RegexParser {
 
         return false;
     }
-    private static boolean isMatch(String text, String pattern) {
+    static boolean isMatch(String text, String pattern) {
+        int textLen = text.length();
+        int patLen = pattern.length();
+        int p1 = 0;
+        int p2 =0;
+        boolean ans = true;
+        while(p1 < textLen && p2 < patLen){
+            if(p2+1 < patLen && pattern.charAt(p2 + 1) == '*'){
+                int i = p1;
+                boolean result =false;
+                char compared = text.charAt(p1);
+                do{
+
+                    result |= isMatch(text.substring(i), pattern.substring(p2+2));
+                    if(result)return true;
+
+                }while(compared == text.charAt(i++));
+                ans &= result;
+                break;
+            }
+            else if(pattern.charAt(p2) == '.'){
+                p2++;
+                p1++;
+            }
+            else{
+                if(pattern.charAt(p2) != text.charAt(p1)){
+                    return false;
+                }
+                p1++;
+                p2++;
+            }
+        }
+        if(p1< textLen && p2>= patLen)return false;
+        return ans;
+    }
+
+    private static boolean isMatchxx(String text, String pattern) {
         boolean matches = false;
         char[] textArray = text.toCharArray();
         int lastValidCharacterIndex = 0;

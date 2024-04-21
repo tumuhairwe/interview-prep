@@ -9,7 +9,7 @@ public class TrieImplWordSuggestion {
 
     private Node root = new Node();
 
-    // TC = O(n) where n = number of characters in word (worst case, othherwise n = unique letters in word)
+    // TC = O(n) where n = number of characters in word (worst case, otherwise n = unique letters in word)
     // SC = O(n)
     public void insert(String word){
         Node node = this.root;

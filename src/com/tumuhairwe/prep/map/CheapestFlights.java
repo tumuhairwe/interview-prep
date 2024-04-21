@@ -1,5 +1,6 @@
 package com.tumuhairwe.prep.map;
 
+import javax.sql.rowset.RowSetFactory;
 import java.util.*;
 
 /**
@@ -27,6 +28,42 @@ import java.util.*;
  * ref: https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
  */
 public class CheapestFlights {
+    static class NewNode implements Comparable<Node>{
+        Integer name;
+
+        int cost = Integer.MAX_VALUE;
+        Map<Node, Integer> adjacentNodes = new HashMap<>();
+        List<NewNode> shortestPath = new ArrayList<>();
+
+        @Override
+        public int compareTo(Node o) {
+            return Integer.compare(this.cost, o.cost);
+        }
+    }
+
+    public static void main(String[] args) {
+        NewNode source = new NewNode();
+        Set<NewNode> visitedNodes = new HashSet<>();
+        Queue<NewNode> unVisitedNodes = new PriorityQueue<>(Collections.singleton(source));
+
+        while (!unVisitedNodes.isEmpty()){
+            NewNode currentNode  = unVisitedNodes.poll();
+            currentNode.adjacentNodes
+                    .entrySet()
+                    .stream().filter(entry -> visitedNodes.contains(entry.getKey()))
+                    .forEach(entry -> {
+                        evalDistanceAndPath(entry.getValue(), entry.getKey(), currentNode);
+                    });
+        }
+    }
+
+    private static void evalDistanceAndPath(Integer weight, Node source, NewNode adjacentNode) {
+        Integer newCost = source.cost + weight;
+        if(newCost < adjacentNode.cost){
+            adjacentNode.cost = newCost;
+            //adjacentNode.shortestPath = new
+        }
+    }
 
     public int findCheapestPrice(int n, int[][] flights, int source, int destination, int k_stops){
         // key= city_id, value = List<Destination_City, CostToThatCity>
@@ -34,7 +71,7 @@ public class CheapestFlights {
         //Queue<Map.Entry<String, String>> q = new PriorityQueue<>();
 
         // use PQ to track lowest cost
-        // use Queue to track the intermediate airpotrs
+        // use Queue to track the intermediate airports
 
         if(flights.length == 0){
             return -1;  // there's no destination
@@ -80,14 +117,5 @@ public class CheapestFlights {
         return -1;
     }
 
-    class Node{
-        int cityId;
-        int cost;
-        int stop;
-        public Node(int cityId, int cost, int stop){
-            this.cityId = cityId;
-            this.stop = stop;
-            this.cost = cost;
-        }
-    }
+    record  Node(int cityId, int cost, int stop){ }
 }

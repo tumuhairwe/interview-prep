@@ -1,9 +1,30 @@
 package com.tumuhairwe.prep.trie;
 
-public class Trie {
+/**
+ * @Deprecated: Prefer Map-based Trie implementation
+ */
+public class TrieArrayImpl {
+
+    class TrieNode {
+        TrieNode[] children;
+        boolean isEndWord;
+        public static final int ALPHABET_SIZE = 26;
+
+        public TrieNode(){
+            this.isEndWord = false;
+            this.children = new TrieNode[ALPHABET_SIZE];
+        }
+        public void markAsEndOfWord(){
+            this.isEndWord = true;
+        }
+
+        public void unMarkAsLeaf() {
+            isEndWord = false;
+        }
+    }
 
     private TrieNode root;
-    public Trie(){
+    public TrieArrayImpl(){
         root = new TrieNode();
     }
     // function to get the index of a character x
@@ -12,6 +33,7 @@ public class Trie {
     }
 
     // function to insert a key into the trie
+    // TC = O(l) == l = the string to insert
     public void insert(String key){
         if(key == null){
             System.err.println("Null keys can not be inserted");
@@ -34,20 +56,21 @@ public class Trie {
         currentNode.unMarkAsLeaf();
     }
 
-    public boolean search(String key){
-        if(key == null){
-            return false;   // key is null
+    // TC: O(l) -- l == length of
+    public boolean search(String prefix){
+        if(prefix == null){
+            return false;
         }
 
-        key = key.toLowerCase();
+        prefix = prefix.toLowerCase();
         TrieNode currentNode = this.root;
         int index = 0;
 
         // iterate the trie with the given character index
         // if its null @ any point, stop and return false;
-        // if we reach endNode/have traversed the entire array (length of key) ... return isEndOfWord flag at last node
-        for(int level = 0; level < key.length(); level++){
-            index = getIndex(key.charAt(level));
+        // if we reach endNode/have traversed the entire array (length of prefix) ... return isEndOfWord flag at last node
+        for(int level = 0; level < prefix.length(); level++){
+            index = getIndex(prefix.charAt(level));
             if(currentNode.children[index] == null){
                 return false;
             }

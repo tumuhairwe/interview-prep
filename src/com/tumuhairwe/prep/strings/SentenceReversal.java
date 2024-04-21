@@ -68,7 +68,6 @@ public class SentenceReversal {
         }
         words.push(sb.toString());  // last time
 
-
         char[] result = new char[sentence.length];
         int filledSpots = 0;
         while (!words.isEmpty()){
