@@ -25,13 +25,13 @@ public class ThreeSumProblem {
 
         // 2. declare response/output array
         List<List<Integer>> output = new LinkedList<>();
-        for (int i = 0; i < nums.length - 2; i++) { // to about going out of bounds
-            if(nums[i] == nums[i-1]){
+        for (int i = 1; i < nums.length - 2; i++) { // to avoid going out of bounds
+            if(nums[i] == nums[i+1]){       // continue if they're UNIQUE
                 continue;
             }
 
             // checking i = 0 so we can avoid the currentIndex
-            if(i == 0 || (i > 0 && nums[i] != nums[i-1])){
+            //if(i == 0 || (i > 0 && nums[i] != nums[i+1])){
                 // do stuff
                 int lowerBound = i+1;
                 int upperBound = nums.length -1;
@@ -58,7 +58,7 @@ public class ThreeSumProblem {
                         lowerBound++;
                     }
                 }
-            }
+            //}
         }
 
             return nums;
