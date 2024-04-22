@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.binary;
 
 import java.util.Collections;
 import java.util.List;
@@ -118,12 +118,7 @@ public class BinarySearch {
 
     /**
      * Binary search that returns the VALUE (not the index) ... if not found ... return closest value
-     *
-     * @param arr
-     * @param startIndex
-     * @param endIndex
-     * @param needle
-     * @return
+     *TC: O(log n) (uses recursion)
      */
     static int binarySearch(int[] arr, int startIndex, int endIndex, int needle){
         // 0. handle edge case
@@ -146,9 +141,8 @@ public class BinarySearch {
             return arr[middle];
         }
 
-        // 2. needle is not between  startIndex and endIndex --> recurse e.g. needle=48, arr=[80, 90, 100], startIndex=0, endIndex=2
+        // 2. needle is  between  startIndex and endIndex --> recurse e.g. needle=48, arr=[80, 90, 100], startIndex=0, endIndex=2
         if(needle >= arr[startIndex] && needle <= arr[endIndex]){
-            //int middle = startIndex + (endIndex - startIndex) /2;
             if(needle <= arr[middle]){
                 return binarySearch(arr, startIndex, middle, needle);
             }
@@ -156,7 +150,7 @@ public class BinarySearch {
                 return binarySearch(arr, middle+1, endIndex, needle); // arr, 0, 3, 97
             }
         }
-        // 3. needle is not in array ... find closest (either closest in extreme left or extreme right
+        // 3. needle is NOT in array ... find closest (either closest in extreme left or extreme right
         else if(arr[startIndex] != needle && arr[endIndex] != needle){   // should be moved into its own method
             int rightDiff, leftDiff = 0;
 

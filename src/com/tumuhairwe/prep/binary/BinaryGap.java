@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.binary;
 
 public class BinaryGap {
     public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class BinaryGap {
         int maxBinCount = 0;
         Long binCount = binaryForm.chars().filter(c -> c == ONE).count();
         if(binCount < 1){
-            return 0;
+            return 0;   // its all zeros
         }
 
         char[] charArray = binaryForm.toCharArray();
