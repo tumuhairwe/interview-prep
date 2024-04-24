@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.map;
+package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
 
@@ -76,6 +76,7 @@ public class DetectCycleInAirportItineraries {
     }
 
     static Stack<String> visited;
+    private static final int UNKNOWN = -1;
 
     /**
      * Gets distance between source & destination
@@ -84,7 +85,15 @@ public class DetectCycleInAirportItineraries {
     static double getDistance(String source, String destination, Map<String, List<String>> airports){
 
         if(!airports.containsKey(source)){
-            return Double.POSITIVE_INFINITY;    //Integer.MIN_VALUE;
+            return UNKNOWN;
+        }
+
+        if(visited.contains(destination)){
+            return Integer.MIN_VALUE;   // has cycle
+        }
+        else for (String key : airports.get(source)){
+            visited.push(key);
+            return 1 + getDistance(key, destination, airports);
         }
 
         for (String key : airports.keySet()){
@@ -92,7 +101,7 @@ public class DetectCycleInAirportItineraries {
 //                return Double.NEGATIVE_INFINITY;
 //            }
 //            else
-            visited.push(key);
+            //visited.push(key);
 
             List<String> destinations = airports.get(source);
             if(destinations.contains(destination)){
@@ -112,12 +121,6 @@ public class DetectCycleInAirportItineraries {
                 return  1 + getDistance(key, destination, airports);
             }
         }
-
-        // find root cause (i.e. throwable with no parent cause)
-//       Optional<Throwable> thr =  Stream
-//                .iterate(new Exception(), Throwable::getCause)
-//                .filter(e -> e.getCause() == null)
-//                .findFirst();
 
         return 0;
     }

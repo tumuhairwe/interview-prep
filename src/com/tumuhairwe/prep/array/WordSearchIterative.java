@@ -22,7 +22,7 @@ package com.tumuhairwe.prep.array;
  * ref: https://leetcode.com/problems/word-search/description/
  * ref: https://www.youtube.com/watch?v=m9TrOL1ETxI
  */
-public class WordSearch {
+public class WordSearchIterative {
 
     public static void main(String[] args) {
         char[][] board = new char[][]{
@@ -46,9 +46,11 @@ public class WordSearch {
         int columns = board[0].length;
 
         visited = new boolean[rows][columns];
+        final int BEGINNING_INDEX_WORD = 0;
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                if(word.charAt(i) == board[i][j] && searchWord(i, j, 0, word, board)){
+                // word can start from any index so we check if char_at_index_0 is at any cell
+                if(word.charAt(i) == board[i][j] && searchWord(i, j, BEGINNING_INDEX_WORD, word, board)){
                     return true;
                 }
             }

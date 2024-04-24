@@ -32,7 +32,7 @@ public class ReorganizeWords {
         Comparator<Map.Entry<Character, Integer>> c = Comparator.comparingInt(Map.Entry::getValue);
         PriorityQueue<Map.Entry<Character, Integer>> maxCharFreqPQ = new PriorityQueue<>(c);
 
-        new ArrayList<>(maxCharFreqPQ);
+        //new ArrayList<>(maxCharFreqPQ);
         // 2. add all frequency-count entries
         maxCharFreqPQ.addAll(charFreqMap.entrySet());
 

@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.map;
+package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
 
@@ -77,10 +77,7 @@ public class NetworkDelay {
                 int newDistance = distance[currentNode.destination] + neighbor.distance;
 
                 // 4. update distance if larger
-                if(distance[neighbor.destination] > newDistance){
-                    distance[neighbor.destination] = newDistance;
-                }
-//              distance[neighbor.destination] = Math.min(distance[neighbor.destination], newDistance);
+              distance[neighbor.destination] = Math.min(distance[neighbor.destination], newDistance);
 
                 // mark node as visited
                 pq.add(new Node(neighbor.destination,newDistance));

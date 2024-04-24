@@ -12,8 +12,6 @@ import java.util.Map;
  * LinkedHashMap -> Main function is maintain FIFO order
  *      -> Insertion and lookup ==  O(1)
  *      -> Only allows a single null key
- * @param <K>
- * @param <V>
  */
 public class OrderedHashMap<K, V> extends HashMap<K, V> {
     private final Comparator<? extends V> comparator;

@@ -1,18 +1,26 @@
 package com.tumuhairwe.prep.heap;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.function.Predicate;
 
 // implementation of 2 heaps
 public class MedianFinder {
+
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a));
+    //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
 
     private PriorityQueue<Integer> small; // maxHeap
     private PriorityQueue<Integer> large; // maxHeap
 
     public MedianFinder(){
+        // same
+        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
         this.small = new PriorityQueue<>(Collections.reverseOrder());   // order by putting smallest on top
-        this.large = new PriorityQueue<>();   // order by putting largest on top
+
+        // same
+        //PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> a - b);
+        this.large = new PriorityQueue<>(Comparator.comparingInt(a -> a));   // order by putting largest on top
     }
 
     public void insert(int num){

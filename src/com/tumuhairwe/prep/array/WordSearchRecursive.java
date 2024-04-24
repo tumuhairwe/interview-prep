@@ -2,12 +2,16 @@ package com.tumuhairwe.prep.array;
 
 /**
  * Like Iterative WordSearch
- * Summary: Given a 2D matrix, determine if the word can be constructed
+ * Summary: Given a 2D matrix, and a word determine if the word can be constructed
  * from letters of sequentially adjacent cells
  *
  * Constraint:
  * - char[][] board and String word consist of lower-case letters only
  * - Search is not case-sensitive
+ *
+ * LeetCode 79
+ * ref: https://leetcode.com/problems/word-search/
+ * ref: https://www.youtube.com/watch?v=m9TrOL1ETxI&t=111s
  */
 public class WordSearchRecursive {
 

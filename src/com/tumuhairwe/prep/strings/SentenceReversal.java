@@ -86,4 +86,27 @@ public class SentenceReversal {
 
         return result;
     }
+
+    static char[] reverseImpl2(char[] sentence){
+        // 0. construct the string
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char ch : sentence){
+            stringBuilder.append(ch);
+        }
+
+        // 1. regex-split based on space
+        String[] arr = stringBuilder.toString().split("\\w");
+
+        // 2. reverse String[] from above
+        StringBuilder result = new StringBuilder();
+        for (int i = arr.length; i >= 0; i--) {
+            result.append(arr[i]);
+            result.append(WORD_SEPARATOR);
+        }
+
+        // 3. trim off extra space & convert to char[]
+        return result.toString()
+                .trim()   // trim off last space
+                .toCharArray();
+    }
 }

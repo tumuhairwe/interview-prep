@@ -1,8 +1,18 @@
-package com.tumuhairwe.prep.map;
+package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
 
 /**
+ * LeetCode 734 (medium)
+ * ref: https://leetcode.com/problems/network-delay-time/description/
+ *
+ *  Problem Description
+ *  - Given a network of N nodes (labeled from 1 to n)
+ *  - Given a list of travel times (int[][] times) such that times[i] = (sourceNode, targetNode, time) where time = time from source to target
+ *  - Given a given node k
+ *  Return the minimum time it takes for all the n nodes to receive the signal.
+ *  If impossible for all the n nodes to receive the signal, return -1
+ *
  * Solution:
  * - Create an adjacency list to store the graph (node + edges_and_cost)
  * - Use PQ to store nodes and cost/delay-time. Initialize queue with the source + cost = 0
@@ -34,14 +44,14 @@ class NetworkDelayTime {
         while (!pq.isEmpty()) {
             int[] current = pq.poll();
             int time = current[0];
-            int node = current[1];
+            int nodeId = current[1];
 
-            if (visited.contains(node))
+            if (visited.contains(nodeId))
                 continue;
 
-            visited.add(node);
+            visited.add(nodeId);
             delays = Math.max(delays, time);
-            List<int[]> neighbors = adjacency.getOrDefault(node, new ArrayList<>());
+            List<int[]> neighbors = adjacency.getOrDefault(nodeId, new ArrayList<>());
 
             for (int[] neighbor : neighbors) {
                 int neighborNode = neighbor[0];
