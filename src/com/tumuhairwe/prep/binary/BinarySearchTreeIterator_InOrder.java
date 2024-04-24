@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.Queue;
 
 /**
- * LeetCode 173
+ * LeetCode 173 (Medium)
  * Implement a BST iterator that follow in-order traversal
  *
- * for refer3nce
+ * for reference
  * in-order = left -> current -> right
  * post-order= left -> right -> current
  * pre-order = current -> left -> right
@@ -23,18 +23,18 @@ public class BinarySearchTreeIterator_InOrder implements Iterator<Integer> {
     public BinarySearchTreeIterator_InOrder(TreeNode root){
         this.iterator = root;
         traversal = new ArrayDeque<>();
-        fillTheStack(iterator);
+        fillTheQueue(iterator);
     }
 
-    private void fillTheStack(TreeNode<Integer> iterator) {
+    private void fillTheQueue(TreeNode<Integer> iterator) {
         if(iterator.left != null){
-            fillTheStack(iterator.left);
+            fillTheQueue(iterator.left);
         }
 
         traversal.add(iterator.data);
 
         if(iterator.right != null){
-            fillTheStack(iterator.right);
+            fillTheQueue(iterator.right);
         }
     }
 
