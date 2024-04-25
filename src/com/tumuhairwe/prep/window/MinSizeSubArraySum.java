@@ -1,6 +1,4 @@
-package com.tumuhairwe.prep;
-
-import java.util.Map;
+package com.tumuhairwe.prep.window;
 
 public class MinSizeSubArraySum {
 
@@ -16,13 +14,13 @@ public class MinSizeSubArraySum {
     private static int findMinSubArray(int s, int[] arr){
         int windowStart =0;
         int windowSum = 0;
-        int lengthOfSmallestSubArray=Integer.MAX_VALUE;
+        int lengthOfSmallestSubArray = Integer.MAX_VALUE;
 
         for (int windowEnd = 0; windowEnd < arr.length-1; windowEnd++) {
             windowSum += arr[windowEnd];
 
             while(windowSum >= s){
-                lengthOfSmallestSubArray = Math.min(lengthOfSmallestSubArray, windowEnd-windowStart+1);
+                lengthOfSmallestSubArray = Math.min(lengthOfSmallestSubArray, windowEnd - windowStart + 1);
                 windowSum -= arr[windowStart];
                 windowStart++;
             }

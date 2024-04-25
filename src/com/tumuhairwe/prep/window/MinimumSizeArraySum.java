@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.window;
 
 /**
  * LeetCode 209 (Medium) Minimum Size Sub array Sum

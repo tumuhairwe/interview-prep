@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.window;
 
 /**
  * LeetCode 977 (Easy)

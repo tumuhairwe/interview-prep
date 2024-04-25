@@ -14,6 +14,7 @@ import java.util.*;
  * points = { [1,3], [-2,2]}, k = 1
  * output = [[-2, 3]]
  *
+ * LeetCode 938 (medium)
  * You may return the answer in any order. The answer is guaranteed to be unique
  * ref: https://leetcode.com/problems/k-closest-points-to-origin/description/
  */
@@ -30,12 +31,20 @@ public class KClosestPointsToOrigin {
 
     static int[][] kClosest(int[][] points, int k){
         Comparator<int[]> comparator = (int[] a, int[] b) -> {
-            int aZeroSquared = a[0] * a[0];
-            int aOneSquared = a[0] - a[1];
+            int x = a[0] - a[1];
+            int xSquared = x * x;
 
-            int bZeroSquared = b[0] * b[0];
-            int bOneSum = b[1] * b[1];
-            return (aZeroSquared + aOneSquared) * (bZeroSquared + bOneSum);
+            int y = b[0] - b[1];
+            int ySquared = y * y;
+            double sqRoot = Math.sqrt(xSquared + ySquared);
+            return Double.valueOf(sqRoot).intValue();
+
+//            int aZeroSquared = a[0] * a[0];
+//            int aOneSquared = a[0] - a[1];
+//
+//            int bZeroSquared = b[0] * b[0];
+//            int bOneSquared = b[1] * b[1];
+//            return (aZeroSquared + aOneSquared) + (bZeroSquared + bOneSquared);
         };
         // 0. create PQ
         PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);

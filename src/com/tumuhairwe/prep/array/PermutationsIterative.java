@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
+ * LeetCode 46
  * Given an input string, return all possible permutations of the string
  *
  * The order of the permutations does not matter
@@ -13,7 +14,11 @@ import java.util.List;
 public class PermutationsIterative {
 
     public static void main(String[] args) {
-        System.out.println(Math.pow(2, 4));
+        int[] arr = new int[]{1,2,3};
+        List<List<Integer>> results = iteratively(arr);
+
+        System.out.println("These are the permutations");
+        System.out.println(results);
     }
 
     static List<List<Integer>> iteratively(int[] nums){
@@ -25,9 +30,9 @@ public class PermutationsIterative {
             rSize = result.size();
             
             while (rSize >0){   // for as many entries as there are
-                List<Integer> permuation = result.pollFirst();
-                for (int i = 0; i < permuation.size(); i++) {
-                    List<Integer> newPermutation = new ArrayList<>(permuation);
+                List<Integer> permutation = result.pollFirst();
+                for (int i = 0; i < permutation.size(); i++) {
+                    List<Integer> newPermutation = new ArrayList<>(permutation);
                     newPermutation.add(i, num);
                     result.add(newPermutation);
                 }

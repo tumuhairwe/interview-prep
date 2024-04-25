@@ -78,11 +78,8 @@ public class SlidingWindowMaximum {
                 result.add(nums[index.getFirst()]);
             }
         }
+        // same
         Comparator<Map.Entry<Character, Integer>> c = Comparator.comparingInt(Map.Entry::getValue);
-
-        Comparator<Map.Entry<Integer, Integer>> entryComparator = (Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) -> {
-            return entry1.getValue() - entry2.getValue();
-        };
         Comparator<Map.Entry<Integer, Integer>> entryComparator1 = (Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) -> {
             return entry1.getValue() - entry2.getValue();
         };

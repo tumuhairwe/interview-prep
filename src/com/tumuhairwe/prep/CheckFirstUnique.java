@@ -1,14 +1,21 @@
 package com.tumuhairwe.prep;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-// First non-repeating integer
-// Algo: use Map<Integer, Integer> -> Integer , countOfOccurrences
-// a) loop thru array & initialize count to Zero
-// b) loop thru array and increment to existingCount+1
-// c) return entry.key with countOfOccurrences <= 1
+/**
+ * LeetCode 387
+ * First Unique Character (this soluion can be adapter tp 387 by
+ * changing the frequencyMap to Map<Character, Integer>
+ *
+ * Solution Summary
+ * - To calcuate the rist First non-repeating integer
+ * Algo: use Map<Integer, Integer> -> Integer , countOfOccurrences
+ *  a) loop thru array & initialize count to Zero
+ *  b) loop thru array and increment to existingCount+1
+ *  c) return entry.key with countOfOccurrences <= 1
+ * ref: https://leetcode.com/problems/first-unique-character-in-a-string/description/
+ */
 public class CheckFirstUnique {
     public static int findFirstUnique(int[] arr)
     {

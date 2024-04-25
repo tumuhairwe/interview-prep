@@ -4,9 +4,11 @@ import java.util.Objects;
 
 public class EntryKey implements Comparable<EntryKey>{
     private int lastAccessedTime;
+    private String key;
     private Object value;
 
-    public EntryKey(Object val){
+    public EntryKey(String key, Object val){
+        this.key = key;
         this.value = val;
         this.lastAccessedTime = (int) System.currentTimeMillis();
     }
@@ -20,7 +22,10 @@ public class EntryKey implements Comparable<EntryKey>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EntryKey entryKey = (EntryKey) o;
-        return lastAccessedTime == entryKey.lastAccessedTime && Objects.equals(value, entryKey.value);
+
+        // equality only account for key and value
+        return Objects.equals(key, entryKey.key)
+                && Objects.equals(value, entryKey.value);
     }
 
     @Override

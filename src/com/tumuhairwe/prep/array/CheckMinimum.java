@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.array;
 
 //  Time complexity = O(n)
 public class CheckMinimum {

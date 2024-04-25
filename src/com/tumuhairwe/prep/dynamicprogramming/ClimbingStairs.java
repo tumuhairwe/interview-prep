@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.dynamicprogramming;
 
 /**
  * LeetCode 70 (Easy)

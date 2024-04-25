@@ -70,7 +70,7 @@ public class MergeInterval {
             int comparison = Integer.compare(array1[0], array2[0]); //
 
             // if the 1st elements are equal, compare the 2nd and so son
-            if(comparison == 0){    // should return -1 if its less, 0 if equal,  and 1 if greater thanb
+            if(comparison == 0){    // should return -1 if its less, 0 if equal,  and 1 if greater than
                 for (int i = 0; i < array1.length; i++) {
                     comparison = Integer.compare(array1[i], array2[i]);
                     if(comparison != 0){
@@ -89,9 +89,6 @@ public class MergeInterval {
         };
 
         Collections.sort(ranges, comp);
-        Collections.sort(ranges, (a, b) -> {
-            return a[0] - b[0] != 0 ? a[0] - b[0] : a[1] - b[1];
-        });
     }
 
     public static int[][] mergeIntervals(int[][] intervals) {

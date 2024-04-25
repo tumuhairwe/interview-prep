@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.window;
 
 import java.util.HashMap;
 import java.util.Map;

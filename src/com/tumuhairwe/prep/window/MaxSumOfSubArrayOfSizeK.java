@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep;
+package com.tumuhairwe.prep.window;
 
 public class MaxSumOfSubArrayOfSizeK {
 
