@@ -73,7 +73,7 @@ public class ValidateIPv4Andv6 {
         if(tokens.length != EXACT_NUMBER_OF_TOKENS){
             return false;
         }
-        // 3. validate segment by segment;
+        // 2. validate segment by segment;
         for (String segment : tokens) {
             validV4 &= isValidV4Segment(segment);
         }
@@ -151,7 +151,7 @@ public class ValidateIPv4Andv6 {
             }
         }
         catch(Exception e){
-            // 1. if non-numeric: -> validate allowable characters
+            // 1. if non-numeric -> validate allowable characters
             List<Character> allowableChars = List.of('A', 'B', 'C', 'D', 'E', 'F');
             char[] s = segment.toCharArray();
             for(int i=0; i<s.length; i++){

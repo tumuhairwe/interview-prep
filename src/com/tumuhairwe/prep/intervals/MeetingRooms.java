@@ -5,7 +5,13 @@ import java.util.stream.Collectors;
 
 /**
  * LeetCode 920
- * ref: https://www.youtube.com/watch?v=Iz5GZbvpxqo
+ *
+ * Solution Summary:
+ * - Sort the interval[] by start time == O(n log_n)
+ * - iterate and compare adjacent intervals (if 1 int[][])
+ *
+ * ref: Geekific: https://www.youtube.com/watch?v=Iz5GZbvpxqo
+ * ref: NeetCode: https://www.youtube.com/watch?v=PaJxqZVPhbg
   */
 public class MeetingRooms {
 
@@ -30,58 +36,40 @@ public class MeetingRooms {
         return minHeap.size();  // size of concurrently occupied rooms
     }
 
-    public int findMinimumNumberOfRoomsRequired(int[][] slotsA, int[][] slotsB){
-        int START_INDEX = 0;
-        int END_INDEX = 1;
-        //Interval[] schedule = new Interval[slotsA.length];
-        Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
-        //Arrays.sort(schedule, comp);
-
-        Set<Interval> slotAAvailability = new TreeSet<>();
-        for (int i = 0; i < slotsA.length; i++) {
-            slotAAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
-        }
-
-        Set<Interval> slotBAvailability = new TreeSet<>();
-        for (int i = 0; i < slotsB.length; i++) {
-            slotBAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
-        }
-        long numberOfIntersections = slotAAvailability
-                .stream()
-                .filter(slotA -> slotBAvailability.stream()
-                        .anyMatch(slotB -> slotB.intersects(slotA)))
-                .count();
-
-        return (int) numberOfIntersections;
-    }
     static  List<Integer> getIntersection(List<Integer> l1, List<Integer> l2){
-        List<Integer> result = new ArrayList<>();
-
-        l1.stream().filter(l -> l2.contains(l)).collect(Collectors.toList());
-
-        for (Integer i : l1){
-            if (l2.contains(i)){
-                result.add(i);
-            }
-        }
+        List<Integer> result = l1.stream()
+                .filter(l -> l2.contains(l))
+                .collect(Collectors.toList());
 
         return result;
     }
     public static boolean canAPersonAttendAllTheMeetings(int[][] slotsA) {
+        // approach 1: sort slots by start time -> iterate comparing next-to-each-other slot (for loop starts at i= 1)
+        // FALSE: sorting is necessary only if collection is array
+        //Arrays.sort((Interval[]) schedule.toArray(), comp);
+        Comparator<int[]> comp = Comparator.comparingInt(a -> a[0]);
+        Arrays.sort(slotsA, comp);
+        for (int i = 1; i < slotsA.length; i++) {
+            int[] i1 = slotsA[i];
+            int[] i2 = slotsA[i - 1];
+            if(i1[1] > i2[0]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public static boolean canAPersonAttendAllTheMeetings2(int[][] slotsA) {
+        // approach 2
         // 0. transform into array of intervals
         Set<Interval> schedule = new TreeSet<>();
         for (int i = 0; i < slotsA.length; i++) {
             schedule.add(new Interval(slotsA[i][0], slotsA[i][1]));
         }
-
-        // 1. sort the intervals based on start time (explicit sorting is unnecessary since Collection (TreeSet<Integer>) already sorted.
-        // sorting is necessary only if collection is array
-        // Comparator<Interval> comp = Comparator.comparingInt(Interval::getStart);
-        // Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
-        // Arrays.sort((Interval[]) schedule.toArray(), comp);
         Interval[] intervals = (Interval[]) schedule.toArray();
         for (int i = 0; i < intervals.length - 1; i++) {
-            if(intervals[i].end > intervals[i + 1].start){
+            if(intervals[i].overlaps(intervals[i + 1])){
                 return false;
             }
         }

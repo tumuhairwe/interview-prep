@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.pramo;
+package com.tumuhairwe.prep.graphs;
 import java.util.*;
 
 /**
@@ -50,7 +50,7 @@ class ShortestPath {
     }
 
     int shortestCellPath(int[][] grid, int startingRow, int startingColumn, int terminalRow, int terminalColumn) {
-        // --> bfs = queue = check neighbors
+        // --> bfs = enqueue -> check neighbors
         // dfs = stack
         Queue<Cell> que = new ArrayDeque<>();
         que.add(new Cell(startingRow,startingColumn));

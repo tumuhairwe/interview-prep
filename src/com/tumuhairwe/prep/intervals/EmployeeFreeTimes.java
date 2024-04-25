@@ -26,9 +26,6 @@ public class EmployeeFreeTimes {
     public static List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> freeTime = new ArrayList<>();
 
-        //PriorityQueue<Interval> priorityQueue = new PriorityQueue<>();
-        //priorityQueue.add(new Interval());
-
         // example of mapping list of integer arrays to list of Interval
         List<int[]> aa = new ArrayList<>();
         aa.add(new int[]{1, 2});

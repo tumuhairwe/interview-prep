@@ -6,6 +6,19 @@ import java.util.Set;
 /**
  * Find the longest substring without repeating characters
  *
+ * LeetCode 3 (medium)
+ *
+ * Solution Summary:
+ * - Use a sliding window to
+ *      - initialize windowStart amd windowEnd to 0, and a new HashSet()
+ *      - loop over the chars ... when you encounter a char that IS NOT in hashSet
+ *         -> add to hashSet
+ *         -> update globalMax = Math.max(hashSet.size(), globalMax)
+ *         -> increment windowEnd
+ *      - ... when you encounter a char that IS in the hashSet
+ *          -> remove from hashSet
+ *          -> increment windowStart
+ * ref: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
  * ref: https://www.youtube.com/watch?v=3IETreEybaA&t=3s
  */
 public class LengthOfLongestSubstring {

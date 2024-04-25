@@ -8,6 +8,7 @@ import java.util.*;
  * Merge all overlapping intervals and return an array of non-overlapping intervals that cover
  * all the intervals
  *
+ * ref: https://www.youtube.com/watch?v=44H3cEC2fFM
  * ref: https://leetcode.com/problems/merge-intervals/description/
  */
 public class MergeInterval {
@@ -83,7 +84,6 @@ public class MergeInterval {
     }
 
     private static void sortArray2(List<Integer[]> ranges){
-        // Iist<int[]> results = new ArrayList<>();
         Comparator<Integer[]> comp = (Integer[] a, Integer[] b) -> {
             return a[0] - b[0] != 0 ? a[0] - b[0] : a[1] - b[1];
         };

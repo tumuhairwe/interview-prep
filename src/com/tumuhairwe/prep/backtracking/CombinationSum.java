@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * LeetCode 30 (combination sum)
+ * LeetCode 39 (combination sum)
  *
  * Given
  * - an array of DISTINCT integers candidates,
@@ -23,9 +23,9 @@ public class CombinationSum {
         int target = 7;
 
         // [[2,2,3],[7]]
-        System.out.println("Result " + new CombinationSum().combinationSum(candidates, target));
+        System.out.println("Result " + combinationSum(candidates, target));
     }
-    public List<List<Integer>> combinationSum(int[] candidates, int target){
+    static public List<List<Integer>> combinationSum(int[] candidates, int target){
         List<List<Integer>> answer = new ArrayList<>();
         List<Integer> curr = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class CombinationSum {
         return answer;
     }
 
-    private void backtrack(int[] candidates, int target, List<List<Integer>> answer, List<Integer> curr, int index) {
+    static private void backtrack(int[] candidates, int target, List<List<Integer>> answer, List<Integer> curr, int index) {
         if(target == 0){
             answer.add(new ArrayList<>(curr));
         }

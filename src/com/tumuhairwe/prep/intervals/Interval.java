@@ -24,7 +24,7 @@ class Interval implements Comparable<Interval>{
         this.closed = closed;
     }
 
-    @Override
+    @Override   // sorting TC O(n log_n)
     public int compareTo(Interval o) {
         return Integer.compare(this.start, o.start);
     }
@@ -64,7 +64,11 @@ class Interval implements Comparable<Interval>{
     }
 
     public boolean intersects(Interval interval){ // overlaps
-        return this.start > interval.start || this.end < interval.end;
+        return this.end > interval.start;
+    }
+    public boolean overlaps(Interval interval){
+        //return interval.start < this.end;
+        return this.end > interval.start;
     }
     public int getIntersection(Interval interval){
         int sharedStartTime = Math.max(this.start, interval.start);

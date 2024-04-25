@@ -15,6 +15,9 @@ import java.util.Set;
  *
  * Get the minimum cost to make all points connected if there's exactly one simple path
  * between any 2 points
+ *
+ * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/1584-min-cost-to-connect-all-points.java
+ * ref: https://leetcode.com/problems/min-cost-to-connect-all-points/description/
  */
 public class MinimumCostToConnectAllPoints {
 

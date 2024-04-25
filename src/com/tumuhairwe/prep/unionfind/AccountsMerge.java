@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.unionfind;
 import java.util.*;
 
 /**
- * LeetCode 721
+ * LeetCode 721 (medium)
  * Given a list of account where each element accounts[i] is a list of string,
  * Where the 1st element in the list is a name and the rest of the elements are
  * emails representing that account
@@ -17,9 +17,25 @@ import java.util.*;
  */
 public class AccountsMerge {
     public static void main(String[] args) {
+        List<List<String>> lists = List.of(
+                List.of("John","johnsmith@mail.com","john_newyork@mail.com"),
+                List.of("John","johnsmith@mail.com","john00@mail.com"),
+                List.of("Mary","mary@mail.com"),
+                List.of("John","johnnybravo@mail.com")
+        );
+        List<List<String>> result = accountsMerge(lists);
+        System.out.println("Accounts Merged = " + result);
 
+        List<List<String>> lists2 = List.of(
+                List.of("Gabe","Gabe0@m.co","Gabe3@m.co","Gabe1@m.co"),
+                List.of("Kevin","Kevin3@m.co","Kevin5@m.co","Kevin0@m.co"),
+                List.of("Ethan","Ethan5@m.co","Ethan4@m.co","Ethan0@m.co"),
+                List.of("Hanzo","Hanzo3@m.co","Hanzo1@m.co","Hanzo0@m.co"),
+                List.of("Fern","Fern5@m.co","Fern1@m.co","Fern0@m.co")
+        );
+        System.out.println("Accounts Merged 2 = " + lists2);
     }
-    public List<List<String>> accountsMerge(List<List<String>> accounts){
+    public static List<List<String>> accountsMerge(List<List<String>> accounts){
         int n = accounts.size();
         UnionFind dsu = new UnionFind(n);
 
@@ -64,7 +80,7 @@ public class AccountsMerge {
         return res;
     }
 
-    class UnionFind{
+    static class UnionFind{
         private int[] parent;
         private int[] rank;
 
