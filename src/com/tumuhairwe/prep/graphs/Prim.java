@@ -17,7 +17,7 @@ import java.util.*;
  *      - repeat pq.poll()
  *
  * TC: Adj_list = O (1) -- putting and getting things from Map
- * TC: PQ = O (log V) where V = number of vertices
+ * TC: PQ = E * O (log V) where V = number of vertices
  */
 public class Prim {
 
@@ -58,21 +58,25 @@ public class Prim {
         visited.add(0);
         while (visited.size() < n && !minHeap.isEmpty()){
             int[] curr = minHeap.remove();
-            int weight = curr[0];
-            int nodeId = curr[1];
-            int neighbor = curr[2];
+            int currentWeight = curr[0];
+            int currentNodeId = curr[1];
+            int currentNode = curr[2];
 
-            if (visited.contains(neighbor)){
+            if (visited.contains(currentNode)){
                 continue;
             }
 
-            totalWeight += weight;
-            visited.add(neighbor);
-            for (Integer[] pair : adjList.get(neighbor)){
+            totalWeight += currentWeight;
+            visited.add(currentNode);
+            for (Integer[] pair : adjList.get(currentNode)){
                 Integer nextDoorNeighbor = pair[0];
-                Integer nextDoorWeight = pair[0];
+                Integer nextDoorWeight = pair[1];
+                // to be finished
+                double nextWeight = Math.asin(nextDoorWeight - currentWeight);
                 if(!visited.contains(nextDoorNeighbor)){
-                    minHeap.add(new int[]{nextDoorWeight, nextDoorNeighbor});
+                    minHeap.add(new int[]{
+                            Double.valueOf(nextWeight).intValue(),
+                            nextDoorNeighbor});
                 }
             }
         }
