@@ -3,12 +3,12 @@ package com.tumuhairwe.prep.pramo;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LRUCacheV2 {
+public class LRUCacheV2_LinkedListImpl {
     int cacheCapacity;
     Map<Integer, LinkedListNode> cacheMap = new HashMap<>();
     KeyValuePairLL cacheList = new KeyValuePairLL();
 
-    public LRUCacheV2(int size){
+    public LRUCacheV2_LinkedListImpl(int size){
         this.cacheCapacity = size;
     }
 

@@ -2,6 +2,23 @@ package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
 
+/**
+ * Prim's algo is used to find a minimum spanning tree (MST) of an undirected graph
+ * MST = weighted undirected graph with no cycles
+ *
+ * Solution Summary
+ * - Build adjacency list & populate with list of edges (Map : key = nodeId, value = [neighbor, weight]
+ * - Create minHeap/PQ Comparable/Sortable by weight
+ * - Iteratively populate minHeap by fetching neighbors from adj_list and adding them to PQ
+ * - For each neighbor in the minHeap,
+ *      - Add to visited set
+ *      - Get [neighbors, weight] from adj_list
+ *      - If not visited, Add to PQ
+ *      - repeat pq.poll()
+ *
+ * TC: Adj_list = O (1) -- putting and getting things from Map
+ * TC: PQ = O (log V) where V = number of vertices
+ */
 public class Prim {
 
     // implementation for Prim's algorithm to compute the minimum spanning trees
@@ -37,30 +54,30 @@ public class Prim {
 
         // 3. compute the minimum spanning tree
         int totalWeight = 0;
-        Set<Integer> visit = new HashSet<>();
-        visit.add(0);
-        while (visit.size() < n && !minHeap.isEmpty()){
+        Set<Integer> visited = new HashSet<>();
+        visited.add(0);
+        while (visited.size() < n && !minHeap.isEmpty()){
             int[] curr = minHeap.remove();
             int weight = curr[0];
             int nodeId = curr[1];
             int neighbor = curr[2];
 
-            if (visit.contains(neighbor)){
+            if (visited.contains(neighbor)){
                 continue;
             }
 
             totalWeight += weight;
-            visit.add(neighbor);
+            visited.add(neighbor);
             for (Integer[] pair : adjList.get(neighbor)){
                 Integer nextDoorNeighbor = pair[0];
                 Integer nextDoorWeight = pair[0];
-                if(!visit.contains(nextDoorNeighbor)){
+                if(!visited.contains(nextDoorNeighbor)){
                     minHeap.add(new int[]{nextDoorWeight, nextDoorNeighbor});
                 }
             }
         }
 
         // 4 return -1 if not all nodes have been visited
-        return visit.size() == n ? totalWeight : -1;
+        return visited.size() == n ? totalWeight : -1;
     }
 }
