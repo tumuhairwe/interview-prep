@@ -14,6 +14,8 @@ package com.tumuhairwe.prep.array;
  *  - when sum of sum[p1] + nums[p2] == target return
  *  - when sum of sum[p1] + nums[p2] > target, decrement p2
  *  - when sum of sum[p1] + nums[p2] > target, increment p1
+ *
+ *  TC: O(n) because you need to thru nums at least once (where n = length of the array)
  */
 public class TwoSumInSortedArray {
     public static void main(String[] args) {

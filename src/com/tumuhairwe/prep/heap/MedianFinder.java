@@ -1,58 +1,61 @@
 package com.tumuhairwe.prep.heap;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 // implementation of 2 heaps
+
+/**
+ * LeetCode 4 (hard)
+ * Find median of 2 sorted arrays
+ *
+ * ref: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+ */
 public class MedianFinder {
 
-    PriorityQueue<Integer> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a));
-    //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
-
-    private PriorityQueue<Integer> small; // maxHeap
-    private PriorityQueue<Integer> large; // maxHeap
+    // maxHeap: (ordered by smallest at the top
+    private PriorityQueue<Integer> smallHeap; // order by putting smallest on top; // maxHeap
+    // minHeap: (ordered by largest at the top)
+    private PriorityQueue<Integer> largeHeap;  // order by putting largest on top
 
     public MedianFinder(){
-        // same
-        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
-        this.small = new PriorityQueue<>(Collections.reverseOrder());   // order by putting smallest on top
+        smallHeap = new PriorityQueue<>((a, b) -> b - a);
 
         // same
-        //PriorityQueue<Integer> minHeap = new PriorityQueue<>((a, b) -> a - b);
-        this.large = new PriorityQueue<>(Comparator.comparingInt(a -> a));   // order by putting largest on top
+        //minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a));
+        largeHeap = new PriorityQueue<>((a, b) -> a - b);
     }
 
     public void insert(int num){
         // push to the max heap & swap with minHeap if needed
-        small.add(num);
+        smallHeap.add(num);
         int val;
-        if(!small.isEmpty() && !large.isEmpty() && small.peek() > large.peek()){
-            val = small.poll();
-            large.add(val);
+        if(!smallHeap.isEmpty() && !largeHeap.isEmpty() && smallHeap.peek() > largeHeap.peek()){
+            val = smallHeap.poll();
+            largeHeap.add(val);
         }
 
-        // hanbdle uneven size
-        if(small.size() > large.size() + 1){
-            val = small.poll();
-            large.add(val);
+        // handle uneven size
+        if(smallHeap.size() > largeHeap.size() + 1){
+            val = smallHeap.poll();
+            largeHeap.add(val);
         }
-        else if (large.size() > small.size() + 1){
-            val = large.poll();
-            small.add(val);
+        else if (largeHeap.size() > smallHeap.size() + 1){
+            val = largeHeap.poll();
+            smallHeap.add(val);
         }
     }
 
-    public double getMedian(){
-        if(small.size() > large.size()){
-            return small.peek();
+    public double findMedian(){
+        // if even number of elements -> add top() of each heap & divide by 2 to get average of middle 2
+        if(smallHeap.size() == largeHeap.size()){
+            return (double) (largeHeap.peek() + smallHeap.peek()) / 2;
         }
-        else if(large.size() > small.size()){
-            return large.peek();
+        if(smallHeap.size() > largeHeap.size()){
+            return (double) smallHeap.peek();
         }
-
-        //  even number of elements -> divide by 2 to get average of middle 2
-        double median = (small.peek() + large.peek()) / 2;
-        return median;
+        else{
+            return largeHeap.peek();
+        }
     }
 }
