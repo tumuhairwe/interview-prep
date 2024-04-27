@@ -1,6 +1,5 @@
 package com.tumuhairwe.prep.heap;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 // implementation of 2 heaps
@@ -8,7 +7,10 @@ import java.util.PriorityQueue;
 /**
  * LeetCode 4 (hard)
  * Find median of 2 sorted arrays
+ * The overall run time complexity should be O(log (m+n)).
  *
+ * Solution Summary:
+ * - Create 2 PQs (minHeap
  * ref: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
  */
 public class MedianFinder {

@@ -17,6 +17,14 @@ public class EntryKey implements Comparable<EntryKey>{
         return value;
     }
 
+    public String getKey() {
+        return key;
+    }
+
+    public void setLastAccessedTime(int lastAccessedTime) {
+        this.lastAccessedTime = lastAccessedTime;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

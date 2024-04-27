@@ -1,6 +1,5 @@
 package com.tumuhairwe.prep.pramo;
 
-import java.util.Optional;
 
 public class LRUCacheSolution {
     public static void main(String[] args) {
@@ -19,17 +18,17 @@ public class LRUCacheSolution {
         System.out.println("LRUCacheV1_PQImpl: third thing was " + result);
 
         LRUCacheV1_PQImpl cacheV1_pq = new LRUCacheV1_PQImpl(2);
-        cacheV1_pq.set("first-thing", 1);
-        cacheV1_pq.set("second-thing", 2);
-        cacheV1_pq.set("third-thing", 3);
+        cacheV1_pq.put("first-thing", 1);
+        cacheV1_pq.put("second-thing", 2);
+        cacheV1_pq.put("third-thing", 3);
 
-        Optional<Object> opt = cacheV1_pq.get("first-thing");
-        System.out.println("LRUCacheV1_PQImpl: first thing was " + (opt.isEmpty() ? " found =" + opt.get() : " not found"));
+        Integer opt = cacheV1_pq.get("first-thing");
+        System.out.println("LRUCacheV1_PQImpl: first thing was " + (opt != -1 ? " found =" + opt : " not found"));
 
         opt = cacheV1_pq.get("second-thing");
-        System.out.println("LRUCacheV1_PQImpl: second thing was " + (opt.isEmpty() ? " found =" + opt.get() : " not found"));
+        System.out.println("LRUCacheV1_PQImpl: second thing was " + (opt != -1 ? " found =" + opt : " not found"));
 
         opt = cacheV1_pq.get("third-thing");
-        System.out.println("LRUCacheV1_PQImpl: third thing was " + (opt.isEmpty() ? " found =" + opt.get() : " not found"));
+        System.out.println("LRUCacheV1_PQImpl: third thing was " + (opt != -1 ? " found =" + opt : " not found"));
     }
 }

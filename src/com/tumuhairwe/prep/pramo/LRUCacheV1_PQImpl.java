@@ -2,6 +2,13 @@ package com.tumuhairwe.prep.pramo;
 
 import java.util.*;
 
+/**
+ * LeetCode 146 (medium)
+ * Implement LRU Cache that's
+ * - initialized with a positive size (initialCapacity)
+ * - get(int key) - should return the value of the key if it exists, otherwise return -1
+ * ref: https://leetcode.com/problems/lru-cache/description/
+ */
 public class LRUCacheV1_PQImpl {
     private final int initialCapacity;
     private PriorityQueue<EntryKey> pqCache;
@@ -13,7 +20,7 @@ public class LRUCacheV1_PQImpl {
         this.datastore = new HashMap<>();
     }
 
-    public void set(String key, Object val){
+    public void put(String key, Integer val){
         if(this.pqCache.size() >= initialCapacity){
             this.evictExcess();
         }
@@ -24,24 +31,17 @@ public class LRUCacheV1_PQImpl {
 
     private void evictExcess() {
         // evict all excess
-        //Set<EntryKey> toBeRemoved = new HashSet<>();
-//        while (pqCache.size() > initialCapacity){
-//            toBeRemoved.add(pqCache.remove());
-//        }
-
         while (datastore.size() > initialCapacity){
             EntryKey removedEntry = pqCache.remove();
             this.datastore.remove(removedEntry);    // equals() only accounts for key and value
-//            this.datastore.entrySet()
-//                    .stream()
-//                    .dropWhile(p -> toBeRemoved.contains(removedEntry));
         }
     }
 
-    public Optional<Object> get(String key){
+    public Integer get(String key){
         if(!this.pqCache.contains(key)){
-            Optional.of(this.datastore.get(key));
+            EntryKey ek = this.datastore.get(key);
+            return Integer.parseInt(ek.getValue().toString());
         }
-        return Optional.empty();
+        return -1;
     }
 }

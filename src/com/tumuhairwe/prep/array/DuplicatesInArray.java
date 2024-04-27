@@ -1,8 +1,7 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Given an INTEGER array of length n, where all integers are in
@@ -22,11 +21,44 @@ import java.util.List;
  * - Go to that index ... that the value references ... and make it negative
  * - When you encounter it again .... (and its negative) ... that means its already been seen
  *
+ * LeetCode 442
  * ref: https://www.youtube.com/watch?v=aMsSF1Il3IY
  * ref: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
  */
 public class DuplicatesInArray {
 
+    /**
+     * Solution Summary
+     * - iterate over the array and create a char-frequency Map
+     * - find all entries with value > 1 and collect them into a list
+     *
+     * TC: O(n)
+     * SC: O(n)
+     *
+     * Compile Map of frequency of every number is nums
+     * return only those have a frequency of more than 1
+     */
+    public List<Integer> findDuplicates_byCharFrequency(int[] nums) {
+        Map<Integer, Integer> charFreq = new HashMap<>();
+        for(Integer n : nums){
+            int existingCount = charFreq.getOrDefault(n, 0);
+            charFreq.put(n, existingCount + 1);
+        }
+
+        List<Integer> duplicates = charFreq.entrySet()
+                .stream()
+                .filter(e -> e.getValue() > 1)
+                .map(e -> e.getKey())
+                .collect(Collectors.toList());
+        return duplicates;
+    }
+
+    /**
+     * Solution Summary
+     *
+     * - Get absolute value of an entry/number
+     * - Use that as the index
+     */
     public List<Integer> findDuplicates(int[] nums){
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < nums.length; i++) {
