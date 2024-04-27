@@ -15,6 +15,12 @@ import java.util.*;
  *  Example:
  *  Input: nums = [7,2,13,11], target = 9
  *  Output: [0,1]
+ *
+ *  Solution summary: (uses constant extra space)
+ *  - As you iterate thru the nums array
+ *      - find the complement (target - nums[i])
+ *      - if complement exists in a map_of_compliments -> return { complement, nums[i] }
+ *      - if complement does not exist, add it to map
  */
 public class TwoSumProblem {
 
@@ -42,7 +48,7 @@ public class TwoSumProblem {
             else numMap.put(nums[i], i);    // key = Integer, val = index
         }
 
-        throw new IllegalArgumentException("No match found");
+        return new int[]{ -1, -1};
     }
 
     /**

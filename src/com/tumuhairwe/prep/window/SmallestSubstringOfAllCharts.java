@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.map;
+package com.tumuhairwe.prep.window;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ import java.util.*;
  * Must be solved in O(n) Complexity
  * ref: https://www.pramp.com/question/wqNo9joKG6IJm67B6z34
  * ref: https://leetcode.com/problems/minimum-window-substring/description/
- * //ref: https://www.youtube.com/watch?v=wlecqVnu5W8
+ * ref: https://www.youtube.com/watch?v=wlecqVnu5W8
  *
  * Solution: (Sliding window)
  * - Create int[] of size 128 (128 == num of ASCII chars)

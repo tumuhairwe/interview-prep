@@ -158,23 +158,22 @@ public class KClosest {
         int left = 0;
         int right = nums.length -1;
 
-        // find the 1st closest elements to target
+        // b) find the 1st closest elements to target
         while (left < right){
-            // compute mid
-            //int mid = (left + right)/2;
+            // b.1 ) compute mid
             int mid = left + (right - left) /2;
 
-            // if val = mid, return it
+            // b.2) f val = mid, return it
             if(nums[mid] == target){
                 return mid;
             }
 
-            // if val < target, move left_pointer forward
+            // b.3) if val < target, move left_pointer forward
             if(nums[mid] < target){
                 left = mid + 1;
             }
 
-            // if val is > mid, move right pointer backwards
+            // b.4) if val is > mid, move right pointer backwards
             else{
                 right = mid - 1;
             }
