@@ -21,6 +21,10 @@ public class EntryKey implements Comparable<EntryKey>{
         return key;
     }
 
+    public int getLastAccessedTime() {
+        return lastAccessedTime;
+    }
+
     public void setLastAccessedTime(int lastAccessedTime) {
         this.lastAccessedTime = lastAccessedTime;
     }

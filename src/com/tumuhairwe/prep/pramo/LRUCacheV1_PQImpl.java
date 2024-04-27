@@ -4,9 +4,11 @@ import java.util.*;
 
 /**
  * LeetCode 146 (medium)
+ *
  * Implement LRU Cache that's
  * - initialized with a positive size (initialCapacity)
  * - get(int key) - should return the value of the key if it exists, otherwise return -1
+ *
  * ref: https://leetcode.com/problems/lru-cache/description/
  */
 public class LRUCacheV1_PQImpl {
@@ -16,7 +18,8 @@ public class LRUCacheV1_PQImpl {
 
     public LRUCacheV1_PQImpl(int initialCapacity){
         this.initialCapacity = initialCapacity;
-        this.pqCache = new PriorityQueue<>();
+        Comparator<EntryKey> comp = (EntryKey e1, EntryKey e2) -> e1.getLastAccessedTime();
+        this.pqCache = new PriorityQueue<>(comp);
         this.datastore = new HashMap<>();
     }
 
@@ -33,14 +36,16 @@ public class LRUCacheV1_PQImpl {
         // evict all excess
         while (datastore.size() > initialCapacity){
             EntryKey removedEntry = pqCache.remove();
-            this.datastore.remove(removedEntry);    // equals() only accounts for key and value
+            this.datastore.remove(removedEntry.getKey());    // equals() only accounts for key and value
         }
     }
 
     public Integer get(String key){
         if(!this.pqCache.contains(key)){
-            EntryKey ek = this.datastore.get(key);
-            return Integer.parseInt(ek.getValue().toString());
+            int now = Long.valueOf(System.currentTimeMillis()).intValue();
+            this.datastore.get(key).setLastAccessedTime(now);
+            String value = this.datastore.get(key).getValue().toString();
+            return Integer.parseInt(value);
         }
         return -1;
     }
