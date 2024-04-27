@@ -1,8 +1,8 @@
 package com.tumuhairwe.prep.pramo;
 
-public class LinkedList<T> {
-    private LinkedListNode<T> head;
-    private LinkedListNode<T> tail;
+public class LinkedList<T>  {
+    private LinkedListNode head;
+    private LinkedListNode tail;
     private int length;
 
     public LinkedList() {
@@ -14,8 +14,8 @@ public class LinkedList<T> {
         return this.length;
     }
 
-    public void insertAtHead(T data) {
-        LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+    public void insertAtHead(int key, int value) {
+        LinkedListNode newNode = new LinkedListNode(key, value);
         if (this.head == null) {
             this.head = newNode;
             this.tail = newNode;
@@ -27,8 +27,8 @@ public class LinkedList<T> {
         this.length++;
     }
 
-    public void insertAtTail(T data) {
-        LinkedListNode<T> newNode = new LinkedListNode<T>(data);
+    public void insertAtTail(int key, int value) {
+        LinkedListNode newNode = new LinkedListNode(key, value);
         if (this.head == null) {
             this.head = newNode;
             this.tail = newNode;
@@ -40,7 +40,7 @@ public class LinkedList<T> {
         this.length++;
     }
 
-    public void addFirst(LinkedListNode<T> newNode) {
+    public void addFirst(LinkedListNode newNode) {
         if (this.head == null) {
             this.head = newNode;
             this.tail = newNode;
@@ -52,7 +52,7 @@ public class LinkedList<T> {
         this.length++;
     }
 
-    public void addLast(LinkedListNode<T> newNode) {
+    public void addLast(LinkedListNode newNode) {
         if (this.head == null) {
             this.head = newNode;
             this.tail = newNode;
@@ -64,10 +64,10 @@ public class LinkedList<T> {
         this.length++;
     }
 
-    public void remove(T data) {
-        LinkedListNode<T> tmp = this.head;
+    public void remove(int data) {
+        LinkedListNode tmp = this.head;
         while (tmp != null) {
-            if (tmp.data == data) {
+            if (tmp.val == data) {
                 this.remove(tmp);
                 return;
             }
@@ -75,7 +75,7 @@ public class LinkedList<T> {
         }
     }
 
-    public void remove(LinkedListNode<T> node) {
+    public void remove(LinkedListNode node) {
         if (node == null)
             return;
         if (node.prev != null)
@@ -101,11 +101,11 @@ public class LinkedList<T> {
         this.remove(this.tail);
     }
 
-    public LinkedListNode<T> getFirst() {
+    public LinkedListNode getFirst() {
         return this.head;
     }
 
-    public LinkedListNode<T> getLast() {
+    public LinkedListNode getLast() {
         return this.tail;
     }
 
