@@ -26,11 +26,11 @@ public class TwoSumProblem {
 
     public static void main(String[] args) {
         int nums[] = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int target = 15;
         int [] result = twoSum(nums, 15);
         System.out.println(result[0] + " " + result[1]);
 
-        boolean has = hasPalindromePermutation("aaaaa");
-        System.out.println("Has Palindromic permutation? " + has);
+        System.out.println("The indices with whose sum is " + target + " are " + Arrays.toString(result));
     }
 
     /**
@@ -49,50 +49,5 @@ public class TwoSumProblem {
         }
 
         return new int[]{ -1, -1};
-    }
-
-    /**
-     * To determine if isPalindrome:
-     *
-     * - Populate charFrequencyMap with [key=Char, value=Integer] of character (max 26 chars in alphabet)
-     * - If comparing 2 strings: Use string2 to iteratively decrement the count for each char
-     * - If just 1 string but trying to determine if it has a palindromic permutation, all chars' frequency should be mode 2 (except at most1)
-     * - At the end, there should be at most 1 char (middle) that has a count/value of 1
-     */
-    // TC =  O(n) == because we need to iterate the whole string
-    // SC = O(1) == even though map can grow up to LENGTH, teh distinct number of char is 26
-    static boolean hasPalindromePermutation(String st){
-        Map<Character, Integer> freqMap = new HashMap<>();
-        for (int i = 0; i < st.length(); i++) {
-            int existingCount = freqMap.getOrDefault(st.charAt(i), 0);
-            freqMap.put(st.charAt(i), existingCount + 1);
-        }
-
-        long count = freqMap.entrySet()
-                .stream()
-                .filter(e -> (e.getValue() % 2) != 0)
-                .count();
-        return count <= 1;
-    }
-
-    // Time Complexity  = N^2
-    private static int[] bruteFoce(int[] nums, int target){
-        // Brute force -> 2 nested for loops -> in inner for-loop, skip index i & check if arr[i] + arr[j= == target
-        int numbs[] = new int[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9};
-        //int target = 15;
-
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                if(j == i) continue;;
-
-                int complement = target - numbs[i];
-                ///int sum = nums[i] + nums[j];
-                if(nums[j] == target){
-                    return new int[]{i, j};
-                }
-            }
-        }
-
-        throw new IllegalArgumentException("No match found");
     }
 }

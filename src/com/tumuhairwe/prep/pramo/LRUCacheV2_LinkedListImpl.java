@@ -44,6 +44,12 @@ public class LRUCacheV2_LinkedListImpl {
         this.tail = new LinkedListNode(-1, -1);
     }
 
+    /**
+     * TC: O( 1 )
+     * - Checking the hasMap = O(1)
+     * - remove = O(1) -- since its just changing pointers
+     * - add = O(1) -- since its just chaing pointers to make tail.prev = nodeBeingAdded
+     */
     int get(int key) {
         if (!this.cacheMap.containsKey(key)) {
             return -1;
@@ -53,6 +59,13 @@ public class LRUCacheV2_LinkedListImpl {
         add(node);      // add it to the last position
         return node.val;
     }
+
+    /**
+     * TC: O(1)
+     * - Checking if exists in map = O(1)
+     * - adding node to map = O(1)
+     * - adding to tail = O(1)
+     */
     public void put(Integer key, Integer value){
         // 0. if exits, remove
         if(this.cacheMap.containsKey(key)){

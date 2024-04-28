@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * LeetCode 16 (Medium) 3Sum (Closest to target)
@@ -53,7 +51,7 @@ public class TheeSumClosest {
         // 1. sort (so that iterating with 2 pointers will have numbers in order)
         Arrays.sort(nums);
 
-        // 2. iterate thru the array using 2 pointers (so
+        // 2. iterate thru the array using 2 pointers
         for (int i = 0; i < nums.length - 2; i++) {
             int a_pointer = i + 1;
             int b_pointer = nums.length - 1;
@@ -88,43 +86,26 @@ public class TheeSumClosest {
      * @return
      */
     public static List<List<Integer>> threeSum(int[] nums){
-        int target = 0;
-        List<List<Integer>> results = new ArrayList<>();
-        //int[] xxx = new int[]{-1,2,1,-4};
-        // 0. set closestSum to baseline
-        int closestSum = nums[0] + nums[1] + nums[nums.length - 1];
+        Set<List<Integer>> results = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+        Map<Integer, Integer> seen = new HashMap<>();
 
-        // 1. sort (so that iterating with 2 pointers will have numbers in order)
-        Arrays.sort(nums);
-
-        // 2. iterate thru the array using 2 pointers (so
+        // 2. iterate thru the array using 2 pointers
         for (int i = 0; i < nums.length - 2; i++) {
-            int a_pointer = i + 1;
-            int b_pointer = nums.length - 1;
+            if(duplicates.add(nums[i])) {       // continue if they're not different UNIQUE
+                for (int j = i + 1; j < nums.length; j++) {
+                    int complement = -nums[i] - nums[j];
 
-            // 3. do the pointer technique with every possible i
-            while (a_pointer < b_pointer){
-                // when sorted ... nums[a_pointer] == lowest element and num[b_pointer] == highest element
-                int current_sum = nums[i] + nums[a_pointer] + nums[b_pointer];
-                if(current_sum == target){
-                    a_pointer++;
-                    b_pointer--;
+                    if(seen.containsKey(complement) && seen.get(complement) == i){
+                        List<Integer> triplets = List.of(nums[i], nums[j], complement);
+                        Collections.sort(triplets);
 
-                    // add to results array
-                    results.add(List.of(nums[i], nums[a_pointer], nums[b_pointer]));
+                        results.add(triplets);
+                    }
+                    seen.put(nums[i], i);
                 }
-                else if(current_sum > target){
-                    b_pointer--;                     // decrement b_pointer
-                }
-                else {
-                    a_pointer++;    // increment a_pointer
-                }
-
-//                if(Math.abs(current_sum - target) < Math.abs(closestSum - target)){
-//                    closestSum = current_sum;
-//                }
             }
         }
-        return results;
+        return new ArrayList<>(results);
     }
 }
