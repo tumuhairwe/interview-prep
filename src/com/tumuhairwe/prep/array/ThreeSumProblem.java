@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * LeetCode 15 (Medium) 3Sum triplets == zero
@@ -15,51 +13,48 @@ import java.util.List;
  * ref: https://leetcode.com/problems/3sum/description/
  */
 public class ThreeSumProblem {
-    // --- optional 0. Dedupe ---
 
     public static void main(String[] args) {
-        int[] nums = new int[]{-1, -2, 0, 4, 3, 7, 9};
+        //int[] nums = new int[]{-1, -2, 0, 4, 3, 7, 9};
+        int [] nums = new int[]{-1,2,-1,-4};
+        int target = 0;
+        List<List<Integer>> results = threeSum(nums);
+
+        System.out.println("Given nums: " + Arrays.toString(nums));
+        System.out.println("Triplets with sum == (" + target + ") is " + results);
     }
 
-    private static int[] threeSum(int[] nums){
-        // 1. Sort
-        Arrays.sort(nums);  // n2
+    /**
+     * LeetCode 15 (Medium) 3Sum triplets == zero
+     *
+     * Given an integer array nums, return all the triplets that total up to zero
+     * [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+     *
+     * LeetCode 15 (Medium) 3Sum
+     * ref: https://leetcode.com/problems/3sum/description/
+     * @return
+     */
+    public static List<List<Integer>> threeSum(int[] nums){
+        Set<List<Integer>> results = new HashSet<>();
+        Set<Integer> duplicates = new HashSet<>();
+        Map<Integer, Integer> seen = new HashMap<>();
 
-        // 2. declare response/output array
-        List<List<Integer>> output = new LinkedList<>();
-        for (int i = 1; i < nums.length - 2; i++) { // to avoid going out of bounds
-            if(nums[i] == nums[i+1]){       // continue if they're not different
-                continue;
-            }
+        // 2. iterate thru the array using 2 pointers
+        for (int i = 0; i < nums.length - 2; i++) {
+            if(duplicates.add(nums[i])) {       // continue if they're not different UNIQUE
+                for (int j = i + 1; j < nums.length; j++) {
+                    int complement = -nums[i] - nums[j];
 
-            // do stuff
-            int lowerBound = i+1;
-            int upperBound = nums.length -1;
-            int sum = 0 - nums[i];
+                    if(seen.containsKey(complement) && seen.get(complement) == i){
+                        List<Integer> triplets = List.of(nums[i], nums[j], complement);
+                        Collections.sort(triplets);
 
-            while (lowerBound < upperBound){
-                if(nums[lowerBound] - nums[upperBound] == sum) {
-                    int thisNumber = nums[i];
-                    int low = nums[lowerBound];
-                    int high = nums[upperBound];
-                    output.add(Arrays.asList(thisNumber, low, high));
-
-                    // skip duplicates
-                    while (lowerBound < upperBound && low == nums[lowerBound+1])    lowerBound++;
-                    while (lowerBound < upperBound && high == nums[upperBound-1])    upperBound--;
-
-                    lowerBound++;
-                    upperBound++;
-                }
-                else if(nums[lowerBound] + nums[upperBound] > sum){
-                    upperBound--;
-                }
-                else {
-                    lowerBound++;
+                        results.add(triplets);
+                    }
+                    seen.put(nums[i], i);
                 }
             }
         }
-
-            return nums;
+        return new ArrayList<>(results);
     }
 }
