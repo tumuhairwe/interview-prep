@@ -29,6 +29,13 @@ public class KClosestPointsToOrigin {
         System.out.println("Match == " + Arrays.equals(res, result));;
     }
 
+    /**
+     * Solution Summary
+     * - Create a comparator that will order the 2 arrays according to the function
+     * - Create pq using above operator
+     * - loop over 2D array and populate pq with arrays
+     * - pq.pop() off the pq k times to get the top k entries
+     */
     static int[][] kClosest(int[][] points, int k){
         Comparator<int[]> comparator = (int[] a, int[] b) -> {
             int x = a[0] - a[1];

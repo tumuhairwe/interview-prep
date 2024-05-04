@@ -5,8 +5,6 @@ import java.util.Arrays;
 public class AbsoluteSort {
 
     static Integer[] absSort(Integer[] arr) {
-        int[] aaa = new int[10];
-        //arr = aaa;
         // your code goes here
         //  [2, -7, -2, -2, 0]
         int startIndex = 0;
