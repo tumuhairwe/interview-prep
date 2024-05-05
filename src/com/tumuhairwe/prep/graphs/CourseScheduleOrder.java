@@ -13,8 +13,17 @@ import java.util.*;
  *
  * If its impossible to finish them all, return an empty array
  *
+ * Solution Summary
+ *
+ * - Build the adjacency graph
+ *      => (Map<Course, List<Course>> i.e. a course and its list of prerequisites)
+ *          because each course is a node in the graph, and each prereq relationship is an edge from the prereq course
+ * - Calculate the in-degree of each course/node (i.e. count the number of prereqs for each course)
+ * - Peform topolgical sort
+ *
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0207-course-schedule.java
  * ref: https://leetcode.com/problems/course-schedule-ii/description/
+ * ref: https://www.youtube.com/watch?v=Akt3glAwyfY
  */
 public class CourseScheduleOrder {
 
@@ -36,7 +45,7 @@ public class CourseScheduleOrder {
         int[] in_degree = new int[numCourses];
         int[] topolgicalOrder = new int[numCourses];
 
-        // create adjacency list while populating in-degree array
+        // `1. create adjacency list while populating in-degree array
         for (int i = 0; i < prerequsites.length; i++) {
             int postReq = prerequsites[i][0];
             int preReq = prerequsites[i][1];
@@ -47,6 +56,12 @@ public class CourseScheduleOrder {
             adjList.put(preReq, prereqList);
         }
 
+        // 2. perform topological sort (using queue)
+        // 2.0 start BFS: add all courses with no prereqs to the queue (i.e. if a course has 0 prereqs, add to queue)
+//        Arrays.stream(in_degree)
+//                .boxed()
+//                .filter(prepreq -> prepreq == 0)
+//                .collect(Collectors.toList());
         Queue<Integer> que = new LinkedList<>();
         for (int i = 0; i < numCourses; i++) {
             if(in_degree[i] == 0){
@@ -54,15 +69,18 @@ public class CourseScheduleOrder {
             }
         }
 
+        // 2.1 while the queue is not empty, remove the node/course from the queue and add it to the result (topolgicalOrder array)
         int i = 0;
         while (!que.isEmpty()){
             int course = que.remove();
             topolgicalOrder[i++] = course;
 
+            // 2.2 for each of each node's neighbors, decrement the in-degree count by 1
             if(adjList.containsKey(course)){
                 for (Integer neighbor : adjList.get(course)){
                     in_degree[neighbor]--;
 
+                    // 2.3 if a neighbors in-degree becomes zero, add it to the queue (i.e. it has no unvisited prereqs)
                     if(in_degree[neighbor] == 0){
                         que.add(neighbor);
                     }
@@ -70,10 +88,12 @@ public class CourseScheduleOrder {
             }
         }
 
+        // 3. check for a cycle -> if a result-size/sorted or processed or visited nodes != number-of-all-courses ...
         if(i == numCourses){
             return topolgicalOrder;
         }
 
+        // 3a. -> there's a cycle
         return new int[0];
     }
 }

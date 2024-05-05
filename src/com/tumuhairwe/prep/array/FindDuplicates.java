@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -33,14 +34,21 @@ import java.util.TreeSet;
 public class FindDuplicates {
 
     public static void main(String[] args) {
-        int[] arr1 = new int[]{1, 2, 3, 5, 6, 7};
-        int[] arr2 = new int[]{3, 6, 7, 8, 20};
-        System.out.println("The duplicates are " + Arrays.toString(findDuplicates(arr1, arr2)));
+
+//        int[] arr1 = new int[]{1, 2, 3, 5, 6, 7};
+//        int[] arr2 = new int[]{3, 6, 7, 8, 20};
+//        System.out.println("Given " + Arrays.toString(arr1) + " and " + Arrays.toString(arr2));
+//        System.out.println("1. The duplicates are " + Arrays.toString(findDuplicates(arr1, arr2)));
+//
+//        arr1 = new int[]{3,4,2,3};
+//        arr2 = new int[]{1, 5};
+//        System.out.println("Given " + Arrays.toString(arr1) + " and " + Arrays.toString(arr2));
+//        System.out.println("The duplicates are " + Arrays.toString(findDuplicates(arr1, arr2)));
     }
     static int[] findDuplicates(int[] arr1, int[] arr2) {
         int pointer_a = 0;
         int pointer_b = 0;
-        Set<Integer> duplicates = new TreeSet<>();
+        Set<Integer> duplicates = new HashSet<>();
 
         while(pointer_a < arr1.length && pointer_b < arr2.length){
 

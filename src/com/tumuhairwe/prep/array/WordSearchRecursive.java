@@ -11,13 +11,14 @@ package com.tumuhairwe.prep.array;
  *
  * LeetCode 79
  * ref: https://leetcode.com/problems/word-search/
- * ref: https://www.youtube.com/watch?v=m9TrOL1ETxI&t=111s
+ * ref: https://www.youtube.com/watch?v=m9TrOL1ETxI&t=111s (Nick White)
+ * ref: https://www.youtube.com/watch?v=pfiQ_PS1g8E (NeetCode.io -- backtracking)
  */
 public class WordSearchRecursive {
 
     public static boolean wordSearch(char[][] grid, String word){
-        int n = grid.length;;
-        int m = grid[0].length;
+        //int n = grid.length;;
+        //int m = grid[0].length;
 
         for (int row = 0; row < grid.length; row++) {
             for (int col = 0; col < grid[0].length; col++) {
@@ -30,6 +31,7 @@ public class WordSearchRecursive {
         return false;
     }
 
+    // TC: O(n x m x 4^n) where n = length of word because we have to call the bfs() at least 4 times
     // TC: O( c X 3_to_the_power_l)
     //      where c = the number of cells
     //            l = the length of the word we are searching for
@@ -49,7 +51,7 @@ public class WordSearchRecursive {
             return false;   // will return false if entire grid is traversed and word is not found
         }
 
-        // boolean result = false;
+        // 2. prepare params to pass to DFS (i.e. the 4 offsets
         char temp = grid[row][col];
         grid[row][col] = '*';
 
@@ -59,6 +61,7 @@ public class WordSearchRecursive {
         };
 
         // 2. explore the 4 neighboring cells to see if the next characters of the word can be found
+        /// TC takes O(n x m) where n = number of rows and m = number of columns
         boolean result = false;
         for (int[] offset : offsets){
             int rowOffset = offset[0];

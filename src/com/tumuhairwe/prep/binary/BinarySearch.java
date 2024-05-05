@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.binary;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class BinarySearch {
     public static void main(String[] args) {
@@ -130,7 +128,7 @@ public class BinarySearch {
         }
 
         int middle = startIndex + (endIndex - startIndex) /2;
-        // 1. handle terminal condition (needle is found)
+        // 1. handle terminal/base condition (needle is found)
         if(arr[startIndex] == needle ){
             return arr[startIndex];
         }

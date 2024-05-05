@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * LeetCode 207 (medium)
  *
- * Given a total of numCourses courses to be taken (labedl 1 to numCourses - 1)
+ * Given a total of numCourses courses to be taken (labeled 1 to numCourses - 1)
  * And given an array of prerequisites where prereq[i] = [a, b]
  * indicates that you must take course b before taking course a
  *
@@ -17,7 +17,7 @@ import java.util.List;
  *
  * Solution Summary:
  * - Create adjacency list index=courseId, value=List_of_courses (List<List<String> )
- * - Populate list with know list of prerequsites
+ * - Populate list with known list of prerequisites
  * - Loop thru all courses and determine if there's a cycle in each
  *      - isCyclic uses DFS to
  *          - determine if currentIndex is already in path (if it is, return true)
@@ -41,6 +41,9 @@ public class CourseSchedule {
         System.out.println("2. Can you take " + Arrays.toString(prereqs));
         System.out.println(canFinish(numCourses, prereqs));
     }
+
+    static int HAS_BEEN_TRAVERSED = 1;
+    static int NOT_YET_VISITED = 0;
     protected static boolean canFinish(int numCourses, int[][] prerequisites){
         // 0. create and initialize adj list
         List<List<Integer>> adjList = new ArrayList<>();
@@ -55,7 +58,7 @@ public class CourseSchedule {
 
         // 2. detect if cycle exists by creating and tracking visited[]
         int[] visited = new int[numCourses];
-        int NOT_YET_VISITED = 0;
+
         for (int i = 0; i < numCourses; i++) {
             if (visited[i] == NOT_YET_VISITED){
                 if(isCyclic(adjList, visited, i)){
@@ -74,7 +77,7 @@ public class CourseSchedule {
         }
 
         visited[currentIndex] = IS_IN_PATH;
-        int HAS_BEEN_TRAVERSED = 1;
+
         for (int i = 0; i < adjList.get(currentIndex).size(); i++) {
             int prereqId = adjList.get(currentIndex).get(i);
             if(visited[prereqId] != HAS_BEEN_TRAVERSED){

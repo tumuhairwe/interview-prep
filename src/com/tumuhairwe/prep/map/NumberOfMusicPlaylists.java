@@ -13,6 +13,9 @@ import java.util.Map;
  *
  *  Given, N, goal and K, return the number of possible playlists that you can create.
  *  Since that answer can be very lard, return it module (10^9 + 7)
+ *
+ *  ref: https://leetcode.com/problems/number-of-music-playlists/description/
+ *  ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0920-number-of-music-playlists.java
  */
 public class NumberOfMusicPlaylists {
 

@@ -21,6 +21,9 @@ import java.util.Map;
  *                # weights 6 and 15 whose sum equals to 21
  *
  * e.g. [4, 6, 10, 10, 4, 15, 16]  limit: 21
+ *
+ * ref:https://www.educative.io/answers/how-to-solve-the-merging-two-packages-problem
+ * ref: https://www.pramp.com/challenge/L3wQBnQYAEh5K97W9ONK
  */
 public class MergePackages {
     public static void main(String[] args) {
@@ -33,13 +36,13 @@ public class MergePackages {
     /*
     * Solution Summary
     *
-    * 0. Sprt the array
+    * 0. Sort the array
     * 1. Loop thru the array ... store the difference between an item-weight && limit in a Map
-    * 2. Map { key: difference, value: index }
+    *       2. Map { key: difference, value: index }
     * 3. return the indices of the matching weights
     *
     * TC: O(n) == where n == length of array
-    * SC: O(n) == where n ==
+    * SC: O(n) == where n == size of array
     *
     * TC: O(n)
     * SC: O(n)
@@ -58,6 +61,22 @@ public class MergePackages {
                 map.put(arr[i], i);   // { key: 17, value = 0}, {15, 1}
                 continue;
             }
+
+            /**
+             * static int[] getIndicesOfItemWeights(int[] arr, int limit) {
+             *     // your code goes here
+             *     Map<Integer,Integer> map = new HashMap<>();
+             *
+             *     for(int i = 0; i < arr.length; i++){
+             *
+             *       if(map.get(limit - arr[i]) != null){
+             *         return new int[]{i,map.get(limit - arr[i])};
+             *       }
+             *       map.put(arr[i],i);
+             *     }
+             *     return new int[]{};
+             *   }
+             */
 
             Map.Entry<Integer, Integer> entry = map.entrySet()
                     .stream()
