@@ -6,7 +6,7 @@ import java.util.*;
  *      - a starting cell (startingColumn and startingRow)
  *      - a target cell (terminalRow and terminalColumn)
  *
- * Find the length of the shortest path that from starting cell to target cell that waslks along the 1 values only
+ * Find the length of the shortest path that from starting cell to target cell that walks along the 1 values only
  *
  * Constraints
  * - Each location in the path including the start and the end must be a 1
@@ -52,7 +52,21 @@ class ShortestPath {
     int shortestCellPath(int[][] grid, int startingRow, int startingColumn, int terminalRow, int terminalColumn) {
         // --> bfs = enqueue -> check neighbors
         // dfs = stack
-        Queue<Cell> que = new ArrayDeque<>();
+        // ArrayDeque == resizable-array impl of queue
+        //  - is not threat-safe
+        //  - and does NOT allow null elements
+        //  - more effecitent that LinkedList
+        //  - useful if insertion/deletion in middle of list is frequent
+        Queue<Cell> que = new ArrayDeque<>();   // not thread-safe. Use Collections.synchronizedCollection();
+
+        // LinkedList = list impl of queue
+        //  - is thread-safe
+        //  - and allows null elements
+        //  - less efficient if that ArrayDeque
+        //  - good choice if frequent insertion/removal operations occur at top/tail of list and random access is not important
+        Queue<Cell> que2 = new LinkedList<>();
+        //Collection<Cell> q = Collections.synchronizedCollection(new ArrayDeque<>());
+
         que.add(new Cell(startingRow,startingColumn));
 
         Cell current = new Cell(startingRow,startingColumn);
@@ -139,27 +153,28 @@ class ShortestPath {
         return validPath.size();
     }
 
-    static class Cell{
-        int row;
-        int col;
-
-        public Cell(int row, int col){
-            this.row = row;
-            this.col = col;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-            Cell cell = (Cell) o;
-            return row == cell.row && col == cell.col;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(row, col);
-        }
-    }
+    record Cell(int row, int col){};
+//    static class Cell{
+//        int row;
+//        int col;
+//
+//        public Cell(int row, int col){
+//            this.row = row;
+//            this.col = col;
+//        }
+//
+//        @Override
+//        public boolean equals(Object o) {
+//            if (this == o) return true;
+//            if (o == null || getClass() != o.getClass()) return false;
+//            Cell cell = (Cell) o;
+//            return row == cell.row && col == cell.col;
+//        }
+//
+//        @Override
+//        public int hashCode() {
+//            return Objects.hash(row, col);
+//        }
+//    }
 }
 

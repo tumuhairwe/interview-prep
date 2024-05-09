@@ -15,10 +15,10 @@ import java.util.*;
  *
  * Solution:
  * - Create an adjacency list to store the graph (node + edges_and_cost)
- * - Use PQ to store nodes and cost/delay-time. Initialize queue with the source + cost = 0
+ * - Use PQ to store nodes and distance/delay-time. Initialize queue with the source + distance = 0
  * - Use a visited set to track the nodes that have already been processed
  * - Process nodes from the PQ by visiting the node with the smallest delay time & update if necessary
- * - Add the unvisited neighbors of the processed node to the PQ (with their new cost/delay times)
+ * - Add the unvisited neighbors of the processed node to the PQ (with their new distance/delay times)
  * - Return the delay time of all the nodes that have been processed, otherwise -1
  *
  * TC: O(E log N) -- where E = total number of edges & N = number of nodes in the network

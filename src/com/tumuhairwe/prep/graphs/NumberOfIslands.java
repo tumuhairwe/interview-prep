@@ -1,8 +1,6 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
-import java.util.function.BiFunction;
-import java.util.function.Predicate;
 
 /**
  * Given a 2D binary grid, which represents a map of '1's (land) and '0's (water) ...

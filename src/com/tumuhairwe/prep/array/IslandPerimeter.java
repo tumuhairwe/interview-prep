@@ -8,7 +8,7 @@ import java.util.Arrays;
  *  - grid[i][j] = 0 represents water
  *
  *  Grid cells are connected horizontally or vertically (not diagonally).
- *  The grid is completely surrounded by wanter and there is exactly 1 island (i.e. 1 or more connected land cells)
+ *  The grid is completely surrounded by water and there is exactly 1 island (i.e. 1 or more connected land cells)
  *
  *  The island doesn't have lakes, meaning the water inside isn't connected to the water outside. One cell is swuare with side_length = 1
  *  The grid is rectangular. with and height don't exceed 100.
@@ -60,16 +60,16 @@ class IslandPerimeter {
         int LAND = 1;
         // big O = O(M x N) -- where M & N are the length and width of te 2D array
         int totalPerimeter = 0;
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
-                if(grid[i][j] == LAND){
+        for (int row = 0; row < grid.length; row++) {
+            for (int col = 0; col < grid[row].length; col++) {
+                if(grid[row][col] == LAND){
                     totalPerimeter += 4;    // add all 4 sides (top + bottom) + (left + right)
 
-                    if(i > 0 && grid[i-1][j] == LAND){  // if neighbor on the left == LAND
+                    if(row > 0 && grid[row-1][col] == LAND){  // if neighbor on the left == LAND
                         totalPerimeter -= 2;
                     }
 
-                    if(j > 0 && grid[i][j-1] == LAND){ // if neighbor on the BOTTOM
+                    if(col > 0 && grid[row][col-1] == LAND){ // if neighbor on the BOTTOM
                         totalPerimeter -= 2;
                     }
                 }

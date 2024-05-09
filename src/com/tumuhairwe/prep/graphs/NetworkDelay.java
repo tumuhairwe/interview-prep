@@ -39,7 +39,7 @@ public class NetworkDelay {
     public static int networkDelayTime(int[][] times, int numberOfNodes, int startingNode){
         final int MAX_VALUE = 10000;    //Double.POSITIVE_INFINITY;
 
-        // 0. build adjacency list [key = sourceNode, value=SetOf_destinations reachable from that node + weight/cost/distance
+        // 0. build adjacency list [key = sourceNode, value=SetOf_destinations reachable from that node + weight/distance/distance
         Map<Integer, Set<Node>> adjacencyList = new HashMap<>();
         for (int i=0; i< times.length; i++){
             int source = times[i][0];
@@ -50,7 +50,7 @@ public class NetworkDelay {
         }
 
         // 1. create PQ to track the closest distance from k
-        // PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.cost - b.cost);
+        // PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.distance - b.distance);
         PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.distance));
         pq.offer(new Node(startingNode, 0));    // distance to self == 0
 

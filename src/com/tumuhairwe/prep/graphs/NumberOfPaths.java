@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.graphs;
 
 
 /**
@@ -10,13 +10,15 @@ package com.tumuhairwe.prep.array;
  *
  * Solution Summary
  - Iterate a 2D array
- - call a recursive a recursive
+ - call a recursive function
  - base-case: not-t-c-ross the diagonal
  - call function 1 cell to the right
  - call function 1 cell to the top
 
- - track count of all hte valid paths
+ - track count of all the valid paths
 
+    TC: O(m x n) - where m = rows & n = cols of the grid
+    SC: O(m x n) - where m = rows & n = cols of the grid (w
  ref: https://www.pramp.com/challenge/N5LYMbYzyOtbpovQoY7X
 */
 class NumberOfPaths {

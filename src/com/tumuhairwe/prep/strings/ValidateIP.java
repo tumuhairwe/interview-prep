@@ -15,11 +15,44 @@ class ValidateIP {
     private static Character DOT = '.';
     public static void main(String[] args) {
         String ip = "123.24.59.99";
-        boolean result = validateIP(ip);
+        boolean result = validateIPManual(ip);
         System.out.println(result);
     }
 
-    static boolean validateIP(String ip) {
+    static boolean validateIPRegex(String ip) {
+        String[] tokens = ip.split("\\.");
+        if(tokens.length > 4){
+            return false;
+        }
+        for (String token : tokens){
+            try {
+                int i = Integer.parseInt(token);
+                if(i > 255 || i < 0){
+                    return false;
+                }
+            }catch (Exception e){
+                return false;
+            }
+        }
+        return true;
+    }
+    static boolean validateIPManual(String ip) {
+        String[] tokens = ip.split("\\.");
+        if(tokens.length > 4){
+            return false;
+        }
+//        for (int i = 0; i < tokens.length; i++) {
+//            try{
+//                int val = Integer.parseInt(tokens[i]);
+//                if (val <=0 || val > 255){
+//                    return false;
+//                }
+//            }catch (Exception e){
+//                return false;
+//            }
+//        }
+//        return true;
+
         char[] chars = ip.toCharArray(); //
         int numberOfDots = 0;
         int MAX_NUMBER_OF_DOTS = 4;

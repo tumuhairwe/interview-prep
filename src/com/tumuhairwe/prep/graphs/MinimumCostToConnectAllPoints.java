@@ -10,10 +10,10 @@ import java.util.Set;
  * Given an array of points of some points on a 2D plane where
  * points[i] = [x, y]
  *
- * The cost of connecting 2 points [x_i, y] and [x_j, y] is the manhattan distance between them
+ * The distance of connecting 2 points [x_i, y] and [x_j, y] is the manhattan distance between them
  * i.e. |xi - xj| + |yi - yj|, where |val| denotes the absolute value of val.
  *
- * Get the minimum cost to make all points connected if there's exactly one simple path
+ * Get the minimum distance to make all points connected if there's exactly one simple path
  * between any 2 points
  *
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/1584-min-cost-to-connect-all-points.java
@@ -27,19 +27,20 @@ public class MinimumCostToConnectAllPoints {
         };
 
         int result = minCostConnectPoints(arr);
-        System.out.println("The minimum cost to connect the whole panning tree is " + result);
+        System.out.println("The minimum distance to connect the whole panning tree is " + result);
 
         arr = new int[][]{
                 {3,12},{-2,5},{-4,1}
         };
         result = minCostConnectPoints(arr);
-        System.out.println("The minimum cost to connect the whole panning tree is " + result);
+        System.out.println("The minimum distance to connect the whole panning tree is " + result);
 
         arr = new int[][]{
                 {3,12},{-2,5},{-4,1}
         };
     }
 
+    // this Prim's MST algo
     static int minCostConnectPoints(int[][] points){
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
         pq.offer(new int[]{0, 0});
