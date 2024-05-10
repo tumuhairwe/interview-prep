@@ -10,7 +10,7 @@ package com.tumuhairwe.prep.array;
  * - iterate both arrays (nested for-loop) (starting from 1 until arr.length)
  * - compare the diff in values on each cell's diagonal neighbor
  * - if diff != 0, return false
- * - if you exit the nested for loops, return treu
+ * - if you exit the nested for loops, return true
  *
  * ref: https://leetcode.com/problems/toeplitz-matrix/
  * ref: https://www.youtube.com/watch?v=VDw9y6nX_ss

@@ -16,6 +16,7 @@ import java.util.Queue;
  * If this impossible, return -1;
  * 
  * ref: https://leetcode.com/problems/rotting-oranges/description/
+ * ref: https://www.youtube.com/watch?v=TzoDDOj60zE
  */
 public class RottingOranges {
 
@@ -37,8 +38,6 @@ public class RottingOranges {
     }
     
     public static int orangesRotting(int[][] grid){
-        //int m = grid.length;
-        //int n = grid[0].length;
         Queue<int[]> listOfRottenOranges = new LinkedList<>();
         int freshCount = 0;
 
@@ -78,11 +77,11 @@ public class RottingOranges {
 
                     boolean rowIsWithinBounds = (0 <= x && x < grid.length);
                     boolean colIsWithinBounds = (0 <= y && y < grid[0].length);
-                    boolean isWithinBounds = rowIsWithinBounds && colIsWithinBounds;
+                    boolean cellIsWithinBounds = rowIsWithinBounds && colIsWithinBounds;
 
                     // 5. if neighbor is FRESH AND is within bounds
                     //boolean isFresh = grid[x][y] == FRESH;    // might throw OutOfBoundsException if is out of bounds
-                    if(isWithinBounds && grid[x][y] == FRESH){
+                    if(cellIsWithinBounds && grid[x][y] == FRESH){
                         grid[x][y] = ROTTEN;    // mark neighbor as ROTTEN and add to queue to be polled in the next iteration
                         listOfRottenOranges.offer(new int[]{x, y});
                         freshCount--;
