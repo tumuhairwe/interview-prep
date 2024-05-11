@@ -35,7 +35,7 @@ public class MinimumMoves {
 
         List<Cell> zeros = new ArrayList<>(), ones = new ArrayList<>();
         for(int row = 0; row< grid.length; row++){
-            for(int col = 0; col< grid.length; col++){
+            for(int col = 0; col< grid[row].length; col++){
                 int value = grid[row][col];
                 if(value> 1){
                     ones.add(new Cell(row, col, value));

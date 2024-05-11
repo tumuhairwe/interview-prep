@@ -67,9 +67,8 @@ class ShortestPath {
         Queue<Cell> que2 = new LinkedList<>();
         //Collection<Cell> q = Collections.synchronizedCollection(new ArrayDeque<>());
 
-        que.add(new Cell(startingRow,startingColumn));
+        //que.add(new Cell(startingRow,startingColumn));
 
-        Cell current = new Cell(startingRow,startingColumn);
         Set<Cell> visited = new HashSet<>();
 
 //        while(!que.isEmpty()){
@@ -81,26 +80,29 @@ class ShortestPath {
 //            seen.add((nr, nc))
 //        }
 
-
-        while(current.row != terminalRow && current.col != terminalColumn){
+        Cell seed = new Cell(startingRow,startingColumn);
+        que.add(seed);
+        while (!que.isEmpty()){
+            // BFS condition: for each neighbor,
+            // if its visitable/is-allowed && is-not-visited yet ...
+            //      - add to queue
+            //      - add to visited set
 
             // need to do boundary checks
-            if(grid[current.row + 1][current.col] == LAND){
-                current = new Cell(current.row + 1, current.col);
-            }
-            else if(grid[current.row - 1][current.col] == LAND){
-                current = new Cell(current.row - 1, current.col);
-            }
-            else if(grid[current.row][current.col + 1] == LAND){
-                current = new Cell(current.row, current.col + 1);
-            }
-            else if(grid[current.row][current.col - 1] == LAND){
-                current = new Cell(current.row, current.col - 1);
-            }
+            int[][] offsets = {
+                    {0, 1}, {1, 0},
+                    {0, -1}, {-1, 0}
+            };
+            for (int[] offset : offsets){
+                int rowOffset = offset[0];
+                int colOffset = offset[1];
 
-            if(!visited.contains(current)){
-                que.add(current);
-                visited.add(current);   // !que.contains(current) &&
+                Cell current = new Cell(startingRow + rowOffset, startingColumn + colOffset);
+                boolean isAllowed = grid[current.row][current.col] == LAND;
+                if(!visited.contains(current) && isAllowed){
+                    que.add(current);
+                    visited.add(current);   // !que.contains(current) &&
+                }
             }
         }
 
@@ -111,11 +113,11 @@ class ShortestPath {
     static Queue<Cell> validPath = new ArrayDeque<>();
     static int NOT_FOUND = -1;
     static int depthFirstSearch(int[][] grid, int row, int col, int terminalRow, int terminalColumn){
-        boolean isAllowed = grid[row][col] == LAND;
+        boolean isAllowed = grid[row][col] == 0;
 
         // 0. check base case (have we reached the end?)
-        if(row == terminalRow && col == terminalColumn && isAllowed){
-            return 0;
+        if(row == terminalRow && col == terminalColumn){
+            return validPath.size();
         }
 
         // 1. checking boundaries
@@ -154,27 +156,5 @@ class ShortestPath {
     }
 
     record Cell(int row, int col){};
-//    static class Cell{
-//        int row;
-//        int col;
-//
-//        public Cell(int row, int col){
-//            this.row = row;
-//            this.col = col;
-//        }
-//
-//        @Override
-//        public boolean equals(Object o) {
-//            if (this == o) return true;
-//            if (o == null || getClass() != o.getClass()) return false;
-//            Cell cell = (Cell) o;
-//            return row == cell.row && col == cell.col;
-//        }
-//
-//        @Override
-//        public int hashCode() {
-//            return Objects.hash(row, col);
-//        }
-//    }
 }
 

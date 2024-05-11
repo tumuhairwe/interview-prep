@@ -9,9 +9,9 @@ import java.util.*;
  *  - Use BFS for UNweighted graphs (e.g. we're looking for count-of-nodes e.g. number ot stops
  *
  *  - BFS is an algorithm that traverses a graph in a breadth-first manner.
- *  - This means that the algorithm starts at the source node and then visits all of the nodes that are one edge away from the source node.
- *  - The algorithm then visits all of the nodes that are two edges away from the source node, and so on.
- *  - The algorithm terminates when all of the nodes in the graph have been visited.
+ *  - This means that the algorithm starts at the source node and then visits all the nodes that are one edge away from the source node.
+ *  - The algorithm then visits all the nodes that are two edges away from the source node, and so on.
+ *  - The algorithm terminates when all the nodes in the graph have been visited.
  *
  * Given n cities, connected by m flights
  * Each flights starts from a source-city to a destination-city
@@ -42,7 +42,7 @@ public class CheapestFlights {
     static class NewNode implements Comparable<Node>{
         int cost = Integer.MAX_VALUE;
         Map<Node, Integer> adjacentNodes = new HashMap<>();
-        List<NewNode> shortestPath = new ArrayList<>();
+        //List<NewNode> shortestPath = new ArrayList<>();
 
         @Override
         public int compareTo(Node o) {

@@ -98,10 +98,22 @@ public class MergeKSortedLists {
 
     // use minHeap / PQ
     public ListNode mergekLists(ListNode[] lists){
-        // these are the same
+        // 0. Create PQ to hold all ListNodes in asc order
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(
+                (o1, o2) -> {
+                    if (o1.val > o2.val) {
+                        return 1;
+                    } else if (o1.val == o2.val) {
+                        return 0;
+                    } else {
+                        return -1;
+                    }
+                }
+        );
         Queue<ListNode> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
         //Queue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);
 
+        // 1. put lists into minHeap
         for (ListNode node : lists){
             if(node == null){
                 continue;
@@ -109,18 +121,19 @@ public class MergeKSortedLists {
             minHeap.add(node);
         }
 
-        ListNode dummy = new ListNode();
-        ListNode current = dummy;
+        // traverse lists & until you reach each lists' end (next = null), put the next list node to pq
+        // . PQ will maintain order by val
+        ListNode head = new ListNode();
+        ListNode current = head;
 
         while (!minHeap.isEmpty()){
-            ListNode top = minHeap.poll();
-            current.next = top;
+            current.next =  minHeap.poll();
             current = current.next;
 
-            if(top.next != null){
-                minHeap.add(top.next);
+            if(current.next != null){
+                minHeap.add(current.next);
             }
         }
-        return dummy.next;
+        return head.next;
     }
 }

@@ -82,43 +82,28 @@ public class DetectCycleInAirportItineraries {
      * Gets distance between source & destination
      * Use BFS when given source + destination tasks
      */
-    static double getDistance(String source, String destination, Map<String, List<String>> airports){
+    static double getDistance(String source, String destination, Map<String, List<String>> adjList_of_airports){
 
-        if(!airports.containsKey(source)){
+        if(!adjList_of_airports.containsKey(source)){
             return UNKNOWN;
         }
 
         if(visited.contains(destination)){
             return Integer.MIN_VALUE;   // has cycle
         }
-        else for (String key : airports.get(source)){
-            visited.push(key);
-            return 1 + getDistance(key, destination, airports);
-        }
+//        else for (String key : adjList_of_airports.get(source)){
+//            visited.push(key);
+//            return 1 + getDistance(key, destination, adjList_of_airports);
+//        }
 
-        for (String key : airports.keySet()){
-//            if(visited.contains(key)){
-//                return Double.NEGATIVE_INFINITY;
-//            }
-//            else
-            //visited.push(key);
-
-            List<String> destinations = airports.get(source);
+        for (String key : adjList_of_airports.keySet()){
+            List<String> destinations = adjList_of_airports.get(source);
             if(destinations.contains(destination)){
                 return  1;
             }
             else {
-                // exclude source ( to avoid cycle)
-//                List<String> nonCycleDestinations = destinations.stream()
-//                        .filter(d -> !d.equals(source))
-//                        .collect(Collectors.toList());
-//                airports.entrySet()
-//                        .stream()
-//                        .filter(entry -> entry.getValue()
-//                                .stream()
-//                                .filter(e -> e.equals(destination))
-//                                .collect(Collectors.toList()));
-                return  1 + getDistance(key, destination, airports);
+                visited.push(key);
+                return  1 + getDistance(key, destination, adjList_of_airports);
             }
         }
 

@@ -29,7 +29,7 @@ import java.util.List;
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0207-course-schedule.java
  * ref: https://www.youtube.com/watch?v=EgI5nU9etnU
  */
-public class CourseSchedule {
+public class CourseSchedule_DFS {
 
     public static void main(String[] args) {
         int numCourses = 2;
