@@ -64,7 +64,7 @@ class Interval implements Comparable<Interval>{
     }
 
     public boolean intersects(Interval interval){ // overlaps
-        return this.end > interval.start;
+        return this.end < interval.start;
     }
     public boolean overlaps(Interval interval){
         //return interval.start < this.end;

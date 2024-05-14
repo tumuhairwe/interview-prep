@@ -3,6 +3,7 @@ package com.tumuhairwe.prep.array;
 import java.util.*;
 
 /**
+ * LeetCode 1 (Easy)
  * Given an array of Integers length n.
  * Find the indices of 2 numbers a & b that add up to the target/Sum S
  *
@@ -40,12 +41,13 @@ public class TwoSumProblem {
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> numMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if(numMap.containsKey(complement)){
-                return new int[]{ numMap.get(complement), i};
+            int num = target - nums[i];
+            int diff = target - num;
+            if(numMap.containsKey(diff)){
+                return new int[]{ numMap.get(diff), i};
             }
 
-            else numMap.put(nums[i], i);    // key = Integer, val = index
+            else numMap.put(num, i);    // key = Integer, val = index
         }
 
         return new int[]{ -1, -1};

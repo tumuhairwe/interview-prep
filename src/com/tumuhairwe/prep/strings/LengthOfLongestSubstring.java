@@ -15,7 +15,7 @@ import java.util.Set;
  *         -> add to hashSet
  *         -> update globalMax = Math.max(hashSet.size(), globalMax)
  *         -> increment windowEnd
- *      - ... when you encounter a char that IS in the hashSet
+ *      - when you encounter a char that IS in the hashSet
  *          -> remove from hashSet
  *          -> increment windowStart
  * ref: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/

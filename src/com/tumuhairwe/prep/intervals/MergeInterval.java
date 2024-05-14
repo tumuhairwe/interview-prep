@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.intervals;
 import java.util.*;
 
 /**
- * LeetCode 56. Merge Intervals
+ * LeetCode 56. Merge Intervals (Medium)
  * Given an array of intervals where interval[i] = [start, end]
  * Merge all overlapping intervals and return an array of non-overlapping intervals that cover
  * all the intervals
@@ -91,54 +91,48 @@ public class MergeInterval {
         Collections.sort(ranges, comp);
     }
 
+    /**
+     * Solution Summaruy
+     * sort each interval,
+     * - overlapping intervals should be adjacent,
+     * - iterate and build solution; also graph method, less efficient, more complicated
+     */
     public static int[][] mergeIntervals(int[][] intervals) {
-        List<int[]> result = new ArrayList<>();
-
         // 0. edge case (when intervals are empty)
         if(intervals.length == 0){
-            return result.toArray(new int[][]{});
+            return new int[][]{{0,0}};
         }
 
-        // 1. sort
-//        Comparator<int[]> comp = (array1, array2) -> {
-//            return array1[0] - array2[0] != 0 ? array1[0] - array2[0] : array1[1] - array2[1];
-//        };
+        List<int[]> output = new ArrayList<>();
 
+        // 1. sort the intervals
         // these are the same
         Comparator<int[]> c1 = (arr1, arr2) -> Integer.compare(arr1[0], arr2[0]);
         Comparator<int[]> c2 = Comparator.comparingInt(arr -> arr[0]);
         Arrays.sort(intervals, c1);
 
         // same
-        // 2. add first pair to the result list
-        //result.add(new int[]{intervals[0][0], intervals[0][1]});
-        result.add(intervals[0]);
+        // 2. add first pair to the output list
+        //output.add(new int[]{intervals[0][0], intervals[0][1]});
+        output.add(intervals[0]);
 
-        // process 1 by 1
-        for(int[] arr : intervals){
-            int[] lastTrackedRange = null;
-            int currentStart = arr[0];
-            int currentEnd = arr[1];
+        // process 1 by 1 -> get current interval .. if overlaps ... merged wi
+        for (int i = 1; i < intervals.length; i++) {
+            int[] current = intervals[i];
+            int currentStart = current[0];
+            int currentEnd = current[1];
 
-            // a) compare the new range to the last one we tracked
-            // if new range has a gap before the next range starts ... and to result
-            if(lastTrackedRange == null || arr[0] > lastTrackedRange[1]){
-                lastTrackedRange = arr;
-                result.add(lastTrackedRange);
+            int[] mostRecent = output.get(output.size() - 1);
+            if(currentStart <= mostRecent[1]){ // lastEnding
+                // merge
+                int latestCombinedEnd = Math.max(mostRecent[1], currentEnd);
+                output.get(output.size() - 1)[1] = latestCombinedEnd;   // set most-recent-end by prolonging ti latestCombinedEnd
             }
-            else if(arr[1] > lastTrackedRange[1]){
-                // b) otherwise ... if its end time is longer than the last
-                // extend the last range's end time to encompass the new interval
-                lastTrackedRange[1] = arr[1];
+            else {
+                output.add(current);
             }
         }
-
-        return (int[][]) result.toArray();
-    }
-
-    static void printArray(List<int[]> temp){
-        temp.forEach(ints -> {
-            System.out.println(Arrays.toString(ints));
-        });
+        int[][] res = new int[output.size()][2];
+        return output.toArray(res);
     }
 }

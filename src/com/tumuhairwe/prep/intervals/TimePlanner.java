@@ -1,17 +1,18 @@
 package com.tumuhairwe.prep.intervals;
 
-import java.time.Duration;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
+ * LeetCode 252
  * Given 2 peoples availability slots ...
  * ref: https://aaronice.gitbook.io/lintcode/sweep-line/meeting-rooms
  *
  * a) find the earliest availability that is common for both of them
- * b) Determine if a person could attend all meeting
+ * b) Determine if a person could attend all meetings
  *
  * int[][] == list of { startTime: UnixTimestamp, endTime: UnixTimestamp }
+ *
+ * ref: https://leetcode.com/problems/meeting-rooms/description/
  */
 public class TimePlanner {
     public static void main(String[] args) {
@@ -31,18 +32,17 @@ public class TimePlanner {
             slotBAvailability.add(new Interval(slotsA[i][0], slotsA[i][1]));
         }
 
-        /*
-        List<Interval> slotAAvailability = Arrays.asList(slotsB)
-                .stream()
-                .map(arr -> new Interval(arr[0], arr[1]))
-                .sorted()
-                .collect(Collectors.toList());
-        List<Interval> slotBAvailability = Arrays.asList(slotsA)
-                .stream()
-                .map(arr -> new Interval(arr[0], arr[1]))
-                .sorted()
-                .collect(Collectors.toList());
-        */
+        // iterate over both arrays at the same time, keeping track/2nd pointer over the late-occurring schedule
+        int pointer_b = 0;
+        for (int pointer_a = 0; pointer_a < Math.min(slotsA.length, slotsB.length); pointer_a++) {
+            int[] schedule_a = slotsA[pointer_a];
+            int[] schedule_b = slotsA[pointer_b];
+
+            if(schedule_a[1] > schedule_b[0]){  // a ends after b starts
+                int sharedStart = schedule_b[0] - schedule_a[1];
+            }
+        }
+
         // find intersection between slotA and slotB
         for (Interval a : slotAAvailability){
             // if A intersects with any of B's availability
@@ -56,10 +56,11 @@ public class TimePlanner {
                     }
                     else continue;  // same duration/interval but its too short for dur
                 }
+                // no time shared
                 else if (a.encloses(b)){    // scenario B : a ENCLOSES b
                     // calculate diff (in Duration)
-                    int diff = b.getEnd() - a.getStart();
-                    Duration.ofSeconds(diff);
+                    //int diff = b.getEnd() - a.getStart();
+                    //Duration.ofSeconds(diff);
                 }
                 else if(a.intersects(b)){   // scenario c: a INTERSECT b
                     int sharedTime = 0;
@@ -71,8 +72,8 @@ public class TimePlanner {
                     }
 
                     if(sharedTime >= dur){
-                        int latestSharedStartTime = a.getStart() + sharedTime;
-                        int earliestSharedEndTime = a.getEnd() - sharedTime;
+                        int latestSharedStartTime = Math.max(a.start, b.start) + sharedTime;
+                        int earliestSharedEndTime = Math.max(a.end, b.end) - sharedTime;
                         return new int[]{ latestSharedStartTime, earliestSharedEndTime};
                     }
                 }

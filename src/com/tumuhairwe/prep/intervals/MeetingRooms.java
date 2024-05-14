@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * LeetCode 920
+ * LeetCode
  *
  * Solution Summary:
  * - Sort the interval[] by start time == O(n log_n)
@@ -43,15 +43,17 @@ public class MeetingRooms {
 
         return result;
     }
+
+    // LeetCode 252 (easy)
+    // LC Summary: sort intervals by start time, if second interval doesn’t overlap with first, then third def wont overlap with first;
     public static boolean canAPersonAttendAllTheMeetings(int[][] slotsA) {
         // approach 1: sort slots by start time -> iterate comparing next-to-each-other slot (for loop starts at i= 1)
         // FALSE: sorting is necessary only if collection is array
-        //Arrays.sort((Interval[]) schedule.toArray(), comp);
         Comparator<int[]> comp = Comparator.comparingInt(a -> a[0]);
         Arrays.sort(slotsA, comp);
-        for (int i = 1; i < slotsA.length; i++) {
+        for (int i = 0; i < slotsA.length; i++) {
             int[] i1 = slotsA[i];
-            int[] i2 = slotsA[i - 1];
+            int[] i2 = slotsA[i + 1];
             if(i1[1] > i2[0]) {
                 return false;
             }
@@ -60,6 +62,8 @@ public class MeetingRooms {
         return true;
     }
 
+    // LeetCode 252 (easy)
+    // LC Summary: sort intervals by start time, if second interval doesn’t overlap with first, then third def wont overlap with first;
     public static boolean canAPersonAttendAllTheMeetings2(int[][] slotsA) {
         // approach 2
         // 0. transform into array of intervals
