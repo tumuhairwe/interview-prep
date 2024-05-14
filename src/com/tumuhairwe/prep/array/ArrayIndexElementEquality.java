@@ -2,7 +2,7 @@ package com.tumuhairwe.prep.array;
 
 /**
  * Given a sorted array of distinct integers, write a function indexEqualsValueSearch() that returns
- * the the lowest index i for which arr[i] == i. Return -1 if there is no such index.
+ * the lowest index i for which arr[i] == i. Return -1 if there is no such index.
  * Return -1 if there's no such index
  *
  * ref: https://www.pramp.com/challenge/jKoA5GAVy9Sr9jGBjz04
@@ -16,17 +16,6 @@ package com.tumuhairwe.prep.array;
  *
  * input: arr = [-1,0,3,6]
  * output: -1 # since no index in arr satisfies arr[i] == i.
- * Constraints:
- *
- * [time limit] 5000ms
- *
- * [input] array.integer arr
- *
- * 1 ≤ arr.length ≤ 100
- * [output] integer
- *
- *
- *
  arr = [-8, 0, 2, 5]
 
  first occurrence arr[i] == i
@@ -35,7 +24,7 @@ package com.tumuhairwe.prep.array;
  - Iterate thru the array
  - check if arr[i] == i
  - keep track of the lowest (if above condition is tru)
- - return the first occuurence
+ - return the first occurrence
  - implemented as binary-search == log_n (TC)
 
  [2 3 4 5 9]
@@ -50,8 +39,7 @@ package com.tumuhairwe.prep.array;
  arr[1] == 1
  ...
 
- [3]
- 0
+ref: https://github.com/kywbaek/pramp_questions/blob/master/questions/array-index-and-element-equality/QUESTION.md
  */
 public class ArrayIndexElementEquality {
     public static void main(String[] args) {
@@ -93,13 +81,13 @@ public class ArrayIndexElementEquality {
         //else return -1;
 
         int mid = fromIndex + (toIndex - fromIndex) / 2;
-        if(arr[mid] == mid){
+        if(arr[mid] == mid || mid == 0){    // mid == 0 -> we can no longer sub-divide the array
             return mid;
         }
         else if(arr[mid] > mid){
             return search(arr, mid+1, toIndex);
         }
-        else return search(arr, fromIndex, mid + 1);
+        else return search(arr, fromIndex, mid -1);
 
         // i=1 => (search(arr, 0, 5),
         // i=2 => (search(arr, 0, 3),
@@ -118,7 +106,7 @@ public class ArrayIndexElementEquality {
         while (left <= right){
             int midpoint = left + (right - left) /2;
 
-            if(nums[midpoint] == midpoint){
+            if(nums[midpoint] == midpoint || midpoint == 0){
                 return midpoint;
             }
             else if(nums[midpoint] > midpoint){

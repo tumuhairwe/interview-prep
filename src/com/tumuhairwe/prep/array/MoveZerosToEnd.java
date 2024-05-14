@@ -3,7 +3,11 @@ package com.tumuhairwe.prep.array;
 import java.util.Arrays;
 
 /**
- * Given a static-sized array of integers arr, move all zeroes in the array to the end of the array. You should preserve the relative order of items in the array.
+ * LeetCode 283
+ * ref: https://leetcode.com/problems/move-zeroes/description/
+ *
+ * Given a static-sized array of integers arr, move all zeroes in the array to the end of the array.
+ * You should preserve the relative order of items in the array.
  *
  * We should implement a solution that is more efficient than a naive brute force.
  *
@@ -20,7 +24,7 @@ import java.util.Arrays;
  */
 public class MoveZerosToEnd {
     static int[] moveZerosToEnd(int[] arr) {
-        // your code goes here
+
         int p1 = 0;
         for(int i=0; i<arr.length; i++){
             if(arr[i] != 0){
@@ -34,7 +38,6 @@ public class MoveZerosToEnd {
         if(arr.length > 0){
             Arrays.fill(arr, p1, arr.length, 0);
         }
-
 
         return arr;
     }

@@ -4,6 +4,7 @@ import java.util.*;
 
 
 /**
+ * LeetCode 373  (medium)
  * Given 2 arrays nums1 and nums2 sorted in non-decreasing order (i.e. ascending)
  * and an integer K
  *
@@ -16,7 +17,7 @@ import java.util.*;
  */
 public class KPairsWithSmallestSum {
 
-    private static class Pair implements Comparator<Pair> {
+    private static class Pair implements Comparable<Pair> {
         int i;
         int j;
         int sum;
@@ -28,8 +29,8 @@ public class KPairsWithSmallestSum {
         }
 
         @Override
-        public int compare(Pair o1, Pair o2) {
-            return Integer.compare(o1.sum, o2.sum);
+        public int compareTo(Pair o) {
+            return Integer.compare(this.sum, o.sum);
         }
     }
 

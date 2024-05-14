@@ -39,6 +39,7 @@ public class CloneGraph {
     Map<Integer, Node> visited = new HashMap<>();
 
     /**
+     * LC Summary: recursive dfs, hashmap for visited nodes
      * DFS solution summary
      *
      * - Account for null, return null;
@@ -49,7 +50,7 @@ public class CloneGraph {
      * - Add to cache/map of visited nodes
      * - for each neighbor, recursively call cloneGraph( neighbor ) to clone them
      *
-     * TC: O(V + E) where V = verices/nodes && E = number of edges
+     * TC: O(V + E) where V = vertices/nodes && E = number of edges
      * SC:O(N) space that would be occupied by the visted map. The space occupied by the
      * recursion stack = O( H ) where h = height of the graph
      */

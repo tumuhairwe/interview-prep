@@ -26,6 +26,18 @@ public class Search2DMatrix {
         found = searchMatrix(matrix, target);
         System.out.println("Was found - " + found);
     }
+
+    /**
+     * Solution Summary (binary searching a 2D array)
+     * - Initialize 2 pointers (vertical & horizontal) to row = matrix.length and cols=matrix[0].length
+     * - Iterate the 2D array until left <= right
+     *  - Define mid (like binary search)
+     *  - set rowNum = mid / cols
+     *  - set colNum = mid % cols
+     *  - define value = matrix[rowNum][colNum]
+     *  - when target == value -> return true
+     *  - else if target > value -> (right + mid - 1), else if value < target -> (left = mid + 1)
+     */
     public static boolean searchMatrix(int[][] matrix, int target) {
         if(matrix.length == 0){
             return false;
@@ -41,10 +53,11 @@ public class Search2DMatrix {
             int rowNumber = mid / cols;
             int colNumber = mid % cols;
 
-            if(target == matrix[rowNumber][colNumber]){
+            int value = matrix[rowNumber][colNumber];
+            if(target == value){
                 return true;
             }
-            else if(matrix[rowNumber][colNumber] > target){
+            else if(value > target){
                 right = mid - 1;
             }
             else{

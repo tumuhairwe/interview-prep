@@ -13,7 +13,7 @@ class Solution {
         int pointer = 0;
 
         //0. find the word (in words) that most closely matches sourceArr[i] = word[i]
-        // distqance =
+        // distance =
         // bit -> but -> put -> pot -> dog
         words = new String[]{"but", "put", "big", "pot", "pog", "dog", "lot"};
         Set<String> wordsSet = Set.of(words);

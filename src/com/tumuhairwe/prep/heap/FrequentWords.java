@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  *
  *  Solution:
  *  1. Create charFrequency map (key=word, value = numberOfTimes_it_occurs
- *  2. Create pq of Map.Entry
+ *  2. Create pq of Map.Entry (key=word,value=frequency_count)
  *  3. Iterate over freqMap and add entries into pq while maintaining pq.size == W
  */
 public class FrequentWords {

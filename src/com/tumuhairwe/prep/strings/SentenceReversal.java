@@ -28,6 +28,8 @@ import java.util.Stack;
  *
  * 0 ≤ arr.length ≤ 100
  * [output] array.character
+ *
+ * ref: https://leetcode.com/problems/reverse-words-in-a-string/description/
  */
 public class SentenceReversal {
 
@@ -37,11 +39,18 @@ public class SentenceReversal {
         String sentence = "Practice Makes Perfect";
         String expected = "Perfect Makes Practice";
 
-        String revered = new String(reversed(sentence.toCharArray()));
-        System.out.println("Is Sentenced reversed? " + revered.equals(expected));
+        String reversed = new String(reversed(sentence.toCharArray()));
+        System.out.println("Is Sentenced reversed? " + reversed.equals(expected));
+
+        sentence = "  hello world  ";
+        expected = "world hello";
+
+        reversed = new String(reversed(sentence.toCharArray()));
+        System.out.println("Is Sentenced reversed? " + reversed.equals(expected));
     }
 
     /**
+     * Solution Summary:
      * Break chars into SPACE separated chunks
      * - Make those chunks strings
      * - Store the in LIFE data structure (Stack)
@@ -52,39 +61,53 @@ public class SentenceReversal {
      * @return
      */
     private static char[] reversed(char[] sentence) {
+        // 0. populate stack with words
         Stack<String> words = new Stack<>();
 
-        // 0. populate stack with words
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < sentence.length; i++) {
-            char c = sentence[i];
-            if(c == WORD_SEPARATOR){
-                words.push(sb.toString());
-                sb = new StringBuilder();
-            }
-            else {
-                sb.append(c);
-            }
-        }
-        words.push(sb.toString());  // last time
+        // 0.1 method 1 -> use regex to split sentence into words/tokens -> add to stack
+        String[] tokens = String.valueOf(sentence).split("\\s");
+        Arrays.stream(tokens)
+                .filter(token -> token != null && token.trim().length() > 0)
+                .forEach(word -> {
+                    words.push(word);
+                });
 
+        // 0.2 method 2 -> iterate over charArray & manually construct word using StringBuilder
+        //              -> when encounter a space = add sb,toString() tpo stack
+//        for (int i = 0; i < sentence.length; i++) {
+//            char c = sentence[i];
+//            if(c == WORD_SEPARATOR){
+//                words.push(sb.toString());
+//                sb = new StringBuilder();
+//            }
+//            else {
+//                sb.append(c);
+//            }
+//        }
+        //words.push(sb.toString());  // last time
+
+        // 1. loop over stack -> pop each word
+        //      -> initialize filledSpots int
+        //      -> reverse each word by copying char-by-char into result array
+        //      -> update filledSpots += word.length();
+        //      -> At the end of each word, append a SPACE to result[] & increment filledSpots
+        // return result[]
         char[] result = new char[sentence.length];
         int filledSpots = 0;
         while (!words.isEmpty()){
-            String w = words.pop();
+            String word = words.pop();
 
-            for (int i = 0; i < w.length(); i++) {
-                result[i + filledSpots] = w.toCharArray()[i];
+            for (int i = 0; i < word.length(); i++) {
+                result[i + filledSpots] = word.toCharArray()[i];
             }
 
-            filledSpots += w.length();
+            filledSpots += word.length();
             if(filledSpots < sentence.length -1){
                 result[filledSpots] = WORD_SEPARATOR;   // add space except the last one
                 filledSpots++;
             }
         }
-
-        return result;
+        return new StringBuilder().append(result).toString().trim().toCharArray();
     }
 
     static char[] reverseImpl2(char[] sentence){

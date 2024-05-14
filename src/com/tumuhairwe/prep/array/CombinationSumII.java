@@ -26,6 +26,7 @@ public class CombinationSumII {
         int[] candidates = new int[]{10,1,2,7,6,1,5};
         int target = 8;
         List<List<Integer>> result = combinationSum2(candidates, target);
+        System.out.println("Results are: " + result);
     }
 
     public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
