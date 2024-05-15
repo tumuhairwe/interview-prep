@@ -3,6 +3,10 @@ package com.tumuhairwe.prep.intervals;
 import java.util.ArrayList;
 import java.util.List;
 
+// LC Summary: insert new interval in order,
+// - then merge intervals;
+// - newinterval could only merge with one interval that comes before it,
+// - then add remaining intervals;
 public class Insert {
 
     public static void main(String[] args) {
@@ -11,7 +15,7 @@ public class Insert {
 
     /**
      * Solution Summary
-     * - Use binary search to find the right spot to me3ge in the new interval
+     * - Use binary search to find the right spot to merge in the new interval
      * - copy all intervals that occur BEFORE newInterval (from incoming-intervals into result) ...
      * - insert newInterval ...
      * - paste in all interval that occur AFTER newInterval has ended
@@ -28,7 +32,7 @@ public class Insert {
         if(intervals.length == 0){
             return new int[][]{ newInterval };
         }
-        // Soltuion summary
+        // Solution summary
         // 1. find the insert position
         // 1 a) use binary search
         int numberOfIntervals = intervals.length;

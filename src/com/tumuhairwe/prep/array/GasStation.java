@@ -16,9 +16,14 @@ package com.tumuhairwe.prep.array;
  */
 public class GasStation {
     public static void main(String[] args) {
+        int[] gas = {1,2,3,4,5}, cost = {3,4,5,1,2};
+        int result = canCompleteCircuit(gas, cost);
+        System.out.println("Output should be 3 " + result);
 
+        int[] gas2 = {2,3,4,}, cost2 = {3,4,3};
+        result =-1;
     }
-    public int canCompleteCircuit(int[] gas, int[] cost){
+    public static int canCompleteCircuit(int[] gas, int[] cost){
         int totalGas =0, totalCost = 0, result = 0, deficiet = 0;
 
         // determine if we have enough gas for the whole trip
