@@ -1,10 +1,12 @@
 package com.tumuhairwe.prep.array;
 
 /**
+ * LeetCode 169 (Easy)
  *
  * Given an array of nums of size N, return the majority element
  *
- * The majority element is the element that appears more than ⌊n / 2⌋ times. You may assume that the majority element always exists in the array.
+ * The majority element is the element that appears more than ⌊n / 2⌋ times.
+ * You may assume that the majority element always exists in the array.
  *
  * ref: https://leetcode.com/problems/majority-element/description/
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0169-majority-element.java

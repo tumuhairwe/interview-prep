@@ -4,6 +4,7 @@ package com.tumuhairwe.prep.array;
  * Given a list of non-negative integers, representing the amount of money in each
  * house, determine the maximum amount of money you can rob to night
  * without alerting the police.
+ *
  * Constraint:
  * - Each house has exactly the amount of money stashed
  * - Only obstacle is that adjacent houses have security cameras connected that
@@ -13,30 +14,40 @@ package com.tumuhairwe.prep.array;
  *
  *  Hint:
  *  - Use memoization to store calculated values in an array
+ *  (memoization is useful for caching the results of repetitive calculations) so you can  use them for future calculations
  *  - Useful to cache repetitive calculations
+ *
+ *  Solution Summary
+ *  - Use DP to calculate the max of (THIS house, THIS + 1 house)
+ *
  * LeetCode 198 (Medium)
  * ref: https://leetcode.com/problems/house-robber/description/
  */
 public class HouseRobber {
 
     public static void main(String[] args) {
+        int[] x = new int[]{1,2,3,1};
+        int r = rob(x);
+        System.out.println(r);
 
+        int[] y = new int[]{2,7,9,3,1};
+        r = rob(y);
+        System.out.println(r);
     }
 
-    public int rob(int[] nums){
+    public static int rob(int[] nums){
         // 0. check base case (array.length == 0)
         if(nums.length == 0){
             return 0;
         }
 
-        //int mid = nums.length /2;
         //int[] arr = Arrays.copyOfRange(nums, mid, nums.length-1);
-        // 1. create cache/array called DP or meo
-        int dp[] = new int[nums.length];
+        // 1. create cache/array called DP or memoization
+        int dp[] = new int[nums.length + 1];
 
         // 2. set initial state/values (i.e. maximum value we can rob for each count of houses)
-        dp[0] = 0;  // 1st value == "if we rob 0 houses" we get 0 money
-        dp[1] = nums[0];;   // minimum = 0 once non-negative integers
+        dp[0] = 0;          // 1st value == "if we rob 0 houses" we get 0 money
+        dp[1] = nums[0];;   // cost of robbing 1 house == nums[0] (first house) .. this assume=s once non-negative integers
 
         // 3. loop over array starting from 1
         for (int i = 1; i < nums.length; i++) {

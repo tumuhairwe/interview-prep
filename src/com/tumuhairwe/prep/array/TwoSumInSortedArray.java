@@ -5,7 +5,7 @@ package com.tumuhairwe.prep.array;
  * LeetCode 167 (medium)
  *
  * Given a 1-indexed array of integers numbers that is sorted in non-decreasing oder,
- * Find 2 numbers such that they add up too a specific target numbers.
+ * Find 2 numbers such that they add up to a specific target numbers.
  *
  * They numbers such that numbers[i] and numbers[j] are 1 <= j <= j <= numbers.length
  *
@@ -16,6 +16,7 @@ package com.tumuhairwe.prep.array;
  *  - when sum of sum[p1] + nums[p2] < target, increment p1
  *
  *  TC: O(n) because you need to thru nums at least once (where n = length of the array)
+ *  ref: https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
  */
 public class TwoSumInSortedArray {
     public static void main(String[] args) {

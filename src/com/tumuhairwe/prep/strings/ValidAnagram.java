@@ -11,9 +11,28 @@ public class ValidAnagram {
     public static void main(String[] args) {
         String st1 = "anagram";
         String st2 = "nagaram";
-        System.out.println("Approach 1 " + st1 + " and " + st2 + " -> " + isAnagram(st1, st2));
+        System.out.println("Approach 1 " + st1 + " and " + st2 + " -> " + isAnagram2(st1, st2));
         System.out.println("Approach 2 " + st1 + " and " + st2 + " -> " + isAnagram2(st1, st2));
         System.out.println("Approach 3 " + st1 + " and " + st2 + " -> " + isAnagram3(st1, st2));
+    }
+
+    public static boolean isPalindrom(String s, String t) {
+
+        // 0. base case
+        if(s.length() != t.length()){
+            return false;
+        }
+
+        // 1.
+        int j = t.length() -1;
+        for(int i=0; i<s.length(); i++){
+            if(s.charAt(i) != t.charAt(j -i)){
+                return false;
+            }
+            j--;
+        }
+
+        return true;
     }
 
     /**

@@ -19,9 +19,9 @@ import java.util.*;
  *
  *  Solution summary: (uses constant extra space)
  *  - As you iterate thru the nums array
- *      - find the complement (target - nums[i])
- *      - if complement exists in a map_of_compliments -> return { complement, nums[i] }
- *      - if complement does not exist, add it to map
+*   - find the complement (target - nums[i])
+*   - if diff exists in a map_of_compliments -> return { complement, nums[i] }
+*   - if diff does not exist, add it to map
  */
 public class TwoSumProblem {
 
@@ -44,7 +44,7 @@ public class TwoSumProblem {
             int num = target - nums[i];
             int diff = target - num;
             if(numMap.containsKey(diff)){
-                return new int[]{ numMap.get(diff), i};
+                return new int[]{ num, i};
             }
 
             else numMap.put(num, i);    // key = Integer, val = index
