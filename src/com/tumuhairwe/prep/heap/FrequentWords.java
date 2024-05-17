@@ -22,7 +22,7 @@ public class FrequentWords {
 
     // TC = in O(n + klogn) == where n = size or words array, k = number-of-top-k
     // SC= O(n) space
-    public static List<String> topKFrequent(String[] words, int W) {
+    public static List<String> topKFrequent(String[] words, int K) {
         Map<String, Integer> freqMap = new HashMap<>();
         for(int i=0; i<words.length; i++){
             int existingCount = freqMap.getOrDefault(words[i], 0);
@@ -36,7 +36,7 @@ public class FrequentWords {
         freqMap.entrySet()
                 .stream()
                 .forEach(entry -> {
-                    if(pq.size() <= W){
+                    if(pq.size() <= K){
                         pq.add(entry);
                     }
                     else{

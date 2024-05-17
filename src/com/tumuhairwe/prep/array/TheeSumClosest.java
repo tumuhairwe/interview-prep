@@ -16,7 +16,6 @@ import java.util.*;
  *      if(current_sum > target) -> decrement p2;
  *      if(current_sum < target) -> increment p2;
  *  5. Update closest_sum, based on diff between target and current_sum
- * LeetCode 15 (Medium) 3Sum triplets == zero
  */
 public class TheeSumClosest {
     public static void main(String[] args) {
