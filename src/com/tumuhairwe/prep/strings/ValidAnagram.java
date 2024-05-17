@@ -16,8 +16,7 @@ public class ValidAnagram {
         System.out.println("Approach 3 " + st1 + " and " + st2 + " -> " + isAnagram3(st1, st2));
     }
 
-    public static boolean isPalindrom(String s, String t) {
-
+    public static boolean isPalindrome(String s, String t) {
         // 0. base case
         if(s.length() != t.length()){
             return false;
@@ -69,7 +68,7 @@ public class ValidAnagram {
             freqMap.put(c, count + 1);
         }
 
-        for(char c : st1.toCharArray()){
+        for(char c : st2.toCharArray()){
             if(!freqMap.containsKey(c) || freqMap.get(c) == 0 ){
                 return false;
             }

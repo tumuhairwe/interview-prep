@@ -7,12 +7,12 @@ package com.tumuhairwe.prep.dynamicprogramming;
  * Each time, you can either climb 1 or 2 steps, how many distinct ways can you climb to the top
  *
  * ref: https://leetcode.com/problems/climbing-stairs/description/
+ * ref: https://www.youtube.com/watch?v=Y0lT9Fck7qI
  */
 public class ClimbingStairs {
 
     public static void main(String[] args) {
         System.out.println("Given n = " + 2 + " there are " + dynamicProgrammingSolution(2));
-        System.out.println("Given n = " + 3+ " there are " + fibonnaciSolution(3));
     }
     /**
      * Solution Summary
@@ -39,33 +39,5 @@ public class ClimbingStairs {
          }
 
          return dp[n];
-    }
-
-    /**
-     * Solution Summary
-     * - Base case: if n == 1, return 1, if n== 2, return 2
-     * - Build fibonnaci sequence until n by sliding current forward
-     *      - current = previous_1 + previous_2
-     *      - previous_2 = previous_1
-     *      - previous_1 = current
-     *  return current (since loop was upt to N)
-     */
-    static int fibonnaciSolution(int n){
-         if(n == 1){
-             return 1;
-         }
-         if(n == 2){
-             return 2;
-         }
-         int current = 0;
-         int previous_1 = 2;
-         int previous_2 = 1;
-         for (int i = 3; i < n; i++) {
-             current = previous_1 + previous_2;
-             previous_2 = previous_1;
-             previous_1 = current;
-        }
-
-         return current;
     }
 }

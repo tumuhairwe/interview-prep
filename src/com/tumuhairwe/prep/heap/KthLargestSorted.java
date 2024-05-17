@@ -13,20 +13,31 @@ import java.util.PriorityQueue;
 // TC = O (k + (n - k) x log_k)  -> O(n -k) x log_k)
 public class KthLargestSorted {
 
+    private static PriorityQueue<Integer> minHeap;
+    private static int maxSize ;
+
     public static int findKthLargest(int[] nums, int k){
         // these 2 are the same
         Comparator<Integer> c = (n1, n2) -> n1 - n2;
         Comparator<Integer> comp = Comparator.comparingInt(n -> n);
+        minHeap = new PriorityQueue<>(comp);
+        //minHeap = new PriorityQueue<Integer>();
+        maxSize = k;
 
-        PriorityQueue<Integer> minHeap = new PriorityQueue<>(comp);
-        for (int i = 0; i < k; i++) {
-            minHeap.add(nums[i]);
+        int returnValue = 0;
+        for (int i = 0; i < nums.length; i++) {
+            returnValue = add(nums[i]);
         }
 
-        for (int i = k; i < nums.length; i++) {
-            if(nums[i] > minHeap.peek()){
+        return returnValue;
+    }
+    static int add(int val) {
+        if (minHeap.size() < maxSize) {
+            minHeap.add(val);
+        } else {
+            if (val > minHeap.peek()) {
                 minHeap.poll();
-                minHeap.add(nums[i]);
+                minHeap.add(val);
             }
         }
         return minHeap.peek();
