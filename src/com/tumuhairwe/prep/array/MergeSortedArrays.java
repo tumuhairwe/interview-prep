@@ -14,7 +14,12 @@ import java.util.Arrays;
 public class MergeSortedArrays {
 
     public static void main(String[] args) {
+        int[] arr1 = new int[]{1,2,3,0,0,0}; int m = 3;
+        int[] arr2 = new int[]{2,5,6}; int n = 3;
 
+        System.out.println("Before : " + Arrays.toString(arr1));
+        merge__3_pointers(arr1, m, arr2, n);
+        System.out.println("After : " + Arrays.toString(arr1));
     }
 
     /**
@@ -46,7 +51,7 @@ public class MergeSortedArrays {
         int reader_1 = m - 1;
         int reader_2 = n - 1;
 
-        for (int writer = (m + n) - 1; writer > 0 ; writer++) {
+        for (int writer = (m + n) - 1; writer > 0 ; writer--) {
             if(reader_1 >= 0 && reader_2 >= 0){
                 nums1[writer] = nums1[reader_1] > nums2[reader_2] ? nums1[reader_1--] : nums2[reader_2--];
             }

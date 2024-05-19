@@ -44,6 +44,7 @@ public class CourseSchedule_DFS {
 
     static int HAS_BEEN_TRAVERSED = 1;
     static int NOT_YET_VISITED = 0;
+    static int IS_IN_PATH = 2;
     protected static boolean canFinish(int numCourses, int[][] prerequisites){
         // 0. create and initialize adj list
         List<List<Integer>> adjList = new ArrayList<>();
@@ -70,22 +71,27 @@ public class CourseSchedule_DFS {
         return true;
     }
 
-    private static boolean isCyclic(List<List<Integer>> adjList, int[] visited, int currentIndex) {
-        int IS_IN_PATH = 2;
-        if(visited[currentIndex] == IS_IN_PATH){
+    private static boolean isCyclic(List<List<Integer>> adjList, int[] visited, int courseId) {
+        // check if already visited
+        if(visited[courseId] == IS_IN_PATH){
             return true;
         }
 
-        visited[currentIndex] = IS_IN_PATH;
+        // courzeId doesn't have its own prerreq
+        if(adjList.get(courseId) == null){
+            return false;
+        }
 
-        for (int i = 0; i < adjList.get(currentIndex).size(); i++) {
-            int prereqId = adjList.get(currentIndex).get(i);
+        // put in path
+        visited[courseId] = IS_IN_PATH;
+        for (Integer prereqId : adjList.get(courseId)){
             if(visited[prereqId] != HAS_BEEN_TRAVERSED){
                 return true;
             }
         }
 
-        visited[currentIndex] = HAS_BEEN_TRAVERSED;
+        // mark as visited
+        visited[courseId] = HAS_BEEN_TRAVERSED;
         return false;
     }
 }

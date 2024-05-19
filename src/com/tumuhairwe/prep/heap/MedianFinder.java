@@ -1,5 +1,6 @@
 package com.tumuhairwe.prep.heap;
 
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 // implementation of 2 heaps
@@ -10,7 +11,8 @@ import java.util.PriorityQueue;
  * The overall run time complexity should be O(log (m+n)).
  *
  * Solution Summary:
- * - Create 2 PQs (minHeap
+ * - Create 2 PQs (minHeap & maxHeap) -- minHeap==order-ascending (i.e. smallest on top and order-descending
+ *
  * ref: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
  */
 public class MedianFinder {
@@ -21,6 +23,9 @@ public class MedianFinder {
     private PriorityQueue<Integer> largeHeap;  // order by putting largest on top
 
     public MedianFinder(){
+        // same
+        Comparator<Integer> comp = Comparator.comparingInt(a -> a);
+        //smallHeap = new PriorityQueue<>(comp.reversed());
         smallHeap = new PriorityQueue<>((a, b) -> b - a);
 
         // same
@@ -37,7 +42,7 @@ public class MedianFinder {
             largeHeap.add(val);
         }
 
-        // handle uneven size
+        // handle uneven size -> pick from 1 give to another
         if(smallHeap.size() > largeHeap.size() + 1){
             val = smallHeap.poll();
             largeHeap.add(val);

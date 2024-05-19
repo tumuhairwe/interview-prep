@@ -3,6 +3,8 @@ package com.tumuhairwe.prep.array;
 import java.util.*;
 
 /**
+ * LeetCode 937
+ *
  * Given an array of points where a point[i] = [x, y]
  * represents a point on the X-Y plan and integer K,
  * return the K closest points to the origin (0,0)
@@ -25,33 +27,30 @@ public class KClosestPointsToOrigin {
         int k = 1;
 
         int[][] res = kClosest(arr, k);
-        System.out.println("The top k are " + List.of(arr));
+        System.out.println("The top k are " + Arrays.toString(arr));
         System.out.println("Match == " + Arrays.equals(res, result));;
     }
 
     /**
      * Solution Summary
      * - Create a comparator that will order the 2 arrays according to the function
-     * - Create pq using above operator
+     * - Create pq using above comparator
      * - loop over 2D array and populate pq with arrays
      * - pq.pop() off the pq k times to get the top k entries
+     *
+     * TC O(NlogK) -- if we don't have store all N poinbs in PQ
+     * TC = O(NlogN) = if we have to store all N points in PQ before popping off top x
      */
     static int[][] kClosest(int[][] points, int k){
         Comparator<int[]> comparator = (int[] a, int[] b) -> {
-            int x = a[0] - a[1];
-            int xSquared = x * x;
+            int aZeroSquared = a[0] * a[0];
+            int aOneSquared = a[1] * a[1];
 
-            int y = b[0] - b[1];
-            int ySquared = y * y;
-            double sqRoot = Math.sqrt(xSquared + ySquared);
-            return Double.valueOf(sqRoot).intValue();
-
-//            int aZeroSquared = a[0] * a[0];
-//            int aOneSquared = a[0] - a[1];
-//
-//            int bZeroSquared = b[0] * b[0];
-//            int bOneSquared = b[1] * b[1];
-//            return (aZeroSquared + aOneSquared) + (bZeroSquared + bOneSquared);
+            int bZeroSquared = b[0] * b[0];
+            int bOneSquared = b[1] * b[1];
+            int a_sum = aOneSquared + aZeroSquared;
+            int b_sum = bZeroSquared + bOneSquared;
+            return Integer.compare(a_sum, b_sum);
         };
         // 0. create PQ
         PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);
@@ -59,6 +58,11 @@ public class KClosestPointsToOrigin {
         // 1. populate pq
         for (int[] point : points){
             pq.add(point);
+
+            //remove when size increase k
+            if (pq.size() > k) {
+                pq.remove();
+            }
         }
 
         // populate top k

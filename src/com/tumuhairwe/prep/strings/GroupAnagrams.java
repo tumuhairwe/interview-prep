@@ -23,6 +23,7 @@ public class GroupAnagrams {
      * Solution summary:
      * - Create a key for reach word in strs array
      *  (key = numeric representation of each word (based on
+     *  TC: O(m  x n)
      */
     public static List<List<String>> groupAnagrams(String[] strs) {
         // base case

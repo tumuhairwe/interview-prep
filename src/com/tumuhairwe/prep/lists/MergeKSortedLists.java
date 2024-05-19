@@ -24,7 +24,7 @@ public class MergeKSortedLists {
 
     }
 
-    static class LinkedListNode{
+    public static class LinkedListNode{
         int data;
         LinkedListNode next;
     }

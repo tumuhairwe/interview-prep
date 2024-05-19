@@ -42,6 +42,9 @@ public class LRUCacheV2_LinkedListImpl {
         this.cacheMap = new HashMap<>();
         this.head = new LinkedListNode(-1, -1);
         this.tail = new LinkedListNode(-1, -1);
+
+        this.head.next = this.tail;
+        this.tail.prev = this.head;
     }
 
     /**

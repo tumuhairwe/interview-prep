@@ -18,7 +18,7 @@ public class KthLargestSorted {
 
     public static int findKthLargest(int[] nums, int k){
         // these 2 are the same
-        Comparator<Integer> c = (n1, n2) -> n1 - n2;
+        //Comparator<Integer> c = (n1, n2) -> n1 - n2;
         Comparator<Integer> comp = Comparator.comparingInt(n -> n);
         minHeap = new PriorityQueue<>(comp);
         //minHeap = new PriorityQueue<Integer>();
@@ -42,6 +42,7 @@ public class KthLargestSorted {
         }
         return minHeap.peek();
     }
+
     // Driver code
     public static void main(String[] args) {
         int[][] inputs = {
