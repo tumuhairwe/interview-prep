@@ -14,30 +14,29 @@ import java.util.Queue;
 public class SurroundedRegions {
     public static void main(String[] args) {
         char[][] board = new char[][]{
-                {'X','X','X','X'},
-                {'X','O','O','X'},
-                {'X','X','O','X'},
-                {'X','O','X','X'}
+                {'O','O'},
+                {'O','O',}
         };
-        new SurroundedRegions().solve(board);
+        int[] arr = new int[]{1, 1};
+
+//        Queue<Orange> rottenOranges = new LinkedList<>();
+//        rottenOranges.add(new Orange(1, 1).);
+//        boolean contains = rottenOranges.contains(new Orange(1, 1));
+//        System.out.println(contains);
+        //System.out.println(rottenOranges.peek().equals(arr));
+        //new SurroundedRegions().solve(board);
         char[][] actual = new char[][]{
-                {'X','X','X','X'},
-                {'X','O','O','X'},
-                {'X','X','O','X'},
-                {'X','O','X','X'}
+                {'O','O'},
+                {'O','O',}
         };
     }
-    public void solve(char[][] board) {
-        Queue<int[]> eligibleCells = new LinkedList<>();
 
+    private Queue<int[]> eligibleCells = new LinkedList<>();
+    public void solve(char[][] board) {
         for(int row=0; row<board.length; row++){
             for(int col=0; col<board[row].length; col++){
 
-                boolean isOnBorder = (row == 0) || (col == 0)
-                        || (row == board.length - 1)
-                        || (col == board[row].length - 1);
-
-                boolean isEligible = !isOnBorder && board[row][col] == 'O';
+                boolean isEligible = board[row][col] == 'O';
                 if(isEligible){
                     eligibleCells.offer(new int[]{row, col});
                 }
@@ -47,9 +46,7 @@ public class SurroundedRegions {
         for(int[] cell : eligibleCells){
             int row = cell[0];
             int col = cell[1];
-            if(!isSurrounded(board, row, col)){
-                flipNeighbors(board, row, col);  // flip all neighbors to X
-            }
+            flipNeighbors(board, row, col);  // flip all neighbors to X
         }
     }
 
@@ -62,18 +59,41 @@ public class SurroundedRegions {
             int rowOffset = offset[0];
             int colOffset = offset[1];
 
-            int x = row + rowOffset;
-            int y = col + colOffset;
+            int proposedRow = row + rowOffset;
+            int proposedCol = col + colOffset;
 
-            boolean rowIsWithinBounds = 0 <= x && x < board.length;
-            boolean colIsWithinBounds = 0 <= y && y < board[x].length;
+            boolean rowIsWithinBounds = 0 <= proposedRow && proposedRow < board.length;
+            boolean colIsWithinBounds = 0 <= proposedCol && proposedCol < board[proposedRow].length;
             boolean cellIsWithinBounds = rowIsWithinBounds && colIsWithinBounds;
-            if(cellIsWithinBounds){
-                board[x][y] = 'X';
+
+            boolean isOnBorder = (proposedRow == 0) || (proposedCol == 0)
+                    || (proposedRow == board.length - 1)
+                    || (proposedCol == board[row].length - 1);
+
+            //boolean canBeFlipped = hasUnflippableNeighbors(proposedRow, proposedCol);
+            if(cellIsWithinBounds && !isOnBorder){
+                board[proposedRow][proposedCol] = 'X';
             }
         }
     }
 
+    public boolean hasUnflippableNeighbors(int row, int col){
+        int[][] offsets = {
+                {1, 0}, {0, 1},
+                {0, -1}, {-1, 0}
+        };
+        boolean isAdjacent = true;
+        for(int[] offset : offsets) {
+            int rowOffset = offset[0];
+            int colOffset = offset[1];
+
+            int proposedRow = row + rowOffset;
+            int proposedCol = col + colOffset;
+
+            isAdjacent &= this.eligibleCells.contains(new int[]{proposedRow, proposedCol});
+        }
+        return isAdjacent;
+    }
 
     boolean isSurrounded(char[][] board, int row, int col){
         int[][] offsets = {
