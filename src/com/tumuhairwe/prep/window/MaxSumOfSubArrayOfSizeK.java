@@ -1,5 +1,9 @@
 package com.tumuhairwe.prep.window;
 
+/**
+ *
+ * ref: https://leetcode.com/problems/maximum-size-subarray-sum-equals-k/description/
+ */
 public class MaxSumOfSubArrayOfSizeK {
 
     public static void main(String[] args) {

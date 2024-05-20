@@ -22,7 +22,7 @@ import java.util.*;
 public class SmallestSubstringOfAllCharts {
 
     public static void main(String[] args) {
-        //boolean isDisjoint = Collections.disjoint(Set.of(1, 2, 3), Set.of(9, 4, 5));;
+        // boolean isDisjoint = Collections.disjoint(Set.of(1, 2, 3), Set.of(9, 4, 5));;
         //System.out.println("isDisjoint " + isDisjoint);
         //NavigableMap<Integer, String> m = Collections.emptyNavigableMap();
         TreeMap<Integer, String> treeMap = new TreeMap<>();

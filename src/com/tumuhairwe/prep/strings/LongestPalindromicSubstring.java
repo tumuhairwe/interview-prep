@@ -18,6 +18,7 @@ package com.tumuhairwe.prep.strings;
  *
  * e.g. RACECAR == middle_character needs to be accounted for if length == odd number
  *
+ * LeetCode 409 (Easy)
  * Summary: Expand around the center
  */
 public class LongestPalindromicSubstring {
