@@ -33,42 +33,59 @@ public class InsertInterval {
         System.out.println("AFTER inserting ... ");
         System.out.println(Arrays.toString(arr1));
     }
-    public static int[][] insertInterval(int[][] intervals, int[] newInterval){
-        List<int[]> result = new ArrayList<>();
-        for (int[] interval : intervals){
+    public static int[][] insertInterval(int[][] intervals, int[] newInterval) {
+        // 0. handle base (when intervals is empty)
+        if(intervals.length == 0){
+            return new int[][]{ newInterval };
+        }
 
-            // 0. case: is distinct
-            int prevIntervalStart = interval[0];
-            int prevIntervalEnd = interval[1];
+        // Solution summary
+        // 1. find the insert position
+        // 1 a) use binary search
+        int numberOfIntervals = intervals.length;
+        int target_to_insert = newInterval[0];
+        int left = 0, right = intervals.length - 1;
 
-            int newIntervalStart = newInterval[0];
-            int newIntervalEnd = newInterval[1];
-
-            // 0. case: they're non overlapping boundaries
-            if(newInterval == null || prevIntervalEnd < newIntervalStart){
-                result.add(interval);
+        // binary search for the position to insert the interval
+        while(left <= right){
+            int mid = (left + right) / 2;
+            if(intervals[mid][0] < target_to_insert){
+                left = mid + 1;
             }
-            // 1. this new interval ends BEFORE previous start
-            else if(prevIntervalStart > newIntervalEnd) {
-                result.add(newInterval);
-                result.add(interval);
-            }
-            // they over-lap -> merge them
-            else {
-                // same
-                //newInterval[0] = Math.min(interval[0], newInterval[0]);
-                newInterval[0] = Math.min(prevIntervalStart, newIntervalStart);
-
-                // same
-                //newInterval[1] = Math.min(interval[1], newInterval[1]);
-                newInterval[1] = Math.max(prevIntervalEnd, newIntervalEnd);
-            }
-
-            if(newInterval != null){
-                result.add(newInterval);
+            else{
+                right = mid - 1;
             }
         }
 
-        return result.toArray(new int[result.size()][2]);
+        // 2. handle the merging
+        List<int[]> result = new ArrayList<>();
+
+        // insert interval into result ... at the appropriate position ... right before MID
+        // 2a) copy + paste all intervals before LEFT
+        for(int i=0; i<left; i++){
+            result.add(intervals[i]);
+        }
+        // 2b add newInterval
+        result.add(newInterval);
+
+        // 2c copy + past all interval after/later-than LEFT/new-interval
+        for(int i=left; i<numberOfIntervals; i++){
+            result.add(intervals[i]);
+        }
+
+        // 3. loop thru and merge any overlapping intervals
+        List<int[]> merged = new ArrayList<>();
+        for(int[] interval : result){
+            // if mergedResult is empty or there's no overlap ... add the interval to the result
+            if(merged.isEmpty() || merged.get(merged.size() - 1)[1] < interval[0]){
+                merged.add(interval);
+            }
+            else {
+                int preceedingEnd = merged.get(merged.size() - 1)[1];
+                merged.get(merged.size() - 1)[1] = Math.max(preceedingEnd, interval[1]);
+            }
+        }
+        // 3. convert to array
+        return merged.toArray(new int[0][]);
     }
 }

@@ -4,6 +4,18 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
+/**
+ * LeetCode 4 (hard)
+ * Find median of 2 sorted arrays
+ * The overall run time complexity should be O(log (m+n)).
+ *
+ * Solution Summary:
+ * - Create 2 PQs (minHeap & maxHeap) -- minHeap==order-ascending (i.e. smallest on top and order-descending
+ * - Initialize both arrays by calling insert() for each element in arr1
+ * - Initialize both arrays by calling insert() for each element in arr2
+ * - return getMedian() to get the median
+ * ref: https://leetcode.com/problems/median-of-two-sorted-arrays/description/
+ */
 public class MedianOfTwoSortedArrays {
     private PriorityQueue<Integer> minHeap;
     private PriorityQueue<Integer> maxHeap;

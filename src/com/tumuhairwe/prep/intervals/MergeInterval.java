@@ -39,22 +39,27 @@ public class MergeInterval {
     public int[][] merge(int[][] intervals) {
         List<int[]> results = new ArrayList<>();
 
-        // base case
+        // 0. base case
         if(intervals.length == 0){
             return new int[][]{};
         }
 
-        // add first (sorted) interval to result list (assumed they're sorted && 1st is lowest')
-        results.add(new int[]{ intervals[0][0], intervals[0][1] });
+        // 1. sort the intervals
+        Comparator<int[]> c1 = Comparator.comparingInt(arr -> arr[0]);
+        Arrays.sort(intervals, c1);
+
+        // 2. add first (sorted) interval to result list (assumed they're sorted && 1st is lowest')
+        results.add(intervals[0]);
         for(int i=1; i<intervals.length; i++){
             int currStart = intervals[i][0];
             int currEnd = intervals[i][1];
-            int prevEnd = results.get(i)[1];
+            int prevEnd = results.get(results.size() - 1)[1];
 
             if(currStart <= prevEnd){
                 // add currStart results
                 int indexOfLastOne = results.size() - 1;
-                results.get(indexOfLastOne)[1] = Math.max(currEnd, prevEnd);  // merge the 2 i.e. prolong the interval
+                int latestCombinedEnd = Math.max(currEnd, prevEnd);
+                results.get(indexOfLastOne)[1] = latestCombinedEnd;  // merge the 2 i.e. prolong the interval
             }
             else {
                 results.add(new int[]{currStart, currEnd});  // new range completely
@@ -92,7 +97,7 @@ public class MergeInterval {
     }
 
     /**
-     * Solution Summaruy
+     * Solution Summaru
      * sort each interval,
      * - overlapping intervals should be adjacent,
      * - iterate and build solution; also graph method, less efficient, more complicated

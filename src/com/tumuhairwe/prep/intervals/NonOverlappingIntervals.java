@@ -2,50 +2,56 @@ package com.tumuhairwe.prep.intervals;
 
 import java.util.*;
 
+/**
+ * LeetCode 435. Non-overlapping Intervals
+ * Given an array of intervals intervals where intervals[i] = [starti, endi],
+ * return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
+ *
+ * ref: https://leetcode.com/problems/non-overlapping-intervals/description/
+ */
 public class NonOverlappingIntervals {
     public static void main(String[] args) {
         int[][] intervals = new int[][]{
                 {1,2},{2,3},{3,4},{1,3}
         };
-        int ddx = eraseOverlapIntervals(intervals);
+        int[][] i2 = new int[][]{
+                {1,100},{11,22},{1,11},{2,12}
+        };
+        int ddx = eraseOverlapIntervals(i2);
         System.out.println("There are " + ddx + " intervals to be removed");
     }
     public static int eraseOverlapIntervals(int[][] intervals) {
-//        int[] arr1, arr2;
-        Comparator<int[]> comp = Comparator.comparingInt(arr -> arr[0]);
 
-        Set<TimeRange> output = new TreeSet<>();
-        // 1. sort intervals & de-dupe
-        for(int i=0; i< intervals.length; i++){
-            int[] interval = intervals[i];
+        int removedCount = 0;
 
-            TimeRange range = new TimeRange(interval[0], interval[1]);
-            if(output.contains(range)){
-                System.out.println("Already contained " + range);
+        // 0. sort interval first
+        Comparator<int[]> comp = Comparator.comparingInt(a -> a[0]);
+        Arrays.sort(intervals, comp);
+        //Arrays.sort(intervals, (arr1, arr2) -> Integer.compare(arr1[0], arr2[0]));
+
+        // 2. remove overalapping intervals
+        int[] previous_interval = intervals[0];
+
+        for(int i=1; i< intervals.length; i++){
+            //int[] interval_a = intervals[i - 1];
+            int[] current_interval = intervals[i];
+
+            if(current_interval[0] < previous_interval[1]){  // b ends before a
+                removedCount++; // b is completely removed
+
+                // determine which interval ends last (update previous interval)
+                if(previous_interval[1] > current_interval[1]){
+                    previous_interval = current_interval;
+                }
             }
-            output.add(range);
-        }
-
-        int overlappingCount = 0;
-        // 2. remove overlapping intervals
-        TimeRange[] timeRangeArray = output.toArray(new TimeRange[output.size()]);
-        for(int i=1; i< timeRangeArray.length; i++){
-            TimeRange a = timeRangeArray[i - 1];
-            TimeRange b = timeRangeArray[i];
-
-            if(a.intersects(b)){
-                // merge by removing b
-                timeRangeArray[i - 1].end = b.end;
-                timeRangeArray[i] = null;
-                overlappingCount++;
+            else{
+                previous_interval = current_interval;
             }
+
         }
 
         // count non-null ranges
-        Long count = Arrays.stream(timeRangeArray)
-                .filter(Objects::nonNull)
-                .count();
-        return intervals.length - count.intValue();
+        return removedCount;
     }
 
     static class TimeRange implements Comparable<TimeRange>{

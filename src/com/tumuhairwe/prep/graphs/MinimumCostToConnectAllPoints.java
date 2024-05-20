@@ -10,7 +10,7 @@ import java.util.Set;
  * Given an array of points of some points on a 2D plane where
  * points[i] = [x, y]
  *
- * The distance of connecting 2 points [x_i, y] and [x_j, y] is the manhattan distance between them
+ * The distance of connecting 2 points [x_1, y_1] and [x_2, y_2] is the manhattan distance between them
  * i.e. |xi - xj| + |yi - yj|, where |val| denotes the absolute value of val.
  *
  * Get the minimum distance to make all points connected if there's exactly one simple path
@@ -44,12 +44,12 @@ public class MinimumCostToConnectAllPoints {
     static int minCostConnectPoints(int[][] points){
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
         pq.offer(new int[]{0, 0});
-        int  length = points.length;
+        //int  length = points.length;
         Set<Integer> visited = new HashSet<>();
         int cost = 0;
 
-        // When visited.size() == points.len meaning that all the nodes has been connected.
-        while (visited.size() < length){
+        // When visited.size() == points.length meaning that all the nodes has been connected.
+        while (visited.size() < points.length){
             int[] arr = pq.poll();;
 
             int weight = arr[0];
@@ -62,7 +62,7 @@ public class MinimumCostToConnectAllPoints {
             visited.add(currNode);
             cost += weight;
 
-            for (int nextNode = 0; nextNode < length; nextNode++){
+            for (int nextNode = 0; nextNode < points.length; nextNode++){
                 if(!visited.contains(nextNode)){
                     int nextWeight = Math.abs(points[nextNode][0] - points[currNode][0])
                                    + Math.abs(points[nextNode][1] - points[currNode][1]);

@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.intervals;
 import java.util.*;
 
 /**
- * LeetCode 252
+ * LeetCode
  * Given 2 peoples availability slots ...
  * ref: https://aaronice.gitbook.io/lintcode/sweep-line/meeting-rooms
  *
@@ -12,7 +12,6 @@ import java.util.*;
  *
  * int[][] == list of { startTime: UnixTimestamp, endTime: UnixTimestamp }
  *
- * ref: https://leetcode.com/problems/meeting-rooms/description/
  */
 public class TimePlanner {
     public static void main(String[] args) {

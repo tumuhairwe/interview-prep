@@ -101,13 +101,13 @@ public class RegexParser {
             else if(patternChar == ASTERISK){
                 if(textArray[lastValidCharacterIndex] == currentChar) {
                     // char is allowed e.g. text = "ab" and pattern = "ab*", i=2, lastValidCharacterIndex=1
-                    System.out.println("Char is allowed boz index=" + i + " and lastValidCharacterIndex "+lastValidCharacterIndex+" currentChar " + textArray[i]);
+                    System.out.println("Char is allowed bcoz index=" + i + " and lastValidCharacterIndex "+lastValidCharacterIndex+" currentChar " + textArray[i]);
                     matches = true;
                     continue;
                 }
                 else {
                     // char is NOT allowed e.g. text = "abc" and pattern = "ab*", i=2, lastValidCharacterIndex=1
-                    System.out.println("Char is NOT allowed boz index=" + i + " and previous as " + currentChar);
+                    System.out.println("Char is NOT allowed bcoz index=" + i + " and previous as " + currentChar);
                 }
             }
             else if(patternChar == DOT){

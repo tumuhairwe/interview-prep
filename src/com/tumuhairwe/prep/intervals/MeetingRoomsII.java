@@ -36,7 +36,7 @@ public class MeetingRoomsII {
 
     /***
      * Solution summary
-     * - Create 2 arrays to track star time and end times
+     * - Create 2 arrays to track start time and end times
      * - populate both arrays from intervals array
      * - Sort both arrays (goal is to track used_number_of_rooms)
      * - Use 2 pointers to track indices of each array ( increment usedRooms counter if startTimes[p1] < endTimes[p2]
@@ -146,6 +146,8 @@ public class MeetingRoomsII {
         // 4. minHeap should have size of all non-intersecting room
         return minHeap.size();
     }
+
+    // this just counts intersections ... just doesn't mean they rquire sepate rooms e.g. if intersections are at different times
     public static int findMinimumNumberOfRoomsRequired(int[][] slotsA, int[][] slotsB){
         // unnecessary since Interval implements Comparable
         // Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
