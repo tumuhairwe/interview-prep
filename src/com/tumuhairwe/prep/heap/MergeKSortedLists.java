@@ -2,7 +2,6 @@ package com.tumuhairwe.prep.heap;
 
 import com.tumuhairwe.prep.lists.ListNode;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;

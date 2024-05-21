@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 /**
+ * LeetCode 134 (medium)
  * Given n gas stations along a circular route, where the amount of gas at the i-th station is gas[i]
  * You have a car with an unlimited gas tank & it cost  cost[i] of gas to travel from the i-th stations ot the next
  * (i+1) station.
@@ -24,24 +25,26 @@ public class GasStation {
         result =-1;
     }
     public static int canCompleteCircuit(int[] gas, int[] cost){
-        int totalGas =0, totalCost = 0, result = 0, deficiet = 0;
+        int totalGas =0, totalCost = 0, result = 0, deficeit = 0;
 
-        // determine if we have enough gas for the whole trip
+        // 1.determine if we have enough gas for the whole trip
         for (int i = 0; i < gas.length; i++) {
             totalGas += gas[i];
             totalCost += cost[i];
         }
 
-        // exit if we don't
+        // 2. exit if we don't
         if(totalGas < totalCost){
             return -1;
         }
 
-        // determine starting index
+        // 3. determine starting index
         for (int i = 0; i < gas.length; i++) {
-            deficiet += gas[i] - cost[i];
-            if(deficiet < 0){
-                deficiet = 0;
+            deficeit += gas[i] - cost[i];
+
+            // if deficeit is too < 0, set index to next position
+            if(deficeit < 0){
+                deficeit = 0;
                 result = i+1;   // set to next position
             }
         }

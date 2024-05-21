@@ -3,8 +3,10 @@ package com.tumuhairwe.prep.array;
 import java.util.Arrays;
 
 /**
+ * LeetCode 18 (Easy)
  * Find the words that can be formed by an array of characters
- * ... return the sum of the length of those words
+ * ... return the sum of the length of the "good" words in array words.
+ * A word is "good" if it can be formed by characters rom chars (each character can only be used once)
  *
  * ref: https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/
  * ref: https://www.youtube.com/watch?v=M2HFao-zgk8
@@ -27,7 +29,7 @@ public class CountCharacters {
     public static int countCharacters(String[] words, String current_word){
         int goodWordsLengthSum = 0;
         int[] global_char_counts  = new int[26];
-        // is constant space because only 26 chars (in Alphabet for which we care going to keep track of hte count)
+        // is constant space because only 26 chars (in Alphabet for which we care going to keep track of the count)
 
         // 0. Build char counts array
         final int asciiValueOfA = 'a';

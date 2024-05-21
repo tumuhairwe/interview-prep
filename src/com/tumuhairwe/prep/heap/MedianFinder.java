@@ -18,6 +18,11 @@ import java.util.PriorityQueue;
  *
  * ref: https://leetcode.com/problems/find-median-from-data-stream/
  * ref: https://www.youtube.com/watch?v=itmhHWaHupI
+ *
+ * TC
+ * - Adding/Removing to any heap: log_n
+ * - Finding the max in madHeap = O(1)
+ * - Finding the min in minHeap = O(1)
  */
 public class MedianFinder {
 

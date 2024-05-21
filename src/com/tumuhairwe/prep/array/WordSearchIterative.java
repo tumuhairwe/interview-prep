@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 /**
+ * LeetCode 79
  * Given a 2D board and a grid, find if the word exists in the board
  *
  * The word can be constructed from letters and sequentially adjacent cells ... where cells are horizontally
@@ -10,17 +11,18 @@ package com.tumuhairwe.prep.array;
  *  LeetCode 79 (Medium) - Searching problem (using recursion)
  *
  *  Solution:
+ *  - create a isExists() function that traverses the whole 2D array, cell by cell, if exists, return true
  *  - create a nest for loop to loop over the 2D array
  *  - only start when you meet the 1st character of the word (i.e. word.charAt(i) == board[i][j] )
- *
- *  - create a isExists() function that traverses the whole 2D array, cell by cell, if exists, return true
  *  - create a searchWord(int i, int j, int indexOfCurrentChar, String word, int[][] board) function that calls itself
+ *      - terminal call (since this a recursive function) is if index >= word.length()
  *      - add cell to be visited 2D array (to tracked visited nodes)
  *      - add boundary checks
- *          - (x-out-of-bound,
- *          - y-out-of-bound,
- *          - is-already-visited, and
+ *          - (x-out-of-bounds,
+ *          - y-out-of-bounds,
+ *          - is-already-visited, i.e. is in visited[][]
  *          - is-a-diff-letter) i.e. word.charAt(indexOfCurrentChar) != board[i][j];
+ *      - mark {x, y} as visted in 2D boolean visited array/tracker
  *      - call recursively passing <i>indexOfCurrentChar + 1</i>, and all 4 neighboring cells (2 horizontal & 2 vertical)
  *      - recursive call should return true if we've reached end-of-word
  *
@@ -67,7 +69,7 @@ public class WordSearchIterative {
     }
 
     static boolean searchWord(int i, int j, int index,String word,  char[][] board){
-        if(index == word.length()){ // base case -> if we have reached end of word
+        if(index >= word.length()){ // base case -> if we have reached end of word
             return true;
         }
 

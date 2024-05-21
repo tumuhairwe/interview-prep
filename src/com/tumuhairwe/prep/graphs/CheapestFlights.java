@@ -78,6 +78,7 @@ public class CheapestFlights {
      */
     public int findCheapestPrice_BFS(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
         // 0. create adjacency list
+        // key = departingCity, value = List<Node> where class Node( id:int -> destination, val:double: cost)
         Map<Integer, List<Node>> city_to_destination_adjList = new HashMap<>();
         for (int[] flight  : flightSchedule) {
             Integer departingCity = flight[0];
@@ -91,7 +92,7 @@ public class CheapestFlights {
             city_to_destination_adjList.get(targetDestination).add(new Node(destinationCity, priceToDestination));
         }
 
-        //2. set default distances[] from src to $destination
+        //2. set default distances[] from src to $destination [index = cityId, value = actual_cost_or_distance_from_src]
         int[] destinations = new int[numberOfCities];
         Arrays.fill(destinations, Integer.MAX_VALUE);
 
@@ -142,7 +143,7 @@ public class CheapestFlights {
         }
 
         // 1. Create adjacency list
-        // key= city_id, value = List<Destination_City, CostToThatCity>
+        // key= city_id, value = List<Node> -- where class Node { int::destination_City, double::CostToThatCity }
         Map<Integer, List<Integer[]>> city_to_destination_graph = new HashMap<>();
         for (int[] flight : flights){
             Integer departingCity = flight[0];

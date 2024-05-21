@@ -22,6 +22,8 @@ package com.tumuhairwe.prep.array;
  *
  * LeetCode 198 (Medium)
  * ref: https://leetcode.com/problems/house-robber/description/
+ * ref: https://www.youtube.com/watch?v=ZwDDLAeeBM0&t=24s (Nick White)
+ * ref: https://www.youtube.com/watch?v=73r3KWiEvyk (NeetCode)
  */
 public class HouseRobber {
 
@@ -35,19 +37,20 @@ public class HouseRobber {
         System.out.println(r);
     }
 
+    // dp memoization template
     public static int rob(int[] nums){
         // 0. check base case (array.length == 0)
         if(nums.length == 0){
             return 0;
         }
 
-        //int[] arr = Arrays.copyOfRange(nums, mid, nums.length-1);
         // 1. create cache/array called DP or memoization
         int dp[] = new int[nums.length + 1];
 
         // 2. set initial state/values (i.e. maximum value we can rob for each count of houses)
+        // set initial state of 1st 2 options (0 and 1)
         dp[0] = 0;          // 1st value == "if we rob 0 houses" we get 0 money
-        dp[1] = nums[0];;   // cost of robbing 1 house == nums[0] (first house) .. this assume=s once non-negative integers
+        dp[1] = nums[0];   // cost of robbing 1 house == nums[0] (first house) .. this assume=s once non-negative integers
 
         // 3. loop over array starting from 1
         for (int i = 1; i < nums.length; i++) {
@@ -55,8 +58,14 @@ public class HouseRobber {
             // get (old/previous-house's max dp[i-1] + THIS value) ..
             // plus the new Max ...
             // whichever is greater si the new value of
-            dp[i+1] = Math.max(dp[i], dp[i -1] + nums[i]);
+            int previousMax = dp[i];
+            int oldMax = dp[i - 1]; // may not be an adjacent house
+            int newHouseCost = nums[i];
+            dp[i+1] = Math.max(previousMax, oldMax + newHouseCost);
+            //dp[i+1] = Math.max(dp[i], dp[i - 1] + nums[i]);
         }
-        return 0;
+
+        // return the max we can rob for MAX number of houses (i.e. last element of dp array == max we can rob)
+        return dp[nums.length];
     }
 }

@@ -1,6 +1,12 @@
 package com.tumuhairwe.prep.pramo;
 
+/**
+ * Pramp
+ * Given: find the minimal Sales Path cost in its distribution tree. Given a node rootNode,
+ * ref: https://www.pramp.com/challenge/15oxrQx6LjtQj9JK9XqA
+ */
 public class SalesPath {
+
     static class Node {
 
         int cost;
