@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
  * Given an array of integers where stones[i] is the weight of the i-th stone
  * We are playing a game with the stones ... on each turn, we choose the heaviest 2 stones and smash them together.
  *
- * Suppose the heaviest 2 stones ahve the weights x and y with x <= y. THe result of the smash is
+ * Suppose the heaviest 2 stones ave the weights x and y with x <= y. THe result of the smash is
  * - if x == y ? both stones are destroyed
  * - if x != y ? the stone of weight x is destroyed and the stone of weight y has a new weight y - x
  * ref: https://leetcode.com/problems/last-stone-weight/description/
@@ -47,7 +47,7 @@ public class LastStoneWeight {
             return 0;
         }
         else {
-            return maxHeap.remove();    // return Math.abso(maxHeap.remove() ) when using default comparator
+            return maxHeap.remove();    // return Math.abs(maxHeap.remove() ) when using default comparator
         }
     }
 }

@@ -65,7 +65,7 @@ public class KClosestPointsToOrigin {
             }
         }
 
-        // populate top k
+        // populate top k array from pq;
         int [][] output = new int[k][2];
         int count = 0;
         while (k-- > 0){

@@ -1,8 +1,5 @@
 package com.tumuhairwe.prep.graphs;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  * LeetCode 130 (medium)
  * Surrounding Regions - Given an M x N matrix board containing 'X' and 'O',
@@ -10,6 +7,7 @@ import java.util.Queue;
  *
  *  A region is captured by flipping all 'O's into 'X's in that surrounded region.
  * ref: https://leetcode.com/problems/surrounded-regions/
+ * ref: https://www.youtube.com/watch?v=9z2BunfoZ5Y
  */
 public class SurroundedRegions {
     public static void main(String[] args) {
@@ -18,39 +16,65 @@ public class SurroundedRegions {
                 {'O','O',}
         };
         int[] arr = new int[]{1, 1};
-
-//        Queue<Orange> rottenOranges = new LinkedList<>();
-//        rottenOranges.add(new Orange(1, 1).);
-//        boolean contains = rottenOranges.contains(new Orange(1, 1));
-//        System.out.println(contains);
-        //System.out.println(rottenOranges.peek().equals(arr));
-        //new SurroundedRegions().solve(board);
-        char[][] actual = new char[][]{
-                {'O','O'},
-                {'O','O',}
-        };
+        solve(board);
     }
 
-    private Queue<int[]> eligibleCells = new LinkedList<>();
-    public void solve(char[][] board) {
-        for(int row=0; row<board.length; row++){
-            for(int col=0; col<board[row].length; col++){
+    private static final char SPECIAL_CHARACTER = 'T';
 
-                boolean isEligible = board[row][col] == 'O';
-                if(isEligible){
-                    eligibleCells.offer(new int[]{row, col});
-                }
+    // TC : (n x M) -- size of grid bcoz we have to iterate over its 3 times
+    public static void solve(char[][] board) {
+        int nRows = board.length;
+        int nCols = board[0].length;
+
+        // 0. mark border cells with SPECIAL CHAR
+        for(int i=0; i<nCols; i++){
+            // top row
+            if(board[0][i] == 'O'){
+                flipNeighbors(board, 0, i);
+            }
+
+            // bottom row
+            if(board[nRows - 1][i] == 'O'){
+                flipNeighbors(board, nRows - 1, i);
             }
         }
 
-        for(int[] cell : eligibleCells){
-            int row = cell[0];
-            int col = cell[1];
-            flipNeighbors(board, row, col);  // flip all neighbors to X
+        // 1. mark boarder cells with SPECIAL_CHAR (left column & right column)
+        for(int i=0; i<nRows; i++){
+            if(board[i][0] == 'O'){
+                flipNeighbors(board, 0, i);
+            }
+            if(board[i][nCols - 1] == 'O'){
+                flipNeighbors(board, i, nCols - 1);
+            }
+        }
+
+        for(int row=0; row<board.length; row++){
+            for(int col=0; col<board[row].length; col++){
+
+                // capture unsurrounded regions -> O -> X
+                if(board[row][col] == 'O'){
+                    board[row][col] = 'X';
+                }
+
+                // capture unsurrounded regions -> O -> X
+                if(board[row][col] == SPECIAL_CHARACTER){
+                    board[row][col] = 'O';
+                }
+            }
         }
     }
+    static void flipNeighbors(char[][] board, int row, int col){
 
-    void flipNeighbors(char[][] board, int row, int col){
+        boolean rowIsWithinBounds = 0 <= row && row < board.length;
+        boolean colIsWithinBounds = 0 <= row && col < board[col].length;
+        boolean cellIsWithinBounds = rowIsWithinBounds && colIsWithinBounds;
+        if(!cellIsWithinBounds){
+            return;
+        }
+
+        board[row][col] = SPECIAL_CHARACTER;
+
         int[][] offsets = {
                 {1, 0}, {0, 1},
                 {0, -1}, {-1, 0}
@@ -62,37 +86,8 @@ public class SurroundedRegions {
             int proposedRow = row + rowOffset;
             int proposedCol = col + colOffset;
 
-            boolean rowIsWithinBounds = 0 <= proposedRow && proposedRow < board.length;
-            boolean colIsWithinBounds = 0 <= proposedCol && proposedCol < board[proposedRow].length;
-            boolean cellIsWithinBounds = rowIsWithinBounds && colIsWithinBounds;
-
-            boolean isOnBorder = (proposedRow == 0) || (proposedCol == 0)
-                    || (proposedRow == board.length - 1)
-                    || (proposedCol == board[row].length - 1);
-
-            //boolean canBeFlipped = hasUnflippableNeighbors(proposedRow, proposedCol);
-            if(cellIsWithinBounds && !isOnBorder){
-                board[proposedRow][proposedCol] = 'X';
-            }
+            flipNeighbors(board, proposedRow, proposedCol);
         }
-    }
-
-    public boolean hasUnflippableNeighbors(int row, int col){
-        int[][] offsets = {
-                {1, 0}, {0, 1},
-                {0, -1}, {-1, 0}
-        };
-        boolean isAdjacent = true;
-        for(int[] offset : offsets) {
-            int rowOffset = offset[0];
-            int colOffset = offset[1];
-
-            int proposedRow = row + rowOffset;
-            int proposedCol = col + colOffset;
-
-            isAdjacent &= this.eligibleCells.contains(new int[]{proposedRow, proposedCol});
-        }
-        return isAdjacent;
     }
 
     boolean isSurrounded(char[][] board, int row, int col){

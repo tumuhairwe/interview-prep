@@ -1,8 +1,11 @@
 package com.tumuhairwe.prep.stack;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 /**
+ * LeetCode 20 (easy)
  * Given a string containing just the characters '(', ')', '{' '}', '[', ']'
  *
  * determine if the input string is valid
@@ -21,7 +24,7 @@ import java.util.Stack;
  * e.g. "{[]}" == true (because nested)
  *
  * ref: https://leetcode.com/problems/valid-parentheses/description/
- *
+ * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0020-valid-parentheses.java
  * Summary == Use stack to push() (when adding) ... and pop when you encounter opposite/closing
  */
 public class MatchingBrackets {
@@ -29,40 +32,41 @@ public class MatchingBrackets {
         Stack<Character> stack = new Stack<>();
         String input_valid = "()[]{}";
         String input_invalid = "([)]";
+        String inv2 = "){";
 
         //boolean isValid = isValid(input_valid);
 
         System.out.println(input_valid + " " + isValid(input_valid));
         System.out.println(input_invalid + " " + isValid(input_invalid));
+        System.out.println("Should be false: ([}}]) ->" + isValid("([}}])"));
+        System.out.println("Should be false: ([}}]) ->" + isValid(inv2));
     }
 
     static boolean isValid(String input){
         if(input.length() %2 != 0){
             return false;
         }
-        Character OPENING_CURLY_BRACE = '{';
-        Character CLOSING_CURLY_BRACE = '}';
 
-        Character OPENING_BRACKET = '(';
-        Character CLOSING_BRACKET = ')';
+        // 0. create global mapping of open-close
+        Map<Character,Character> closeToOpen = new HashMap<>();
+        closeToOpen.put(')', '(');
+        closeToOpen.put(']', '[');
+        closeToOpen.put('}', '{');
 
-        Character OPENING_PARENTHESIS = '[';
-        Character CLOSING_PARENTHESIS = ']';
         Stack<Character> stack = new Stack<>();
         for (Character c : input.toCharArray()){
-            if(c == OPENING_BRACKET || c == OPENING_PARENTHESIS || c == OPENING_CURLY_BRACE){
+
+            // 1. for each char, check if its contained in mapping && on top of non-empty stack
+            if(closeToOpen.containsKey(c) && !stack.isEmpty() && stack.peek() == closeToOpen.get(c)){
+                stack.pop();
+            }
+            else {
+                // 2. else add to stack
                 stack.push(c);
             }
-            else if(!stack.isEmpty() && c == CLOSING_BRACKET && stack.peek() == OPENING_BRACKET){
-                stack.pop();
-            }
-            else if(!stack.isEmpty() && c == CLOSING_CURLY_BRACE && stack.peek() == OPENING_CURLY_BRACE){
-                stack.pop();
-            }
-            else if(!stack.isEmpty() && c == CLOSING_PARENTHESIS && stack.peek() == OPENING_PARENTHESIS){
-                stack.pop();
-            }
         }
+
+        // 4. return is stack is empty
         return stack.isEmpty();
     }
 }
