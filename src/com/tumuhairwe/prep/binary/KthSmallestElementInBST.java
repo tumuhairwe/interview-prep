@@ -24,7 +24,7 @@ public class KthSmallestElementInBST {
             return 0;
         }
 
-        List<Integer> list = getBST_asList(root);
+        List<Integer> list = getBST_inOrder_asList(root);
 
         Comparator<Integer> comp = Comparator.comparingInt(a -> a);
         PriorityQueue<Integer> pq = new PriorityQueue<>(comp.reversed());
@@ -37,7 +37,7 @@ public class KthSmallestElementInBST {
         return pq.poll();
     }
 
-    List<Integer> getBST_asList(TreeNode<Integer> node){
+    List<Integer> getBST_inOrder_asList(TreeNode<Integer> node){
         if(node == null){
             return new ArrayList<>();
         }
@@ -46,11 +46,11 @@ public class KthSmallestElementInBST {
         results.add(node.data);
 
         if(node.left != null){
-            results.addAll(getBST_asList(node.left));
+            results.addAll(getBST_inOrder_asList(node.left));
         }
 
         if(node.right != null){
-            results.addAll(getBST_asList(node.right));
+            results.addAll(getBST_inOrder_asList(node.right));
         }
 
         return results;

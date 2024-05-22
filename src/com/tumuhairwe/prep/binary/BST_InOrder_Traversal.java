@@ -1,9 +1,6 @@
 package com.tumuhairwe.prep.binary;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Given the root of a binary tree, return the inorder traversal of its nodes' values.

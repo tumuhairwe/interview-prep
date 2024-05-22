@@ -26,7 +26,7 @@ public class SurroundedRegions {
         int nRows = board.length;
         int nCols = board[0].length;
 
-        // 0. mark border cells with SPECIAL CHAR
+        // 0. mark border cells with SPECIAL CHAR (top row & bottom row)
         for(int i=0; i<nCols; i++){
             // top row
             if(board[0][i] == 'O'){
