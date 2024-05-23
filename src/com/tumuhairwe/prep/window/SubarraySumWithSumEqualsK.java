@@ -9,16 +9,25 @@ import java.util.Map;
  * Given an array of integers nums and an integer K,
  * return the total number of contiguous sum-arrays whose sum equals K
  *
+ * Solution Summary
+ * - Create Map<Integer, Integer> where [key=total_sum_of_sub_array, value = count]
+ * - iterate thru array and populate Map and seed it with [0, 1] -- bcoz there at least 1 sub-arry with sum = 0
+ * - calculate cumulative sum (as you traverse array)
+ * - calculate diff (cumulativeSum - k)
+ * - if diff exists in, map -> set as result (to be returned)
+ * - add cummulativeSum to amp (with existingCount updated + 1)
  * ref: https://leetcode.com/problems/subarray-sum-equals-k/description/
  * ref: https://www.youtube.com/watch?v=fFVZt-6sgyo
  */
 public class SubarraySumWithSumEqualsK {
 
     public static void main(String[] args) {
-
+        int[] nums = new int[]{1,2,3};
+        int k = 3;
+        System.out.println(subarraySum(nums, k));
     }
 
-    public int subarraySum(int[] nums, int k) {
+    public static int subarraySum(int[] nums, int k) {
         int result = 0;
         int currentSum = 0;     // number of cont
 

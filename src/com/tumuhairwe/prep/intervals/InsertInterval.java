@@ -15,7 +15,7 @@ import java.util.List;
  * - intervals still do not have any overlapping intervals (merge overlapping intervals if
  * necessary)
  *
- * NB: You are not required to modify intervals in place (you can create a new one)
+ * NB: If You are not required to modify intervals in place (you can create a new one)
  * ref: https://leetcode.com/problems/insert-interval/description/
  */
 public class InsertInterval {
@@ -33,6 +33,16 @@ public class InsertInterval {
         System.out.println("AFTER inserting ... ");
         System.out.println(Arrays.toString(arr1));
     }
+
+    /**
+     * Solution Summary
+     * - Binary search interval 2D array (focus on start index) ....
+     * - Find the spot to insert new interval
+     * - Binary-search should leave you with a LEFT pointer (i.e. every before that can be copy-pasted into result
+     * - insert inverval after LEFT
+     * - copy + paste all other/later intervals into result
+     * - Loop thru result and perform merging by combining every entry by checking preceding entry
+     */
     public static int[][] insertInterval(int[][] intervals, int[] newInterval) {
         // 0. handle base (when intervals is empty)
         if(intervals.length == 0){
@@ -46,7 +56,7 @@ public class InsertInterval {
         int target_to_insert = newInterval[0];
         int left = 0, right = intervals.length - 1;
 
-        // binary search for the position to insert the interval
+        //1. binary search for the position to insert the interval
         while(left <= right){
             int mid = (left + right) / 2;
             if(intervals[mid][0] < target_to_insert){

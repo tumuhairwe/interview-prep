@@ -10,6 +10,16 @@ import java.util.*;
  * or vertically.
  * You may assume all four edges of the grid are surrounded by water
  *
+ * Solution Summary
+ * - Do a nested for-loop for the 2-D array
+ * -> for each cell that is LAND
+ * -> call doBFS(grid, row, col)
+ * -> implement doBFS() to
+ *      - check boundaries (return if out of boundary)
+ *      - check if cells is already WATER, if so, return
+ *      - Mark current cell as WATER
+ *      - call doBFS(grid, row, col) for reach of the 4 neighbors
+ *
  * LeetCode 200 (medium)
  * ref: https://www.youtube.com/watch?v=pV2kpPD66nE
  * ref: https://leetcode.com/problems/number-of-islands/description/

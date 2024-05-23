@@ -40,7 +40,7 @@ public class BSTIterator_InOrder implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        while (!traversal.isEmpty()){
+        if (!traversal.isEmpty()){
             return traversal.poll();
         }
         return -1;

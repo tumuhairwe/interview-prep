@@ -11,6 +11,7 @@ package com.tumuhairwe.prep.dynamicprogramming;
  * F(n) = F(n - 1) + F(n - 2), for n > 1.
  *
  * Given N, calculate f(n)
+ * ref: https://blog.pramp.com/how-to-solve-any-dynamic-programming-problem-603b6fbbd771
  */
 public class FibonacciNumber {
 
@@ -18,7 +19,12 @@ public class FibonacciNumber {
         System.out.println("Given n = " + 3 + " there are " + fibonnaciSolution_recursive(3));
     }
 
-    //TC: O(2^n)
+    /**
+     * TC: O(2^n)
+     * Because the depth of our recursivion is N, and each level has twice as many calls
+     *
+     * Since we have overlapping sub-problems ... use dynamic programming
+     */
     static int fibonnaciSolution_recursive(int n){
         if(n == 0){
             return 0;
@@ -26,8 +32,47 @@ public class FibonacciNumber {
         if(n == 1){
             return 1;
         }
-        return fibonnaciSolution_recursive(n + 1) + fibonnaciSolution_recursive(n - 2);
+        return fibonnaciSolution_recursive(n - 1) + fibonnaciSolution_recursive(n - 2);
     }
+
+    /**
+     * Since we know the sulrs of fib(n) depend on the fib(n - 1) and fib(n -2), we can cache/memoize the results
+     * and check if they exist in the cache before computing them
+     *
+     * This new solution only has to compute each value once, so it runs in O(n) time,
+     * because of the cache though, it uses O9n) space
+     */
+    static int fibonacci_dp(int n){
+        if(n < 2){
+            return n;
+        }
+
+        //0. create cache
+        int[] cache = new int[n + 1];
+
+        // 1. seed the cache with default value e.g. -1
+        for (int i = 0; i < cache.length; i++) {
+            cache[i] = -1;
+        }
+
+        // 2.
+        cache[0] = 0;
+        cache[1] = 1;
+
+        // 3. call recursive helper that can use cache
+        return fib(n, cache);
+    }
+
+    // top-down solution:
+    private static int fib(int n, int[] cache) {
+        // if value is et in cache, return it
+        if(cache[n] > 0){
+            return cache[n];
+        }
+        cache[n] = fib(n - 1, cache) + fib(n -1, cache);
+        return cache[n];
+    }
+
     /**
      * Solution Summary
      * - Base case: if n == 1, return 1, if n== 2, return 2

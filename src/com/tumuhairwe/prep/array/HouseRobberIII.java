@@ -56,6 +56,8 @@ public class HouseRobberIII {
         return Math.max(result[0], result[1]);
     }
 
+    // TC: O(n)
+    // Algo : dFS
     private static int[] heist(TreeNode<Integer> root) {
         if(root == null){
             return new int[]{0, 0};

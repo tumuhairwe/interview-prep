@@ -15,7 +15,7 @@ import java.util.*;
  * Main points
  * - used to find the shortest path between two nodes in a weighted graph
  * - It uses a priority queue to track the nodes that have been visited and the nodes that still need to be visited.
- * -  The algorithm terminates when the destination node is reached.
+ * - The algorithm terminates when the destination node is reached.
  * - The algorithm works by starting at the source node and then greedily adding the node with the shortest path to the priority queue.
  *
  * Solution summary
@@ -24,8 +24,8 @@ import java.util.*;
  *  - Create adjacency-list of all nodes (Map: key=nodeId, value=[ {neighborNodeId}, {weight} ]
  *  - Create minHeap/PQ ordered by weight
  *  - Seed minHeap with sourceId + 0 distance
- *  - Populate minHeap (while iterating & getting destinations from adjList.get(sourceNodeId) until all desitnation are exhausted
- *  - Return adjList Map { key=nodeId, value = weight-to-destiation }
+ *  - Populate minHeap (while iterating & getting destinations from adjList.get(sourceNodeId) until all destinations are exhausted
+ *  - Return adjList Map { key=nodeId, value = weight-to-destination }
  *
  *  TC: O(V + E(log V)) bcoz PQ has O(log_n) tc for push() and pop() operations
  *
@@ -55,7 +55,7 @@ public class Dijkstra {
         // 1. put all edges in adjList
         for (int[] edge : edges) {
             // s = src, d = dist, w = weight
-            int source = edge[0], neighborNodeId = edge[1], weight = edge[3];
+            int source = edge[0], neighborNodeId = edge[1], weight = edge[2];
             adjacencyList.get(source).add(new Integer[]{neighborNodeId, weight});
         }
 
@@ -66,11 +66,11 @@ public class Dijkstra {
         //Comparator<Pair> p = Comparator.comparingInt((Pair p2) -> p2.distance);
         Comparator<int[]> p = Comparator.comparingInt((int[] p2) -> p2[0]);
         Queue<int[]> minHeap = new PriorityQueue<>(p);
-        minHeap.add(new int[]{0, src});
+        minHeap.add(new int[]{0, src}); // weight/distance to "myself" = 0
 
         // 3. iterate over min heap and poll() the top
         while (!minHeap.isEmpty()){
-            int[] curr = minHeap.poll();    // distance opposing from a minHeap/pq = O(log V) -- where V is the number of vertices in the graph
+            int[] curr = minHeap.poll();    // distance from a minHeap/pq = O(log V) -- where V is the number of vertices in the graph
             int currentWeight = curr[0];
             int currentNodeId = curr[1];
 
