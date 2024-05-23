@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.strings;
 
 /**
+ * LeetCode 9 (easy)
  * Given an input, determine if it's a valid palindrome
  * Palindrome == string that reads the same from left-to-right and right-to-left
  *
@@ -26,18 +27,18 @@ public class ValidPalindrome {
     }
 
     public static boolean isValid(String input){
-        int index = 0;
-        int mid = input.length() /2;
+        int p1 = 0;
+        int p2 = input.length() -1;
 
-        while (index < mid){
-            int length = input.length();
-            Character theChar = input.charAt(index);
-            Character correspondingChar = input.charAt( length-index-1);
+        while (p1 < p2){
+            Character theChar = input.charAt(p1);
+            Character correspondingChar = input.charAt( p2);
             if(theChar != correspondingChar){
                 return false;
             }
 
-            index++;
+            p1++;
+            p2--;
         }
         return true;    // there was only 1 character left in the middle e.g. caRab == R
     }
