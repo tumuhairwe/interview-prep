@@ -9,8 +9,11 @@ import java.util.Map;
  * Determine if a binary tree is balanced
  *
  * Solution Summary
+ * -
+ * - create dfs() : Map.Entry<Integer, Boolean> that returns a pair (key=height_of_tree, value=is_balacned_flag)
  * - Recursively call dfs( node.left) and dfs(node.right)
  * - return true IFF children are balance && diff between heights <= 1
+ * - Call dfs() helper method from primary method.
  */
 public class BalancedBinarySearchTree {
     public boolean isBalanced(TreeNode root) {

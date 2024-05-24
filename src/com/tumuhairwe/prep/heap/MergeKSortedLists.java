@@ -120,7 +120,7 @@ public class MergeKSortedLists {
             minHeap.add(node);
         }
 
-        // traverse lists & until you reach each lists' end (next = null), put the next list node to pq
+        // 2. traverse lists & until you reach each lists' end (next = null), put the next list node to pq
         // . PQ will maintain order by val
         ListNode head = new ListNode();
         ListNode current = head;
@@ -129,6 +129,7 @@ public class MergeKSortedLists {
             current.next =  minHeap.poll();
             current = current.next;
 
+            // 3. if current has a .next, add to PQ (minHeap will sort & by comp & return the next one)
             if(current.next != null){
                 minHeap.add(current.next);
             }

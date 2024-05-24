@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.graphs;
 import java.util.*;
 
 /**
- * LeetCode 734 (medium)
+ * LeetCode 743 (medium)
  * ref: https://leetcode.com/problems/network-delay-time/description/
  *
  *  Problem Description
@@ -28,6 +28,7 @@ import java.util.*;
  */
 class NetworkDelayTime {
     public static int networkDelayTime(int[][] times, int n, int k) {
+        // 0. create adjacency list Map<key=nodeId, value=L[destination, time]>
         Map<Integer, List<int[]>> adjacency = new HashMap<>();
         for (int[] time : times) {
             int source = time[0];
@@ -36,28 +37,41 @@ class NetworkDelayTime {
             adjacency.computeIfAbsent(source, key -> new ArrayList<>()).add(new int[]{destination, travelTime});
         }
 
+        // 1. create PQ to sort by time (index=0) == entry = {0=time, 1=nodeId}
         PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+
+        // 2. see pq with self (0=time, 1=nodeId)
         pq.offer(new int[]{0, k});
         Set<Integer> visited = new HashSet<>();
         int delays = 0;
 
         while (!pq.isEmpty()) {
+            // 3. pull top of minHeap
             int[] current = pq.poll();
             int time = current[0];
             int nodeId = current[1];
 
+            // 4. check if unvisited
             if (visited.contains(nodeId))
                 continue;
 
+            // 5. add to visited
             visited.add(nodeId);
-            delays = Math.max(delays, time);
+
+            // 6. update delays/time-taken
+            delays = Math.min(delays, time);
+
+            // 7. pull neighbors from adjaceny List
             List<int[]> neighbors = adjacency.getOrDefault(nodeId, new ArrayList<>());
 
+            // 8. DFS on each neighbpr (add to PQ (0=newTime = (time-from-THIS-node + time-to-get-to-neighbor, nodeId=neighborId) )
             for (int[] neighbor : neighbors) {
                 int neighborNode = neighbor[0];
                 int neighborTime = neighbor[1];
                 if (!visited.contains(neighborNode)) {
                     int newTime = time + neighborTime;
+
+                    // 9. add to pq
                     pq.offer(new int[]{newTime, neighborNode});
                 }
             }

@@ -9,7 +9,7 @@ import java.util.Map;
  * changing the frequencyMap to Map<Character, Integer>
  *
  * Solution Summary
- * - To calcuate the rist First non-repeating integer
+ * - To calculate the rist First non-repeating integer
  * Algo: use Map<Integer, Integer> -> Integer , countOfOccurrences
  *  a) loop thru array & initialize count to Zero
  *  b) loop thru array and increment to existingCount+1

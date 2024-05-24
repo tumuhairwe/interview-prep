@@ -4,10 +4,9 @@ import java.util.Arrays;
 
 /**
  * - Disjoint Set:
- *      Definition: Two Sets are called "Disjoint Sets" if they don't have an element in common
+ *      Definition: Two Sets are called "Disjoint Sets" if they don't have an element in common ancestor
  * -Union Find/Merge-Find:
- *      Definition: A data structure that stores a collection of
- *      non-overlapping or disjoint sets or partitions a set into disjoint sets
+ *      Definition: A data structure that stores a collection of  non-overlapping or disjoint sets or partitions a set into disjoint sets
  *      Operations
  *      - Add a new disjoint set
  *      - Find a representative/leader of a set

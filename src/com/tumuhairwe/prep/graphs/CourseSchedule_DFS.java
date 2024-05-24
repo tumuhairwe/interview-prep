@@ -77,7 +77,7 @@ public class CourseSchedule_DFS {
             return true;
         }
 
-        // courzeId doesn't have its own prerreq
+        // courseId doesn't have its own prereq
         if(adjList.get(courseId) == null){
             return false;
         }

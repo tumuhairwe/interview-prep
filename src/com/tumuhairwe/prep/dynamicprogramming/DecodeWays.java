@@ -3,6 +3,8 @@ package com.tumuhairwe.prep.dynamicprogramming;
 import java.util.Arrays;
 
 /**
+ * LeetCode 91
+ *
  * A message containing letters from A-Z can be decoded into numbers using the following mapping
  * 'A' - > '1'
  * 'B' - > '2'
@@ -46,8 +48,8 @@ public class DecodeWays {
         dp[1] = s.charAt(0) == '0' ? 0 : 1;   // will epend on whether or not the char is a 0
 
         for(int i = 2; i <= s.length(); i++){
-            int oneDigit = Integer.valueOf(s.substring(i - 1, i));   // just current digit
-            int twoDigits = Integer.valueOf(s.substring(i - 2, i));   // just current digit and previous digit
+            int oneDigit = Integer.parseInt(s.substring(i - 1, i));   // just current digit
+            int twoDigits = Integer.parseInt(s.substring(i - 2, i));   // just current digit and previous digit
 
             if(oneDigit >= 1 && oneDigit <= 9){
                 dp[i] += dp[i -1 ];

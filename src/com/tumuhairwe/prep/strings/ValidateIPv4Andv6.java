@@ -118,7 +118,7 @@ public class ValidateIPv4Andv6 {
 //            }
 //        }
 
-        String[] tokens = ip.split("\\:");
+        String[] tokens = ip.split(":");
         if(tokens.length != EXACT_NUMBER_OF_TOKENS
         //|| separatorCount + 1 < tokens.length
         ){

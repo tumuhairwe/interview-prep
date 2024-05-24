@@ -14,7 +14,7 @@ public class ReorganizeWords {
     //1. Iterate: TC = O(n) ... bcoz we have to iterate over the whole string to get each character (N == length of string)
     //2. push: O(log c) where c == num_characters in string
     // 1 + 2 = O(n Log_c)
-    // but ince upper-bound of c = 26=SIZE_OF_ALPHABET == constact
+    // but since upper-bound of c = 26=SIZE_OF_ALPHABET == contact
     // we can summarize that overall TC = O(n)
     // SC
     // HashMap is responsible for storing solution of charFrequency
@@ -41,9 +41,9 @@ public class ReorganizeWords {
         StringBuilder sb = new StringBuilder(text.length());
 
         while (!maxCharFreqPQ.isEmpty() || previous != null){
-            if(previous != null && maxCharFreqPQ.isEmpty()){
-                return "";
-            }
+//            if(previous != null && maxCharFreqPQ.isEmpty()){
+//                return "";
+//            }
 
             Map.Entry<Character, Integer> currentEntry = maxCharFreqPQ.poll();
             Integer count = currentEntry.getValue() - 1;

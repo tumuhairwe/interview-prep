@@ -74,7 +74,7 @@ public class CheapestFlights {
     }
 
     /**
-     * BFS = Find shortest path for unweighted graphs
+     * BFS = Find shortest path for weighted graphs
      */
     public int findCheapestPrice_BFS(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
         // 0. create adjacency list
@@ -83,7 +83,7 @@ public class CheapestFlights {
         for (int[] flight  : flightSchedule) {
             Integer departingCity = flight[0];
             Integer destinationCity = flight[1];
-            Integer priceToDestination = flight[2];
+            Integer priceToDestination = flight[2]; // weight
 
             // 1a) pre-fill the whole adj list
             if (!city_to_destination_adjList.containsKey(departingCity)) {
@@ -168,7 +168,7 @@ public class CheapestFlights {
         // use Queue to track the intermediate airports
         // build a queue to store the Nodes/Cities,
         Queue<Node> queue = new PriorityQueue<>(reverseComp);   // sorted by HIGHEST distance
-        Queue<Node> queue_minHeap = new PriorityQueue<>(comp);          // sorted by LOWEST distance
+        Queue<Node> queue_maxHeap = new PriorityQueue<>(comp);          // sorted by LOWEST distance
 
         // 2a) Seed PQ with route to self
         queue.add(new Node(source, 0));

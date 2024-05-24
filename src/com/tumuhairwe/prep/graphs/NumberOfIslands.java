@@ -58,7 +58,7 @@ public class NumberOfIslands {
             for (int col = 0; col < grid[0].length; col++) {
 
                 Cell cell = new Cell(row, col);
-                if(grid[row][col] == LAND && visited.contains(cell)){
+                if(grid[row][col] == LAND && !visited.contains(cell)){
                     numIslandsIterative(grid, row, col);
                     numIslands++;
                 }
