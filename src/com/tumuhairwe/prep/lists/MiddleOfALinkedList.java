@@ -14,7 +14,11 @@ package com.tumuhairwe.prep.lists;
  */
 public class MIddleOfALinkedList {
 
-    public ListNode middleNode(ListNode head) {
+    public static void main(String[] args) {
+        int[] arr = new int[]{1,2,3,4,5};
+        int[] arr2 = new int[]{1,2,3,4,5,6};
+    }
+    public static ListNode middleNode(ListNode head) {
         ListNode slow_pointer = head;
         ListNode fast_pointer = head;
 

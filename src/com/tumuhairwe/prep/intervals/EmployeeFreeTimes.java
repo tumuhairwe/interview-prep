@@ -34,18 +34,24 @@ public class EmployeeFreeTimes {
                 .sorted()
                 .collect(Collectors.toList());
 
+        // 0. flat-map them into list of Comparable objectss
         List<Interval> allSchedulesSorted = schedule
                 .stream()
                 .flatMap(s -> s.stream())
                 .sorted()
                 .collect(Collectors.toList());
 
-        Interval previousInterval = allSchedulesSorted.get(0);
+        // 1. loop thru list (starting from index 1)
+        Interval previousInterval = allSchedulesSorted.get(0);  // seed _prev as index=0
 
         for (int i=1; i<allSchedulesSorted.size(); i++) {
+
+            // 2. calculate free period
             Interval currentInterval = allSchedulesSorted.get(i);
             int freePeriod = previousInterval.end - currentInterval.start;
             if(freePeriod > 0 ){
+
+                // 4. if there is a free period, add it to result-list (using previous.end and current.start
                 freeTime.add(new Interval(previousInterval.end, currentInterval.start));
             }
 

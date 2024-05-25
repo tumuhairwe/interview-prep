@@ -12,6 +12,13 @@ public class FindMaxSubArray {
 
     // Runtime complexity: O(n)
     // Space complexity: O(1)
+
+    /**
+     * Loop over the array
+     * - If currentMax is less than 0 (from previous iteration), reset to 0
+     * - cumulatively add to currentMax
+     * - Udate global max is currentMax is larger
+     */
     public static int findMaxSubArray(int[] arr){
         if(arr.length < 1){
             return 0;
@@ -19,18 +26,13 @@ public class FindMaxSubArray {
 
         int currentMax = arr[0];
         int globalMax = arr[0];
-        int arrayLength = arr.length;
-        int beginningPointer = 0;
-        int endingPointer = beginningPointer + 1;
 
-        for (int i=0; i<arrayLength; i++){
-            if(currentMax < 0){
+        for (int i=0; i<arr.length; i++){
+            if(currentMax < 0){ // reset
                 currentMax = arr[i];
-                beginningPointer = i;
             }
             else {
                 currentMax += arr[i];
-                endingPointer = i;
             }
 
             if(globalMax < currentMax){
@@ -39,6 +41,28 @@ public class FindMaxSubArray {
         }
 
         return globalMax;
+    }
+
+    /**
+     * Solution summary
+     * - Iterate over the array and
+     *      - calculate currentSum
+     *      - update maxSum if the current Sum is large
+     */
+    public int findMaxSubArray_alternateImpl(int[] nums) {
+        if(nums.length == 1){
+            return nums[0];
+        }
+
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+
+        for(int i=1; i<nums.length; i++){
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        return maxSum;
     }
     // integer returned must be the maximum sub-array of arr
     public static int maxContiguousSubArray(int[] arr){

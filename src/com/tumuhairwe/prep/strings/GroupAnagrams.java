@@ -4,9 +4,10 @@ import java.util.*;
 
 /**
  * Group Anagrams (LeetCode 49) medium
- * Given an array of string, group the anagrams together. You can return them in any order.
+ * Given an array of strings, group the anagrams together. You can return them in any order.
  *
- * An anagram is a word or phrase formed by re-arrangin the letter of a different word or phrase, typically using all the orignnal
+ * An anagram is a word or phrase formed by re-arranging the letter of a different word or phrase,
+ * typically using all the original
  * letters exactly once.
  *
  * ref: https://leetcode.com/problems/group-anagrams/

@@ -58,7 +58,7 @@ public class InsertInterval {
 
         //1. binary search for the position to insert the interval
         while(left <= right){
-            int mid = (left + right) / 2;
+            int mid = left + (right - left) / 2;
             if(intervals[mid][0] < target_to_insert){
                 left = mid + 1;
             }

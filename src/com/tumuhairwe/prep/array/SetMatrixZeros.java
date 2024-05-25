@@ -40,6 +40,7 @@ public class SetMatrixZeros {
         Set<Integer> rowsToFill = new HashSet<>();
         int[][] copyOfMatrix = Arrays.copyOf(matrix, matrix.length );
 
+        // 1. populate Set of columns to fill and rows to fill
         for(int i=0; i<matrix.length; i++){
             for(int j=0; j<matrix.length; j++){
                 if(matrix[i][j] == 0){
