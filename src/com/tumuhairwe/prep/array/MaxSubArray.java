@@ -1,7 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 /**
- * LeetCode 53
+ * LeetCode 53 (medium)
  * Given an integer  nums,
  * find the sub-array with the largest sum and it return its sum
  *

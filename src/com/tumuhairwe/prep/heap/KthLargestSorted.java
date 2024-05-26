@@ -5,9 +5,12 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * LeetCode 703 easy
- *
+ * LeetCode 703 easy*
  * ref: https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
+ *
+ * LeetCode 215 (medium)
+ * ref: https://leetcode.com/problems/kth-largest-element-in-an-array/
+ *
  * ref: https://www.youtube.com/watch?v=m6zDTNzC1bA&list=PLB7ZlVMcmjIAMEeI0p4BAeCeZvu2xxdVu
  */
 // TC = O (k + (n - k) x log_k)  -> O(n -k) x log_k)

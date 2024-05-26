@@ -23,11 +23,11 @@ public class LongestPalindrome {
     }
 
     public static int longestPalindrome(String s){
-        // char_counts = array to keep track of the number of occurrences of a character
+        // 0. create char_counts[] to keep track of the number of occurrences of a character
         int[] char_counts  = new int[128];
 
         for (char c : s.toCharArray()){
-            // c = converted to ASCII index & used as the index of hte array
+            //1. convert to ASCII index & used as the index of hte array
             char_counts[c]++;   // counts the number of occurrences in each character
         }
 
