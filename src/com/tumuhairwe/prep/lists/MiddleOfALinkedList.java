@@ -12,7 +12,7 @@ package com.tumuhairwe.prep.lists;
  * - Exit the iteration when fast_pointer.next == null
  * - Return slow_pointer
  */
-public class MIddleOfALinkedList {
+public class MiddleOfALinkedList {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,3,4,5};
