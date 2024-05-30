@@ -38,7 +38,7 @@ public class GroupAnagrams {
         // 1. for each string, create List of anagrams
         for(String s : strs){
 
-            // 2 - construct count array
+            // 2 - construct count array & convert String to #ascii-form
             int[] count = new int[26];
 
             int indexOfLetterA = 'a';

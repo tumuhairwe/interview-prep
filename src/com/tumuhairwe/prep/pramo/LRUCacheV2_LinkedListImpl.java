@@ -29,7 +29,9 @@ import java.util.Map;
  *      - re-size to evict entities that exceedd capacity by
  *          - iteratively call remove()
  *          - removing the key from the map
+ *
  * ref: https://leetcode.com/problems/lru-cache/description/
+ * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0146-lru-cache.java
  */
 public class LRUCacheV2_LinkedListImpl {
     int cacheCapacity;
@@ -70,7 +72,7 @@ public class LRUCacheV2_LinkedListImpl {
      * - adding to tail = O(1)
      */
     public void put(Integer key, Integer value){
-        // 0. if exits, remove
+        // 0. if exists, remove
         if(this.cacheMap.containsKey(key)){
             LinkedListNode oldNode = cacheMap.get(key);
             remove(oldNode);

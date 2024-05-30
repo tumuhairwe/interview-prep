@@ -5,8 +5,10 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
+ * LeetCode 64 (Medium)
+ *
  * Given a m x n grid, filled with non-negative numbers, find a path from the top left
- * to the bottom right, which mimimizes the sum of all numbers along its path
+ * to the bottom right, which minimizes the sum of all numbers along its path
  *
  * Example; [[1,3,1],[1,5,1],[4,2,1]]
  * output: 7
@@ -70,7 +72,7 @@ public class MinimumPathSum {
             Node node = pq.poll();
 
             int weight = minCost + node.weight;
-            //minCost = Math.min(minCost, weight);
+            minCost = Math.min(minCost, weight);    // unlikely to change since grid has non-negative numbers i.e. all edges have a weight
 
             // 2.get next node/neighbor to add to pq
             for(int row = node.row + 1; row<grid.length; row++){

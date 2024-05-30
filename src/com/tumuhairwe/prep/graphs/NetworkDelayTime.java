@@ -29,12 +29,14 @@ import java.util.*;
 class NetworkDelayTime {
     public static int networkDelayTime(int[][] times, int n, int k) {
         // 0. create adjacency list Map<key=nodeId, value=L[destination, time]>
+        Map<Integer, Integer> m = new HashMap<>();
+        m.values().stream().sorted().findFirst();
         Map<Integer, List<int[]>> adjacency = new HashMap<>();
         for (int[] time : times) {
             int source = time[0];
-            int destination = time[1];
+            int targetNodeId = time[1];
             int travelTime = time[2];
-            adjacency.computeIfAbsent(source, key -> new ArrayList<>()).add(new int[]{destination, travelTime});
+            adjacency.computeIfAbsent(source, key -> new ArrayList<>()).add(new int[]{travelTime, targetNodeId});
         }
 
         // 1. create PQ to sort by time (index=0) == entry = {0=time, 1=nodeId}
@@ -66,13 +68,13 @@ class NetworkDelayTime {
 
             // 8. DFS on each neighbpr (add to PQ (0=newTime = (time-from-THIS-node + time-to-get-to-neighbor, nodeId=neighborId) )
             for (int[] neighbor : neighbors) {
-                int neighborNode = neighbor[0];
-                int neighborTime = neighbor[1];
-                if (!visited.contains(neighborNode)) {
+                int neighborTime = neighbor[0];
+                int neighborNodeId = neighbor[1];
+                if (!visited.contains(neighborNodeId)) {
                     int newTime = time + neighborTime;
 
                     // 9. add to pq
-                    pq.offer(new int[]{newTime, neighborNode});
+                    pq.offer(new int[]{newTime, neighborNodeId});
                 }
             }
         }

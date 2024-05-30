@@ -5,11 +5,11 @@ import java.util.Map;
 
 /**
  * LeetCode 387
- * First Unique Character (this soluion can be adapter tp 387 by
+ * First Unique Character (this solution can be adapted by
  * changing the frequencyMap to Map<Character, Integer>
  *
  * Solution Summary
- * - To calculate the rist First non-repeating integer
+ * - To calculate the first non-repeating integer
  * Algo: use Map<Integer, Integer> -> Integer , countOfOccurrences
  *  a) loop thru array & initialize count to Zero
  *  b) loop thru array and increment to existingCount+1
