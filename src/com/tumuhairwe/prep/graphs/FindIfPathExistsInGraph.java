@@ -27,6 +27,20 @@ public class FindIfPathExistsInGraph {
         pathExists = validPath(6, edges,0, 5);
         System.out.println("Path " + (pathExists ? "exists": "does not exist") + " from " + 0 + " to " + 5);
     }
+
+    /**
+     * Solution Summary
+     * - Create Adjacency list out of 2D array of edges
+     *      - adjList is bidirectional (since nodes are unweighted)
+     *      - src -> [dest]
+     *      - dest -> [source]
+     * - do DFS on edges (to get a flattened List<> of all the nodes that originate from source
+     *      -> src -> neighbor_1
+     *      - neighbor_1 -> neighbor_2
+     *      - neighbor_2 -> neighbor_n
+     * - Track all nodes into a visited set
+     * - Return whether or not vistedSetOfNodes.contains(destination)
+     */
     public static boolean validPath(int n, int[][] edges, int source, int destination) {
         //0. base case
         if(edges.length == 0 && destination == 0){

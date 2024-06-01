@@ -48,19 +48,23 @@ public class MergePackages {
     * SC: O(n)
   */
     static int[] getIndicesOfItemWeights(int[] arr, int limit) {
-
         // create vars
         Map<Integer, Integer> map = new HashMap<>(); // key = diff, value = index
 
-        int[] results = new int[2];
-        for(int i=0; i< arr.length; i++){
+        //0. sort array
+        Arrays.sort(arr);
+
+        // 1. iterate thru the array and populate Map (key=diff and value == index
+        for(int i=0; i< arr.length; i++) {
             int diff = limit - arr[i];
 
             // arr = [4, 6, 4,10, 15, 16],  lim = 21 === [{17 : 0} {15 : 1}, 11 : 2, 6 : 3, 5 : 4 ]
-            if(!map.containsKey(diff)){
-                map.put(arr[i], i);   // { key: 17, value = 0}, {15, 1}
-                continue;
+            if (map.containsKey(diff)) {
+                //map.put(arr[i], i);   // { key: 17, value = 0}, {15, 1}
+                return new int[]{i, map.get(diff)};
             }
+            map.put(arr[i],i);
+        }
 
             /**
              * static int[] getIndicesOfItemWeights(int[] arr, int limit) {
@@ -77,24 +81,6 @@ public class MergePackages {
              *     return new int[]{};
              *   }
              */
-
-            Map.Entry<Integer, Integer> entry = map.entrySet()
-                    .stream()
-                    .filter(e -> e.getKey() == diff)
-                    .findFirst()
-                    .get();
-
-            if(i < entry.getValue() ){
-                results[0] = i;
-                results[1] = entry.getValue() ;
-                return results;
-            }
-            else{
-                results[0] = entry.getValue();
-                results[1] = i;
-                return results;
-            }
-        }
 
         int[] a = new int[0];
         return a;

@@ -12,6 +12,7 @@ import java.util.Arrays;
  *
  * LeetCode 153 Medium
  * ref: https://www.youtube.com/watch?v=IzHR_U8Ly6c
+ * ref: https://www.youtube.com/watch?v=H2U24n4bcQQ
  * ref: https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
  */
 public class MinimumInRotatedArray {
@@ -30,6 +31,8 @@ public class MinimumInRotatedArray {
         System.out.println("Given " + Arrays.toString(arr) + " result=" + result);
     }
 
+    // SC : O91
+    // TC : O(log n)
     public static int findMin(int[] nums) {
         if(nums.length == 0){
             return -1;
@@ -42,7 +45,8 @@ public class MinimumInRotatedArray {
         int right = nums.length -1;
 
         while (left < right){
-            int middle = left + (right - left)/2;
+            int middle = (left + right)/2;
+            //int midpoint = left + (right - left) /2;
 //            if(nums[middle] == target){
 //                return middle
 //            }

@@ -1,7 +1,7 @@
 package com.tumuhairwe.prep.binary;
 
 /**
- * Leetcode 236
+ * Leetcode 236 (medium)
  * Given a binary tree, find the lowest commons ancestor of 2 given nodes in the tree
  *
  * Solution Summary

@@ -31,6 +31,7 @@ import java.util.*;
  *
  *  ref: https://dzone.com/articles/from-dijkstra-to-a-star-a
  *  ref: https://www.baeldung.com/cs/graph-algorithms-bfs-dijkstra
+ *  ref: https://neetcode.io/courses/advanced-algorithms/14
  */
 public class Dijkstra {
 
@@ -52,7 +53,7 @@ public class Dijkstra {
             adjacencyList.put(nodeId, new ArrayList<>());
         }
 
-        // 1. put all edges in adjList
+        // 1. populate adjList with edges
         for (int[] edge : edges) {
             // s = src, d = dist, w = weight
             int source = edge[0], neighborNodeId = edge[1], weight = edge[2];
@@ -68,6 +69,7 @@ public class Dijkstra {
         Queue<int[]> minHeap = new PriorityQueue<>(p);
         minHeap.add(new int[]{0, src}); // weight/distance to "myself" = 0
 
+        // minHeap.peek() and minHeap.poll() will take the SMALLEST element on the heap i.e. lowest cost
         // 3. iterate over min heap and poll() the top
         while (!minHeap.isEmpty()){
             int[] curr = minHeap.poll();    // distance from a minHeap/pq = O(log V) -- where V is the number of vertices in the graph

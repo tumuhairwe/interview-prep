@@ -1,18 +1,30 @@
 package com.tumuhairwe.prep.array;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 /**
- * Givena 2D array .. where each index == roomNumber and value == roomKey,
+ * LeetCode 841 (medium)
+ * Given 2D array .. where each index == roomNumber and value == roomKey,
  *
- * Determine if ew can visit every room of if we have a room without a key
+ * Determine if we can visit every room of if we have a room without a key
  * ref: https://leetcode.com/problems/keys-and-rooms/description/
+ * ref: https://www.youtube.com/watch?v=Rz_-Kx0LN-E
  */
 public class KeysAndRooms {
+
+    /**
+     * Solution Summary
+     * - Create an array of rooms.size()
+     * - Arrays.fill(array, false)
+     * - Keep track of keys
+     * - put key-0 onto the stack
+     * - loop by iterating over the stack ... pop the current key
+     * - Use key poped() from stack to rooms.get(key) ...for each key, if unseen, mak at seen
+     */
     public boolean canVisitAllRooms(List<List<Integer>> rooms){
         boolean[] seen = new boolean[rooms.size()];
-
         seen[0] = true; // we can automatically visit room 0 (fist room)
 
         Stack<Integer> keys = new Stack<>();
@@ -32,5 +44,41 @@ public class KeysAndRooms {
         }
 
         return true;
+    }
+
+    boolean[] roomState;
+    // TC: O(R + K) where R = number-of-rooms and K = number-of-keys
+    // SC: O(n) where n == number of rooms
+    public boolean canVisitAllRooms_dfs(List<List<Integer>> rooms) {
+        // 0. create boolean array to track roomState
+        roomState = new boolean[rooms.size()];
+        Arrays.fill(roomState, false);
+
+        // 1. mark first toom as visited
+        roomState[0] = true;
+
+        // 2. call DFS on all rooms
+        dfs(rooms, 0);
+
+        // 3.if at least 1 room is unVisited == return false
+        for(boolean state : roomState){
+            if(!state){
+                return false;
+            }
+        }
+
+        // 4. if we get here, all rooms have been visited
+        return true;
+    }
+
+    public void dfs(List<List<Integer>> allRooms, int roomNumber){
+
+        for(Integer key : allRooms.get(roomNumber)){
+            if(roomState[key] == false){
+                roomState[key] = true;
+
+                dfs(allRooms, key);
+            }
+        }
     }
 }
