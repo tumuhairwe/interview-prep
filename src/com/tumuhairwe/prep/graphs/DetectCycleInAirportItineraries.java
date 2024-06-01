@@ -91,10 +91,6 @@ public class DetectCycleInAirportItineraries {
         if(visited.contains(destination)){
             return Integer.MIN_VALUE;   // has cycle
         }
-//        else for (String key : adjList_of_airports.get(source)){
-//            visited.push(key);
-//            return 1 + getDistance(key, destination, adjList_of_airports);
-//        }
 
         for (String key : adjList_of_airports.keySet()){
             List<String> destinations = adjList_of_airports.get(source);
