@@ -24,21 +24,36 @@ public class FloodFill {
         floodFill(grid, 1, 1, 2);
         Arrays.stream(grid).forEach(a -> System.out.println(Arrays.toString(a)));
     }
+
+    /**
+     * Solution Summary
+     * - We'll used DFS .. so create visited 2D array to mark all cells that visited
+     * - Create Queue and see it with starting cell (row, col)
+     * - while !que.isEmpty() .. poll() current cell , mark as visited ... and 4-directionally mark neighboring cell with newColor ... a
+     * - Repeat until queue is emtpy
+     * - return upated 2-D array
+     */
     public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
-        int[] directions = new int[]{0, 1, 0, -1, 0};
+        final int[] directions = new int[]{0, 1, 0, -1, 0};
         int rowLength = image.length;
         int colLength = image[0].length;
         int originalValue = image[sr][sc];
         image[sr][sc] = newColor;
 
+        // 0. create visited 2D array to track cells that are visted
         boolean[][] visited = new boolean[rowLength][colLength];
 
+        // 1. gonna use DFS so create queue and seed with starting cell
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(new int[]{sr, sc});
 
+        // 2. while queue is not empty pull cell and process it
         while (!queue.isEmpty()) {
+            // 3. poll current cell and mark as visited
             int[] curr = queue.poll();
             visited[curr[0]][curr[1]] = true;
+
+            // 4. 4-directionally mark neighboring cell with newColor
             for (int i = 0; i < directions.length - 1; i++) {
                 int nextRow = curr[0] + directions[i];
                 int nextCol = curr[1] + directions[i + 1];
@@ -50,6 +65,8 @@ public class FloodFill {
                     continue;
                 }
                 image[nextRow][nextCol] = newColor;
+
+                //5. add cell to queue
                 queue.offer(new int[]{nextRow, nextCol});
             }
         }
