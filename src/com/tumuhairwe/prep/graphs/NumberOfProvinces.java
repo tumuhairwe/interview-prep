@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * LeetCode 547 (medium)
+ * ref https://leetcode.com/problems/number-of-provinces/description/
+ *
  * Given n cities in a region (2D array of edges)
  *
  * Some of them connected i.e. edges[i][j] == 1 means the i-th city and the j-th city are cdirctectly

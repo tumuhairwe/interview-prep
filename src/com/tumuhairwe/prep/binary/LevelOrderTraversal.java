@@ -26,6 +26,7 @@ import java.util.Queue;
  */
 public class LevelOrderTraversal {
 
+    // level-order: visit nodes level by level and left-to-right at the same level
     public List<List<Integer>> levelOrder(TreeNode<Integer> root){
         List<List<Integer>> result = new ArrayList<>();
 
