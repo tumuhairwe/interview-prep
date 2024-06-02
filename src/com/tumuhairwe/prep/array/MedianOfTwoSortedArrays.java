@@ -41,6 +41,8 @@ public class MedianOfTwoSortedArrays {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         Comparator<Integer> comp = Comparator.comparingInt(a -> a);
         this.maxHeap = new PriorityQueue<>(comp);
+        Comparator<Integer> c = (a, b) -> b - a;
+        Comparator<Integer> cc = (a, b) -> b - a;
         this.minHeap = new PriorityQueue<>((a, b) -> b - a);    // same as comp.reversed()
 
         for(int num : nums1){

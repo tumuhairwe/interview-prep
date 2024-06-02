@@ -32,7 +32,8 @@ public class SmallestElementInBST {
     public int kthSmallest_pq_imple(TreeNode<Integer> root, int k) {
         List<Integer> list = inOrderTraversal(root);
         Comparator<Integer> comp = Comparator.comparingInt(a -> a);
-        PriorityQueue<Integer> pq = new PriorityQueue<>(comp.reversed());
+        PriorityQueue<Integer> pq = new PriorityQueue<>(comp);  // minHeap will return the SMALLEST number in the PQ
+        // co,p.reversed() will return the LARGEST number
         pq.addAll(list);
 
         while (pq.size() > k){

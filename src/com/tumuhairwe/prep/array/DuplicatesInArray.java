@@ -35,7 +35,7 @@ public class DuplicatesInArray {
      * TC: O(n)
      * SC: O(n)
      *
-     * Compile Map of frequency of every number is nums
+     * Compile Map of frequency of every number is nums (key=number, value=frequency)
      * return only those have a frequency of more than 1
      */
     public List<Integer> findDuplicates_byCharFrequency(int[] nums) {
@@ -66,6 +66,8 @@ public class DuplicatesInArray {
             int index = Math.abs(nums[i]) - 1;  // goal is to a) get the absolute/positive value and b) -1 to get the index
             if (nums[index] < 0){       // if the value is already negative
                 result.add(index + 1);
+            }
+            else {
                 nums[index] = -nums[index];     // update it to negative
             }
         }

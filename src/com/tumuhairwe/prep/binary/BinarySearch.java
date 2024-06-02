@@ -171,33 +171,7 @@ public class BinarySearch {
         return -1;
     }
 
-    // iterative
-    // Time complexity = O(log_n)
-    // Space complexity = O (1) since no new data structure is created
-    public static int binarySearchRotated(List<Integer> nums, int target) {
-        int start = 0;
-        int end = nums.size() - 1;
 
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            if (nums.get(mid) == target)
-                return mid;
-            if (nums.get(start) <= nums.get(mid)) {
-                if (nums.get(start) <= target && target < nums.get(mid)) {
-                    end = mid - 1;
-                } else
-                    start = mid + 1;
-            } else {
-                if (nums.get(mid) < target && target <= nums.get(end))
-                    start = mid + 1;
-                else
-                    end = mid - 1;
-            }
-            //List.of(nums)
-            //List<Integer> xx = Arrays.asList(new int[]{9});
-        }
-        return -1;
-    }
 
     // recursive
     // Time complexity = O(log_n)

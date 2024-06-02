@@ -52,6 +52,39 @@ public class TaskScheduler {
         return idle_slots > 0 ? idle_slots + tasks.length : tasks.length;
     }
 
+    public static int leastInterval_map(char[] tasks, int coolDownInterval){
+        // create charFrequency map of tasks
+        Map<Character, Integer> map = new HashMap<>();
+        for(char c : tasks){
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        // create pq (that will put max number at top of heap)
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b- a);
+        maxHeap.addAll(map.values());   // put all values/tasks from map into heap
+
+        // max heap is empty == we're done processing the tasks
+        int cycles = 0;
+        while (!maxHeap.isEmpty()){
+
+            List<Integer> registryOfCurrentlyRunningProcesses = new ArrayList<>();
+            for (int i = 0; i < coolDownInterval + 1; i++) {
+                if(!maxHeap.isEmpty()){
+                    registryOfCurrentlyRunningProcesses.add(maxHeap.remove());
+                }
+            }
+
+            for (int i : registryOfCurrentlyRunningProcesses){
+                if(--i > 0){
+                    maxHeap.add(i);
+                }
+            }
+
+            cycles += maxHeap.isEmpty() ? registryOfCurrentlyRunningProcesses.size() : coolDownInterval + 1;
+        }
+
+        return cycles;
+    }
 
     class Pair<K, V>{
         K key;

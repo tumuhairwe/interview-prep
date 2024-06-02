@@ -30,10 +30,10 @@ public class NetworkDelay {
 
     static class Node{
         Integer destination;
-        int distance;
+        int timeTaken;
         public Node (int d, int cost){
             this.destination = d;
-            this.distance = cost;   // aka distance
+            this.timeTaken = cost;   // aka distance
         }
     }
     public static int networkDelayTime(int[][] times, int numberOfNodes, int startingNode){
@@ -43,7 +43,9 @@ public class NetworkDelay {
         Map<Integer, Set<Node>> adjacencyList = new HashMap<>();
         for (int i=0; i< times.length; i++){
             int source = times[i][0];
-            Node value = new Node(times[i][1], times[i][2]);
+            int targetNode = times[i][1];
+            int timeTaken = times[i][2];
+            Node value = new Node(targetNode,timeTaken);
 
             adjacencyList.putIfAbsent(source, new HashSet<>());
             adjacencyList.get(source).add(value);
@@ -51,7 +53,7 @@ public class NetworkDelay {
 
         // 1. create PQ to track the closest distance from k
         // PriorityQueue<Node> pq = new PriorityQueue<>((a, b) -> a.distance - b.distance);
-        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.distance));
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.timeTaken));
         pq.offer(new Node(startingNode, 0));    // distance to self == 0
 
 
@@ -74,7 +76,7 @@ public class NetworkDelay {
 
             Set<Node> neighbors = adjacencyList.getOrDefault(currentNode.destination, new HashSet<>());
             for (Node neighbor : neighbors){
-                int newDistance = distance[currentNode.destination] + neighbor.distance;
+                int newDistance = distance[currentNode.destination] + neighbor.timeTaken;
 
                 // 4. update distance if larger
               distance[neighbor.destination] = Math.min(distance[neighbor.destination], newDistance);
