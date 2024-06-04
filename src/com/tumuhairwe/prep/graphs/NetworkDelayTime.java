@@ -27,67 +27,81 @@ import java.util.*;
  * SC: O(N + E) where N = number of nodes in graph and E = number of edges required by the adjacency matrix and PQ
  */
 class NetworkDelayTime {
-    public static int networkDelayTime(int[][] times, int n, int k) {
+    static class Node{
+        int nodeId;
+        int time;
+        public Node(int id, int weight){
+            this.nodeId = id;
+            this.time = weight;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "nodeId=" + nodeId +
+                    ", time=" + time +
+                    '}';
+        }
+    }
+    public static int networkDelayTime(int[][] times, int numberOfNodes, int k) {
         // 0. create adjacency list Map<key=nodeId, value=L[destination, time]>
-        Map<Integer, Integer> m = new HashMap<>();
-        m.values().stream().sorted().findFirst();
-        Map<Integer, List<int[]>> adjacency = new HashMap<>();
+        Map<Integer, Set<Node>> adjList = new HashMap<>();
         for (int[] time : times) {
             int source = time[0];
-            int targetNodeId = time[1];
+            int targetNode = time[1];
             int travelTime = time[2];
-            adjacency.computeIfAbsent(source, key -> new ArrayList<>()).add(new int[]{travelTime, targetNodeId});
+
+            Set<Node> existingNodes = adjList.getOrDefault(source, new HashSet<>());
+            Node node = new Node(targetNode, travelTime);
+            existingNodes.add(node);
+            adjList.put(source, existingNodes);
         }
 
         // 1. create PQ to sort by time (index=0) == entry = {0=time, 1=nodeId}
-        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.time));
 
         // 2. see pq with self (0=time, 1=nodeId)
-        pq.offer(new int[]{0, k});
+        pq.offer(new Node(k, 0));
         Set<Integer> visited = new HashSet<>();
-        int delays = 0;
+        int minimumTimeTaken = 0;
 
         while (!pq.isEmpty()) {
             // 3. pull top of minHeap
-            int[] current = pq.poll();
-            int time = current[0];
-            int nodeId = current[1];
+            Node currentNode = pq.poll();
 
             // 4. check if unvisited
-            if (visited.contains(nodeId))
+            if (visited.contains(currentNode.nodeId))
                 continue;
 
             // 5. add to visited
-            visited.add(nodeId);
+            visited.add(currentNode.nodeId);
 
             // 6. update delays/time-taken
-            delays = Math.min(delays, time);
+            minimumTimeTaken = Math.max(minimumTimeTaken, currentNode.time);
 
             // 7. pull neighbors from adjaceny List
-            List<int[]> neighbors = adjacency.getOrDefault(nodeId, new ArrayList<>());
+            Set<Node> neighbors = adjList.getOrDefault(currentNode.nodeId, new HashSet<>());
 
             // 8. DFS on each neighbpr (add to PQ (0=newTime = (time-from-THIS-node + time-to-get-to-neighbor, nodeId=neighborId) )
-            for (int[] neighbor : neighbors) {
-                int neighborTime = neighbor[0];
-                int neighborNodeId = neighbor[1];
-                if (!visited.contains(neighborNodeId)) {
-                    int newTime = time + neighborTime;
+            for (Node neighbor : neighbors) {
+                if (!visited.contains(neighbor.nodeId)) {
+                    int newTime = currentNode.time + neighbor.time;
 
                     // 9. add to pq
-                    pq.offer(new int[]{newTime, neighborNodeId});
+                    pq.offer(new Node(neighbor.nodeId, newTime));
                 }
             }
         }
 
-        if (visited.size() == n)
-            return delays;
+        if (visited.size() == numberOfNodes)
+            return minimumTimeTaken;
 
         return -1;
     }
 
     public static void main(String[] args) {
         int[][][] times = {
-            { {2, 1, 1}, {3, 2, 1}, {3, 4, 2} },
+            { {2, 1, 1}, {2, 3, 1}, {3, 4, 1} },
             { {2, 1, 1}, {1, 3, 1}, {3, 4, 2}, {5, 4, 2} },
             { {1, 2, 1}, {2, 3, 1}, {3, 4, 1} },
             { {1, 2, 1}, {2, 3, 1}, {3, 5, 2} },
@@ -95,7 +109,7 @@ class NetworkDelayTime {
         };
 
         int[] n = {4, 5, 4, 5, 2};
-        int[] k = {3, 1, 1, 1, 2};
+        int[] k = {2, 1, 2, 1, 2};
 
         for (int i = 0; i < times.length; i++) {
             System.out.println((i + 1) + ".\t times = " + Arrays.deepToString(times[i]));

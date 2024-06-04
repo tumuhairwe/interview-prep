@@ -43,11 +43,10 @@ public class ValidGraphTree {
         }
 
         // 3. perform dfs
-
-        return visited.size() == n && dfs(edges[0][0], -1, visited);
+        return visited.size() == n && depthFirstSearch(edges[0][0], -1, visited);
     }
 
-    boolean dfs(Integer nodeId, Integer previous, Set<Integer> visited){
+    boolean depthFirstSearch(Integer nodeId, Integer previous, Set<Integer> visited){
         // 0. check if visited
         if(visited.contains(nodeId)){
             return false;
@@ -60,7 +59,7 @@ public class ValidGraphTree {
             if(neighbor == previous){
                 continue;
             }
-            if(!dfs(neighbor, nodeId, visited)){
+            if(!depthFirstSearch(neighbor, nodeId, visited)){
                 return false;
             }
         }
