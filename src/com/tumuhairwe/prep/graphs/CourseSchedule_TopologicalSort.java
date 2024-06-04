@@ -30,68 +30,98 @@ public class CourseSchedule_TopologicalSort {
     public static void main(String[] args) {
         int numCourses = 2;
         int[][] prereqs = new int[][]{{1,0}};
-        int[] result = findOrder(numCourses, prereqs);
+        int[] result = new CourseSchedule_TopologicalSort().findOrder(numCourses, prereqs);
         System.out.println("Given that there are " + numCourses + " to take. Correct order is " + Arrays.toString(result));
 
         numCourses = 4;
         prereqs = new int[][]{{1,0}, {2, 0}, {3, 1}, {3, 2}};
-        result = findOrder(numCourses, prereqs);
+        result = new CourseSchedule_TopologicalSort().findOrder(numCourses, prereqs);
         System.out.println("Given that there are " + numCourses + " to take. Correct order is " + Arrays.toString(result));
 
     }
-    public static int[] findOrder(int numCourses, int[][] prerequsites){
-        // 0. instantiate vars: adjacency-list, in-degree and topological order arrays
-        Map<Integer, List<Integer>> adjList = new HashMap<>();
-        int[] in_degree = new int[numCourses];
-        int[] topologicalOrder = new int[numCourses];
+    // 0. init constants
+    static final int UNVISITED_STATE = 0;
+    static final int VISITING_STATE = 1;
+    static final int VISITED_STATE = 2;
 
-        // `1. create adjacency list while populating in-degree array
-        for (int i = 0; i < prerequsites.length; i++) {
-            int postReq = prerequsites[i][0];
-            int preReq = prerequsites[i][1];
+    // 1. initialize adj list and state + result vars based on size of numCourses
+    Map<Integer, List<Integer>> adjList = new HashMap<>();
+    int[] state;  // tracks the state of each course (index = courseId), value = state)
+    int[] topologicalOrder; // stores valid ordering of the courses
+    int i = 0;
 
-            List<Integer> prereqList = adjList.getOrDefault(preReq, new ArrayList<>());
-            prereqList.add(postReq);
+    // combines DFS + Cycle detection
+    // TC = O(V + E) .. where v = number-of-courses, v = edges that are traversed (only once)
+    // TC = O(V + E) ... because of the representation of the adjacency list
 
-            adjList.put(preReq, prereqList);
-            in_degree[postReq] += 1;
+    /**
+     * Solution Summary
+     * - init 2 arrays to track
+     *      - state = will track the state of each course
+     *      - topologicalOrder will track the order in which the courses have to be taken
+     * - Create adjacency list of each key=course, val=list_of_prereqs
+     * - perform DFS on each course (to make sure each course can be taken) -- dfs method will return false if it can't
+     */
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        // init vars
+        state = new int[numCourses];
+        topologicalOrder = new int[numCourses];
+
+        // 1. create adjacency list
+        for(int courseId = 0; courseId < numCourses; courseId++){
+            adjList.put(courseId, new ArrayList<>());
+        }
+        for(int[] p : prerequisites){
+            int preReq = p[1];
+            int course = p[0];
+
+            adjList.get(course).add(preReq);
         }
 
-        // 2. perform topological sort (using queue)
-        // 2.0 start DFS: add all courses with no prereqs to the queue (i.e. if a course has 0 prereqs, add to queue)
-        Queue<Integer> que = new LinkedList<>();
-        for (int i = 0; i < numCourses; i++) {
-            if(in_degree[i] == 0){
-                que.add(i);
+        // 2. start DFS by initializing the Queue with courses with 0 prereqs
+        for(int i=0; i < numCourses; i++){
+            if(!dfs_hasNoCycle(i)){
+                return new int[0];  // return if there's a cycle
             }
         }
 
-        // 2.1 while the queue is not empty, remove the node/course from the queue and add it to the result (topologicalOrder array)
-        int i = 0;
-        while (!que.isEmpty()){
-            int course = que.remove();
-            topologicalOrder[i++] = course;
+        return topologicalOrder;
+    }
 
-            // 2.2 for each of each node's neighbors, decrement the in-degree count by 1
-            if(adjList.containsKey(course)){
-                for (Integer neighbor : adjList.get(course)){
-                    in_degree[neighbor]--;
+    // 3. do DFS
 
-                    // 2.3 if a neighbors in-degree becomes zero, add it to the queue (i.e. it has no unvisited prereqs)
-                    if(in_degree[neighbor] == 0){
-                        que.add(neighbor);
-                    }
-                }
+    /**
+     * Solution summary
+     * - For each course return false it has a cycle
+     * - To do that, check each course's prereqs, & iteratively call dfs_hasNoCycle()
+     * - make state[courseId] = VISITING
+     * - for each course (if state == VISITED or VISITING, return false
+     * - when done with all prereqs,
+     *      - mark course as VISITED
+     *      - add course topological_sort []
+     */
+    boolean dfs_hasNoCycle(int course){
+        // 0. check state of course
+        if(state[course] == VISITED_STATE){   // 2
+            return true;    // no cycle has been encountered
+        }
+        else if(state[course] == VISITING_STATE){ // 1
+            return false;    // we have encountered a cycle (i.e. course on path already is being visited again)
+        }
+        // state must be UNVISITED == 0;
+        state[course] = VISITING_STATE;
+
+        // 2 check outgoping edge of each vertex
+        for(Integer prereq : adjList.get(course)){
+            if(!dfs_hasNoCycle(prereq)){   // recursive call to check each child
+                return false;   // we detected a cycle
             }
         }
 
-        // 3. check for a cycle -> if a result-size/sorted or processed or visited nodes != number-of-all-courses ...
-        if(i == numCourses){
-            return topologicalOrder;
-        }
-
-        // 3a. -> there's a cycle
-        return new int[0];
+        state[course] = VISITED_STATE;    // 2
+        topologicalOrder[i] = course;
+        ++i;
+        return true;
     }
 
 //    static int[] state;

@@ -46,7 +46,7 @@ public class ValidGraphTree {
         return visited.size() == n && depthFirstSearch(edges[0][0], -1, visited);
     }
 
-    boolean depthFirstSearch(Integer nodeId, Integer previous, Set<Integer> visited){
+    boolean depthFirstSearch(Integer nodeId, Integer parent, Set<Integer> visited){
         // 0. check if visited
         if(visited.contains(nodeId)){
             return false;
@@ -56,7 +56,7 @@ public class ValidGraphTree {
         visited.add(nodeId);
 
         for(int neighbor : adjList.get(nodeId)){
-            if(neighbor == previous){
+            if(neighbor == parent){
                 continue;
             }
             if(!depthFirstSearch(neighbor, nodeId, visited)){

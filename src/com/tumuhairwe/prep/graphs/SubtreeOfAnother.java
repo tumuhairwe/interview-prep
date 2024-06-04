@@ -22,11 +22,6 @@ public class SubtreeOfAnother {
             return false;
         }
 
-        // at this point both of the trees are NOT NULL
-        if(isSameTree(root, subTree)){
-            return true;
-        }
-
         return isSameTree(root.left, subTree) || isSameTree(root.right, subTree);
     }
 
@@ -44,7 +39,7 @@ public class SubtreeOfAnother {
         return isLeftSame && isRightSame;
     }
 
-    class TreeNode<T>{
+    static class TreeNode<T>{
         T val;
         TreeNode<T> left;
         TreeNode<T> right;
