@@ -44,59 +44,64 @@ class NetworkDelayTime {
         }
     }
     public static int networkDelayTime(int[][] times, int numberOfNodes, int k) {
-        // 0. create adjacency list Map<key=nodeId, value=L[destination, time]>
+        //0. create adjacency list
         Map<Integer, Set<Node>> adjList = new HashMap<>();
-        for (int[] time : times) {
-            int source = time[0];
-            int targetNode = time[1];
-            int travelTime = time[2];
+        for(int i=0; i<times.length; i++){
+            int source = times[i][0];   // u
+            int targetNode = times[i][1];   // v
+            int timeTaken = times[i][2];    //time
 
             Set<Node> existingNodes = adjList.getOrDefault(source, new HashSet<>());
-            Node node = new Node(targetNode, travelTime);
+
+            Node node = new Node(targetNode, timeTaken);
             existingNodes.add(node);
             adjList.put(source, existingNodes);
         }
 
-        // 1. create PQ to sort by time (index=0) == entry = {0=time, 1=nodeId}
-        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.time));
+        //1 create pq
+        //Comparator comp = Comparator.comparingInt(n -> n.time);
+        PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(n -> n.time));
 
-        // 2. see pq with self (0=time, 1=nodeId)
-        pq.offer(new Node(k, 0));
+        // 1.1 seed pq
+        Node startingNode = new Node(k, 0);
+        pq.offer(startingNode);     // will sort Node by time to get to that node
+
+        // 2.1 track visited
         Set<Integer> visited = new HashSet<>();
+
+        //2.2 initialize minimumTimeTaken
         int minimumTimeTaken = 0;
 
-        while (!pq.isEmpty()) {
-            // 3. pull top of minHeap
+        // 3. loop over pq and calculate minimumTimeTaken
+        while(!pq.isEmpty()){
             Node currentNode = pq.poll();
 
-            // 4. check if unvisited
-            if (visited.contains(currentNode.nodeId))
+            // 3.1 mark as visited
+            if(visited.contains(currentNode.nodeId)){
                 continue;
-
-            // 5. add to visited
+            }
             visited.add(currentNode.nodeId);
 
-            // 6. update delays/time-taken
+            // 3.4 update time
             minimumTimeTaken = Math.max(minimumTimeTaken, currentNode.time);
 
-            // 7. pull neighbors from adjaceny List
+            // 3.2 get neighbors
             Set<Node> neighbors = adjList.getOrDefault(currentNode.nodeId, new HashSet<>());
 
-            // 8. DFS on each neighbpr (add to PQ (0=newTime = (time-from-THIS-node + time-to-get-to-neighbor, nodeId=neighborId) )
-            for (Node neighbor : neighbors) {
-                if (!visited.contains(neighbor.nodeId)) {
+            // 3.3 for each neighbor calc distance
+            for(Node neighbor : neighbors){
+                if(!visited.contains(neighbor.nodeId)){
                     int newTime = currentNode.time + neighbor.time;
-
-                    // 9. add to pq
-                    pq.offer(new Node(neighbor.nodeId, newTime));
+                    pq.add(new Node(neighbor.nodeId, newTime));
                 }
             }
         }
 
-        if (visited.size() == numberOfNodes)
+        int returnValue = -1;
+        if(numberOfNodes == visited.size()){
             return minimumTimeTaken;
-
-        return -1;
+        }
+        return returnValue;
     }
 
     public static void main(String[] args) {
