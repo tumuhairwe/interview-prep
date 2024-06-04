@@ -1,9 +1,5 @@
 package com.tumuhairwe.prep.binary;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * LeetCode 33 (medium)
  * Search in a rotated Array
@@ -14,41 +10,48 @@ import java.util.stream.Collectors;
 public class SearchRotatedArray {
     public static void main(String[] args) {
         int[] nums = new int[]{4,5,6,7,0,1,2};
-        List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        //List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
         int target = 0;
-        System.out.println("Searching a rotated array for " + target + " results (should be 4)=> " + binarySearchRotated(list, 0));
+        System.out.println("Searching a rotated array for " + target + " results (should be 4)=> " + binarySearchRotated(nums, 0));
 
         nums = new int[]{4,5,6,7,0,1,2};
-        list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+        //list = Arrays.stream(nums).boxed().collect(Collectors.toList());
         target = 0;
-        System.out.println("Searching a rotated array for " + target + " results (should be -1)=> " + binarySearchRotated(list, 3));
+        System.out.println("Searching a rotated array for " + target + " results (should be -1)=> " + binarySearchRotated(nums, 3));
     }
     // iterative
     // Time complexity = O(log_n)
     // Space complexity = O (1) since no new data structure is created
-    public static int binarySearchRotated(List<Integer> nums, int target) {
-        int start = 0;
-        int end = nums.size() - 1;
+    public static int binarySearchRotated(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
 
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
-            //int mid = (start + end) / 2;      // also good
-            if (nums.get(mid) == target)
+        while(left <= right){
+            int mid = (right + left)/2;
+
+            if(nums[mid] == target){
                 return mid;
-            else if (nums.get(start) <= nums.get(mid)) {
-                if (nums.get(start) <= target && target < nums.get(mid)) {
-                    end = mid - 1;
-                } else
-                    start = mid + 1;
-            } else {
-                if (nums.get(mid) < target && target <= nums.get(end))
-                    start = mid + 1;
-                else
-                    end = mid - 1;
             }
-            //List.of(nums)
-            //List<Integer> xx = Arrays.asList(new int[]{9});
+            // check left (sorted)
+            else if(nums[left] < nums[mid]){
+                if(target > nums[mid] || target < nums[left]){
+                    left = mid + 1;
+                }
+                else{
+                    right = mid - 1;
+                }
+            }
+            // check right (sorted)
+            else{
+                if(target < nums[mid] || target > nums[right]){
+                    right = mid - 1;
+                }
+                else{
+                    right = mid + 1;
+                }
+            }
         }
+
         return -1;
     }
 }

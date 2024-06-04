@@ -4,10 +4,18 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
+ * LeetCode 703 (easy)
  * Find the Kth Largest Value in a stream. Note that its the Kth element in sorted order
  * not the Kth distinct element
  *
- * LeetCode 703
+ * Solution Summary
+ *- - initialiaze pq (minHeap) to PQ and maxSize to capcity
+ * - iterate thru all of nums and add each num to minHeap
+ *      - as you add, if pq.size() i< capacity -> add num
+ *      - if pq.size() exceeds maxSize, evict/poll top of pq (largest element) -> then add num
+ *      - pq.peek() will always return the min element on top of queue
+ *      - to get max, use PQ with reversed() order (e.g. Collections.reverseOrder() or Comparator.reversedOrder())
+ *
  * ref: https://leetcode.com/problems/kth-largest-element-in-a-stream/description/
  * ref: https://www.youtube.com/watch?v=m6zDTNzC1bA&list=PLB7ZlVMcmjIAMEeI0p4BAeCeZvu2xxdVu
  */

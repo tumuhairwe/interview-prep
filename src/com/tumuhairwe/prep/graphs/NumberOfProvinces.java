@@ -14,7 +14,7 @@ import java.util.Set;
  *
  * Assuming transitive connection e.g. if a->b and b->c that means a is connected to c (a -> c)
  *
- * A provice is a group of directly connected cities and no other cities outside the group
+ * A province is a group of directly connected cities and no other cities outside the group
  *
  * return the total number of provinces
  *

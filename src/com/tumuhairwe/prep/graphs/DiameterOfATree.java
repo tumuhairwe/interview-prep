@@ -5,13 +5,10 @@ package com.tumuhairwe.prep.graphs;
 /**
  * LeetCode 543 (easy)
  *
- * Given the root of a binary tree, return the length of the diameter of a the
- * tree.
+ * Given the root of a binary tree, return the length of the diameter of a tree.
  * Definition:
- * Diameter: The diameter of a binary tree is the length of the longest path
- * between any 2 nodes in a tree.
- * Length: Thw length of a path between 2 nodes is represented by the number
- * of edges between them
+ *  Diameter: The diameter of a binary tree is the length of the longest path between any 2 nodes in a tree.
+ *  Length: Thw length of a path between 2 nodes is represented by the number of edges between them
  *
  * Solution Summary
  * - Account for base case (return -1 when node == null)
@@ -24,14 +21,14 @@ package com.tumuhairwe.prep.graphs;
  * ref: https://www.youtube.com/watch?v=6lJZ_xj1mEo
  */
 public class DiameterOfATree {
-    int largestDiameter = -1;
+    int treeHeight = -1;
 
     // TC: O(n) -- where n = height of tree
     // SC: O(h) -- where h == height of tree
     public int getDiameterOfBinaryTree(TreeNode<Integer> root){
         getDFS_height(root);
 
-        return largestDiameter;
+        return treeHeight;
     }
 
     int getDFS_height(TreeNode<Integer> node){
@@ -45,7 +42,7 @@ public class DiameterOfATree {
         int rightHeight = 1 + getDFS_height(node.right);
 
         // 2. update result to be max of (right + left) if larger
-        largestDiameter = Math.max(largestDiameter, leftHeight + rightHeight);
+        treeHeight = Math.max(treeHeight, leftHeight + rightHeight);
 
         return Math.max(leftHeight, rightHeight);
     }

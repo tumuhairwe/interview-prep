@@ -3,6 +3,8 @@ package com.tumuhairwe.prep.unionfind;
 import java.util.Arrays;
 
 /**
+ * LeetCode 684 redundant connect
+ *
  * - Disjoint Set:
  *      Definition: Two Sets are called "Disjoint Sets" if they don't have an element in common ancestor
  * -Union Find/Merge-Find:
@@ -39,6 +41,18 @@ public class RedundantConnections {
         System.out.println("The redundant connections are " + Arrays.toString(connections));
     }
     static int[] parent;
+
+    /**
+     * Solution Summary
+     * - Implement UnionFind
+     *      - create an int[] parent
+     *      - findParent() -> a node's parent is the value at the [x-1] position
+     *          - if its not x, recursively call find parent of parent (findParent( parent[x -1] )
+     *      - union() -> assign node_A's parent to parent[ indexOfParentOfNode_B)
+     * - loop thru the 2D array of edges
+     *      - if both nodes have different parents, union them
+     *      - if both nodes have the same parent, return that edge
+     */
     public static int[] findRedundantConnection(int[][] edges){
         // 0. initialize parent
         parent = new int[edges.length];

@@ -1,15 +1,14 @@
 package com.tumuhairwe.prep.array;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * LeetCode 73 (Medium)
- * Given an m x n integer matrix matrix, if an element is 0, set its entire row and column to 0's.
+ * Given an m x n integer matrix m, if an element is 0, set its entire row and column to 0's.
  *
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0073-set-matrix-zeroes.java
  * ref: https://leetcode.com/problems/set-matrix-zeroes/
+ * https://gist.github.com/sdpatil/686ec4308dc7814b34f711b48fac1afd
  */
 public class SetMatrixZeros {
     public static void main(String[] args) {
@@ -32,47 +31,35 @@ public class SetMatrixZeros {
     /**
      * Solution summary
      * - Read from the input ... but Make changes to the copy -- to avoid read the changed copy
-     *
-     * @param matrix
+     * - 1st 2d Loop: as you iterate, put save coordinates int 2 boolean[] (for both zeroRows and zeroCols)
+     * - 2nd sd loop: as you iterate, if rowSet.contains(row) || colSet.contains(col) ... mark cell 0
+     * - return copy_of_matrix
      */
     public static void setZeroes(int[][] matrix) {
-        Set<Integer> colsToFill = new HashSet<>();
-        Set<Integer> rowsToFill = new HashSet<>();
-        int[][] copyOfMatrix = Arrays.copyOf(matrix, matrix.length );
+        //0. declare vars
+        boolean[] zeroRows = new boolean[matrix.length];
+        boolean[] zeroCols = new boolean[matrix[0].length];
 
-        // 1. populate Set of columns to fill and rows to fill
+        Arrays.fill(zeroRows, false);
+        Arrays.fill(zeroCols, false);
+
+        //1. mark rows & cols to be zeroed out
         for(int i=0; i<matrix.length; i++){
-            for(int j=0; j<matrix.length; j++){
+            for(int j=0; j<matrix[0].length; j++){
                 if(matrix[i][j] == 0){
-                    // fill the entire row
-                    //Arrays.fill(matrix[i], 0);
-                    if(!rowsToFill.contains(i)){
-                        rowsToFill.add(i);
-                    }
-                    if(!colsToFill.contains(j)){
-                        colsToFill.add(j);
-                    }
+                    zeroRows[i] = true;
+                    zeroCols[j] = true;
                 }
             }
         }
 
-        // fill the copy
-        for(int row_index = 0; row_index < matrix.length; row_index++){
-            for(int col_index = 0; col_index < matrix[row_index].length; col_index++){
-                if(rowsToFill.contains(row_index) || colsToFill.contains(col_index)){
-                    //matrix[row_index][col_index] = 0;
-                    copyOfMatrix[row_index][col_index] = 0;
+        //2. zero out those rows & cols
+        for(int i=0; i<matrix.length; i++){
+            for(int j=0; j<matrix[0].length; j++){
+                if(zeroRows[i] == true || zeroCols[j] == true){
+                    matrix[i][j] = 0;
                 }
             }
         }
-
-        // fill the non-zero fields with 1s
-//        for (int i = 0; i < copyOfMatrix.length; i++) {
-//            for (int j = 0; j < copyOfMatrix[0].length; j++) {
-//                if(copyOfMatrix[i][j] != 0){
-//                    copyOfMatrix[i][j] = 1;
-//                }
-//            }
-//        }
     }
 }

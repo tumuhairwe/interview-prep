@@ -9,7 +9,7 @@ import java.util.Stack;
  * functions of a normal queue (push, peek, pop, and empty).
  *
  * Solution Summary
- * - Intialize 2 stacks
+ * - Initialize 2 stacks (primary & secondary)
  * - on push(int x) -> push value to the bottom of primary
  *      -> copy + paste values from primary to secondary
  *      -> push value into primary
@@ -30,6 +30,7 @@ public class QueueImplUsingStacks {
 
     // push element to end of queue
     public void push(int x){
+        // 0. copy + paste elements from primary to secondary
         while (!primary.isEmpty()){
             secondary.push(primary.pop());
         }
@@ -49,5 +50,9 @@ public class QueueImplUsingStacks {
 
     public int peek(){
         return primary.peek();
+    }
+
+    public boolean empty() {
+        return primary.isEmpty();
     }
 }

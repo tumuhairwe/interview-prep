@@ -27,6 +27,16 @@ public class NumberOfConnectedComponents {
         System.out.println("In a graph of " + n + " nodes, there are " + number + " connected components ");
     }
 
+    /**
+     * Solution Summary
+     * - Create adjList for all edges
+     * - populate adjList bidirectionally (source -> destination) && (destination -> source)
+     * - for each nodeId,
+     *      - if a neighbor is unvisited, add to visited set and
+     *      - call do_dfs() to recursively collect & count all connected/visited neighbors
+     *      - increment count of visited nodes
+     * - return count
+     */
     private static int getNumberOfConnectedComponents(int[][] edges, int n){
         // 0. create adj list
         Map<Integer, List<Integer>> adjList = new HashMap<>();
