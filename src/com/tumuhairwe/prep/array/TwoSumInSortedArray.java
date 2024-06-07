@@ -4,7 +4,7 @@ package com.tumuhairwe.prep.array;
 /**
  * LeetCode 167 (medium)
  *
- * Given a 1-indexed array of integers numbers that is sorted in non-decreasing oder,
+ * Given a 1-indexed array of integers numbers that is sorted in non-decreasing order,
  * Find 2 numbers such that they add up to a specific target numbers.
  *
  * They numbers such that numbers[i] and numbers[j] are 1 <= j <= j <= numbers.length
@@ -26,8 +26,8 @@ public class TwoSumInSortedArray {
     }
 
     private static int[] getTwsoSum(int[] numbers, int target) {
-        int pointer_b = numbers.length - 1;
         int pointer_a = 0;
+        int pointer_b = numbers.length - 1;
 
         // base case
         while (pointer_a < pointer_b){

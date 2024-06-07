@@ -25,7 +25,7 @@ import java.util.Map;
  * ref:https://www.educative.io/answers/how-to-solve-the-merging-two-packages-problem
  * ref: https://www.pramp.com/challenge/L3wQBnQYAEh5K97W9ONK
  */
-public class MergePackages {
+public class GetIndicesOfItemWeights {
     public static void main(String[] args) {
         int[] arr = new int[]{4, 6, 10, 15, 16};
         int target = 21;
@@ -54,7 +54,7 @@ public class MergePackages {
         //0. sort array
         Arrays.sort(arr);
 
-        // 1. iterate thru the array and populate Map (key=diff and value == index
+        // 1. iterate thru the array and populate Map (key=diff and value == index)
         for(int i=0; i< arr.length; i++) {
             int diff = limit - arr[i];
 

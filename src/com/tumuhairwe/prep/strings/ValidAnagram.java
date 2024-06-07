@@ -23,12 +23,12 @@ public class ValidAnagram {
         }
 
         // 1.
-        int j = t.length() -1;
-        for(int i=0; i<s.length(); i++){
-            if(s.charAt(i) != t.charAt(j -i)){
+        int end = t.length() -1;
+        for(int start=0; start<s.length(); start++){
+            if(s.charAt(start) != t.charAt(end -i)){
                 return false;
             }
-            j--;
+            end--;
         }
 
         return true;

@@ -10,12 +10,12 @@ import java.util.Map;
  * - initialized with a positive size (initialCapacity)
  * - get(int key) - should return the value of the key if it exists, otherwise return -1
  * - put(int key, int value) should update the value of the key if exists.
- * Otherwise add the key-value to the cache.
+ * Otherwise, add the key-value to the cache.
  * If the number of the kyes exceeds the capacity from this operation, evict the least recently used key
  *
  *  Solution Summary
  *  - initialize { int capacity, Map cacheMap, and Node head, and Node tail}
- *      - int capcity only track allowed capcity
+ *      - int capacity only track allowed capacity
  *      - head points to head --> useful w
  *  - implement get(key) ->
  *      - if key !exists in cacheMap, return NOT_FOUND;
@@ -53,7 +53,7 @@ public class LRUCacheV2_LinkedListImpl {
      * TC: O( 1 )
      * - Checking the hasMap = O(1)
      * - remove = O(1) -- since its just changing pointers
-     * - add = O(1) -- since its just chaing pointers to make tail.prev = nodeBeingAdded
+     * - add = O(1) -- since its just caching pointers to make tail.prev = nodeBeingAdded
      */
     int get(int key) {
         if (!this.cacheMap.containsKey(key)) {

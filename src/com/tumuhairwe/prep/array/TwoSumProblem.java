@@ -41,13 +41,13 @@ public class TwoSumProblem {
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> numMap = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
-            int num = target - nums[i];
-            int diff = target - num;
+            int diff = target - nums[i];
             if(numMap.containsKey(diff)){
-                return new int[]{ num, i};
+                int  index = numMap.get(diff);
+                return new int[]{ index, i};
             }
 
-            else numMap.put(num, i);    // key = Integer, val = index
+            else numMap.put(nums[i], i);    // key = Integer, val = index
         }
 
         return new int[]{ -1, -1};
