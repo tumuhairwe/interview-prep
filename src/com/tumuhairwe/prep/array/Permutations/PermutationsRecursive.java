@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * LeetCode 267 (medium)
+ * Palindrome Permutation II
+ *
 * Solution Summary
 * 1. Fix the 1st index and keep swapping the character at this index with other characters of the string 1 by 1
 * 2. After each swap, skip the 1st character and recursively compute the permutation of the remaining string
@@ -17,6 +20,7 @@ public class PermutationsRecursive {
         String[] inputWords = {"ab", "bad", "abcd"};
         for (int i = 0; i < inputWords.length; i++) {
             List<String> permutedWords = permuteWord(inputWords[i]);
+            System.out.println(permutedWords);
         }
     }
 

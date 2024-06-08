@@ -8,6 +8,7 @@ package com.tumuhairwe.prep.array;
  * Return true if you can reach the last index, or false otherwise.
  *
  * Solution Summary
+ * - Set the target/goal to be 0
  * - Start from the end of the array and iterate backwards
  * - keep track of value in nums[i] ---- as jumpDistance
  * - for every iteration, if jumpDistance is >= goalIndex, set goalIndex = i

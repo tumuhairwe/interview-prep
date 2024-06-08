@@ -39,6 +39,9 @@ public class SortedArraySquares {
      *      - calculate the actual square of (l_square = nums[l_pointer) & (r_square = nums[r_pointer)
      *      - set square[ index-- ] = based on which ever (left or right) is greater
      *  - return squares array
+     *
+     *  TC: O(n)
+     *  SC: O(n) -- if you could the output array
      */
     public static int[] makeSquares(int[] arr){
         int n = arr.length;

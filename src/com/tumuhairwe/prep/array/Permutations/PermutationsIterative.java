@@ -30,9 +30,9 @@ public class PermutationsIterative {
             rSize = result.size();
             
             while (rSize >0){   // for as many entries as there are
-                List<Integer> permutation = result.pollFirst();
-                for (int i = 0; i < permutation.size(); i++) {
-                    List<Integer> newPermutation = new ArrayList<>(permutation);
+                List<Integer> permutations = result.pollFirst();
+                for (int i = 0; i < permutations.size(); i++) {
+                    List<Integer> newPermutation = new ArrayList<>(permutations);
                     newPermutation.add(i, num);
                     result.add(newPermutation);
                 }

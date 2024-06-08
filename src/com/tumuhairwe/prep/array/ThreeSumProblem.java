@@ -20,8 +20,11 @@ public class ThreeSumProblem {
     public static void main(String[] args) {
         int [] nums = new int[]{-1,0, 1,2,-1,-4};
         int target = 0;
-        List<List<Integer>> results = threeSum_2_pointer(nums);
+        List<List<Integer>> results = threeSum(nums);
+        System.out.println("Given nums: " + Arrays.toString(nums));
+        System.out.println("Triplets with sum == (" + target + ") is " + results);
 
+        results = threeSum_2_pointer(nums);
         System.out.println("Given nums: " + Arrays.toString(nums));
         System.out.println("Triplets with sum == (" + target + ") is " + results);
     }

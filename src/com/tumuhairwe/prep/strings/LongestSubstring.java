@@ -3,6 +3,7 @@ package com.tumuhairwe.prep.strings;
 import java.util.*;
 
 /**
+ * LeetCode 3
  * Given a string S, that represents a DNA sequence
  * ... and a number K
  * ... return all the contiguous substrings of length K
@@ -39,38 +40,32 @@ public class LongestSubstring {
         int firstPoointer , secondPointer = 0;
         // pointer should include a word that does not invalidate our conditions
     }
-    public static void main(String[] args) {
-        LinkedList<Character> d = new LinkedList<>();
-        ArrayDeque<Character> a = new ArrayDeque<>();
-        a.addFirst('A');
-        a.addLast('Z');
+    public int lengthOfLongestSubstring(String s){
+        Map<Character, Integer> freqMap =new HashMap<>();
 
-        a.pollFirst();
-        a.pollFirst();
-        a.remove();
-        a.size();
+        //0. initialize values
+        int maxLength = 0;
+        List<Character> listOfEncounteredChars = new ArrayList<>();
+        for (int left = 0; left < s.length(); left++) {
+            char c = s.charAt(left);
 
-        a.pop();
+            // 1. if char is NOT already encountered -> add to set and calculate max
+            if(listOfEncounteredChars.contains(c)){
+                // uses List to rack index of char + char itself
+                int index = listOfEncounteredChars.indexOf(c);
+                listOfEncounteredChars.remove(index);
 
-        String input = "ACGAATTCCG";
-        Set<Character> chars = new HashSet<>();
-
-        int resultLength = 0;
-
-        int windowStart = 0;
-        int windowEnd = 0;
-        // charLength = chars.length();
-
-        char[] arr = input.toCharArray();
-        for (int i = 0; i < arr.length; i++) {
-            Character c = Character.valueOf(arr[i]);
-
-            while (chars.contains(c)){
-                chars.remove(c);
-                windowStart++;
+                // clear all char uup until that point
+                if(index > 0){
+                    listOfEncounteredChars.subList(0, index).clear();
+                }
             }
-            chars.add(c);
-            resultLength = windowStart - i +1;
+
+            //3. add char and update maxLength
+            listOfEncounteredChars.add(c);
+            maxLength = Math.max(maxLength, listOfEncounteredChars.size());
         }
+
+        return maxLength;
     }
 }

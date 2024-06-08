@@ -19,7 +19,7 @@ import java.util.Map;
  * ref: https://leetcode.com/problems/subarray-sum-equals-k/description/
  * ref: https://www.youtube.com/watch?v=fFVZt-6sgyo
  */
-public class SubarraySumWithSumEqualsK {
+public class SubArraySumWithSumEqualsK {
 
     public static void main(String[] args) {
         int[] nums = new int[]{1,2,3};
@@ -31,12 +31,16 @@ public class SubarraySumWithSumEqualsK {
         int result = 0;
         int currentSum = 0;     // number of cont
 
+        // 0. Declare vars (prefixSums map) and seed it
         // key = prefixSum, val=count-of-numerOfTimes We've see that prefixSum
         Map<Integer, Integer> prefixSums = new HashMap<>();
         prefixSums.put(0, 1);   // there's at least 1 sub-array with sum = 0;
 
         for (int i = 0; i < nums.length; i++) {
+            // 2. calculate current sum
             currentSum += nums[i];
+
+            // 3. update result (if diff between currentSum and K exists in prefixSum)
             int diff = currentSum - k;
             if(prefixSums.containsKey(diff)){
                 result += prefixSums.get(diff);

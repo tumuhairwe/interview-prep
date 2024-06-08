@@ -11,7 +11,7 @@ import java.util.Map;
  * - get(int key) - should return the value of the key if it exists, otherwise return -1
  * - put(int key, int value) should update the value of the key if exists.
  * Otherwise, add the key-value to the cache.
- * If the number of the kyes exceeds the capacity from this operation, evict the least recently used key
+ * If the number of the keys exceeds the capacity from this operation, evict the least recently used key
  *
  *  Solution Summary
  *  - initialize { int capacity, Map cacheMap, and Node head, and Node tail}
@@ -31,6 +31,7 @@ import java.util.Map;
  *          - removing the key from the map
  *
  * ref: https://leetcode.com/problems/lru-cache/description/
+ * ref: https://www.youtube.com/watch?v=et-yvRZ6nww
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0146-lru-cache.java
  */
 public class LRUCacheV2_LinkedListImpl {
@@ -85,9 +86,9 @@ public class LRUCacheV2_LinkedListImpl {
 
         // 2. resize
         if(this.cacheMap.size() > cacheCapacity){
-            LinkedListNode nodeToDelete = this.head.next;
-            remove(nodeToDelete);
-            cacheMap.remove(nodeToDelete.key);
+            LinkedListNode leastRecentlyUsed = this.head.next;
+            remove(leastRecentlyUsed);
+            cacheMap.remove(leastRecentlyUsed.key);
         }
     }
     private void remove(LinkedListNode node){

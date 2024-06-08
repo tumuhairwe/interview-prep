@@ -50,7 +50,7 @@ public class NQueensRecursive {
 
     /**
      * This method determines if a queen can be placed at proposed_row, proposed_col with the current solution
-     * i.e. this move is vaslid only if no queen in current solution may attach the square at proposed_row and col
+     * i.e. this move is valid only if no queen in current solution may attach the square at proposed_row and col
      */
     private static boolean isValidMove(int proposedRow, int proposedCol, List<Integer> solution) {
         int oldRow, oldCol, diagonalOffset = 0;

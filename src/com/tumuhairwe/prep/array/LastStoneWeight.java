@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
+ * LeetCode 1046 (easy)
  * Given an array of integers where stones[i] is the weight of the i-th stone
  * We are playing a game with the stones ... on each turn, we choose the heaviest 2 stones and smash them together.
  *
@@ -43,11 +44,12 @@ public class LastStoneWeight {
             }
         }
 
-        if(maxHeap.size() == 0){
-            return 0;
-        }
-        else {
-            return maxHeap.remove();    // return Math.abs(maxHeap.remove() ) when using default comparator
-        }
+//        if(maxHeap.size() == 0){
+//            return 0;
+//        }
+//        else {
+//            return maxHeap.remove();    // return Math.abs(maxHeap.remove() ) when using default comparator
+//        }
+        return maxHeap.size() == 0 ? 0 : maxHeap.remove();
     }
 }

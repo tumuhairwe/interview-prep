@@ -1,6 +1,9 @@
 package com.tumuhairwe.prep.intervals;
 
+import com.tumuhairwe.prep.pramo.EntryKey;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 // LC Summary: insert new interval in order,
@@ -78,6 +81,7 @@ public class Insert {
                 merged.get(merged.size() - 1)[1] = Math.max(preceedingEnd, interval[1]);
             }
         }
+        //Comparator<EntryKey[]> orderByStart = Comparator.comparing(a -> a[0].);
         // 3. convert to array
         return merged.toArray(new int[0][]);
     }

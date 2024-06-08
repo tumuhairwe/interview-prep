@@ -82,8 +82,8 @@ public class CheapestFlights {
         Map<Integer, List<Node>> city_to_destination_adjList = new HashMap<>();
         for (int[] flight  : flightSchedule) {
             Integer departingCity = flight[0];
-            Integer destinationCity = flight[1];
-            Integer priceToDestination = flight[2]; // weight
+            int destinationCity = flight[1];
+            int priceToDestination = flight[2]; // weight
 
             // 1a) pre-fill the whole adj list
             if (!city_to_destination_adjList.containsKey(departingCity)) {
@@ -134,7 +134,7 @@ public class CheapestFlights {
     }
 
     /**
-     * Dijkstra = Finds shortest path for weighted graphs
+     * Dijkstra = Finds the shortest path for weighted graphs
      */
     public int findCheapestPrice_wrong_dijkstra(int numberOfCities, int[][] flights, int source, int destination, int k_stops){
         // 0. base case

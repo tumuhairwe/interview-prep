@@ -1,7 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 /**
- * LeetCode 074 Medium
+ * LeetCode 74 Medium
  * Given a 2D array, and a target, search the array for that target number
  * assume that
  * - Each row is sorted in non-decreasing order.
@@ -9,6 +9,8 @@ package com.tumuhairwe.prep.array;
  *
  * Given an integer target, return true if target is in matrix or false otherwise.
  * You must write a solution in O(log(m * n)) time complexity.
+ *
+ * ref: https://www.youtube.com/watch?v=DB_cfI4wGbE
  */
 public class Search2DMatrix {
     public static void main(String[] args) {

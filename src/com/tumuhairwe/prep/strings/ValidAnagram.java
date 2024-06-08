@@ -16,6 +16,14 @@ public class ValidAnagram {
         System.out.println("Approach 3 " + st1 + " and " + st2 + " -> " + isAnagram3(st1, st2));
     }
 
+    // Palindrome: word that reads the same backwards and forwards = racecar
+
+    /**
+     * Solution Summary
+     * - use 2 pointers to traverse the array from both ends
+     * -
+     * TC: O (n)
+     */
     public static boolean isPalindrome(String s, String t) {
         // 0. base case
         if(s.length() != t.length()){
@@ -25,7 +33,7 @@ public class ValidAnagram {
         // 1.
         int end = t.length() -1;
         for(int start=0; start<s.length(); start++){
-            if(s.charAt(start) != t.charAt(end -i)){
+            if(s.charAt(start) != t.charAt(end -start)){
                 return false;
             }
             end--;
@@ -38,7 +46,8 @@ public class ValidAnagram {
      * Since anagrams return identical strings when sorted,
      * - sort the input string and compare the output
      * - Strings can be sorted by splitting into char arrays and per
-     * @return
+     * TC: O( log n) --- because of sorting
+     * SC: O(n) -- because of temp sortable array
      */
     static boolean isAnagram2(String st1, String st2){
         return sortedString(st1).equals(sortedString(st2));
