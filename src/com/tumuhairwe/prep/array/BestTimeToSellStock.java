@@ -39,15 +39,38 @@ public class BestTimeToSellStock {
 
         // track max-profit and min-value and scan the array while updatting them
         int maxProfit = 0;
-        int lowestPrice = Integer.MAX_VALUE;
+        int buy_price = prices[0];
 
-        for (int day = 0; day < prices.length; day++) {
-            if(prices[day] < lowestPrice){
-                lowestPrice = prices[day];
+        for (int day = 1; day < prices.length; day++) {
+            if(prices[day] < buy_price){
+                buy_price = prices[day];
+            }
+
+            int profit = prices[day] - buy_price;
+            maxProfit = Math.max(maxProfit, profit);
+        }
+
+        return maxProfit;
+    }
+
+    /**
+     * Solution Summary
+     * - this strategy uses a sliding window to track lowest_price & highest_price
+     */
+    static int maxProfit_2(int[] prices){
+        int left = 0;   // lowest_price
+        int right = 1;
+        int maxProfit = 0;
+        while (left < prices.length){
+            if(prices[left] < prices[right]){
+                int profit = prices[right] - prices[left];
+                maxProfit = Math.max(maxProfit, profit);
             }
             else {
-                maxProfit = Math.max(maxProfit, prices[day] - lowestPrice);
+                left = right;
             }
+
+            right++;
         }
 
         return maxProfit;

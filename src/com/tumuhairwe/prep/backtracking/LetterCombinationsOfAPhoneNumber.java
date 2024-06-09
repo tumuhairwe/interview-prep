@@ -5,6 +5,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ *LeetCode 17 (medium)
+ * Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the
+ * number could represent. Return the answer in any order.
+ *
+ * ref: https://www.youtube.com/watch?v=0snEunUacZY
+ * ref: https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+ */
 public class LetterCombinationsOfAPhoneNumber {
     public static void main(String[] args) {
         String digits = "23";

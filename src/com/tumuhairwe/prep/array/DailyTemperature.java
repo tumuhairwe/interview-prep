@@ -20,27 +20,28 @@ public class DailyTemperature {
     }
     /**
      * Solution Summary
-     * - Use stack to track the day
-     * - Use stack to keep track of days & update result[]
+     * \- Use stack to keep track of days & update result[]
      * - Iterate thru array and use stack to track day-with-a-higher-temp
-     * - update result when you encounter a temp where temp[day] > temp[stack.pee()];
+     *      - push(day) on stack for each iteration
+     *      - update result when you encounter a temp where temp[day] > temp[stack.peek()];
+     *  - return result[] (number to dyas to wait for warmer
      */
     public int[] dailyTemperatures(int[] temps){
         //0. build result[] and fill it with zeros
-        int[] result = new int[temps.length];
+        int[] numberOfDaysToWait = new int[temps.length];
 
         //1. create stack to track day/index_of_temp
-        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> days = new Stack<>();
         for (int day = 0; day < temps.length; day++) {
             // 2. while temp[day] > too_of_stack -> pop & populate result[]
-            while (!stack.isEmpty() && temps[day] > temps[stack.peek()]){
-                int prevDay = stack.pop();
-                result[prevDay] = day - prevDay;
+            while (!days.isEmpty() && temps[day] > temps[days.peek()]){
+                int previousDay = days.pop();
+                numberOfDaysToWait[previousDay] = day - previousDay;
             }
 
-            stack.push(day);
+            days.push(day);
         }
 
-        return result;
+        return numberOfDaysToWait;
     }
 }

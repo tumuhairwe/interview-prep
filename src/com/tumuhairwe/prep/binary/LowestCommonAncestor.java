@@ -44,7 +44,7 @@ public class LowestCommonAncestor {
     }
 
     // iterative:
-    public TreeNode<Integer> lowestCommonAncestor(TreeNode<Integer> root, TreeNode<Integer> p, TreeNode<Integer> q) {
+    public TreeNode<Integer> dfs_iterative(TreeNode<Integer> root, TreeNode<Integer> p, TreeNode<Integer> q) {
         TreeNode<Integer> current = root;
 
         while (current != null){
