@@ -1,7 +1,8 @@
 package com.tumuhairwe.prep.array;
 
 /**
- * LeetCode 79
+ * LeetCode 79 (medium)
+ * Word Search
  * Given a 2D board and a grid, find if the word exists in the board
  *
  * The word can be constructed from letters and sequentially adjacent cells ... where cells are horizontally
@@ -59,7 +60,7 @@ public class WordSearchIterative {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 // word can start from any index, so we check if char_at_index_0 is at any cell
-                boolean foundTheFirstLetter = word.charAt(i) == board[i][j];
+                boolean foundTheFirstLetter = word.charAt(0) == board[i][j];
                 if(foundTheFirstLetter && searchWord(i, j, BEGINNING_INDEX_WORD, word, board)){
                     return true;
                 }

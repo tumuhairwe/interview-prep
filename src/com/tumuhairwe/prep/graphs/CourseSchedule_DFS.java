@@ -45,6 +45,13 @@ public class CourseSchedule_DFS {
     static int HAS_BEEN_TRAVERSED = 1;
     static int NOT_YET_VISITED = 0;
     static int IS_IN_PATH = 2;
+
+    /**
+     * Solution Summary
+     * - Create adjacency list of courses (key=courseId, val=List_of_prereqs)
+     * - Create array to track visited courses (index=course_id)
+     * - for each course, if its unvisted, call isCyclic(adjList, []visited, courseid)
+     */
     protected static boolean canFinish(int numCourses, int[][] prerequisites){
         // 0. create and initialize adj list
         List<List<Integer>> adjList = new ArrayList<>();
@@ -71,6 +78,13 @@ public class CourseSchedule_DFS {
         return true;
     }
 
+    /**
+     * Solution Summary
+     * - to determine if cyclic, if state IS_IN_PATH, return true, if its not even in adjList, return falss
+     * - make visted[ courseid ] = IS_IN_PATH
+     * - recursively call isCyclic() on each prereq (if state is not HAS_BEEN_TRAVERSED) ... return true
+     * - at the end, marke viste[ courseId ] = HAS_BEEN_TRAVERSED
+     */
     private static boolean isCyclic(List<List<Integer>> adjList, int[] visited, int courseId) {
         // check if already visited
         if(visited[courseId] == IS_IN_PATH){

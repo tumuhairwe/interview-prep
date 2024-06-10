@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.array.Permutations;
 
 import java.util.ArrayList;
 import java.util.List;

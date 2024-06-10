@@ -22,6 +22,10 @@ public class LongestPalindrome {
         System.out.println("The length of the longest palindromic substring is " + result);
     }
 
+    /**
+     * Solution Summary
+     *
+     */
     public static int longestPalindrome(String s){
         // 0. create char_counts[] to keep track of the number of occurrences of a character
         int[] char_counts  = new int[128];
@@ -31,27 +35,38 @@ public class LongestPalindrome {
             char_counts[c]++;   // counts the number of occurrences in each character
         }
 
-        int result = 0;
+        // same as\
+//        int[] char_counts = new int[26];
+//        for(char c : s.toCharArray()){
+//            int indexOfLetterA = 'a';
+//            int indexOfThisLetter = c - indexOfLetterA;
+//            char_counts[indexOfThisLetter]++;
+//        }
+
+        int total = 0;
         for (int charCount : char_counts){
-            result += charCount / 2 * 2;
+            int pairs = charCount / 2;
+            total += pairs * 2;
             // e.g. if charCount = 8 .. 8/2 = 4 ... 4 * 2 .. 8 (i.e. 8 chars we can put in palindrome)
             // e.g. if charCount = 9 .. 9/2 = 4 ... 4 * 2 .. 8 (i.e. 8 chars we can put in palindrome)
-            boolean resultIsEvenNumber = (result & 2) == 0;
+            boolean resultIsEvenNumber = (total & 2) == 0;
             boolean hasMiddleChar = charCount % 2 == 1;
             if(resultIsEvenNumber && hasMiddleChar){
-                result += 1;
+                total += 1;
             }
         }
 
-        return result;
+        return total;
     }
 
     /**
      * To determine if isPalindrome:
+     * LeetCode 266 (easy)
      *
+     * Solution Summary
      * - Populate charFrequencyMap with [key=Char, value=Integer] of character (max 26 chars in alphabet)
      * - If comparing 2 strings: Use string2 to iteratively decrement the count for each char
-     * - If just 1 string but trying to determine if it has a palindromic permutation, all chars' frequency should be mode 2 (except at most1)
+     * - If just 1 string but trying to determine if it has a palindromic permutation, all chars' frequency should be mode 2 (except at most 1)
      * - At the end, there should be at most 1 char (middle) that has a count/value of 1
      */
     // TC =  O(n) == because we need to iterate the whole string

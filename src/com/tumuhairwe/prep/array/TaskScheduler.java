@@ -86,7 +86,7 @@ public class TaskScheduler {
         return cycles;
     }
 
-    class Pair<K, V>{
+    static class Pair<K, V>{
         K key;
         V val;
         public Pair(K k, V v){
@@ -104,9 +104,9 @@ public class TaskScheduler {
             return tasks.length;    // there's 0 wait interval so we can do all task
         }
 
-        // 1. Create maxHeap to track most frequently occuring tasks
+        // 1. Create maxHeap to track most frequently occurring tasks
         Comparator<Integer> reversedComp = (a, b) -> b - a;
-        PriorityQueue<Integer> maxHeap = new PriorityQueue(reversedComp);
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(reversedComp);
         Queue<Pair<Integer, Integer>> que = new LinkedList<>();
 
         // 2. create task-frequency array

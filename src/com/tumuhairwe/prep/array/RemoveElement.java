@@ -15,8 +15,7 @@ public class RemoveElement {
         int nextElement =0;
         for (int i = 0; i < arr.length; i++) {
             if(arr[i] != key){
-                arr[nextElement] = arr[i];
-                nextElement++;
+                arr[nextElement++] = arr[i];
             }
         }
 

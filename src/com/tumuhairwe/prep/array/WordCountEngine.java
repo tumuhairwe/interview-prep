@@ -2,7 +2,6 @@ package com.tumuhairwe.prep.array;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Given a string, return the number of occurrences of the words in the String. Assume that all letters are in English alphabet.
