@@ -14,6 +14,7 @@ public class FindMaxSubArray {
     // Space complexity: O(1)
 
     /**
+     * LeetCode 58 (medium)
      * Loop over the array
      * - If currentMax is less than 0 (from previous iteration), reset to 0
      * - cumulatively add to currentMax

@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.dynamicprogramming;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.PriorityQueue;
 
 /**
  * LeetCode 64 (Medium)
@@ -30,76 +28,66 @@ public class MinimumPathSum {
             Arrays.fill(arr, -1);
         }
 
-        return helper(grid, rows, cols, dp);
+        return dp_recursive(grid, rows, cols, dp);
     }
 
-    private int helper(int[][] grid, int rows, int cols, int[][] dp) {
+    /**
+     * Solution Summary
+     * - Skip the 1st cell,
+     * - iterate grid and fill each cell with the cost to get to it from origin [0][0] (i.e. cost of cell-to-right + cell-to-left
+     * - set cell-value = min(costToTheRight, costToTheLeft)
+     * - Eventually, return cost of getting to the very last cell coordinates [ row-1][col-1]s
+     */
+    public int minPathSum(int[][] grid){
+        //0. declare vars
+        int row = grid.length;
+        int col = grid[0].length;
+
+        // 1. iterate grid (strategy is to calculate the cost-to-go-down & cost-to-go-left & get the min() until we get to the last cell
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+                // skip the first cell
+                if(i == 0 && j == 0){
+                    continue;
+                }
+
+                int costToGoRight = Integer.MAX_VALUE;
+                if(i != 0){
+                    costToGoRight = grid[i][j] + grid[i - 1][j];
+                }
+
+                int costToGoDown = Integer.MAX_VALUE;
+                if(j != 0){
+                    costToGoDown = grid[i][j] + grid[i][j - 1];
+                }
+
+                grid[i][j] = Math.min(costToGoDown, costToGoRight);
+            }
+        }
+
+        return grid[row - 1][col - 1];
+    }
+
+    private int dp_recursive(int[][] grid, int rows, int cols, int[][] dp) {
         if(rows == 0 && cols == 0){
             return grid[0][0];
         }
 
         if (rows == 0){
-            dp[rows][cols] = grid[rows][cols] + helper(grid, rows, cols -1, dp);
+            dp[rows][cols] = grid[rows][cols] + dp_recursive(grid, rows, cols -1, dp);
             return dp[rows][cols];
         }
         if(cols == 0){
-            dp[rows][cols] = grid[rows][cols] + helper(grid, rows -1, cols, dp);
+            dp[rows][cols] = grid[rows][cols] + dp_recursive(grid, rows -1, cols, dp);
             return dp[rows][cols];
         }
         if(dp[rows][cols] != -1){
             return dp[rows][cols];
         }
-        int rowToTheLeft = helper(grid, rows, cols - 1, dp);
-        int colAbove = helper(grid, rows-1, cols, dp);
+        int rowToTheLeft = dp_recursive(grid, rows, cols - 1, dp);
+        int colAbove = dp_recursive(grid, rows-1, cols, dp);
         dp[rows][cols] = grid[rows][cols] + Math.min(rowToTheLeft, colAbove);
 
         return dp[rows][cols];
     }
-
-    public int minPathSum_pq_impl(int[][] grid) {
-        int[] src = grid[0];
-        int[] destination = grid[grid.length  - 1];
-
-        // 0. prioritize minHeap by weight
-        Comparator<Node> comp = Comparator.comparingInt(node -> node.weight);
-        PriorityQueue<Node> pq = new PriorityQueue<>(comp);
-
-        // 1. seed minHeap
-        pq.add(new Node(0, 0, grid[0][0]));
-
-        int minCost = 0;
-        while(!pq.isEmpty()){
-            Node node = pq.poll();
-
-            int weight = minCost + node.weight;
-            minCost = Math.min(minCost, weight);    // unlikely to change since grid has non-negative numbers i.e. all edges have a weight
-
-            // 2.get next node/neighbor to add to pq
-            for(int row = node.row + 1; row<grid.length; row++){
-                for(int col = node.col + 1; col<grid[row].length; col++){
-
-                    int cost = grid[row][col];
-                    pq.offer(new Node(row, col, weight));
-                }
-            }
-        }
-
-        // 3. return minCost
-        return minCost;
-    }
-    class Node implements Comparable<Node>{
-        int row;
-        int col;
-        int weight;
-        public Node(int x, int y, int w){
-            this.row = x;
-            this.col = y;
-            this.weight = w;
-        }
-
-        public int compareTo(Node n){
-            return Integer.compare(this.weight, n.weight);
-        }
-    }
-
 }
