@@ -54,15 +54,15 @@ public class MatchingBrackets {
         closeToOpen.put('}', '{');
 
         Stack<Character> stack = new Stack<>();
-        for (Character c : input.toCharArray()){
+        for (Character closing : input.toCharArray()){
 
-            // 1. for each char, check if its contained in mapping && on top of non-empty stack
-            if(closeToOpen.containsKey(c) && !stack.isEmpty() && stack.peek() == closeToOpen.get(c)){
+            // 1. for each char, check if its (contained in mapping) && (on top of non-empty stack)
+            if(closeToOpen.containsKey(closing) && !stack.isEmpty() && stack.peek() == closeToOpen.get(closing)){
                 stack.pop();
             }
             else {
                 // 2. else add to stack
-                stack.push(c);
+                stack.push(closing);
             }
         }
 
