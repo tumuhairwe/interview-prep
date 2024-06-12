@@ -35,7 +35,7 @@ public class JewelsAndStones {
 
         int num_jewels = 0;
         for (char c : stones.toCharArray()){
-            if(setOfJewels.contains(Character.valueOf(c))){
+            if(setOfJewels.contains(c)){
                 num_jewels++;
             }
         }

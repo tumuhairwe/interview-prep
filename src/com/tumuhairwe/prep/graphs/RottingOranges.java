@@ -98,10 +98,7 @@ public class RottingOranges {
 
         System.out.println("At the start we have Rotten Oranges: " + rottenOranges.size() + " rotten oranges. Fresh Oranges: " + freshCount);
         int numberOfMinutes = -1;   // accounts for the last loop where nothing happens (i.e. last rotten orange has no neigh)
-        int[][] direction_offsets = {
-                {0, 1}, {1, 0},
-                {0, -1}, {-1, 0}
-        };
+
         // 4. while queue has rotten cells & freshCount is not zero
         while(!rottenOranges.isEmpty() && freshCount != 0 ){
             numberOfMinutes++;

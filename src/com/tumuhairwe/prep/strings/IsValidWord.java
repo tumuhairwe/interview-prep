@@ -37,12 +37,12 @@ public class IsValidWord {
         //1. create list of allowable chars
         // 1a) create list of upper case + lower case vowels
         Set<Character> lowerCaseVowels = Set.of('a','e','i','o', 'u');
-        Set<Character> upperCaseVowels = lowerCaseVowels.stream().map(c -> Character.toUpperCase(c)).collect(Collectors.toSet());
+        Set<Character> upperCaseVowels = lowerCaseVowels.stream().map(Character::toUpperCase).collect(Collectors.toSet());
         Set<Character> vowels = Stream.concat(lowerCaseVowels.stream(), upperCaseVowels.stream()).collect(Collectors.toSet());
 
         // 1b) create list of upper case + lower case consonants
         Set<Character> lowerCaseConsonants = Set.of('b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z');
-        Set<Character> upperCaseConsonants = lowerCaseConsonants.stream().map(c -> Character.toUpperCase(c)).collect(Collectors.toSet());
+        Set<Character> upperCaseConsonants = lowerCaseConsonants.stream().map(Character::toUpperCase).collect(Collectors.toSet());
         Set<Character> consonants = Stream.concat(lowerCaseConsonants.stream(), upperCaseConsonants.stream()).collect(Collectors.toSet());
 
         //2. create 2 flags (criteria b & c)
