@@ -19,6 +19,13 @@ public class KthLargestSorted {
     private static PriorityQueue<Integer> minHeap;
     private static int maxSize ;
 
+    /**
+     * Solution summary
+     * - call insert() for each element in the array to add it to the PQ
+     * - onAdd(): if pq.size() < k ... just add it
+     * -          if pq.size() is > than k ... poll() the top of hte pq, then add the new number (ensures that the largest k is always on top)
+     * - return pq.peek() to see the largest value on top of a q os size K
+     */
     public static int findKthLargest(int[] nums, int k){
         // these 2 are the same
         //Comparator<Integer> c = (n1, n2) -> n1 - n2;

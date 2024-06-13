@@ -25,6 +25,8 @@ import java.util.*;
  * (since push() and pop() operations take O(log n ) time)
  *
  * SC: O(N + E) where N = number of nodes in graph and E = number of edges required by the adjacency matrix and PQ
+ *
+ * ref: https://www.youtube.com/watch?v=EaphyqKU4PQ
  */
 class NetworkDelayTime {
     static class Node{
@@ -43,6 +45,8 @@ class NetworkDelayTime {
                     '}';
         }
     }
+
+    //Dijkstra TC: O(E log_V) == where E = number of edges, v = vertices
     public static int networkDelayTime(int[][] times, int numberOfNodes, int k) {
         //0. create adjacency list
         Map<Integer, Set<Node>> adjList = new HashMap<>();
@@ -59,7 +63,6 @@ class NetworkDelayTime {
         }
 
         //1 create pq
-        //Comparator comp = Comparator.comparingInt(n -> n.time);
         PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(n -> n.time));
 
         // 1.1 seed pq
@@ -97,11 +100,10 @@ class NetworkDelayTime {
             }
         }
 
-        int returnValue = -1;
         if(numberOfNodes == visited.size()){
             return minimumTimeTaken;
         }
-        return returnValue;
+        return -1;
     }
 
     public static void main(String[] args) {
