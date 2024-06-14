@@ -1,7 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 /**
- * LeetCode 303
+ * LeetCode 303 (easy)
  *
  * Given an integer array nums, handle multiple queries of the following type:
  *
@@ -18,6 +18,7 @@ public class RangeSum {
             prefixSums[i] = current;
         }
     }
+
     /**
      * Solution Summary
      * - pre-compute the sums at initialization/construction so the reading/getting is O(1)

@@ -51,7 +51,8 @@ public class FindAllAnagrams {
             result.add(0);
         }
 
-        // 3. since s-freq-map is already partially complete ... start from p.length() until s.length() to finish
+        // NOT TRUE: 3. since s-freq-map is already partially complete ... start from p.length() until s.length() to finish
+        // true if (loopP creation of pfreqMap has included sFreqMap
         int begin = 0;
         for(int end=0; end<s.length(); end++){
             char sChar_at_rp = s.charAt(end);

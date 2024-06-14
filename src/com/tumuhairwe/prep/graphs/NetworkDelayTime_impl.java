@@ -2,6 +2,11 @@ package com.tumuhairwe.prep.graphs;
 
 import java.util.Arrays;
 
+/**
+ * LeetCode 743 (medium)
+ *
+ * ref: https://leetcode.com/problems/network-delay-time/description/
+ */
 public class NetworkDelayTime_impl {
     static class Node{
         int nodeId;
