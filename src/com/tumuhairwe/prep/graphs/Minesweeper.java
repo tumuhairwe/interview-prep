@@ -1,7 +1,6 @@
 package com.tumuhairwe.prep.graphs;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class Minesweeper {
@@ -17,89 +16,54 @@ public class Minesweeper {
             return board;
         }
 
-        // 1. collect count of square to be revealed;
-        for (int i = 0; i < click.length; i++) {
-            for (int j = 0; j < click.length; j++) {
-                if(board[i][j] == UNREVEALED_EMPTY_SQ || board[i][j] == UNREVEALED_MINE){
-                    squaresToBeRevealed.add(new int[]{i, j});
-                }
+        int numRows = board.length;
+        int numCols = board[0].length;
+        Queue<int[]> squaresToBeRevealed = new LinkedList<>();
+        squaresToBeRevealed.add(click);
+
+        while(!squaresToBeRevealed.isEmpty()){
+            int[] cell = squaresToBeRevealed.poll();
+            int row = cell[0];
+            int col = cell[1];
+
+            if(board[row][col] == UNREVEALED_MINE){ //M = Mine
+                board[row][col] = REVEALED_MINE;    //X
             }
-        }
+            else{
+                //1. get number of mines
+                //int count = getAdjacentMines(board, row, col);
+                int count = 0;
 
-        int countRemainingUnrevealedSquares = 0;
-        List<Character> revealableStates = List.of(UNREVEALED_EMPTY_SQ);
-
-        // 2. reveal
-        char[][] board2 = reveal(board, click[0], click[1], revealableStates);
-
-        for (int i = 0; i < board2.length; i++) {
-            for (int j = 0; j < board2[0].length; j++) {
-                if(board2[i][j] == UNREVEALED_EMPTY_SQ || board[i][j] == UNREVEALED_MINE){
-                    countRemainingUnrevealedSquares++;
-                }
-            }
-        }
-
-        // no more squares to reveal
-        if(squaresToBeRevealed.size() - countRemainingUnrevealedSquares == 0){
-            return board2;
-        }
-        return board2;
-    }
-
-    char[][] reveal(char[][] board, int row, int col, List<Character> revealableStates){
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if(board[i][j] == UNREVEALED_MINE){
-                    board[i][j] = REVEALED_MINE;
-                    return board;   // rule 1: game over
-                }
-                else if(board[i][j] == UNREVEALED_EMPTY_SQ){
-                    int numAdjacentMines = getAdjacentMines(board, i, j);
-                    if(numAdjacentMines == 0){
-                        board[i][j] = REVEALED_BLANK_WITH_NO_ADJACENT_MINES;    // rule 2
-
-                        // set neighbors to original state
-                        reveal(board, i, j, List.of(UNREVEALED_EMPTY_SQ));
+                for (int i = -1; i < 2; i++) {
+                    for (int j = -1; j < 2; j++) {
+                        if (i == 0 && j == 0) continue;
+                        int r = row + i, c = col + j;
+                        if (r < 0 || r >= numRows || c < 0 || c < 0 || c >= numCols) continue;
+                        if (board[r][c] == 'M' || board[r][c] == 'X') count++;
                     }
-                    else {
-                        board[i][j] = String.valueOf(numAdjacentMines).charAt(0);
+                }
+
+                System.out.println("There are " + count + " mines on (" + row + ", " + col + ")");
+                if(count > 0){  // stop further DFS
+                    board[row][col] = (char)(count + '0');
+                }
+                else{   // continue DFS on adjacent cells
+                    board[row][col] = REVEALED_BLANK_WITH_NO_ADJACENT_MINES;    // B
+
+                    for (int i = -1; i < 2; i++) {
+                        for (int j = -1; j < 2; j++) {
+                            if (i == 0 && j == 0) continue;
+                            int r = row + i, c = col + j;
+                            if (r < 0 || r >= numRows || c < 0 || c < 0 || c >= numCols) continue;
+                            if (board[r][c] == 'E') {
+                                squaresToBeRevealed.add(new int[]{r, c});
+                                board[r][c] = REVEALED_BLANK_WITH_NO_ADJACENT_MINES;
+                            }
+                        }
                     }
                 }
             }
         }
-
         return board;
-    }
-
-    int getAdjacentMines(char[][] board, int row, int col){
-        int numberOfMines = 0;
-        boolean isRowOutOfBounds = row < 0 || row >= board.length;
-        boolean isColOutOfBounds = col < 0 || col >= board[0].length;
-
-        if(isRowOutOfBounds || isColOutOfBounds){
-            return numberOfMines;
-        }
-
-        int[][] offsets = {
-                {0, 1}, {1, 0},
-                {-1, 0}, {0, -1},
-        };
-        for(int[] direction : offsets){
-            int x = row + direction[0];
-            int y = col + direction[1];
-
-            boolean rowInBounds = x >= 0 && x < board.length;
-            boolean colInBounds = y >= 0 && y < board[0].length;
-
-            if(!rowInBounds || !colInBounds){
-                continue;
-            }
-            if(board[x][y] == UNREVEALED_MINE){
-                numberOfMines++;
-            }
-        }
-
-        return numberOfMines;
     }
 }
