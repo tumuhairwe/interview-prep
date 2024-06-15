@@ -27,37 +27,6 @@ import com.tumuhairwe.prep.lists.ListNode;
 public class Merge2SortedLists {
 
     // creating a new List
-    public static ListNode mergeLists(ListNode l1, ListNode l2){
-        //ListNode tempNode = new ListNode();
-        ListNode current_node = new ListNode();
-
-        while (l1 != null && l2 != null){
-            if(l1.val < l2.val){
-                current_node = l1;
-                l1 = l1.next;
-            }
-            else {
-                current_node = l2;
-                l2 = l2.next;
-            }
-
-            current_node = current_node.next;
-        }
-
-        if(l1 != null){
-            current_node.next = l1;
-            l1 = l1.next;
-        }
-
-        if(l2 != null){
-            current_node.next = l2;
-            l2 = l2.next;
-        }
-
-        //return tempNode.next;
-        return current_node;
-    }
-
     /**
      * Solution Summary
      * - Base case: if 1 is null, return the other
@@ -79,7 +48,7 @@ public class Merge2SortedLists {
             returnValue = list1;
         }
         else {
-            list2.next = merge2Lists_recursive(list2.next, list2);
+            list2.next = merge2Lists_recursive(list1, list2.next);
             returnValue = list2;
         }
 
