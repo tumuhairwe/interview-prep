@@ -86,10 +86,36 @@ public class ValidAnagram {
                 freqMap.put(c, count - 1);
             }
         }
-//        long count = freqMap.entrySet().stream()
-//                .filter(e -> e.getValue() > 0)
-//                .count();
-//        return count == 0;
+        // WARNING: will run into TimeLimitExceeded
+        return true;
+    }
+
+    /**
+     * Solution Summary
+     * Use an in[] to track the frequency of each letter in each string
+     * - increment or decrement accordingly
+     * - At the end, all frequencies shoulld be zero, if not, they're not anagrams
+     */
+    public boolean isAnagram_freqCounter(String s, String t){
+        //0.  base case
+        if(t.length() != s.length()){
+            return  false;
+        }
+
+        //1. build counter by decrementing each letter's frequency (and incrementing)
+        int[] count = new int[26];
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+
+        //2 at the end, all letters should be exactly zero
+        for (int i = 0; i < count.length; i++) {
+            if(count[i] != 0){
+                return false;
+            }
+        }
+
         return true;
     }
 
