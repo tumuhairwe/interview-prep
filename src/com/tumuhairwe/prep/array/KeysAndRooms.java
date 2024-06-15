@@ -21,7 +21,7 @@ public class KeysAndRooms {
      * - Keep track of keys
      * - put key-0 onto the stack
      * - loop by iterating over the stack ... pop the current key
-     * - Use key poped() from stack to rooms.get(key) ...for each key, if unseen, mak at seen
+     * - Use key popped() from stack to rooms.get(key) ...for each key, if unseen, mak at seen
      */
     public boolean canVisitAllRooms(List<List<Integer>> rooms){
         boolean[] seen = new boolean[rooms.size()];
@@ -54,7 +54,7 @@ public class KeysAndRooms {
         roomState = new boolean[rooms.size()];
         Arrays.fill(roomState, false);
 
-        // 1. mark first toom as visited
+        // 1. mark first room as visited
         roomState[0] = true;
 
         // 2. call DFS on all rooms

@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.array;
 import java.util.*;
 
 /**
- * LeetCode 937
+ * LeetCode 938 (medium)
  *
  * Given an array of points where a point[i] = [x, y]
  * represents a point on the X-Y plan and integer K,
@@ -16,7 +16,6 @@ import java.util.*;
  * points = { [1,3], [-2,2]}, k = 1
  * output = [[-2, 3]]
  *
- * LeetCode 938 (medium)
  * You may return the answer in any order. The answer is guaranteed to be unique
  * ref: https://leetcode.com/problems/k-closest-points-to-origin/description/
  */
@@ -38,7 +37,7 @@ public class KClosestPointsToOrigin {
      * - loop over 2D array and populate pq with arrays
      * - pq.pop() off the pq k times to get the top k entries
      *
-     * TC O(NlogK) -- if we don't have store all N poinbs in PQ
+     * TC O(NlogK) -- if we don't have store all N points in PQ
      * TC = O(NlogN) = if we have to store all N points in PQ before popping off top x
      */
     static int[][] kClosest(int[][] points, int k){

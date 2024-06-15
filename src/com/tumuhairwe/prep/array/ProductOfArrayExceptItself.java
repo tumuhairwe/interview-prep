@@ -24,18 +24,20 @@ public class ProductOfArrayExceptItself {
         int[] left_products = new int[nums.length];
         int[] right_products = new int[nums.length];
 
-        //0. seed & loop forward
+        //0. seed &
         left_products[0] = 1;
+
+        //1.loop forward (from 1 -> n-1) -- skip arr[0] (seeded with 1) -> put results in left_array
         for (int i = 1; i < nums.length - 1; i++) {
             left_products[i] = nums[i - 1] * left_products[i - 1];
         }
 
-        //1. seed and loop backward
+        //2.loop backward (from arr[length-2) -> 0) -- skip arr[arr.length]  -> put right in left_array
         for (int i = nums.length -2; i >=0; i--) {
             right_products[i] = nums[i + 1] * nums[i + 1];
         }
 
-        //2. populate output
+        //2. populate output left_array * right_array
         for (int i = 0; i < nums.length; i++) {
             output[i] = left_products[i] * right_products[i];
         }
@@ -52,6 +54,7 @@ public class ProductOfArrayExceptItself {
      */
     public int[] productExceptSelfNumAsPrefix(int[] nums){
         int[] output = new int[nums.length];
+        output[0] = 1;
 
         // 0. iterate forward
         for (int i = 0; i < nums.length - 1; i++) {
@@ -60,7 +63,7 @@ public class ProductOfArrayExceptItself {
 
         // 1. iterate backwards
         for (int i = nums.length - 2; i >=0; i--) {
-            output[i] = nums[i + 1] * output[i];
+            output[i] = output[i] * nums[i + 1];
             nums[i] = nums[i] * nums[i + 1];
         }
 
