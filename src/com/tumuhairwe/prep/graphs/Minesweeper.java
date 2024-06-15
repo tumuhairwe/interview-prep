@@ -56,8 +56,9 @@ public class Minesweeper {
                             int r = row + i, c = col + j;
                             if (r < 0 || r >= numRows || c < 0 || c < 0 || c >= numCols) continue;
                             if (board[r][c] == 'E') {
-                                squaresToBeRevealed.add(new int[]{r, c});
+                                //squaresToBeRevealed.add(new int[]{r, c});
                                 board[r][c] = REVEALED_BLANK_WITH_NO_ADJACENT_MINES;
+                                updateBoard(board, new int[]{r, c});
                             }
                         }
                     }
