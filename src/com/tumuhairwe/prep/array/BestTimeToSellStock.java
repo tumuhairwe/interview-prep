@@ -37,7 +37,7 @@ public class BestTimeToSellStock {
             return 0;
         }
 
-        // track max-profit and min-value and scan the array while updatting them
+        // track max-profit and min-value and scan the array while updating them
         int maxProfit = 0;
         int buy_price = prices[0];
 

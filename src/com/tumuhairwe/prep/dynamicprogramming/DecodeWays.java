@@ -44,8 +44,8 @@ public class DecodeWays {
         // 1. take care of base case
         // dp[X] caches the answer to "number of way to decode a string of length X"
 
-        dp[0] = 1;  // bcoz there's only 1 way to decode a string of legnth 0
-        dp[1] = s.charAt(0) == '0' ? 0 : 1;   // will epend on whether or not the char is a 0
+        dp[0] = 1;  // bcoz there's only 1 way to decode a string of length 0
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;   // will depend on whether the char is a 0
 
         for(int i = 2; i <= s.length(); i++){
             int oneDigit = Integer.parseInt(s.substring(i - 1, i));   // just current digit
