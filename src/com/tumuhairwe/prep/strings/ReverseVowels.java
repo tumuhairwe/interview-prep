@@ -21,9 +21,11 @@ public class ReverseVowels {
      * Solution Summary
      * - Iterate string with 2 pointers
      * - inner-loop 1: while char at p1 is not a vowel, increment p1 index
-     * - inner-loop 2: while char at p1 is not a vowel, decrement p2 index
+     * - inner-loop 2: while char at p2 is not a vowel, decrement p2 index
      * - if p1 < p2 - swap the chars
      * - increment p1 && decrement p2;
+     *
+     * TC: O(n)
      */
     public static String reverseVowels(String s){
         int p1 = 0;
