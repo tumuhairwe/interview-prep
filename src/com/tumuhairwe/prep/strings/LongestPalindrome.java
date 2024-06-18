@@ -24,6 +24,9 @@ public class LongestPalindrome {
 
     /**
      * Solution Summary
+     * - create char_count array of 26
+     * - for each character that has an even number of chars, add (count of pairs * 2) to total
+     * - if
      *
      */
     public static int longestPalindrome(String s){

@@ -20,7 +20,7 @@ public class Atoi {
      TC: O(n) becoz we need to parse the entire string
      SC: O(1)
      */
-    public int myAtoi(String s) {
+    public static int myAtoi(String s) {
         // 1. trim leading spaces
         String st = s.trim();
         if(st.isEmpty()){

@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.heap;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Given an array of integers, arr, and an integer, k, return the K
@@ -30,21 +31,25 @@ public class KMostFrequentElements {
         int[] arr = new int[]{1,1,1,2,2,3};
         int k = 2;
         int[] result = topKFrequent(arr, k);
+        System.out.println(Arrays.toString(result));
     }
 
     public static int[] topKFrequent(int[] arr, int k) {
-        // these 2 are the same
-        Comparator<Map.Entry<Integer, Integer>> c = (e1, e2) -> e1.getValue() - e2.getValue();
-        //Comparator<Map.Entry<Integer, Integer>> comparator = Comparator.comparingInt(Map.Entry::getValue);
-
-        Comparator<Map.Entry<Integer, Integer>> comp = Comparator.comparingInt(Map.Entry::getValue);
-        PriorityQueue<Map.Entry<Integer,Integer>> topKElements_pq = new PriorityQueue<>(comp);
+        //0. create frequency map
         Map<Integer, Integer> numFrequencyMap = new HashMap<>();
 
         for (int number : arr){
             int existingFreq = numFrequencyMap.getOrDefault(number, 0);
             numFrequencyMap.put(number, existingFreq + 1);
         }
+
+        // these 2 are the same
+        //Comparator<Map.Entry<Integer, Integer>> c = (e1, e2) -> e1.getValue() - e2.getValue();
+        //Comparator<Map.Entry<Integer, Integer>> comparator = Comparator.comparingInt(Map.Entry::getValue);
+
+        //2. put entries of frequency map in pq (sorted by value/frequency) ... when size exceeds K ... poll() off the top most entry
+        Comparator<Map.Entry<Integer, Integer>> comp = Comparator.comparingInt(Map.Entry::getValue);
+        PriorityQueue<Map.Entry<Integer,Integer>> topKElements_pq = new PriorityQueue<>(comp);
 
         for (Map.Entry<Integer, Integer> entry : numFrequencyMap.entrySet()) {
             topKElements_pq.add(entry);
@@ -53,13 +58,14 @@ public class KMostFrequentElements {
             }
         }
 
-        int i = k;
-        int[] result = new int[k];
-        while(!topKElements_pq.isEmpty()){
-            result[--i] = topKElements_pq.poll().getKey();
-        }
-        //List<Integer> results = pq.stream().map(e -> e.getKey()).collect(Collectors.toList());
-        //int[] arr = results.stream().mapToInt(e -> e).toArray();
+        // 3. convert remaining entries of pq into array (if pq is not empty)
+//        int i = k;
+//        int[] result = new int[k];
+//        while(!topKElements_pq.isEmpty()){
+//            result[--i] = topKElements_pq.poll().getKey();
+//        }
+        List<Integer> results = topKElements_pq.stream().map(e -> e.getKey()).collect(Collectors.toList());
+        int[] result = results.stream().mapToInt(e -> e).toArray();
         return result;
     }
 }

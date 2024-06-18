@@ -53,7 +53,7 @@ public class SentenceReversal {
      * Solution Summary:
      * Break chars into SPACE separated chunks
      * - Make those chunks strings
-     * - Store the in LIFE data structure (Stack)
+     * - Store the in LIFO data structure (Stack)
      * - Reconstruct the stack into single String
      * - Return string as char[]
      *
@@ -110,6 +110,17 @@ public class SentenceReversal {
         return new StringBuilder().append(result).toString().trim().toCharArray();
     }
 
+    //TC: O(n)
+
+    /**
+     * Solution summary
+     * - append each character into a StringBuilder
+     * - regex-split the stringBuilder by white space ( \\w ) -> produces string[]
+     * - reconstruct the sentence by iterating the string array (FROM THE END) and building the sentence
+     *      - append arr[i]
+     *      - append space/separator
+     * - convert the reconstructed stringBuilder.toString() , trim the white space off of the ends, return array
+     */
     static char[] reverseImpl2(char[] sentence){
         // 0. construct the string
         StringBuilder stringBuilder = new StringBuilder();

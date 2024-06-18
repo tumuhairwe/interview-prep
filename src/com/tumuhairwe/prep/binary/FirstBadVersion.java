@@ -32,7 +32,7 @@ public class FirstBadVersion {
 
         int goodVersion = mid;
 
-//        while(low < high){
+//        while(low <= high){
 //            mid = low + (high - low) / 2;
 //            if(isBadVersion(mid)){
 //                high = mid;
