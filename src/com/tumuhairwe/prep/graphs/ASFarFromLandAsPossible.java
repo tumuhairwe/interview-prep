@@ -4,8 +4,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * LeetCode 1162 (medium
+ * LeetCode 1162 (medium)
  *
+ * Given an n x n grid containing only values 0 and 1, where 0 represents water and 1 represents land,
+ * find a water cell such that its distance to the nearest land cell is maximized, and return the distance. If no land or water exists in the grid, return -1.
+ *
+ * The distance used in this problem is the Manhattan distance:
+ * the distance between two cells (x0, y0) and (x1, y1) is |x0 - x1| + |y0 - y1|.
  * ref: https://leetcode.com/problems/as-far-from-land-as-possible/
  */
 public class ASFarFromLandAsPossible {
@@ -26,6 +31,24 @@ public class ASFarFromLandAsPossible {
         int d = maxDistance(arr);
         System.out.println(d);
     }
+
+    /**
+     * Solution summary
+     * - create a linkedList/Queue and
+     *      - fill it with the cells that are land
+     *      - create a copy of the grid (to be used to mark each cell as visited
+     *      - count the total number of waterCells (to be used to determine if there's no water at all)
+     * - if there's no water (i.e. waterCell count == 0)  .. return -1;
+     * - if there's its entirely water (i.e. just land) ... return -1
+     * - Start DFS
+     *      - pull from the queue as many times as queue.depth
+     *      - for each cell ... if its out of bounds, skip
+     *                      ... if its within bounds and value = WATER,
+     *                      ... add to queue
+     *                      ... mark coordinates as visited
+     *      - increment distance
+     *  - while loop will exit when queue is empy ... return distance (i.e. all WATER cells have been visited)
+     */
     public static int maxDistance(int[][] grid) {
         int WATER = 0;
         int LAND = 1;

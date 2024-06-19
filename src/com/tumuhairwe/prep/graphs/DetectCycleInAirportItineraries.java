@@ -81,6 +81,13 @@ public class DetectCycleInAirportItineraries {
     /**
      * Gets distance between source & destination
      * Use BFS when given source + destination tasks
+     * Solution summary
+     * - for each cell, if it doesn't exist in the adjList, return UNKNOWN as distance
+     * - check if its not visited yet ... if it is... that means there's a cylce (because we've encountered it before on this path)
+     *
+     * - for each airport (key in adjList map)
+     *      - if destination is in list of that airport's destinations, return 1
+     *      - if not in list, return 1 + recursiveCall()
      */
     static double getDistance(String source, String destination, Map<String, List<String>> adjList_of_airports){
 
