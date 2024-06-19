@@ -22,7 +22,7 @@ public class RotateLinkedList {
         ListNode temp = head;
         while (temp.next != null){
             temp = temp.next;
-            length+;
+            length++;
         }
 
         //2. move the pivot & rotate list (make pivot point to head)
