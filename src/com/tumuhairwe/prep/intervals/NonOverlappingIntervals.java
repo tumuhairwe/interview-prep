@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * LeetCode 435. Non-overlapping Intervals
- * Given an array of intervals intervals where intervals[i] = [starti, endi],
+ * Given an array of intervals intervals where intervals[i] = [start_i, end_i],
  * return the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.
  *
  * ref: https://leetcode.com/problems/non-overlapping-intervals/description/
@@ -20,6 +20,16 @@ public class NonOverlappingIntervals {
         int ddx = eraseOverlapIntervals(i2);
         System.out.println("There are " + ddx + " intervals to be removed");
     }
+
+    /**
+     * Solution summary
+     * - Comparison sort the intervals (based on start time)
+     * - seed previousInterval with the 1st one ... start iterating from the 2nd/current one
+     * - if current_one starts b4 prevous_one ends:
+     *      - removeCounter++, and
+     *      - determine which one ends later ... update previous_one with the later-ending one
+     *  -if there's no overlap, set previous_one to current_one
+     */
     public static int eraseOverlapIntervals(int[][] intervals) {
 
         int removedCount = 0;

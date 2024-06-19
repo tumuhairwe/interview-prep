@@ -12,15 +12,16 @@ import java.util.Queue;
  * - while queue is not empty
  *      - case a: if cell is UNREVEALED_MINE, set to REVEALED_MINE
  *      - case b:
- *          - count mines in neighboring cells
+ *          - count mines in neighboring cells (revealed & unrevealed)
  *          - if mineCount > 0, set cell value to be $mineCount
- *          - if mineCount = 0,
+ *          - if mineCount = 0 (i.e. blank),
  *                  - set cell value to be REVEALED_BLANK_WITH_NO_ADJACENT_MINES
  *                  - check neighbors, if a neighbor is an UNREVEALED_EMPTY_SQ,
  *                  - if neighbor is UNREVEALED_EMPTY_SQ,
  *                      - update board and set cell = REVEALED_BLANK_WITH_NO_ADJACENT_MINES
  *                      - add cell to queue to be popped() in the next iteration
  * TC: O(m * n)
+ * SC: O(m * n)
  */
 public class Minesweeper {
     char UNREVEALED_MINE = 'M';
@@ -45,8 +46,8 @@ public class Minesweeper {
             int row = cell[0];
             int col = cell[1];
 
-            if(board[row][col] == UNREVEALED_MINE){ //M = Mine
-                board[row][col] = REVEALED_MINE;    //X
+            if(board[row][col] == UNREVEALED_MINE){ //M = Unrevealed Mine
+                board[row][col] = REVEALED_MINE;    //X = revealed mine
             }
             else{
                 //1. get number of mines

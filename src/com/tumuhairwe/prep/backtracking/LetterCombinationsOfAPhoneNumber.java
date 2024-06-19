@@ -17,7 +17,7 @@ public class LetterCombinationsOfAPhoneNumber {
         System.out.println(results);
     }
 
-    public static List<String> etterCombinations_backtracking(String digits){
+    public static List<String> letterCombinations_backtracking(String digits){
         //0. base case
         if(digits.length() == 0){
             return new ArrayList<>();
@@ -53,8 +53,8 @@ public class LetterCombinationsOfAPhoneNumber {
             return;
         }
 
-        String currentDigit = String.valueOf(digits.charAt(index));
-        String letters = digitToChatMap.get(Integer.parseInt(currentDigit));
+        Integer currentDigit = Integer.parseInt(digits.charAt(index) + "");
+        String letters = digitToChatMap.get(currentDigit);
         for (char c : letters.toCharArray()){
             letterCombinations_backtrack(digitToChatMap, digits, result, current + c, index + 1);
         }

@@ -1,5 +1,6 @@
 package com.tumuhairwe.prep.array;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -23,9 +24,22 @@ public class LastStoneWeight {
     // putting things into a heap -> O(n) -- n == the number of elements/array
     // getting things from the heap -> O(log_n) operation
     // getting max/min of N #of things from PQ -> O(n log_n) maxHeap.poll()
+
+    /**
+     * Solution summary
+     * - Create a maxHeap (regular minHeap but with comparator.reversed()) to sort by HEAVIEST
+     * - put all stones into maxHeap
+     * - iteratively:
+     *      - while maxHeap.size() > 1
+     *      - remove top 2 stones ... if their weights are not equal, create new stone with the diff and add it to the pq
+     *      - repeat until pq.size() > 1
+     * - if pq is !empty .. reeturn size of last remaining stone, else return 0
+     */
     public static int lastStoneWeight(int[] stones) {
-        Comparator<Integer> comp = Comparator.comparingInt(a -> a);
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(comp.reversed());
+        // same
+        //Comparator<Integer> comp = Comparator.comparingInt(a -> a);
+        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>(comp.reversed());
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 
         // 0. add stones to pq
         for (int num : stones){

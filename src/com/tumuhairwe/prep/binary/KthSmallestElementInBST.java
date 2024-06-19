@@ -1,11 +1,9 @@
 package com.tumuhairwe.prep.binary;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
+ * LeetCode 230 (medium)
  * Given the root of a binary search tree, and an integer k, return the kth smallest value (1-indexed) of all the
  * values of the nodes in the tree.
  *
@@ -19,22 +17,32 @@ import java.util.PriorityQueue;
  * ref: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
  */
 public class KthSmallestElementInBST {
-    public int kthSmallest(TreeNode<Integer> root, int k) {
+
+    /**
+     * Solution summary
+     * - Convert tree into List<Integer> of values ( pre-order: root -> left -> right)
+     * - Put tree-as-list into maxHeap
+     * - while maxHeap.size() > K ... poll()/remove() top of heap
+     * - At the end, heap is of size K -> return top of heap
+     */
+    public Integer kthSmallest(TreeNode<Integer> root, int k) {
         if(root == null){
             return 0;
         }
 
         List<Integer> list = getBST_preOrder_asList(root);
 
-        Comparator<Integer> comp = Comparator.comparingInt(a -> a);
-        PriorityQueue<Integer> pq = new PriorityQueue<>(comp.reversed());
-        pq.addAll(list);
+        // same
+        //Comparator<Integer> comp = Comparator.comparingInt(a -> a);
+        //PriorityQueue<Integer> maxHeap = new PriorityQueue<>(comp.reversed());
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        maxHeap.addAll(list);
 
-        while(pq.size() > k){
-            pq.poll();
+        while(maxHeap.size() > k){
+            maxHeap.poll();
         }
 
-        return pq.poll();
+        return maxHeap.poll();
     }
 
     // preorder: root -> left -> right
