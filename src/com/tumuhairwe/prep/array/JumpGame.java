@@ -7,11 +7,15 @@ package com.tumuhairwe.prep.array;
  *
  * Return true if you can reach the last index, or false otherwise.
  *
- * Solution Summary
+ * Solution Summary (uses greedy algo instead of dp)
  * - Set the target/goal to be 0
- * - Start from the end of the array and iterate backwards
+ * - Start from the end of the array (be greedy) and iterate backwards
  * - keep track of value in nums[i] ---- as jumpDistance
  * - for every iteration, if jumpDistance is >= goalIndex, set goalIndex = i
+ *
+ * ref: https://www.youtube.com/shorts/3pRtOeZzGJ4
+ * ref: https://www.youtube.com/watch?v=Yan0cv2cLy8
+ * ref: https://www.youtube.com/watch?v=Zb4eRjuPHbM
  */
 public class JumpGame {
 
@@ -22,8 +26,10 @@ public class JumpGame {
         nums = new int[]{3,2,1,0,4};
         System.out.println("Can jump? " + canJump(nums));
     }
+
+    //TC: O(n)
     public static boolean canJump(int[] nums){
-        int goalIndex = 0;
+        int goalIndex = 0;  // aka lastGoodIndexPosition
 
         for (int i = nums.length - 1; i >0; i--) {
             int jumpDistance = nums[i];

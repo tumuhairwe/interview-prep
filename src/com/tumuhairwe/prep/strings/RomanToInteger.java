@@ -5,7 +5,9 @@ import java.util.Map;
 
 /**
  * LeetCode 13. Roman to Integer (easy)
- * https://leetcode.com/problems/roman-to-integer/description/
+ *
+ * ref: https://www.youtube.com/watch?v=3jdxYj3DD98
+ * ref: https://leetcode.com/problems/roman-to-integer/description/
  */
 public class RomanToInteger {
 
@@ -14,6 +16,17 @@ public class RomanToInteger {
         System.out.println("Should be 58: " + romanToInt("LVIII"));
         System.out.println("Should be 1994: " + romanToInt("MCMXCIV"));
     }
+
+    /**
+     * Solution summary
+     * - define a Map<Character,Integer> that is the source of truth for conversions (roman to int)
+     * - define int result (to be computed as you iterate thru the char)
+     * - iterate the roman/string for each char
+     *      - if char doesn't exist as key in map, skip
+     *      - if char exists, but its value is < the value of the char at charIndex+1, .. subtract it intValue from result
+     *      - if char exists, else, add/+ it to the resumt (result += map.get( s.charAt(i) ) )
+     *  - return result
+     */
     public static int romanToInt(String s){
         Map<Character, Integer> map = new HashMap<>();
         map.put('I', 1);

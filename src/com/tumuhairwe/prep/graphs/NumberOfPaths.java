@@ -42,8 +42,6 @@ class NumberOfPaths {
             return 1;
         }
 
-        //System.out.println("Current X=" + currentX + ", currentY =" + currentY);
-
         if(currentX >= length || currentY >= length){
             return 0;
         }

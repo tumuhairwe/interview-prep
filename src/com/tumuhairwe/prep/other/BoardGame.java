@@ -7,7 +7,7 @@ import java.util.Map;
  * Given a 4 x 5 board game:
  *  a dice, Map of starting position-x and landing position-y, redirects you to position-Y,
  *  write a function that returns all possible positions you can land on a single turn.
- *  Assum you have a Map for position-X and position-Y
+ *  Assume you have a Map for position-X and position-Y
  */
 public class BoardGame {
 

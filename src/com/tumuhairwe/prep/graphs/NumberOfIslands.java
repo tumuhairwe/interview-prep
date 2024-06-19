@@ -43,7 +43,7 @@ public class NumberOfIslands {
         };
 
         System.out.println("Iterative: There are " + numIslands2Iterative(board) + " islands");
-        System.out.println("Recursive: There are " + numIslandsRecursive(board) + " islands");
+        //System.out.println("Recursive: There are " + numIslandsRecursive(board) + " islands");
     }
     static char WATER = '0';
     static char LAND = '1';
@@ -159,34 +159,40 @@ public class NumberOfIslands {
      * - increment count++;
      * NB: At the end parent for-loop will check if cell is ALDN (i.e all neighboring contigous cells were markeed as water)
      */
-    public static int numIslandsRecursive(char[][] grid){
+    public int numIslands(char[][] grid) {
         int count = 0;
         for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[i].length; j++) {
+            for(int j=0; j<grid[0].length; j++){
                 if(grid[i][j] == LAND){
+                    callBfs(grid, i, j);
                     count++;
-                    callBFS(grid, i, j);
                 }
             }
         }
-
         return count;
     }
 
-    private static void callBFS(char[][] grid, int i, int j) {
-        boolean rowIsOutOfBounds = i < 0 || i >= grid.length;
-        boolean colIsOutOfBounds = j < 0 || j >= grid[0].length;
+    void callBfs(char[][] grid, int row, int col){
+        boolean isRowOutOfBounds = row <0 || row >= grid.length;
+        boolean isColOutOfBounds = col <0 || col >= grid[0].length;
 
-        if(rowIsOutOfBounds || colIsOutOfBounds || grid[i][j] == WATER){
+        if(isRowOutOfBounds || isColOutOfBounds || grid[row][col] == WATER){
             return;
         }
-        // check above, visit it ... recursively call neighbors
-        // goal is to set all adjacent cells to, so we don't see them again
-        grid[i][j] = '0';   // mark it as water == marking it as visited
-        callBFS(grid, i+1, j);
-        callBFS(grid, i-1, j);
 
-        callBFS(grid, i, j+1);
-        callBFS(grid, i, j-1);
+        int[][] offsets = {
+                {1, 0}, {0, 1},
+                {-1, 0}, {0, -1}
+        };
+
+        for(int[] direction : offsets){
+            int x = row + direction[0];
+            int y = col + direction[1];
+
+            //System.out.println("Calling expand on cell ( " +x +", " + y+ ")");
+            if(x >= 0 && x <grid.length && y >=0 && y <grid[0].length){
+                callBfs(grid, x, y);
+            }
+        }
     }
 }

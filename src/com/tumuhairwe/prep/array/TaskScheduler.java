@@ -20,6 +20,12 @@ public class TaskScheduler {
         System.out.println("There are " + result + " minimum number of intervals required to complete all tasks");
     }
 
+    /**
+     * Solution Summary
+     * - Create a char_frequency int[] of all the count of each char,
+     * - and then sort it to have the most frequent task at the end of the array
+     * - Iterate the array (from the end)
+     */
     public static int leastInterval(char[] tasks, int n){
         int SIZE_OF_ALPHABET = 26;
         int LAST_LETTER_OF_ALPHABET = 25;
