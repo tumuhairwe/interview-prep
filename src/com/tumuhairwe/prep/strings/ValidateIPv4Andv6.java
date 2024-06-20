@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ValidateIPv4Andv6 {
     public static void main(String[] args) {
-        String[] valid_ipV4 = new String[]{"172.16.254.1", "192.168.1.0"};
+        String[] valid_ipV4 = new String[]{"256.256.256.256"};
         for (String ipV4 : valid_ipV4){
             System.out.println("Is v4 VALID == " + validIPAddress(ipV4));
         }
@@ -47,7 +47,8 @@ public class ValidateIPv4Andv6 {
             System.out.println("Is v6 VALID == " + validIPAddress(ipV6));
         }
         String[] invalid_ipv6 = new String[]{"2001:0db8:85a3::8A2E:037j:7334",
-                "02001:0db8:85a3:0000:0000:8a2e:0370:7334"};
+                "02001:0db8:85a3:0000:0000:8a2e:0370:7334",
+                "2001:0db8:85a3:0:0:8A2E:0370:7334:"};
         for (String ipV6 : invalid_ipv6){
             System.out.println("Is v6 INVALID == " + validIPAddress(ipV6));
         }
@@ -65,15 +66,13 @@ public class ValidateIPv4Andv6 {
     }
 
     static boolean isValidV4Address(String ip){
-        final int EXACT_NUMBER_OF_TOKENS = 4;
-        boolean validV4 = true;
-
         // 1. split into tokens (with regex)
         String[] tokens = ip.split("\\.");
-        if(tokens.length != EXACT_NUMBER_OF_TOKENS){
+        if(tokens.length != 4 || ip.startsWith(".") || ip.endsWith(".")){
             return false;
         }
-        // 2. validate segment by segment;
+        // 3. validate segment by segment;
+        boolean validV4 = true;
         for (String segment : tokens) {
             validV4 &= isValidV4Segment(segment);
         }
@@ -81,47 +80,21 @@ public class ValidateIPv4Andv6 {
         return validV4;
     }
     static boolean isValidV4Segment(String segment){
-        int MIN_LENGTH = 1;
-        int MAX_LENGTH = 255;
-
-        char[] s = segment.toCharArray();
-        for(int i=0; i<s.length; i++){
-            if(!Character.isDigit(s[i])){
-                return false;
-            }
-            else if(s[i] == '0' && i != 0){   // disallow zero alone (must be '01')
-                return false;
-            }
+        if(segment.isBlank() || segment.length() > 3|| (segment.length() == 1 && segment.charAt(0) =='0')){
+            return false;
         }
-
-        try{
-            int num = Integer.parseInt(segment);
-            if(segment.length() < MIN_LENGTH || num > MAX_LENGTH){
+        for(int i=0; i< segment.toCharArray().length; i++){
+            if(!Character.isDigit( segment.toCharArray()[i])){   // disallow zero alone (must be '01')
                 return false;
             }
-        }
-        catch(Exception e){
-            return false;   // failed to parse number e.g. x1
         }
 
         return true;
     }
     static boolean isValidV6Address(String ip){
-        final int EXACT_NUMBER_OF_TOKENS = 8;
-        final Character V6_SEPARATOR= ':';
-
-        // 0. validate ip address format
-//        int separatorCount = 0;
-//        for (int i = 0; i < ip.length(); i++) {
-//            if(ip.toCharArray()[i] == V6_SEPARATOR){
-//                separatorCount++;
-//            }
-//        }
-
-        String[] tokens = ip.split(":");
-        if(tokens.length != EXACT_NUMBER_OF_TOKENS
-        //|| separatorCount + 1 < tokens.length
-        ){
+        // 0. set up initial state
+        String[] tokens = ip.split("\\:");
+        if(tokens.length != 6 || ip.startsWith(":") || ip.endsWith(":")){
             return false;
         }
 
@@ -134,30 +107,16 @@ public class ValidateIPv4Andv6 {
         return validV6;
     }
     static boolean isValidV6Segment(String segment){
-        int MIN_LENGTH = 1;
-        int MAX_LENGTH = 9999;
-        int MAX_SEGMENT_LENGTH = 4;
+        List<Character> allowableChars = List.of('A', 'B', 'C', 'D', 'E', 'F');
 
         // 0. validate segment length
-        if(segment.length() != 0 && segment.length() > MAX_SEGMENT_LENGTH){
+        if(segment.isBlank() || segment.length() > 4){
             return false;
         }
-
-        try{
-            // 1. if numeric: check boundaries
-            int num = Integer.parseInt(segment);
-            if(segment.length() < MIN_LENGTH || num > MAX_LENGTH){
+        // 1. if non-numeric: -> validate allowable characters
+        for(char c : segment.toUpperCase().toCharArray()){
+            if(Character.isAlphabetic(c) && !allowableChars.contains(c)){
                 return false;
-            }
-        }
-        catch(Exception e){
-            // 1. if non-numeric -> validate allowable characters
-            List<Character> allowableChars = List.of('A', 'B', 'C', 'D', 'E', 'F');
-            char[] s = segment.toCharArray();
-            for(int i=0; i<s.length; i++){
-                if(!Character.isDigit(s[i]) && !allowableChars.contains(Character.toUpperCase(s[i]))){
-                    return false;   // is non-numeric and non-hex
-                }
             }
         }
 
