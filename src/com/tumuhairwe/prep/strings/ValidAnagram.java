@@ -94,7 +94,7 @@ public class ValidAnagram {
      * Solution Summary
      * Use an in[] to track the frequency of each letter in each string
      * - increment or decrement accordingly
-     * - At the end, all frequencies shoulld be zero, if not, they're not anagrams
+     * - At the end, all frequencies should be zero, if not, they're not anagrams
      */
     public boolean isAnagram_freqCounter(String s, String t){
         //0.  base case

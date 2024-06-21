@@ -29,7 +29,7 @@ public class MinimumSizeArraySum {
     static int minSubArray(int target, int[] nums){
         int result = Integer.MAX_VALUE;
 
-        int leftBoundary = 0;
+        int leftPointer = 0;
         //int rightBoundary = 0;
         int running_sum = 0;
 
@@ -37,9 +37,8 @@ public class MinimumSizeArraySum {
             running_sum += nums[rightBoundary];
 
             while (running_sum >= target){
-                result = Math.min(result, rightBoundary+1 - leftBoundary);
-                running_sum -= nums[leftBoundary];
-                leftBoundary++;
+                result = Math.min(result, rightBoundary - leftPointer + 1);
+                running_sum -= nums[leftPointer++];
             }
         }
 

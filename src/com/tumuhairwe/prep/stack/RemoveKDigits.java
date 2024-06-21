@@ -26,27 +26,29 @@ public class RemoveKDigits {
         //1. create a monotonic stack (stack with increasing elements)
         Stack<Character> stack = new Stack<>();
         for(char ch : num.toCharArray()){
+            // remove from stack all characters that are greater that ch
             while (!stack.isEmpty() && stack.peek() > ch && k >0){
                 stack.pop();
                 k--;
             }
 
+            // push ch onto stack -> ensures that all characters under ch are less than ch
             stack.push(ch);
         }
 
-        //2.
+        //2. pop of all extra character (in case the stack.size() is larger than k)
         while (!stack.isEmpty() && k > 0){
             k--;
             stack.pop();
         }
 
-        //3. construct the string to return
+        //3. construct the string to return (by insert every character at the END of the string i.e. offset zero)
         StringBuilder sb = new StringBuilder();
         while (!stack.isEmpty()){
-            sb.insert(0, stack.pop());
+            sb.insert(0, stack.pop());  // should lead to "12345" (where as stack had 5,4,3,2,1 on it)
         }
 
-        //4 if you find the 1st non-zero number (no leading zeros), return the string
+        //4 remove any leading zeros -> return the string (in case stack/string had leading zeros
         for (int i = 0; i < sb.length(); i++) {
             if(sb.charAt(i) != 0){
                 return sb.toString().substring(i, sb.length());

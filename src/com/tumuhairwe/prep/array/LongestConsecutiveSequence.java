@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * Solution Summary
  * - Put all elements into a set
- * - Check if element is beginnning of se (i.e. if num - 1 does not exist in set)
+ * - Check if element is beginning of se (i.e. if num - 1 does not exist in set)
  * - If so, set Length = 0;
  * - while set.contains(num + length) ... increment length & update longes to (max (longest, length)
  * - return longest

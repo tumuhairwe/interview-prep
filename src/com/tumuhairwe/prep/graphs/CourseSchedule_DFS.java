@@ -50,7 +50,7 @@ public class CourseSchedule_DFS {
      * Solution Summary
      * - Create adjacency list of courses (key=courseId, val=List_of_prereqs)
      * - Create array to track visited courses (index=course_id)
-     * - for each course, if its unvisted, call isCyclic(adjList, []visited, courseid)
+     * - for each course, if its unvisited, call isCyclic(adjList, visited[], courseId)
      */
     protected static boolean canFinish(int numCourses, int[][] prerequisites){
         // 0. create and initialize adj list

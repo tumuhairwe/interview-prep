@@ -39,7 +39,7 @@ public class InsertInterval {
      * - Binary search interval 2D array (focus on start index) ....
      * - Find the spot to insert new interval
      * - Binary-search should leave you with a LEFT pointer (i.e. every before that can be copy-pasted into result
-     * - insert inverval after LEFT
+     * - insert interval after LEFT
      * - copy + paste all other/later intervals into result
      * - Loop thru result and perform merging by combining every entry by checking preceding entry
      */

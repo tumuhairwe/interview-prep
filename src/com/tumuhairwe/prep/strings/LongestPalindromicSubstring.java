@@ -1,65 +1,54 @@
 package com.tumuhairwe.prep.strings;
 
 /**
- * Brute Force
- *  a) Generate all substrings of a string
- *  b) Find out if any of them are palindromes
- *      // inner for-loop
- *      // outer-for-loop
- * Time Complexity: n^2 x n == n^3
+ * LeetCode 5 (medium) (409 -- easy asks for LENGTH). This asks for SUBSTRING
+ * Longest palindromic substring
  *
- * Need to keep track of which one is the longest
- *
- * Method 1:
- * - For each word (space is separator)
- * - Find the middle_index ...
- * - Use that to compare if every character (going outwards to the left and the right) is equal
- * e.g. abccba => abc_MID_cba => string.charAt( MID + counter) == string.charAt( MID - counter)
- *
- * e.g. RACECAR == middle_character needs to be accounted for if length == odd number
- *
- * LeetCode 409 (Easy)
- * Summary: Expand around the center
+ * ref: https://leetcode.com/problems/longest-palindromic-substring/description/
  */
 public class LongestPalindromicSubstring {
-
-    public static void main(String[] args) {
-        return;
-    }
-
-    public static String longestPalindromeSusbstring(String input){
-        if(input == null || input.length() == 0){
+    /**
+     * Solution summary
+     * - iterate thru the entire string
+     * - for each char, expand from center (treating char as center)
+     * - when length exceeds maxLength (update maxLength and the substring itself)
+     * // Time Complexity: O(n^2)
+     * // Extra Space Complexity: O(1)
+     */
+    public String longestPalindrome(String s) {
+        if(s == null || s.length() == 0 ){
             return "";
         }
 
-        int start =0;
-        int end = 0;
+        int maxLength = 0;
+        String sub = "";
+        for (int i = 0; i < s.length(); i++) {
 
-        for (int i = 0; i < input.length(); i++) {
-            int length1 = expandFromMiddle(input, i, i);    // if length == odd
-            int length2 = expandFromMiddle(input, i, i+1);  // if length == even
-
-            int len = Math.max(length1, length2);
-            if(len > end -start){
-                start = i - ((len-1)/2);
+            // for even numbered strings
+            int left = i;
+            int right = i;
+            while (left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                if(right - left + 1 > maxLength){
+                    maxLength = right - left +1;
+                    sub = s.substring(left, right + 1);
+                }
+                left--;
+                right++;
             }
 
+            // for odd numbered strings
+            left = i;
+            right = i + 1;
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                if(right - left + 1 > maxLength){
+                    maxLength = right - left +1;
+                    sub = s.substring(left, right + 1);
+                }
+                left--;
+                right++;
+            }
         }
 
-        return input.substring(start, end - 1);   // Time Complexity = n^2
-    }
-    public static int expandFromMiddle(String s, int left, int right){
-        if(s == null || left > right){
-            return 0;
-        }
-
-        while (left >=0 &&
-                right < s.length() &&
-                s.charAt(left) == s.charAt(right)){
-            left--;
-            right++;
-        }
-
-        return right - left + 1;
+        return sub;
     }
 }

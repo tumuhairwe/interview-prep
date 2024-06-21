@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * LeetCode 253
  * Given an array of meeting time intervals of start and end times,
- * find the minimum number of conference roomsm required
+ * find the minimum number of conference rooms required
  *
  * LC Summary:
  * we care about the points in time where we are starting/ending a meeting,
@@ -53,9 +53,7 @@ public class MeetingRoomsII {
         }
 
         // 2. sort both arrays
-        //Arrays.sort(start_times, Comparator.comparingInt(a -> a));
         Arrays.sort(start_times);
-        // Arrays.sort(end_times, Comparator.comparingInt(a -> a));
         Arrays.sort(end_times);
 
         // 3. track used rooms

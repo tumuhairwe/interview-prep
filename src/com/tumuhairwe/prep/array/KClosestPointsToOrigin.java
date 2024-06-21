@@ -25,9 +25,22 @@ public class KClosestPointsToOrigin {
         int[][] result = new int[][]{{-2,2}};
         int k = 1;
 
-        int[][] res = kClosest(arr, k);
+        int[][] res = kClosest_justSort(arr, k);
         System.out.println("The top k are " + Arrays.toString(arr));
         System.out.println("Match == " + Arrays.equals(res, result));;
+    }
+
+    /**
+     * Solution sort
+     * - Implement a comparator that uses the formulaa
+     * - just sort the points with that comparator
+     * - return a copy of that array from O to K
+     */
+    static int[][] kClosest_justSort(int[][] points, int k){
+        Comparator<int[]> comp = Comparator.comparingInt(point -> (point[0] * point[0]) + (point[1] * point[1]));
+        Arrays.sort(points, comp);
+
+        return Arrays.copyOfRange(points, 0, k);
     }
 
     /**
@@ -40,37 +53,46 @@ public class KClosestPointsToOrigin {
      * TC O(NlogK) -- if we don't have store all N points in PQ
      * TC = O(NlogN) = if we have to store all N points in PQ before popping off top x
      */
-    static int[][] kClosest(int[][] points, int k){
-        Comparator<int[]> comparator = (int[] a, int[] b) -> {
-            int aZeroSquared = a[0] * a[0];
-            int aOneSquared = a[1] * a[1];
-
-            int bZeroSquared = b[0] * b[0];
-            int bOneSquared = b[1] * b[1];
-            int a_sum = aOneSquared + aZeroSquared;
-            int b_sum = bZeroSquared + bOneSquared;
-            return Integer.compare(a_sum, b_sum);
-        };
+    static int[][] kClosest_usePQ(int[][] points, int k){
         // 0. create PQ
-        PriorityQueue<int[]> pq = new PriorityQueue<>(comparator);
+        PriorityQueue<Point> pq = new PriorityQueue<>();
 
         // 1. populate pq
         for (int[] point : points){
-            pq.add(point);
+            while (pq.size() > k)
 
             //remove when size increase k
             if (pq.size() > k) {
-                pq.remove();
+                pq.poll();
             }
+
+            int distance = calcDistance(point);
         }
 
         // populate top k array from pq;
         int [][] output = new int[k][2];
-        int count = 0;
-        while (k-- > 0){
-            output[count++] = pq.poll();
+        for (int i = 0; i < k; i++) {
+            Point p = pq.poll();
+            output[i] = new int[]{p.row, p.col};
         }
 
         return output;
+    }
+    static int calcDistance(int[] point){
+        return (point[0] * point[0]) + (point[1] * point[1]);
+    }
+    class Point implements Comparable<Point>{
+        int row;
+        int col;
+        int distance;
+        public Point(int r, int c, int d){
+            this.row = r;
+            this.col = c;
+            this.distance = d;
+        }
+
+        public int compareTo(Point p){
+            return Integer.compare(this.distance, p.distance);  // ascending order
+        }
     }
 }
