@@ -47,7 +47,7 @@ public class ASFarFromLandAsPossible {
      *                      ... add to queue
      *                      ... mark coordinates as visited
      *      - increment distance
-     *  - while loop will exit when queue is empy ... return distance (i.e. all WATER cells have been visited)
+     *  - while loop will exit when queue is empty ... return distance (i.e. all WATER cells have been visited)
      */
     public static int maxDistance(int[][] grid) {
         int WATER = 0;
