@@ -75,4 +75,21 @@ public class BestTimeToSellStock {
 
         return maxProfit;
     }
+
+    public int maxProfit_simple(int[] prices){
+        if(prices.length == 0){
+            return 0;
+        }
+
+        int min_price_so_far = Integer.MAX_VALUE;
+        int max_profit = 0;
+
+        for(int i=0; i< prices.length; i++){
+            min_price_so_far = Math.min(prices[i], min_price_so_far);
+            int profit = prices[i] - min_price_so_far;
+            max_profit = Math.max(profit, max_profit);
+        }
+
+        return max_profit;
+    }
 }
