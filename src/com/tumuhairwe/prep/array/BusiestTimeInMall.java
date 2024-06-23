@@ -10,6 +10,8 @@ package com.tumuhairwe.prep.array;
  * Find the time at which the mall reached its busiest
  * ref: https://www.pramp.com/question/2WBx3Axln1t7JQ2jQq96
  * ref: https://www.youtube.com/watch?v=GiQEKZOn9K4
+ * ref: https://www.youtube.com/watch?v=nSsiyuJI-YY
+ * ref: https://github.com/maiquynhtruong/algorithms-and-problems/blob/master/busiest-time-in-the-mall.java
  */
 public class BusiestTimeInMall {
 
@@ -39,24 +41,35 @@ public class BusiestTimeInMall {
         int ENTRY = 1;
         int EXIT = 0;
 
-        int currentOccupancy = 0;
+        int currentTimestamp = data[0][0];
         int peakTimestamp = 0;
-        int peakCount = 0;
 
-        for (int i = 0; i < data.length; i++) {
-            if(data[i][2] == ENTRY){
-                currentOccupancy += data[i][1];
-            }
-            else if(data[i][2] == EXIT){
-                currentOccupancy =+ data[i][1];
-            }
-            //currentOccupancy = data[i][2] == ENTRY ? currentOccupancy + data[i][1] : currentOccupancy - data[i][1];
-            if(currentOccupancy > peakCount){
-                peakCount = currentOccupancy;
-                peakTimestamp = data[i][0];
+        int currentOccupancy = data[0][1];
+        int maxOccupancy = currentOccupancy;
+
+        for (int i = 1; i < data.length; i++) {
+            if (data[i][0] == currentTimestamp) {
+                // update current occupancy
+                currentOccupancy += data[i][2] == ENTRY ? data[i][1] : -data[i][1];
+            } else {
+                if (currentOccupancy > maxOccupancy) {
+                    maxOccupancy = currentOccupancy;
+                    peakTimestamp = currentTimestamp;
+                }
+
+                // update current occupancy
+                currentOccupancy += data[i][2] == ENTRY ? data[i][1] : -data[i][1];
+                // update current time
+                currentTimestamp = data[i][0];
             }
         }
-        System.out.println("The peakCount was " + peakCount);
+
+            if(currentOccupancy > maxOccupancy){
+                maxOccupancy = currentOccupancy;
+                peakTimestamp = currentTimestamp;
+            }
+
+        System.out.println("The peakCount was " + maxOccupancy);
         return peakTimestamp;
     }
 }

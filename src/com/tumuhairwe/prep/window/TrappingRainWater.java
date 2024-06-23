@@ -2,7 +2,7 @@ package com.tumuhairwe.prep.window;
 
 /**
  * Given
- * LeetCode 76
+ * LeetCode 42 (hard)
  * ref: https://leetcode.com/problems/trapping-rain-water/description/
  * ref: https://www.youtube.com/watch?v=8cqpkCreiwM
  * ref: https://www.youtube.com/watch?v=AFl_VxaO_F0
@@ -20,10 +20,10 @@ public class TrappingRainWater {
     /**
      * Solution summary (pre-processing)
      * - build 2 arrays
-     *      - max_left: track the max height of the wall fom the left up to that index
-     *      - max_right: track the max height of the wall fom the right up to that index
+     *      - max_left: tracks the max height of the wall fom the left up to that index (built forward: i++)
+     *      - max_right: tracks the max height of the wall fom the right up to that index (build backwards: i--)
      * - Calculate trapped water
-     *      - Get the waterLevel i.e. min between max_left[i and max_right[i] -- to get the height of the shorter wall btwen the 2 (at that index)
+     *      - Get the waterLevel i.e. min between max_left[i and max_right[i] -- to get the height of the shorter wall between the 2 (at that index)
      *      - subtract waterLevel from height[i]
      *      - Add that index's watter to the total
      *  - return the total
@@ -43,7 +43,7 @@ public class TrappingRainWater {
             max_right[i] = Math.max(height[i], max_right[i + 1]);   // Max height from the right up to index i
         }
 
-        //2. calculate the trapped water
+        //2. cumulatively calculate the trapped water (diff between max_left and max_right)
         int trappedWater =0;
         for (int i = 0; i < height.length; i++) {
             int waterLevel = Math.min(max_left[i], max_right[i]);   // Water level at index i

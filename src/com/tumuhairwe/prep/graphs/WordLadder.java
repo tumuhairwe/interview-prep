@@ -6,15 +6,30 @@ import java.util.*;
  * LeetCode 127 (hard) Word Ladder
  *
  * ref: https://leetcode.com/problems/word-ladder/description/?envType=problem-list-v2&envId=plakya4j
+ * ref: https://leetcode.com/problems/word-ladder/solutions/4453863/easy-beginner-heavily-commented-6-stepapproach/?envType=problem-list-v2&envId=plakya4j
  */
 public class WordLadder {
+
+    /**
+     * Solution summary
+     * - base case: if endWord doesn't exist in wordList -> its impossible to go to destination i.e. exit
+     * - create Set<String> of words (to avoid TimeLimitExceeded exception if there are too many duplicates in wordList .. look up will be expensive)
+     * - Create and seed BFS queue with Entry(key=beginWord, value=stepCount 1)
+     * - while !que.isEmpty()
+     *      - poll() entry from que (call it currentWord)
+     *      - if currentWord == endWord, we've reached destination -> return entry.step
+     *      - generate permutation for each word by changing one letter at a time ... if permutation is in the wordList,
+     *          -> add to queue and remove from geneBank (to prevent infinite loops)
+     *      - while-loop will continue until end/destination is reached since each permutation will need to be checked against the bank.
+     * - if we exit the loop (i.e. queue becomes empty before destination is reached ... return -1 --- impossible to reach destination)
+     */
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         //0. edge case
         if(!wordList.contains(endWord)){
             return 0;   // there's no way to get to endWord
         }
 
-        //1. store wordList in a set for efficient look up
+        //1. store wordList in a set for efficient look up  --> also avoid TimeLimitExceeded Exceptions when there are lots of duplicate words in wordList
         Set<String> words = new HashSet<>(wordList);
         words.remove(beginWord);
 
@@ -42,7 +57,7 @@ public class WordLadder {
 
                     //2.3 check if it exists in wordList
                     if(words.contains(newWord)){
-                        words.remove(newWord);
+                        words.remove(newWord);  // to prevent re-visiting and creating infinite loops
                         que.add(new AbstractMap.SimpleEntry<>(newWord, step+1));
                     }
                 }

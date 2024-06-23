@@ -1,6 +1,6 @@
 package com.tumuhairwe.prep.array;
 
-// Array elements are store in sequential memory locatoins
+// Array elements are store in sequential memory locations
 public class FindMaxSubArray {
     public static void main(String[] args) {
         int[] arr = new int[]{1, 7, -2, -5, 10, -1};

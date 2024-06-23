@@ -48,7 +48,7 @@ public class RegexParser {
         int textLen = text.length();
         int patLen = pattern.length();
         int p1 = 0;
-        int p2 =0;
+        int p2 = 0;
         boolean ans = true;
         while(p1 < textLen && p2 < patLen){
             if(p2+1 < patLen && pattern.charAt(p2 + 1) == ASTERISK){

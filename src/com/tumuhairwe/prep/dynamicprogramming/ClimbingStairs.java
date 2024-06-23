@@ -30,8 +30,8 @@ public class ClimbingStairs {
 
         // 1. seed 1st 2
         int[] dp = new int[n + 1];
-        dp[1] = 1;
-        dp[2] = 2;
+        dp[0] = 1;
+        dp[1] = 2;
 
         // set value of dp[i] = previous + 2nd_previous
          for (int i = 3; i <= n; i++) {

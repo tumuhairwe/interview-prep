@@ -19,10 +19,8 @@ import java.util.Queue;
  * Solution:
  *  - Use a min heep
  *  ref: https://www.youtube.com/watch?v=L-8LVBPmIpc
+ *  ref: https://www.youtube.com/watch?v=RyrVWP76lVo&t=12s
  *
- *  Solution
- *      - Use 2 pointers (p1 and p2 starting from last-index of either array
- *      ref: https://www.educative.io/courses/grokking-coding-interview-patterns-java/solution-merge-sorted-array
  *
  * Solution:
  * - Initialize 2 pointers (pointing to the last data element in both arrays)
@@ -59,6 +57,13 @@ public class MergeKSortedLists {
     // use 2 pointers
     // TC = O(m + n)  where m & n == the counts of the initialized/populated elements in the 2 arrays
     // SC = O(1) == because we don't use any extra space
+
+    /**
+     * Solution
+     *    - Use 2 pointers (p1 and p2 starting from last-index of either array
+     *    ref: https://www.educative.io/courses/grokking-coding-interview-patterns-java/solution-merge-sorted-array
+     *
+     */
     public static int[] mergeSorted(int[] nums1, int m, int[] nums2, int n){
         // 0. init pointers
         int p1 = m - 1; // $populated_entries_of_nums1.length - 1
@@ -96,6 +101,11 @@ public class MergeKSortedLists {
     }
 
     // use minHeap / PQ
+    //TC:
+    //    - pushing onto the heap K times = O(K log_k)
+    //    - popping n times from the K-sized heap == O(n log_k)
+    // TC: n log K
+    // SC: O (k) -- the heap needs to store things
     public ListNode mergekLists(ListNode[] lists){
         // 0. Create PQ to hold all ListNodes in asc order
         PriorityQueue<ListNode> queue = new PriorityQueue<>(

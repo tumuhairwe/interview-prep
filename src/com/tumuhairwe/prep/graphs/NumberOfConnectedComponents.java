@@ -59,7 +59,7 @@ public class NumberOfConnectedComponents {
         int count = 0;
         Set<Integer> visited = new HashSet<>();
         for (int nodeId = 0; nodeId < n; nodeId++) {
-            if(visited.add(nodeId)){
+            if(visited.add(nodeId)){    // recursively add node to the visited set
                 doDfsRecursively(nodeId, adjList, visited);
                 count++;
             }
@@ -70,7 +70,7 @@ public class NumberOfConnectedComponents {
 
     private static void doDfsRecursively(int nodeId, Map<Integer, List<Integer>> adjList, Set<Integer> visited) {
         for (int destination : adjList.get(nodeId)){
-            if(visited.add(destination)){
+            if(visited.add(destination)){   // if node added successfully, add neighbors
                 doDfsRecursively(destination, adjList, visited);
             }
 

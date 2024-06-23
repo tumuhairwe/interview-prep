@@ -5,6 +5,16 @@ import java.util.*;
 /**
  * LeetCode 433 (medium)
  *
+ * A gene string can be represented by an 8-character long string, with choices from 'A', 'C', 'G', and 'T'.
+ *
+ * Suppose we need to investigate a mutation from a gene string startGene to a gene string endGene where one mutation is defined as one single character changed in the gene string.
+ *
+ * For example, "AACCGGTT" --> "AACCGGTA" is one mutation.
+ * There is also a gene bank bank that records all the valid gene mutations. A gene must be in bank to make it a valid gene string.
+ *
+ * Given the two gene strings startGene and endGene and the gene bank bank, return the minimum number of mutations needed to mutate from startGene to endGene. If there is no such a mutation, return -1.
+ *
+ * Note that the starting point is assumed to be valid, so it might not be included in the bank.
  */
 public class MinimumGeneticMutation {
     public static void main(String[] args) {
@@ -14,13 +24,29 @@ public class MinimumGeneticMutation {
         int result = minMutation(stargGene, endGene, bank);;
         System.out.println("There are " + result + " mutations");
     }
+
+    /**
+     * Solution summary
+     * - preparing the ground
+     *      - Create Set<String> of genes (to prevent TimeLimitExceeded exceptions when there are duplicate genes in the array)
+     *      - Define list of allowable/valid Set<Character> to check against before adding to queue
+     * - edge case: if endGene does not exist in geneBank, return -1 (impossible to reach destination)
+     * - Create and seed BFS que with (key=startGene, step=1)
+     * - while !que.isEmpty()
+     *      - poll() entry from que (call it currentGene)
+     *      - if currentGene == endGene, we've reached destination -> return entry.step
+     *      - generate permutation for currentGene by changing one letter at a time ... if permutation is a gene in the geneBank,
+     *          -> add to queue and remove from geneBank (to prevent infinite loops)
+     *      - while-loop will continue until end/destination is reached since each permutation will need to be checked against the bank.
+     * - if we exit the loop (i.e. queue becomes empty before destination is reached ... return -1 --- impossible to reach destination)
+     */
     public static int minMutation(String startGene, String endGene, String[] bank) {
-        List<Character> allowableGenes = List.of('A', 'C', 'G', 'T');
+        Set<Character> allowableGenes = Set.of('A', 'C', 'G', 'T');
         //0. edge case
         Set<String> genes = new HashSet<>(Arrays.asList(bank));
 
         if(!genes.contains(endGene)){
-            return 0;
+            return -1;
         }
 
         // create que and seed in
@@ -57,15 +83,4 @@ public class MinimumGeneticMutation {
 
         return -1;
     }
-    /*
-    "AACCGGTT"
-"AACCGGTA"
-["AACCGGTA"]
-"AACCGGTT"
-"AAACGGTA"
-["AACCGGTA","AACCGCTA","AAACGGTA"]
-"AACCTTGG"
-"AATTCCGG"
-["AATTCCGG","AACCTGGG","AACCCCGG","AACCTACC"]
-     */
 }

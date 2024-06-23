@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LeetCode 920
+ * LeetCode 920 (hard)
  * Your music player contains N different songs
  * You want ot listen to goal songs (not necessarily different) during you trip
  * To avoid boredom, create a playlist so that
