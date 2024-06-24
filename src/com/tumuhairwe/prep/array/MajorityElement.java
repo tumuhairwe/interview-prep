@@ -10,6 +10,7 @@ package com.tumuhairwe.prep.array;
  *
  * ref: https://leetcode.com/problems/majority-element/description/
  * ref: https://github.com/neetcode-gh/leetcode/blob/main/java/0169-majority-element.java
+ * ref: https://www.youtube.com/watch?v=c1B3LZQtZ_s&t=43s
  */
 public class MajorityElement {
 

@@ -6,7 +6,8 @@ import java.util.Map;
 /**
  * LeetCode 2244 (medium)
  *
- * You are given a 0-indexed integer array tasks, where tasks[i] represents the difficulty level of a task. In each round, you can complete either 2 or 3 tasks of the same difficulty level.
+ * You are given a 0-indexed integer array tasks, where tasks[i] represents the difficulty level of a task.
+ * In each round, you can complete either 2 or 3 tasks of the same difficulty level.
  *
  * Return the minimum rounds required to complete all the tasks, or -1 if it is not possible to complete all the tasks.
  *
@@ -14,7 +15,11 @@ import java.util.Map;
  */
 public class MinimumRoundsToCompleteAllTasks {
 
-    public int minimumRounds(int[] tasks){
+    public static void main(String[] args) {
+        int[] arr = {2,2,3,3,2,4,4,4,4,4};
+        System.out.println("Should be 4: " + minimumRounds(arr));
+    }
+    public static int minimumRounds(int[] tasks){
         //0. create frequency map of tasks
         Map<Integer, Integer> freqMap = new HashMap<>();
         for (int i = 0; i < tasks.length; i++) {

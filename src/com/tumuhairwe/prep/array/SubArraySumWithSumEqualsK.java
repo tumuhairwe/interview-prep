@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * Solution Summary
  * - Create Map<Integer, Integer> where [key=total_sum_of_sub_array, value = count]
- * - iterate thru array and populate Map and seed it with [0, 1] -- bcoz there at least 1 sub-arry with sum = 0
+ * - iterate thru array and populate Map and seed it with [0, 1] -- bcoz there at least 1 sub-array with sum = 0
  * - calculate cumulative sum (as you traverse array)
  * - calculate diff (cumulativeSum - k)
  * - if diff exists in, map -> set as result (to be returned)
