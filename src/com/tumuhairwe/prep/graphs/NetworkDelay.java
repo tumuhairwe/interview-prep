@@ -79,7 +79,7 @@ public class NetworkDelay {
                 int newDistance = distance[currentNode.destination] + neighbor.timeTaken;
 
                 // 4. update distance if larger
-              distance[neighbor.destination] = Math.min(distance[neighbor.destination], newDistance);
+               distance[neighbor.destination] = Math.min(distance[neighbor.destination], newDistance);
 
                 // mark node as visited
                 pq.add(new Node(neighbor.destination,newDistance));

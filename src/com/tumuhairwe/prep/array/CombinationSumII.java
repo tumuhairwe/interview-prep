@@ -13,6 +13,7 @@ import java.util.List;
  *
  * ref: https://leetcode.com/problems/combination-sum-ii/description/
  * ref: https://www.youtube.com/watch?v=IER1ducXujU
+ * ref: https://www.youtube.com/watch?v=rSA3t6BDDwg
  *
  * Solution Summary
  * 1. Simulate adding the number of the current list
@@ -43,7 +44,7 @@ public class CombinationSumII {
 
     // TC = 2^n -> recursive calls
     // SC = O(N)
-    private static void findCombinations(int[] candidates, int index, int target, List<Integer> current, List<List<Integer>> result) {
+    private static void findCombinations(int[] candidates, int position, int target, List<Integer> current, List<List<Integer>> result) {
         // 0. base case
         if(target == 0){
             result.add(current);
@@ -55,13 +56,12 @@ public class CombinationSumII {
             return; // all candidates are positive number so there's no way we'll get a number to add that will reach target
         }
 
-        // DFS (loop thru candidates, check for non-dupes,
-        for (int i = 0; i < candidates.length; i++) {
+        // DFS (loop thru candidates, check for non-dupes)
+        for (int i = position; i < candidates.length; i++) {
             boolean theNumbersAreDifferent = candidates[i] != candidates[i-1];
-            boolean thereIsNoPreviousNumber = i == index;   // starting from this index going forward
-            if(thereIsNoPreviousNumber || theNumbersAreDifferent){ // if the numbers
+            if(theNumbersAreDifferent){
                 current.add(candidates[i]);
-                findCombinations(candidates, i + 1, candidates[i], current, result);
+                findCombinations(candidates, i + 1, target- candidates[i], current, result);
                 current.remove(current.size() - 1);
             }
         }
