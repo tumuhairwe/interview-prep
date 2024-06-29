@@ -15,11 +15,12 @@ import java.util.*;
  * ref: https://www.youtube.com/watch?v=z9e-tGD7Z8g
  * ref: https://www.youtube.com/watch?v=DfljaUwZsOk
  * ref: https://www.youtube.com/watch?v=9BwZAwrYC7c
+ * ref: https://www.youtube.com/watch?v=DfljaUwZsOk
  * ref: https://leetcode.com/problems/sliding-window-maximum/description/
  * ref: https://www.interviewkickstart.com/problems/sliding-window-maximum
  */
 public class SlidingWindowMaximum {
-    // time complexity = I)k * (n-k))
+    // time complexity = (O)k * (n-k))
     LinkedList<Character> d = new LinkedList<>();
     
     PriorityQueue<Integer> pq = new PriorityQueue<>();
@@ -27,85 +28,67 @@ public class SlidingWindowMaximum {
     public static void main(String[] args) {
         int k=3;    // size of sliding window
         int[] input = {1, 3, -1, -3, 5, 3, 6, 7};
-        int windowStart = 0;
-
-        ArrayDeque<Integer> result = new ArrayDeque<>();
-        for (int windowEnd=0; windowEnd<input.length; windowEnd++){
-//            for (int windowStart = 0; windowStart < k; windowStart++) {
-//                Arrays.s
-//                int max = Math.max(input[j], input[j+1]);
-//            }
-        }
-        System.out.println(Arrays.asList(input));
-    }
-
-    // complexity: O(n * k) --- where nn = length of array and k === windowSiee
-    int[] bruteForceMaxSlidingWindow(int[] numsa, int k){
-        int n = numsa.length;
-        int[] result = new int[n - k + 1];
-
-        for (int i = 0; i < n - k; i++) {
-            int max = numsa[i];
-
-            for (int j = 0; j < i + k; j++) {
-                max = Math.max(max, numsa[j]);
-            }
-            result[i] = max;
-        }
-        return result;
+        //System.out.println(Arrays.asList(input));
+        System.out.println(maxSlidingWindow_deque(input, 3));
     }
 
     // Time Complexity = O(n)
     // Space Complexity = O(k)
     int[] maxSlidingWindow(int[] nums, int k){
         // need to be able to pop from both ends of the list
-        LinkedList<Integer> index = new LinkedList<>();
+        LinkedList<Integer> indices_dq = new LinkedList<>();
+        Deque<Integer> que = new ArrayDeque<>();
+
         List<Integer> result = new ArrayList<>();
+        //int numberOfWindows = nums.length - k + 1;
+        //int[] result = new int[numberOfWindows];
 
         for (int i = 0; i < nums.length; i++) {
             // i -k === current_window_size
-            // pop from the head all numbers less than WINDOW_SIZE
-            while (!index.isEmpty() && index.getFirst() <= i - k){
-                index.removeFirst();
+            // if smaller values exist in queue, pop them
+            // 3 remove indices that are out of bounds
+            // 3a) pop from the head all numbers less than WINDOW_SIZE
+            while (!indices_dq.isEmpty() && indices_dq.peekFirst() <= i - k) {
+                indices_dq.pollFirst();    // remove from font of queue
             }
 
-            // pop from the tail
-            while (!index.isEmpty() && nums[i] >= nums[index.getLast()]){
-                index.removeLast();
+            // remove indices whose corresponding value is less than num[i]
+            //3b pop from the tial all number > nums[i]
+            while (!indices_dq.isEmpty() && nums[indices_dq.peekLast()] < nums[i]) {
+                indices_dq.pollLast();
             }
+
+            // add index to window
+            indices_dq.offer(i);
+
+            // add to result
 
             if(i >= k - 1){
-                result.add(nums[index.getFirst()]);
+                result.add(nums[indices_dq.getFirst()]);
             }
         }
-        // same
-        Comparator<Map.Entry<Character, Integer>> c = Comparator.comparingInt(Map.Entry::getValue);
-        Comparator<Map.Entry<Integer, Integer>> entryComparator1 = (Map.Entry<Integer, Integer> entry1, Map.Entry<Integer, Integer> entry2) -> {
-            return entry1.getValue() - entry2.getValue();
-        };
-
         return result.stream().mapToInt(x -> x).toArray();
     }
-    List<Integer> maxSlidingWindow_deque(int[] nums, int k){
+
+    static List<Integer> maxSlidingWindow_deque(int[] nums, int k){
         List<Integer> output = new ArrayList<>();
-        Deque<Integer> deque = new ArrayDeque<>();  // will contain indices
+        Deque<Integer> indices_dq = new ArrayDeque<>();  // will contain indices
         int windowStart = 0, windowEnd = 0;
 
         while (windowEnd < nums.length){
             // pop smaller values from Q
-            while (!deque.isEmpty() && nums[deque.getLast()] < nums[windowEnd]){
-                deque.pop();
+            while (!indices_dq.isEmpty() && nums[indices_dq.getLast()] < nums[windowEnd]){
+                indices_dq.pop();
             }
 
             // remove left val from window
             if(windowStart + 1 > k){
-                deque.removeFirst();
+                indices_dq.removeFirst();
             }
 
             if(windowEnd + 1 > k){
-                output.add(nums[deque.removeFirst()]);
+                output.add(nums[indices_dq.removeFirst()]);
             }
-
         }
         return output;
     }

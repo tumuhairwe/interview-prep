@@ -45,7 +45,7 @@ public class CourseSchedule_TopologicalSort {
     static final int VISITED_STATE = 2;
 
     // 1. initialize adj list and state + result vars based on size of numCourses
-    Map<Integer, List<Integer>> adjList = new HashMap<>();
+    ///Map<Integer, List<Integer>> adjList = new HashMap<>();
     int[] state;  // tracks the state of each course (index = courseId), value = state)
     int[] topologicalOrder; // stores valid ordering of the courses
     int i = 0;
@@ -66,6 +66,7 @@ public class CourseSchedule_TopologicalSort {
         // init vars
         state = new int[numCourses];
         topologicalOrder = new int[numCourses];
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
 
         // 1. create adjacency list
         for(int courseId = 0; courseId < numCourses; courseId++){
@@ -80,7 +81,7 @@ public class CourseSchedule_TopologicalSort {
 
         // 2. start DFS by initializing the Queue with courses with 0 prereqs
         for(int i=0; i < numCourses; i++){
-            if(!dfs_hasNoCycle(i)){
+            if(!dfs_hasNoCycle(i, adjList)){
                 return new int[0];  // return if there's a cycle
             }
         }
@@ -100,7 +101,7 @@ public class CourseSchedule_TopologicalSort {
      *      - mark course as VISITED
      *      - add course topological_sort []
      */
-    boolean dfs_hasNoCycle(int course){
+    boolean dfs_hasNoCycle(int course, Map<Integer, List<Integer>> adjList){
         // 0. check state of course
         if(state[course] == VISITED_STATE){   // 2
             return true;    // no cycle has been encountered
@@ -113,7 +114,7 @@ public class CourseSchedule_TopologicalSort {
 
         // 2 check outgoping edge of each vertex
         for(Integer prereq : adjList.get(course)){
-            if(!dfs_hasNoCycle(prereq)){   // recursive call to check each child
+            if(!dfs_hasNoCycle(prereq, adjList)){   // recursive call to check each child
                 return false;   // we detected a cycle
             }
         }

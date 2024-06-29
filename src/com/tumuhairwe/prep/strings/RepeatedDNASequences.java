@@ -8,7 +8,7 @@ import java.util.*;
  * ... return all the contiguous substrings of length K
  * ... that occur more than 1 in the string
  *
- * Solution:
+ * Solution: (summary: use a freqMap of the dnaString.hashCode() in the sliding window) ... when a dnaString freq > 1, add to Set to return
  * - Iterate over all k-length substring (windowStart = 0, windowEnd = k)
  * - Store the hash of the current substring str.substring(windowStart, windowEnd)
  * - Check the Map<Hash, String> and if the hash has been calculated already, add to result-set

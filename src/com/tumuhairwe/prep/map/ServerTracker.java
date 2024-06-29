@@ -75,15 +75,21 @@ public class ServerTracker {
             cache.put(serverName, new TreeSet<>());
         }
 
+        // find the lowest missing number in sequence e.g. 1,2,3,5,6 -> should break because 4 is missing
         int lowestMissingNumber = Integer.MIN_VALUE;
         int[] nums = cache.get(serverName).stream().mapToInt(Integer::intValue).toArray();
         for (int i = 1; i < nums.length; i++) {
-            if(nums[i] != nums[i -1]){
-                lowestMissingNumber = cache.get(serverName).last() + 1;
+            if(nums[i] != nums[i -1] + 1){  // 1, 2, 3, 4, 6 -> should break because 5 is missing
+                lowestMissingNumber = nums[i];
+                break;
             }
         }
 
-        cache.get(serverName).add(lowestMissingNumber);
+        if(lowestMissingNumber == Integer.MIN_VALUE){   // if all was sequential (no breakage) ... 1,2,3,4,5,6
+            lowestMissingNumber = cache.get(serverName).last() + 1; // 7
+        }
+
+        cache.get(serverName).add(lowestMissingNumber); // server-7
         return serverName + "-"+ lowestMissingNumber;
     }
 
