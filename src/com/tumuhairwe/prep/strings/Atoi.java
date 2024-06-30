@@ -21,52 +21,46 @@ public class Atoi {
      SC: O(1)
      */
     public static int myAtoi(String s) {
-        // 1. trim leading spaces
-        String st = s.trim();
-        if(st.isEmpty()){
+        //0. base case: empty string
+        if(s.trim().length() == 0){
             return 0;
         }
 
-        // 1. check for sign
+        s = s.trim();
+
+        //0. base case: just + or -
+        boolean hasSign = s.charAt(0) == '-' || s.charAt(0) == '+';
+        if(s.length() == 1 && hasSign){
+            return 0;
+        }
+
+        //1 has sign
         int idx = 0;
-        int sign = 1;
-        if(st.charAt(idx) == '-'){
-            sign = -1;
-            idx++;
-        }
-        else if(st.charAt(idx) == '+'){
-            sign = 1;
+        int sign = s.charAt(idx) == '-' ? -1 : 1;
+        if(hasSign){
             idx++;
         }
 
-        //2. check digits
         int parsed = 0;
-        while (idx < st.length()) {
-            char cur = st.charAt(idx);
-            if (!Character.isDigit(cur)) {
-                break; // we've met a non-digit char
-            }
-            else{
-                int digit = cur - '0';
-                parsed = parsed * 10 + digit;    // e.g. 123
+        //2.conversion
+        while (idx < s.length()) {
+            char ch = s.charAt(idx);
 
-                if(sign == 1 && parsed > Integer.MAX_VALUE){
-                    return Integer.MAX_VALUE;
-                }
-                else if(sign == -1 && parsed < Integer.MIN_VALUE){
-                    return Integer.MIN_VALUE;
-                }
+            if(!Character.isDigit(ch)){
+                break;  // "read integer until non-digit char is encountered"
             }
 
-            System.out.println(cur + " __ " + parsed);
+            int digit = Integer.parseInt(ch + "");
+            parsed = (parsed * 10) + digit;
             idx++;
         }
 
-        //4. clamp down into allowable range
-        parsed *= sign; // multiply by 1 or -1 to force into +ve or -ve
 
-        //4. clamp down
-        boolean isInRange = parsed >= Integer.MIN_VALUE && parsed <= Integer.MAX_VALUE;
-        return parsed;
+        int abs = parsed * sign;
+        if(abs >= Integer.MAX_VALUE || abs <= Integer.MIN_VALUE){
+            return sign == 1 ? Integer.MAX_VALUE: Integer.MIN_VALUE;
+        }
+
+        return parsed * sign;
     }
 }

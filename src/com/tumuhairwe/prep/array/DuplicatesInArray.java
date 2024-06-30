@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
  * - Go to that index ... that the value references ... and make it negative
  * - When you encounter it again .... (and its negative) ... that means its already been seen
  *
- * LeetCode 442
+ * LeetCode 442 (medium) Find all duplicates
  * ref: https://www.youtube.com/watch?v=aMsSF1Il3IY
  * ref: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
  */
@@ -38,14 +38,14 @@ public class DuplicatesInArray {
      * Compile Map of frequency of every number is nums (key=number, value=frequency)
      * return only those have a frequency of more than 1
      */
-    public List<Integer> findDuplicates_byCharFrequency(int[] nums) {
-        Map<Integer, Integer> charFreq = new HashMap<>();
+    public List<Integer> findDuplicates_byFrequencyMap(int[] nums) {
+        Map<Integer, Integer> freqMap = new HashMap<>();
         for(Integer n : nums){
-            int existingCount = charFreq.getOrDefault(n, 0);
-            charFreq.put(n, existingCount + 1);
+            int existingCount = freqMap.getOrDefault(n, 0);
+            freqMap.put(n, existingCount + 1);
         }
 
-        List<Integer> duplicates = charFreq.entrySet()
+        List<Integer> duplicates = freqMap.entrySet()
                 .stream()
                 .filter(e -> e.getValue() > 1)
                 .map(e -> e.getKey())
@@ -58,6 +58,8 @@ public class DuplicatesInArray {
      *
      * - Get absolute value of an entry/number
      * - Use that as the index
+     * TC: O(n)
+     * SC: O(1) (if you don't include the result)
      */
     public List<Integer> findDuplicates(int[] nums){
         List<Integer> result = new ArrayList<>();

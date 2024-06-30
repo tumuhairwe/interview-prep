@@ -84,10 +84,12 @@ public class SlidingWindowMaximum {
             // remove left val from window
             if(windowStart + 1 > k){
                 indices_dq.removeFirst();
+                windowStart--;
             }
 
             if(windowEnd + 1 > k){
-                output.add(nums[indices_dq.removeFirst()]);
+                output.add(nums[indices_dq.removeLast()]);
+                windowEnd++;
             }
         }
         return output;

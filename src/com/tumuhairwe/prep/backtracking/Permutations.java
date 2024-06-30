@@ -1,7 +1,9 @@
 package com.tumuhairwe.prep.backtracking;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * LeetCode 46
@@ -18,24 +20,39 @@ public class Permutations {
 
     private static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        function(ans, nums, 0);
+        permute(ans, nums, 0);
         return ans;
     }
 
-    private static void function(List<List<Integer>> ans, int[] nums, int startIndex) {
+    /**
+     * Base case: if startIndex == nums.length -> put convert nums[] -> list
+     *          - Add list to global/results list
+     * - for each entry in nums
+     *      - swap with startIndex (received
+     *      - call permute() with altered arr[]
+     *      - undo the swap
+     * - Thinking is recursive call will
+     *      (for each recursive call until startIndex == nums.length)
+     *      (add the whole collection to the results list in various states of the arr[]
+     * swap and unswap the numbers ... so each successive recusive call can depend on temporarily modified collection
+     *
+     * TC: O(2 ^ n)
+     * SC: O(1) --- If you don't include the results collection
+     */
+    private static void permute(List<List<Integer>> results, int[] nums, int startIndex) {
         if(startIndex == nums.length){
-            List<Integer> list = new ArrayList<>();
-            for (int i=0; i< nums.length; i++){
-                list.add(nums[i]);
-            }
+            List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
+//            for (int i=0; i< nums.length; i++){
+//                list.add(nums[i]);
+//            }
 
-            ans.add(list);
+            results.add(list);
             return;
         }
 
         for (int i = 0; i < nums.length; i++) {
             swap(nums, startIndex, i);
-            function(ans, nums, startIndex + 1);
+            permute(results, nums, startIndex + 1);
             swap(nums, startIndex, i);
         }
     }
