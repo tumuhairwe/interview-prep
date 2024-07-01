@@ -22,19 +22,14 @@ public class FirstAndLastPostionOfElementInArray {
         int[] positions = doBinarySearch(data, target);
         System.out.println(Arrays.toString(positions));
     }
-//    static int[] doFindPositions(int[] data, int target){
-//        int indexOfStartingPosition = doBinarySearch(data, target);
-//
-//        int[] subArray = Arrays.copyOfRange(data, indexOfStartingPosition+1, data.length);
-//
-//        int indexOfEndingPosition = doBinarySearch(subArray, target);
-//        return new int[]{indexOfStartingPosition, indexOfEndingPosition};
-//    }
-    static int[] doBinarySearch(int[] nums, int target){
-//        if(nums.length == 0){
-//            return -1;
-//        }
 
+    /**
+     * Solution summary: Binary search for a range
+     * - do binary search to look for target
+     * - when you find target, call special method to* 10 find range
+     * - searchRange() basically expands around target as long as nums[left] == target or nums[right] == target
+     */
+    static int[] doBinarySearch(int[] nums, int target){
         int left = 0;
         int right = nums.length -1;
         int[] result = new int[]{-1, -1};
@@ -42,8 +37,7 @@ public class FirstAndLastPostionOfElementInArray {
         while (left <= right){
             int midpoint = left + (right - left)/2;
             if(nums[midpoint] == target){
-                findEdges(midpoint, nums, target);
-                break;
+                return findEdges(midpoint, nums, target);
             }
             else if (nums[midpoint] > target) {
                 right = midpoint - 1;
@@ -59,7 +53,7 @@ public class FirstAndLastPostionOfElementInArray {
     public static int[] findEdges(int mid, int[] nums, int target){
         int left = mid;
         int right = mid;
-        int[] result ={left, right};
+        int[] result = new int[]{left, right};
 
         //0. move left as long as nums[left] == target -> update result[0]
         while (left >=0 && nums[left] == target){
