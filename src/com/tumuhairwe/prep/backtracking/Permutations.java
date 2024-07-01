@@ -9,7 +9,8 @@ import java.util.stream.Collectors;
  * LeetCode 46
  * Given an array nums of distinct integers, return all possible permutations (in ay order)
  *
- *
+ * ref: https://leetcode.com/problems/permutations/
+ * ref: https://www.youtube.com/watch?v=FZe0UqISmUw
  */
 public class Permutations {
 
@@ -18,6 +19,7 @@ public class Permutations {
         System.out.println("Resutt = " + permute(nums));
     }
 
+    // diff btwen this and permutation II is that perm-II requires NO duplicates (i.e. uses visited set)
     private static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
         permute(ans, nums, 0);
@@ -42,10 +44,6 @@ public class Permutations {
     private static void permute(List<List<Integer>> results, int[] nums, int startIndex) {
         if(startIndex == nums.length){
             List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
-//            for (int i=0; i< nums.length; i++){
-//                list.add(nums[i]);
-//            }
-
             results.add(list);
             return;
         }
