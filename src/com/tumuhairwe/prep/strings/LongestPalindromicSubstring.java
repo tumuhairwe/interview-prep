@@ -1,5 +1,8 @@
 package com.tumuhairwe.prep.strings;
 
+import java.util.TreeSet;
+import java.util.stream.IntStream;
+
 /**
  * LeetCode 5 (medium) (409 -- easy asks for LENGTH). This asks for SUBSTRING
  * Longest palindromic substring
@@ -7,6 +10,16 @@ package com.tumuhairwe.prep.strings;
  * ref: https://leetcode.com/problems/longest-palindromic-substring/description/
  */
 public class LongestPalindromicSubstring {
+
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+        int[] arr = IntStream.range(0, 10).toArray();
+        IntStream.range(0, 10).forEach(i -> set.add(i));
+
+        System.out.println("First=" + set.first());
+        System.out.println("Last=" + set.last());
+    }
+
     /**
      * Solution summary
      * - iterate thru the entire string
