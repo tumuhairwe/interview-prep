@@ -72,11 +72,49 @@ public class CheapestFlights {
             adjacentNode.cost = newCost;
         }
     }
+    public int findCheapestPrice_correct(int n, int[][] flights, int src, int destination, int k_numberOfStops) {
+        //0. initialize price array to MAX_VALUE
+        int[] prices = new int[n];
+        Arrays.fill(prices, Integer.MAX_VALUE);
+
+        //1. initialize price from src to src
+        prices[src] = 0;
+
+        for (int i = 0; i <= k_numberOfStops; i++) {
+            //2. make a copy of prices
+            int[] prices_copy = new int[n];
+            prices_copy = Arrays.copyOf(prices, prices.length);
+
+            for(int[] trip : flights){
+                int from = trip[0];   // from
+                int dest = trip[1];     // to
+                int price = trip[2];    // price
+
+                // if price is not set yet
+                if(prices[from] == Integer.MAX_VALUE){
+                    continue;
+                }
+
+                if(prices[from] + price < prices_copy[dest]){
+                    prices_copy[dest] = prices[from] + price;
+                }
+            }
+
+            // update global sor of prices
+            prices = prices_copy;
+        }
+
+        if(prices[destination] != Integer.MAX_VALUE){
+            return prices[destination];
+        }
+
+        return -1;  // we were not able to find a price within K stops
+    }
 
     /**
      * BFS = Find shortest path for weighted graphs
      */
-    public int findCheapestPrice_BFS(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
+    public int findCheapestPrice_BFS_wrong(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
         // 0. create adjacency list
         // key = departingCity, value = List<Node> where class Node( id:int -> destination, val:double: cost)
         Map<Integer, List<Node>> city_to_destination_adjList = new HashMap<>();
