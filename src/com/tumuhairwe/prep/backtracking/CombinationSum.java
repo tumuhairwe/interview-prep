@@ -27,27 +27,30 @@ public class CombinationSum {
         System.out.println("Result " + combinationSum(candidates, target));
     }
     static public List<List<Integer>> combinationSum(int[] candidates, int target){
-        List<List<Integer>> answer = new ArrayList<>();
-        List<Integer> curr = new ArrayList<>();
-
-        backtrack(candidates, target, answer, curr, 0);
-        return answer;
+        List<List<Integer>> superset = new ArrayList<>();
+        backtrack(candidates, target, 0, new ArrayList<>(), superset);
+        return superset;
     }
 
-    static private void backtrack(int[] candidates, int target, List<List<Integer>> answer, List<Integer> curr, int index) {
-        if(target == 0){
-            answer.add(new ArrayList<>(curr));
+    static private void backtrack(int[] candidates, int currentSum, int startIndex, List<Integer> subset, List<List<Integer>> superset) {
+        if(currentSum == 0){
+            superset.add(new ArrayList<>(subset));
         }
-        else if(target < 0 || index >= candidates.length){
+        else if(currentSum < 0 || startIndex >= candidates.length){
             return;
         }
         else {
-            curr.add(candidates[index]);
-            backtrack(candidates, target - candidates[index], answer, curr, index);
-
-            Integer lastObject = curr.size() - 1;
-            curr.remove(lastObject);
-            backtrack(candidates, target, answer, curr, index + 1);
+            for (int i = startIndex; i < candidates.length; i++) {
+                subset.add(candidates[i]);
+                backtrack(candidates, currentSum - candidates[i], i, subset, superset);
+                subset.remove(subset.size() - 1);
+            }
+//            curr.add(candidates[index]);
+//            backtrack(candidates, target - candidates[index], answer, curr, index);
+//
+//            Integer lastObject = curr.size() - 1;
+//            curr.remove(lastObject);
+//            backtrack(candidates, target, answer, curr, index + 1);
         }
     }
 }

@@ -16,14 +16,38 @@ public class Permutations {
 
     public static void main(String[] args) {
         int[] nums = new int[]{1,2,3};
-        System.out.println("Resutt = " + permute(nums));
+        System.out.println("Result = " + permute(nums));
     }
 
-    // diff btwen this and permutation II is that perm-II requires NO duplicates (i.e. uses visited set)
+    // diff between this and permutation II is that perm-II requires NO duplicates (i.e. uses visited set)
     private static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> ans = new ArrayList<>();
-        permute(ans, nums, 0);
+        permute_withSwap(ans, nums, 0);
+        //backtrack(nums, new ArrayList<>(), ans);
         return ans;
+    }
+
+    /**
+     * Solution summary (impl similar to subsets)
+     * - add subset to superset if length matches nums.length ... return right away
+     * - iterate thru nums (starting from index 0) ... avoid duplicates
+     * - add nums[i] to subset -> recursively call backtrack -> remove nums[i] from subset
+     */
+    static void backtrack(int[] nums, List<Integer> subset, List<List<Integer>> superset){
+        if(subset.size() == nums.length){
+            superset.add(new ArrayList<>(subset));
+            return;
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            if(subset.contains(nums[i])){
+                continue;
+            }
+
+            subset.add(nums[i]);
+            backtrack(nums, subset, superset);
+            subset.remove(subset.size() - 1);
+        }
     }
 
     /**
@@ -41,7 +65,7 @@ public class Permutations {
      * TC: O(2 ^ n)
      * SC: O(1) --- If you don't include the results collection
      */
-    private static void permute(List<List<Integer>> results, int[] nums, int startIndex) {
+    private static void permute_withSwap(List<List<Integer>> results, int[] nums, int startIndex) {
         if(startIndex == nums.length){
             List<Integer> list = Arrays.stream(nums).boxed().collect(Collectors.toList());
             results.add(list);
@@ -50,7 +74,7 @@ public class Permutations {
 
         for (int i = 0; i < nums.length; i++) {
             swap(nums, startIndex, i);
-            permute(results, nums, startIndex + 1);
+            permute_withSwap(results, nums, startIndex + 1);
             swap(nums, startIndex, i);
         }
     }
