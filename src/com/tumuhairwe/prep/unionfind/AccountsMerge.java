@@ -101,6 +101,11 @@ public class AccountsMerge {
             return parent[x];
         }
 
+        // function to check if x and y are part of the same component
+        public boolean belongs(int x, int y){
+            return find(x) == find(y);
+        }
+
         // implementation of union by rank
         public boolean union(int x, Integer y) {
             int parent_of_x = find(x);
