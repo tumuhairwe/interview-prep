@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * ref: https://www.youtube.com/watch?v=e69C6xhiSQE
+ */
 public class WallsAndGates {
     static int WALL = -1;
     static int GATE = 0;
@@ -32,6 +35,13 @@ public class WallsAndGates {
 
     }
 
+    /**
+     * Solution summary (DFS)
+     * - traverse 2D array and collect all GATES into queue
+     * - while !que.isEmpty() ... for each in-bounds neighbor ... if value
+     *      - INFinity, add to queue
+     *      - set value = rooms[row][col] + 1;
+     */
     public static void wallsAndGates(int[][] rooms) {
         Queue<int[]> que = new LinkedList<>();
 

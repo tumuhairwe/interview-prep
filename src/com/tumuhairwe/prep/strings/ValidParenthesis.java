@@ -16,6 +16,20 @@ package com.tumuhairwe.prep.strings;
  * ref: https://leetcode.com/problems/valid-parenthesis-string/description/?envType=problem-list-v2&envId=plakya4j
  */
 public class ValidParenthesis {
+
+    //SC: O(1)
+    //TC: O(n)
+
+    /**
+     * Solution summary
+     * - track the count of POSSIBILITIES
+     * - if opening ( -> increment both
+     * - if closing ) -> decrement both
+     * - if * --> increment max and decrement min
+     *
+     * - if at any point min is less than zero, reset to 0
+     * - if any point max is less than 0, we can't recover i.e. return false
+     */
     public boolean checkValidString(String s){
         int leftMin = 0;
         int leftMax = 0;
