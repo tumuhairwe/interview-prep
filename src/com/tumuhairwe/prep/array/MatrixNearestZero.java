@@ -26,8 +26,7 @@ public class MatrixNearestZero {
     /**
      * Solution Summary
      *- Loop over 2D array ...
-     *      a) store cells with 0 in queue,
-     *      b) set non-zero to have a distance of 0 (i.e. Entry(x, y, 0)
+     *      a) store all cells in queue (with distance 0) (i.e. Entry(x, y, 0)
      * -do BFS on queue
      *      - for each entry
      *          - if matrix[row][col] == MARKER, set value to entry.distance
