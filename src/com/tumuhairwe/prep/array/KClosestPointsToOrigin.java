@@ -32,7 +32,7 @@ public class KClosestPointsToOrigin {
 
     /**
      * Solution sort
-     * - Implement a comparator that uses the formulaa
+     * - Implement a comparator that uses the formulae
      * - just sort the points with that comparator
      * - return a copy of that array from O to K
      */

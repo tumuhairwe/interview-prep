@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
  *
  * ref: https://leetcode.com/problems/permutations/
  * ref: https://www.youtube.com/watch?v=FZe0UqISmUw
+ * ref: for permutations, combination sum, and subsets
+ *      https://leetcode.com/problems/subsets/solutions/27281/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning/
  */
 public class Permutations {
 

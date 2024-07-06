@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Given a 2D binary grid, which represents a map of '1's (land) and '0's (water) ...
@@ -92,12 +93,6 @@ public class NumberOfIslands {
             Cell current = que.pop();
 
             // check boundary to make sure cell isn't out of bounds || is not WATER
-//            BiFunction<Cell, char[][], Boolean> isWithinBounds = (cell1, ints) ->
-//                    cell.row > 0 && ints.length < cell1.row
-//                            && cell1.col > 0 && ints[cell1.row].length < cell1.col;
-//            if(!isWithinBounds.apply(current, grid)){
-//                continue;
-//            }
             boolean rowIsOutOfBounds = current.row < 0 || current.row >= grid.length;
             boolean colIsOutOfBounds = current.col < 0 || current.row >= grid[current.row].length;
             if(rowIsOutOfBounds || colIsOutOfBounds || grid[current.row][current.col] == WATER){
@@ -106,39 +101,23 @@ public class NumberOfIslands {
 
             // this might unnecessarily add out-of-bound cells to
             List<Cell> neighbors = new ArrayList<>();
-            if(grid[current.row + 1][current.col] == LAND){
-                Cell up = new Cell(current.row + 1, current.col);
-                neighbors.add(up);
-            }
-            else if(grid[current.row - 1][current.col] == LAND){
-                Cell down = new Cell(current.row - 1, current.col);
-                neighbors.add(down);
-            }
-            else if(grid[current.row][current.col + 1] == LAND){
-                Cell right = new Cell(current.row, current.col + 1);
-                neighbors.add(right);
-            }
-            else if(grid[current.row][current.col - 1] == LAND){
-                Cell left = new Cell(current.row, current.col - 1);
-                neighbors.add(left);
-            }
             // alternate implementation of checking all neighbors
-//            int[][] offsets = {
-//                    {0, 1}, {1, 0},
-//                    {0, -1}, {-1, 0}
-//            };
-//            for (int[] offset : offsets){
-//                int rowOffset = offset[0];
-//                int colOffset = offset[1];
-//
-//                // 3. repeat from the neighboring cell (index + 1) until the entire grid is traversed of the word is found
-//                // result = depthFirstSearch(row + rowOffset, col + colOffset, word, index+1, grid);
-//                Cell c = new Cell(current.row + rowOffset, current.col + colOffset);
-//                BiFunction<Cell, char[][], Boolean> isWithinBounds = (cell1, ints) -> ints.length < cell1.row && ints[cell1.row].length < cell1.col;
-//                if(isWithinBounds.apply(c, grid) && grid[c.row][c.col] == LAND){
-//                    neighbors.add(c);
-//                }
-//            }
+            int[][] offsets = {
+                    {0, 1}, {1, 0},
+                    {0, -1}, {-1, 0}
+            };
+            for (int[] offset : offsets){
+                int rowOffset = offset[0];
+                int colOffset = offset[1];
+
+                // 3. repeat from the neighboring cell (index + 1) until the entire grid is traversed of the word is found
+                // result = depthFirstSearch(row + rowOffset, col + colOffset, word, index+1, grid);
+                Cell c = new Cell(current.row + rowOffset, current.col + colOffset);
+                BiFunction<Cell, char[][], Boolean> isWithinBounds = (cell1, ints) -> ints.length < cell1.row && ints[cell1.row].length < cell1.col;
+                if(isWithinBounds.apply(c, grid) && grid[c.row][c.col] == LAND){
+                    neighbors.add(c);
+                }
+            }
 
             neighbors.stream().forEach(n -> {
                 if(!visited.contains(n)){
