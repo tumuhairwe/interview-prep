@@ -33,15 +33,15 @@ public class MinimumMoves {
         //int rows = grid.length;
         //int cols = grid[0].length;
 
-        List<Cell> zeros = new ArrayList<>(), ones = new ArrayList<>();
+        List<int[]> zeros = new ArrayList<>(), ones = new ArrayList<>();
         for(int row = 0; row< grid.length; row++){
             for(int col = 0; col< grid[row].length; col++){
                 int value = grid[row][col];
                 if(value> 1){
-                    ones.add(new Cell(row, col, value));
+                    ones.add(new int[]{row, col, value});
                 }
                 else if(grid[row][col] == 0){
-                    zeros.add(new Cell(row, col, value));
+                    zeros.add(new int[]{row, col, value});
                 }
             }
         }
@@ -50,7 +50,7 @@ public class MinimumMoves {
         return minMoves;
     }
 
-    private static void findMoves(List<Cell> zeros, List<Cell> ones, int startIndex, int moves, int[][]grid){
+    private static void findMoves(List<int[]> zeros, List<int[]> ones, int startIndex, int moves, int[][]grid){
         int sizeOfZeros = zeros.size();
         int sizeOfOnes = ones.size();;
 
@@ -58,32 +58,17 @@ public class MinimumMoves {
             minMoves = Math.min(minMoves, moves);
         }
 
-        Cell zeroCell = zeros.get(startIndex);
+        int[] zeroCell = zeros.get(startIndex);
         for (int index = 0; index < sizeOfOnes; index++) {
-            Cell oneCell = ones.get(index);
-            if(grid[oneCell.x][oneCell.y] > 1  ){   // is over populated
-                grid[oneCell.x][oneCell.y]--;
+            int[] oneCell = ones.get(index);
+            if(grid[oneCell[0]][oneCell[1]] > 1  ){   // is over-populated
+                grid[oneCell[0]][oneCell[1]]--;
 
-                int xxx = Math.abs(zeroCell.x - oneCell.x) +
-                        Math.abs(zeroCell.y - oneCell.y);
-                findMoves(zeros, ones, startIndex+1, moves + xxx, grid);
-                grid[oneCell.x][oneCell.y]++;
+                int val = Math.abs(zeroCell[0] - oneCell[0]) +
+                        Math.abs(zeroCell[1] - oneCell[1]);
+                findMoves(zeros, ones, startIndex+1, moves + val, grid);
+                grid[oneCell[0]][oneCell[1]]++;
             }
-        }
-    }
-
-    static class Cell implements Comparable<Cell>{
-        int x;
-        int y;
-        int value;
-        public Cell(int x, int y, int value){
-            this.x = x;
-            this.y = y;
-            this.value = value;
-        }
-        @Override
-        public int compareTo(Cell o) {
-            return Integer.compare(this.value, o.value);
         }
     }
 }

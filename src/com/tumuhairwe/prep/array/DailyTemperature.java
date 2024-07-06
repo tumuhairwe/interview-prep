@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.array;
 import java.util.Stack;
 
 /**
- * LeetCode 739
+ * LeetCode 739 (medium)
  *
  * Given an array of integers temperatures, representing the daily temps, return an array answer
  * such that answer[i] is the number of days you have to wait after the ith day to get warmer
@@ -20,7 +20,7 @@ public class DailyTemperature {
     }
     /**
      * Solution Summary
-     * \- Use stack to keep track of days & update result[]
+     * - Use stack to keep track of days & update result[]
      * - Iterate thru array and use stack to track day-with-a-higher-temp
      *      - push(day) on stack for each iteration
      *      - update result when you encounter a temp where temp[day] > temp[stack.peek()];

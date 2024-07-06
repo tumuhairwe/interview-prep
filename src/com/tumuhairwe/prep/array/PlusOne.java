@@ -1,9 +1,13 @@
 package com.tumuhairwe.prep.array;
 
+import java.util.Arrays;
+
 /**
  * LeetCode 69 (easy)
  *
- * You are given a large integer represented as an integer array digits, where each digits[i] is the ith digit of the integer.
+ * You are given a large integer represented as an integer array digits,
+ * where each digits[i] is the ith digit of the integer.
+ *
  * The digits are ordered from most significant to least significant in left-to-right order.
  * The large integer does not contain any leading 0's.
  *
@@ -16,19 +20,19 @@ public class PlusOne {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,2,3};
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
 
         arr = new int[]{4,3,2,1};
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
 
         arr = new int[]{9};
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
 
         arr = new int[] {9,9,9};
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
 
         arr = new int[]{9,8,7,6,5,4,3,2,1,0};
-        System.out.println(arr);
+        System.out.println(Arrays.toString(arr));
     }
     /**
      * Solution summary

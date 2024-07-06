@@ -19,7 +19,21 @@ public class RemoveDuplicatesFromSortedArray {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1,1,1,2,2,3};
-        System.out.println(removeDuplicates(arr) + "-> " + Arrays.toString(arr));
+        System.out.println(removeDuplicates2(arr) + "-> " + Arrays.toString(arr));
+    }
+    public static int removeDuplicates2(int[] nums){
+        if (nums.length <= 2){
+            return nums.length;
+        }
+
+        int p1 = 2;
+        for (int p2 = 2; p2 < nums.length; p2++) {
+            if(nums[p2] != nums[p1 - 2]){
+                nums[p1] = nums[p2];
+                p1++;
+            }
+        }
+        return p1;
     }
     static int removeDuplicates(int[] nums){
         if (nums.length <= 2){

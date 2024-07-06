@@ -5,13 +5,20 @@ import java.util.*;
 /**
  * LeetCode 417 (medium). Pacific Atlantic Water Flow
  *
- * There is an m x n rectangular island that borders both the Pacific Ocean and Atlantic Ocean. The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's right and bottom edges.
+ * There is an m x n rectangular island that borders both the Pacific Ocean and Atlantic Ocean.
+ * The Pacific Ocean touches the island's left and top edges, and the Atlantic Ocean touches the island's
+ * right and bottom edges.
  *
- * The island is partitioned into a grid of square cells. You are given an m x n integer matrix heights where heights[r][c] represents the height above sea level of the cell at coordinate (r, c).
+ * The island is partitioned into a grid of square cells.
+ * You are given an m x n integer matrix heights where heights[r][c] represents the height above sea level
+ * of the cell at coordinate (r, c).
  *
- * The island receives a lot of rain, and the rain water can flow to neighboring cells directly north, south, east, and west if the neighboring cell's height is less than or equal to the current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.
+ * The island receives a lot of rain, and the rain water can flow to neighboring cells
+ * directly north, south, east, and west if the neighboring cell's height is less than or equal to the
+ * current cell's height. Water can flow from any cell adjacent to an ocean into the ocean.
  *
- * Return a 2D list of grid coordinates result where result[i] = [ri, ci] denotes that rain water can flow from cell (ri, ci) to both the Pacific and Atlantic oceans.
+ * Return a 2D list of grid coordinates result where result[i] = [ri, ci] denotes that rain water can
+ * flow from cell (ri, ci) to both the Pacific and Atlantic oceans.
  */
 public class PacificAtlanticWaterFlow {
 
@@ -58,15 +65,15 @@ public class PacificAtlanticWaterFlow {
         //2. call DFS on cell on left col and right col coast
         for (int row = 0; row < rows; row++) {
             dfs(row, 0, pacific, Integer.MIN_VALUE, heights);       // facing pacific -> used pacific visited tracker
-            dfs(row, cols -1, atlantic, Integer.MIN_VALUE, heights);    // facing atlantic -> use atlantic visted-tracker
+            dfs(row, cols -1, atlantic, Integer.MIN_VALUE, heights);    // facing atlantic -> use atlantic visited-tracker
         }
 
         //3. find intersection of 2 sets
         List<List<Integer>> intersection = new ArrayList<>();
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                if(atlantic[row][col] && pacific[row][col]){
-                    intersection.add(List.of(row, col));
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if(atlantic[i][j] && pacific[i][j]){
+                    intersection.add(List.of(i, j));
                 }
             }
         }

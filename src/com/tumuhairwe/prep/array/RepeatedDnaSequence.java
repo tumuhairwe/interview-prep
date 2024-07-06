@@ -36,22 +36,22 @@ public class RepeatedDnaSequence {
     public static List<String> findRepeatedDnaSequences(String s) {
         //0. init vars
         Set<String> seenBefore = new HashSet<>();
-        Set<String> result = new HashSet<>();
+        Set<String> repeated = new HashSet<>();
 
         //1. traverse string with 2 pointers
-        int start = 0;
-        for(int end = 10; end <= s.toCharArray().length; end++){
-            String dna = s.substring(start, end);   // startIndex is inclusive, but endIndex is exclusive
+        int DNA_LENGTH = 10;
+        for(int i = 0; i <= s.length()-DNA_LENGTH; i++){
+            String dna = s.substring(i, i + DNA_LENGTH);   // startIndex is inclusive, but endIndex is exclusive
 
             if(seenBefore.contains(dna)){
-                result.add(dna);    // sets don't have duplicates
+                repeated.add(dna);    // sets don't have duplicates
             }
-
-            seenBefore.add(dna);
-            start++;
+            else {
+                seenBefore.add(dna);
+            }
         }
 
-        return new ArrayList<>(result);
+        return new ArrayList<>(repeated);
     }
 
     /**
@@ -59,25 +59,25 @@ public class RepeatedDnaSequence {
      * - Use sliding window to a create frequency map of each 10 character string
      * - return each DNA-string/entry that has a frequency of more than 1
      */
-    public static List<String> findRepeatedDnaSequences_map_based(String s){
-        //0. init vars
-        Map<String, Integer> freqCount = new HashMap<>();   // key = dna_string, val = frequency
-
-        //1. traverse string with 2 pointers
-        int start = 0;
-        for(int end = 10; end <= s.toCharArray().length; end++){
-            String dna = s.substring(start, end);
-
-            int existingCount = freqCount.getOrDefault(dna, 0);
-            freqCount.put(dna, existingCount + 1);
-            start++;
-        }
-
-        List<String> dnaThatOccursMoreThanOnce = freqCount.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 1)
-                .map(entry -> entry.getKey())
-                .collect(Collectors.toList());
-        return dnaThatOccursMoreThanOnce;
-    }
+//    public static List<String> findRepeatedDnaSequences_map_based(String s){
+//        //0. init vars
+//        Map<String, Integer> freqCount = new HashMap<>();   // key = dna_string, val = frequency
+//
+//        //1. traverse string with 2 pointers
+//        int start = 0;
+//        for(int end = 10; end <= s.toCharArray().length; end++){
+//            String dna = s.substring(start, end);
+//
+//            int existingCount = freqCount.getOrDefault(dna, 0);
+//            freqCount.put(dna, existingCount + 1);
+//            start++;
+//        }
+//
+//        List<String> dnaThatOccursMoreThanOnce = freqCount.entrySet()
+//                .stream()
+//                .filter(entry -> entry.getValue() > 1)
+//                .map(entry -> entry.getKey())
+//                .collect(Collectors.toList());
+//        return dnaThatOccursMoreThanOnce;
+//    }
 }
