@@ -9,6 +9,7 @@ package com.tumuhairwe.prep;
  * Given the two integers numBottles and numExchange, return the maximum number of water bottles you can drink.
  *
  * ref: https://leetcode.com/problems/water-bottles/description/
+ * ref: https://www.youtube.com/watch?v=V4d6xym5efE
  * ref: https://leetcode.com/problems/water-bottles/solutions/5431087/easy-beats-100-java-python-c/
  */
 public class WaterBottles {

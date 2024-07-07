@@ -14,6 +14,9 @@ import java.util.*;
  * The answer to the jth query is the size of the smallest interval i such that left_i <= queries[j] <= right_i.
  * If no such interval exists, the answer is -1.
  * Return an array containing the answers to the queries.
+ *
+ * ref: https://www.youtube.com/watch?v=5hQ5WWW5awQ
+ * ref: https://leetcode.com/problems/minimum-interval-to-include-each-query/?envType=problem-list-v2&envId=plakya4j
  */
 public class MinInterval {
     public static void main(String[] args) {
