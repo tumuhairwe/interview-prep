@@ -41,7 +41,7 @@ public class LongestCommonSubsequence {
         }
     }
 
-    private static int iterative_dp(String s1, String s2){
+    private static int iterative_dp_bottom_up(String s1, String s2){
         int[][] dp = new int[s1.length()][s2.length()];
 
         for (int i = s1.length(); i > 0; i--) {
@@ -56,5 +56,34 @@ public class LongestCommonSubsequence {
         }
 
         return dp[0][0];
+    }
+    public int iterative_dp_top_down(String text1, String text2) {
+        // 0. create dynamic programming grid
+        int[][] dpGrid = new int[text1.length() + 1][text2.length() + 1];
+
+        // 1. iterate thru 2D array of both strings & populate 2D array
+        for(int row = 1; row <= text1.length(); row++){
+            for(int col = 1; col <= text2.length(); col++){
+
+                int answer = 0;
+
+                // if corresponding characters of each cell are the same ... add 1
+                if(text1.charAt(row - 1) == text2.charAt(col - 1)){
+                    answer = 1 + dpGrid[row - 1][col - 1];
+                }
+                // otherwise, they must be different
+                else{
+                    int cellAbove = dpGrid[row - 1][col];
+                    int cellBelow = dpGrid[row][col - 1];
+
+                    answer = Math.max(cellAbove, cellBelow);
+                }
+
+                dpGrid[row][col] = answer;
+            }
+        }
+
+        // 3. problem's answer is in dp_grid[0][0]. Return it.
+        return dpGrid[text1.length()][text2.length()];
     }
 }

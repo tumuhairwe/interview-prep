@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.dynamicprogramming;
 import java.util.Arrays;
 
 /**
- * LeetCode 322 (esay)
+ * LeetCode 322 (medium)
  * Given an array coins, representing  coins of different denominations
  * and an integer amount representing the total amount of money
  *
@@ -13,6 +13,7 @@ import java.util.Arrays;
  * You may assume that you have an infinite number of each kind of coin
  *
  * ref: https://leetcode.com/problems/coin-change/
+ * ref: https://www.youtube.com/watch?v=H9bfqozjoqs
  */
 public class CoinChange {
     public static void main(String[] args) {
@@ -29,7 +30,7 @@ public class CoinChange {
     }
     static int coinChange(int[] coins, int amount){
         // 0. handle base case
-        if(amount < 0 || coins.length == 0 || coins == null){
+        if(amount < 0 || coins.length == 0){
             return 0;
         }
 
