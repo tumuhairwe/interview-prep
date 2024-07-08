@@ -23,7 +23,7 @@ public class WordDictionary {
      * Solution summary
      * - Create a backing map keyed by integer/length-of-string, value=List_of_string with that length
      * - onAdd() : add the word to by index=length-of-word to the map (value=List<String>
-     * - onSearch() : if map doesn't have any word with that  lenghth, return false
+     * - onSearch() : if map doesn't have any word with that  length, return false
      *              : get all Strings of that length from the map and call isMatch() --
      *                  should return true if (char != WILDCARD && word1.char(charIndex) != str.char(wordIndex)
      */
@@ -64,5 +64,20 @@ public class WordDictionary {
         }
 
         return true;
+    }
+
+    public static void main(String[] args) {
+        String[] actions = {"","addWord","addWord","addWord","search","search","search","search"};
+        String[] searchTerms = {"","bad", "dad", "mad", "pad", "bad",".ad", "b.."};
+
+        WordDictionary dictionary = new WordDictionary();
+        dictionary.addWord("bad");
+        dictionary.addWord("dad");
+        dictionary.addWord("mad");
+
+        System.out.println(dictionary.search("pad"));
+        System.out.println(dictionary.search("bad"));
+        System.out.println(dictionary.search(".ad"));
+        System.out.println(dictionary.search("b.."));
     }
 }
