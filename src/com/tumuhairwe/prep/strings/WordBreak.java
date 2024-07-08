@@ -14,6 +14,61 @@ import java.util.*;
 public class WordBreak {
 
     /**
+     * Solution summary (simple BFS)
+     * - Create & seed que with 0 (will track indices until index = s.length())
+     * - Create visitedSet (will track all indices visited to avoid repetition)
+     * - create Set<String> representation of wordDictionary (non-dupe
+     *
+     * - while !que.isEmpty()
+     *      - poll currentIndex from queue
+     *      - if visited, skip
+     *      - iterate string from currentIndex + 1 to s.length()
+     *      - if substring is in wordDictSet
+     *          - if i == str.length() -> we've reached en-of-string, return
+     *          - else ... add currentIndex to queOfIndices
+     *      - add currentIndex to visitedIndices
+     *   - return false is you exit the while loop and haven't found a word in wordDictSet & que is empty
+     * TC: O(n^3 + m * k)
+     * - where n == length of the string s
+     * and m = size() of wordDict
+     * and k is the average length of the word in worddict
+     *
+     * BFS could cost up to n^3 (since we have to iterate over n nodes in front of the current node) of which there
+     * are n. (for each node, we have to create a n^2 substring)
+     * We spent O(m * k) to creat the set of words
+     */
+    public boolean wordBreak(String str, List<String> wordDict){
+        Deque<Integer> queOfIndices = new ArrayDeque<>();
+        queOfIndices.add(0);
+
+        Set<Integer> visitedIndices = new HashSet<>();
+        Set<String> wordDictSet = new HashSet<>(wordDict);
+
+        while (!queOfIndices.isEmpty()){
+            Integer currentIndex = queOfIndices.pop();
+            if(visitedIndices.contains(currentIndex)){
+                continue;
+            }
+
+            for (int i = currentIndex + 1; i <= str.length(); i++) {
+                String substring = str.substring(currentIndex, i);
+                if(wordDictSet.contains(substring)){
+                    if (i == str.length()){
+                        return true;
+                    }
+                    else {
+                        queOfIndices.push(currentIndex);
+                    }
+                }
+            }
+
+            visitedIndices.add(currentIndex);
+        }
+
+        return false;
+    }
+
+    /**
      * Solution summary (BFS with memo)
      * - Create a cache map to store already calculated state
      * - Change the wordDict from List to Map (to avoid duplicates)

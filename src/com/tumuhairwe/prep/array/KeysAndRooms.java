@@ -1,8 +1,6 @@
 package com.tumuhairwe.prep.array;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * LeetCode 841 (medium)
@@ -44,6 +42,23 @@ public class KeysAndRooms {
         }
 
         return true;
+    }
+
+    public boolean canVisitAllRooms_recursiveDfs(List<List<Integer>> rooms){
+        Set<Integer> visitedRooms = new HashSet<>();
+        recurse(0, visitedRooms, rooms);
+
+        return visitedRooms.size() == rooms.size();
+    }
+    void recurse(Integer currentRoom, Set<Integer> visitedRooms, List<List<Integer>> rooms){
+        if(visitedRooms.contains(currentRoom)){
+            return; // avoid infinite loop
+        }
+
+        visitedRooms.add(currentRoom);
+        for(Integer nextRoom : rooms.get(currentRoom)){
+            recurse(nextRoom, visitedRooms, rooms);
+        }
     }
 
     boolean[] roomState;

@@ -56,7 +56,7 @@ public class SetMatrixZeros {
         //2. zero out those rows & cols
         for(int i=0; i<matrix.length; i++){
             for(int j=0; j<matrix[0].length; j++){
-                if(zeroRows[i] == true || zeroCols[j] == true){
+                if(zeroRows[i] || zeroCols[j]){
                     matrix[i][j] = 0;
                 }
             }
