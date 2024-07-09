@@ -14,6 +14,7 @@ import java.util.*;
  * for each meeting check if a prev meeting has finished before curr started, using min heap;
  *
  *  ref: https://leetcode.com/problems/meeting-rooms-ii
+ *  ref: https://www.youtube.com/watch?v=FdzJmTCVyJU
  */
 public class MeetingRoomsII {
 

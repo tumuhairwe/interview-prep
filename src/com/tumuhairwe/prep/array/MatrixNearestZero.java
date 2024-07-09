@@ -9,6 +9,7 @@ import java.util.Queue;
  * Given an m x n binary matrix mat, return the distance of the nearest 0 for each cell.
  *
  * The distance between two adjacent cells is 1.
+ * ref: https://leetcode.com/problems/01-matrix/description/
  */
 public class MatrixNearestZero {
 
@@ -49,7 +50,7 @@ public class MatrixNearestZero {
             }
         }
 
-        //1. do BFS on queu
+        //1. do BFS on queue
         while (!que.isEmpty()){
             Entry entry = que.peek();
 
