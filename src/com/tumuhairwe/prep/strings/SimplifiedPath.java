@@ -28,26 +28,60 @@ public class SimplifiedPath {
         });
     }
 
+    /**
+     * Solution
+     * - split string into parts (by /)
+     * - if part == '..' -> pop from LinkedList (if !stack.isEmpty())
+     * - if part is '.', skip
+     * - put part onto LinkedList
+     * - reconstruct path from LinkedList (using / as separator)
+     * - return reconstructed path
+     */
     public static String simplifyPath(String input){
-        Deque<String> stack = new LinkedList<>();
+        Deque<String> linkedList = new LinkedList<>();
         Set<String> skippable = new HashSet<>(Arrays.asList("..", ".", ""));
 
         // build stack
         for (String dir : input.split("/")){
-            if (dir.equals("..") && !stack.isEmpty()){
-                stack.pop();
+            if (dir.equals("..") && !linkedList.isEmpty()){
+                linkedList.pop();
             }
             else if(!skippable.contains(dir)){
-                stack.push(dir);
+                linkedList.push(dir);
             }
         }
 
         // build return value
         String result = "";
-        for(String dir  : stack){
+        for(String dir  : linkedList){
             result = "/" + dir + result;
         }
 
         return result.isEmpty() ? "/" : result;
+    }
+
+    public String simplifyPath_impl2_linkedList(String path) {
+        //0. create vars
+        Deque<String> linkedList = new LinkedList<>();
+        List<String> skippable = List.of("..", ".", "");
+
+        //1 translate path into linked List
+        String[] parts = path.split("/");
+        for(String dir : parts){
+            if(!linkedList.isEmpty() && dir.equals("..")){
+                linkedList.pop();
+            }
+            else if(!skippable.contains(dir)){
+                linkedList.push(dir);
+            }
+        }
+
+        //2. reconstruct path from linkedList
+        String result = "";
+        while (!linkedList.isEmpty()) {
+            result = result + "/" + linkedList.pollLast();
+        }
+
+        return result == "" ? "/" : result;
     }
 }
