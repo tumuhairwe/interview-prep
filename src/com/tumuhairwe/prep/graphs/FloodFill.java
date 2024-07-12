@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * LeetCode 733
+ * LeetCode 733 (medium)
  * Given an image (grid that is m x n) where  image[i][j] represents the pixel value of the image.
  * You are also given three integers sr, sc, and color. You should perform a flood fill on the image starting from the pixel image[sr][sc].
  *

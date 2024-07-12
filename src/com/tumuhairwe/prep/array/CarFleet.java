@@ -49,24 +49,30 @@ public class CarFleet {
      */
     public int carFleet(int target, int[] position, int[] speed){
         // we need map in reverse sorted order
+        //1. store pairs of position & speed in reverse sorted order i.e. biggest (position) first ... smallest last
         Comparator<Integer> comp = Comparator.reverseOrder();
-        Map<Integer, Integer> map = new TreeMap<>(comp);    // map that sorts by key (position) ... but reverse
+        TreeMap<Integer, Integer> map = new TreeMap<>(comp);
         for (int i = 0; i < position.length; i++) {
             map.put(position[i], speed[i]);
         }
 
+        //2. create monotonic stack to keep track of time-to-reach target
         Stack<Double> stack = new Stack<>();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()){
             int pos = entry.getKey();
             int spd = entry.getValue();
+
+            //3. skip any entry that has a time less than the stack.peek()
             double timeToReachTarget = (double)(target - pos) / spd;
             if(!stack.isEmpty() && timeToReachTarget <= stack.peek()){
                 continue;
             }
 
+            //4. if time-to-reach-target is greater than stack.peek() ... add it to stack
             stack.push(timeToReachTarget);
         }
 
+        // return total size of stack (i.e. all cars moving at separate speeds) i.e. not crashed
         return stack.size();
     }
 

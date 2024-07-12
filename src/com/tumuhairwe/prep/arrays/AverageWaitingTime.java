@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.arrays;
 
 /**
+ * LeetCode 1701 (medium) Average waiting tie
  * ref: https://leetcode.com/problems/average-waiting-time/description/
  * ref: https://www.youtube.com/watch?v=2fN7uIgCIBA
  */

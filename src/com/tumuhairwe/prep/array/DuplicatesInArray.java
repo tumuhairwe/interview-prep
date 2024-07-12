@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
  *
  * LeetCode 442 (medium) Find all duplicates
  * ref: https://www.youtube.com/watch?v=aMsSF1Il3IY
+ * ref: https://www.youtube.com/watch?v=Y8x0iAVEITo
  * ref: https://leetcode.com/problems/find-all-duplicates-in-an-array/description/
  */
 public class DuplicatesInArray {
