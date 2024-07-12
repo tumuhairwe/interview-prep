@@ -1,5 +1,9 @@
 package com.tumuhairwe.prep.array;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Given a list of non-negative integers, representing the amount of money in each
  * house, determine the maximum amount of money you can rob to night
@@ -37,8 +41,37 @@ public class HouseRobber {
         System.out.println(r);
     }
 
+    /**
+     * Solution summary (use dynamic programming & iterate the array from the end)
+     * - initialize last 2 entries
+     * ref: https://leetcode.com/problems/house-robber/editorial/?envType=problem-list-v2&envId=plakya4j
+     */
+    public int rob_dp(int[] nums){
+        if(nums.length == 0){
+            return 0;
+        }
+
+        //base case initialize last 2 entries in 1D array
+        int[] maxRobbedAmount = new int[nums.length + 1];
+        maxRobbedAmount[nums.length] = 0;
+        maxRobbedAmount[nums.length - 1] = nums[nums.length - 1];
+
+        //1. iterate 1D array from the end
+        for (int i = nums.length - 1; i >=0 ; i--) {
+            int prev = maxRobbedAmount[i + 1];
+            int curr = maxRobbedAmount[i + 2] + nums[i];
+            maxRobbedAmount[i] = Math.max(curr, prev);
+        }
+
+        return maxRobbedAmount[0];
+    }
+
     // dp memoization template
     public static int rob(int[] nums){
+        List<String> list = new ArrayList<>();
+        String ss = list.stream()
+                .map(str -> new StringBuilder(str).append("##").toString())
+                .collect(Collectors.joining());
         // 0. check base case (array.length == 0)
         if(nums.length == 0){
             return 0;

@@ -12,7 +12,7 @@ import java.util.Map;
 public class RangeSum {
 
     private int[] prefixSums;
-    // implementation 2 uses pre-calculated sum in a map 9as opposed to array
+    // implementation 2 uses pre-calculated sum in a map as opposed to array
     private Map<Integer, Integer> prefixSumMap;    // map of key=array_index, value=sumUpUntilThatPoint
     public RangeSum(int[] nums){
         int cumulativeSum = 0;

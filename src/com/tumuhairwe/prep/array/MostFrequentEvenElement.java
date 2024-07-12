@@ -51,7 +51,7 @@ public class MostFrequentEvenElement {
             }
         }
 
-        // "if there's a tire, return the smallest one"
+        // "if there's a tie, return the smallest one"
         final int maxFrequency = maxFreq;
         Optional<Integer> smallestKeyWithHighestFrequency = freqMap.entrySet().stream()
                 .filter(e -> e.getValue() == maxFrequency)
