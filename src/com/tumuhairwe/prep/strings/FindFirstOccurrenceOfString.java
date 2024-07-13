@@ -28,7 +28,11 @@ public class FindFirstOccurrenceOfString {
         }
 
         // this solution does not use a sliding window and relies on the substring
-        for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
+        for (int i = 0; i <= haystack.length() - needle.length(); i++) {
+//            if(haystack.charAt(i) != needle.charAt(0)){
+//                continue;
+//            }
+
             int endIndex = i + needle.length(); // define end index
             if(haystack.substring(i, endIndex).equals(needle)){
                 return i;

@@ -26,14 +26,14 @@ public class RemoveDuplicatesFromSortedArray {
             return nums.length;
         }
 
-        int p1 = 2;
+        int uniqueCount = 2;
         for (int p2 = 2; p2 < nums.length; p2++) {
-            if(nums[p2] != nums[p1 - 2]){
-                nums[p1] = nums[p2];
-                p1++;
+            if(nums[p2] != nums[uniqueCount - 2]){
+                nums[uniqueCount] = nums[p2];
+                uniqueCount++;
             }
         }
-        return p1;
+        return uniqueCount;
     }
     static int removeDuplicates(int[] nums){
         if (nums.length <= 2){
