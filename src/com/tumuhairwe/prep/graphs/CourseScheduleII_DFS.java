@@ -14,7 +14,7 @@ import java.util.*;
  */
 public class CourseScheduleII_DFS {
     // 0. init constants
-    static final int UNVISITED_STATE = 0;
+    //static final int UNVISITED_STATE = 0;
     static final int VISITING_STATE = 1;
     static final int VISITED_STATE = 2;
 
@@ -22,7 +22,7 @@ public class CourseScheduleII_DFS {
     Map<Integer, List<Integer>> adjList = new HashMap<>();
     int[] state;  // tracks the state of each course (index = courseId), value = state)
     int[] result; // stores valid ordering of the courses
-    int i = 0;
+    int idx = 0;
 
     // combines DFS + Cycle detection
     // TC = O(V + E) .. where v = number-of-courses, v = edges that are traversed (only once)
@@ -37,15 +37,15 @@ public class CourseScheduleII_DFS {
             adjList.put(courseId, new ArrayList<>());
         }
         for(int[] p : prerequisites){
-            int preReq = p[1];
             int course = p[0];
+            int preReq = p[1];
 
             adjList.get(course).add(preReq);
         }
 
         // 2. start DFS by initializing the Queue with courses with 0 prereqs
         for(int i=0; i < numCourses; i++){
-            if(!dfs(i)){
+            if(hasCycle(i)){
                 return new int[0];  // return if there's a cycle
             }
         }
@@ -54,29 +54,28 @@ public class CourseScheduleII_DFS {
     }
 
     // 3. do DFS
-    boolean dfs(int course){
+    boolean hasCycle(int course){
         // 3.0. check for base case of DFS
         if(state[course] == VISITED_STATE){   // 2
-            return true;    // no cycle has been encountered
+            return false;    // no cycle has been encountered
         }
         else if(state[course] == VISITING_STATE){ // 1
-            return false;    // we have encountered a cycle (i.e. course on path already is being visited again)
+            return true;    // we have encountered a cycle (i.e. course on path already is being visited again)
         }
 
-        // 3.1 udpate state of course
+        // 3.1 update state of course
         // state must be UNVISITED == 0;
         state[course] = VISITING_STATE;
 
-        // 3.2 check outgoping edge of each vertex
+        // 3.2 check outgoing edge of each vertex
         for(Integer prereq : adjList.get(course)){
-            if(!dfs(prereq)){   // recursive call to check each child
+            if(hasCycle(prereq)){   // recursive call to check each child
                 return false;   // we detected a cycle
             }
         }
 
         state[course] = VISITED_STATE;    // 2
-        result[i] = course;
-        ++i;
+        result[idx++] = course;
         return true;
     }
 }

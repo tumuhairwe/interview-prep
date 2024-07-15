@@ -34,7 +34,6 @@ public class Subsets {
         //2 backtrack
         backtrack(nums, 0, results, new ArrayList<>());
 
-        // return
         return  results;
     }
 
@@ -45,18 +44,18 @@ public class Subsets {
      * - add nums[i] to array -> recursively call backtrack -> remove recently added num
      */
     public void backtrack(int[] nums, int startIndex, List<List<Integer>> superset, List<Integer> subset){
-        //0. add subset to super set
+        //3. add subset to super set
         superset.add(new ArrayList<>(subset));
 
-        //1.iterate from startIndex
+        //4.iterate from startIndex
         for (int i = startIndex; i < nums.length; i++) {
-            //0 add to set
+            //5 add to set
             subset.add(nums[i]);
 
-            // backtrack
+            // 6. backtrack
             backtrack(nums, i+1, superset, subset);
 
-            // remove from set
+            // 7. remove from set
             subset.remove(subset.size() - 1);
         }
     }
