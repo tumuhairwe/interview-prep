@@ -13,11 +13,23 @@ import java.util.stream.Collectors;
 public class OpenLock {
     //TC: O(1000)
     //SC: O(1000)
+
+    /**
+     * Solution summary (BFS)
+     * - Create visited set of deadEnds ... (if startingPoint is a deadEnd, return)
+     * - Create deque + seed with startingPoint
+     * - Create queue and seed with Pair(key=combo, val=stepCount)
+     * - while !que.isEmpty() ->
+     *      - pull from que
+     *      - if combo/key is visited, skip
+     *      - if combo/key == target, return stepCount
+     *      - get all possible combo permutations from currentState
+     *      - for reach possibleCombo, -> add to que if unvisited
+     */
     public int openLock(String[] deadends, String target){
         //0. declare vars
         String startingPoint = "0000";
-        Set<String> deadendSet = Arrays.stream(deadends).collect(Collectors.toSet());
-        Set<String> visit = new HashSet<>(deadendSet);
+        Set<String> visit = Arrays.stream(deadends).collect(Collectors.toSet());
 
         if(visit.contains(startingPoint)){
             return -1;
@@ -68,5 +80,7 @@ public class OpenLock {
             mid = String.valueOf(((Integer.parseInt(String.valueOf(ch)) - 1 ) + 10) % 10 );
             comboSet.add(pre + mid + post);
         }
+
+        return comboSet;
     }
 }
