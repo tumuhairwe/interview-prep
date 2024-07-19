@@ -18,11 +18,11 @@ import java.util.TreeMap;
 public class MaximumProfitInJobScheduling {
     public int jobScheduling(int[] startTime, int[] endTime, int[] profit){
         //0. base case: if the lengths of the 3 arrays are not equals, return false
-        if(startTime.length == 0|| (startTime.length != endTime.length || endTime.length != profit.length){
+        if(startTime.length == 0|| (startTime.length != endTime.length || endTime.length != profit.length)){
             return 0;
         }
 
-        //1. create and populate 2D jobs[]
+        //1. create and populate 2D jobs[]  {start, end, profit}
         int n = startTime.length;;
         int[][] jobs = new int[n][3];
         for (int i = 0; i < n; i++) {

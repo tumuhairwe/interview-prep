@@ -82,7 +82,7 @@ public class AccountsMerge {
 
     static class UnionFind{
         private int[] parent;
-        private int[] rank;
+        private int[] rank; //the rank of each node
 
         public UnionFind(int size){
             rank = new int[size];
