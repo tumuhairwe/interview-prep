@@ -25,8 +25,8 @@ public class NearestExitFromEntranceInMaze {
      * - while !que.isEmpty()
      *      - pull() cell from queue (set row, col and distance)
      *      - if its on the boarder & !and entrance -> return distance
-     *      - check all 4 neighborss
-     *      - if a neigbor is an EMPTY_CELL and is within bounds, add to queue (with disance = distance + 1)
+     *      - check all 4 neighbors
+     *      - if a neighbor is an EMPTY_CELL and is within bounds, add to queue (with disance = distance + 1)
      *      - mark cell as WALL (aka visited)
      */
     public int nearestExit(char[][] maze, int[] entrance){
@@ -40,10 +40,7 @@ public class NearestExitFromEntranceInMaze {
         //1. mark as visited
         maze[entrance[0]][entrance[1]] = WALL;
 
-        //2. init number of steps
-        //int numberOfSteps = 0;
-
-        //3. do BFS starting from entrance
+        //2. do BFS starting from entrance
         while (!queue.isEmpty()){
             Cell current_cell = queue.poll();;
             //numberOfSteps++;
@@ -52,14 +49,14 @@ public class NearestExitFromEntranceInMaze {
             int col = current_cell.col;
             int dist = current_cell.distance;
 
-            // if its on the boarder, we found exit -> return
+            //3. if it's on the boarder, we found exit -> return
             boolean isOnBorder = row == 0 || row == maze.length - 1 || col == 0 || col == maze[0].length;
             boolean isEntrance = row == entrance[0] && col == entrance[1];
             if(isOnBorder && !isEntrance){
                 return dist;
             }
 
-            // find all neighbors from current-cell
+            //4. find all neighbors from current-cell
             int[][] offsets = {
                     {1, 0}, {0, 1},
                     {-1, 0}, {0, -1}
@@ -72,10 +69,10 @@ public class NearestExitFromEntranceInMaze {
                 boolean isColInBounds = proposedCol >=0 && proposedCol < maze[0].length;
                 boolean isEmptyCell = maze[proposedRow][proposedCol] == EMPTY_CELL;
                 if(isRowInBounds && isColInBounds && isEmptyCell){
-                    // add to queue
-                    queue.add(new Cell(proposedRow, proposedCol, dist + 1));
+                    // 5. add to queue
+                    queue.add(new Cell(proposedRow, proposedCol, dist + 1));    // increment stepcOUNT
 
-                    /// mark as visited
+                    //6. mark as visited
                     maze[proposedRow][proposedCol] = WALL;
                 }
             }

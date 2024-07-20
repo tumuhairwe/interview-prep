@@ -49,13 +49,13 @@ public class MinimumGeneticMutation {
             return -1;
         }
 
-        // create que and seed in
+        // create que and seed it
         Queue<Map.Entry<String, Integer>> que = new LinkedList<>();
-        que.offer(new AbstractMap.SimpleEntry<>(startGene, 1));
+        que.offer(new AbstractMap.SimpleEntry<>(startGene, 1)); //key=gene, val=stepCount
 
         while (!que.isEmpty()) {
             Map.Entry<String, Integer> p = que.poll();
-            System.out.println(p.getKey());
+
             String gene = p.getKey();
             int step = p.getValue();
 

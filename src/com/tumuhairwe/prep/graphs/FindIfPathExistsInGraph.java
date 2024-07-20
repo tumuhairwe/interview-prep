@@ -47,7 +47,6 @@ public class FindIfPathExistsInGraph {
             return true;
         }
 
-        Set<Integer> visited = new HashSet<>();
         Map<Integer, List<Integer>> adjList = new HashMap<>();
 
         // 1. create adjList
@@ -62,7 +61,8 @@ public class FindIfPathExistsInGraph {
             adjList.get(dest).add(src);
         }
 
-        // 1. do DFS on each neighbor & collect visted set
+        // 1. do DFS on each neighbor & collect visited set
+        Set<Integer> visited = new HashSet<>();
         doDfs(adjList, source, visited);
 
         //n2. return true if destination is visited
