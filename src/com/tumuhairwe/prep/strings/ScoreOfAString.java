@@ -1,5 +1,12 @@
 package com.tumuhairwe.prep.strings;
 
+/**
+ * LeetCode 3110 (easy)
+ * You are given a string s. The score of a string is the sum, of the absolute diff
+ * between the ASCII values of the adjacent characters
+ *
+ * ref: https://leetcode.com/problems/score-of-a-string/description/
+ */
 public class ScoreOfAString {
     public static void main(String[] args) {
         System.out.println("Should be 13 " + scoreOfSstring("hello"));
