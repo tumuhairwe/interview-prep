@@ -37,14 +37,20 @@ public class RearrangingFruits {
      */
     public static long minCost(int[] basket1, int[] basket2){
         TreeMap<Integer, Integer> countMap = new TreeMap<>();
-        for(int b1 : basket1){
-            countMap.merge(b1, 1, Integer::sum);
-            //countMap.merge(b1, 1, (Integer a, Integer b) -> a+b );
-        }
+//        for(int b1 : basket1){
+//            countMap.merge(b1, 1, Integer::sum);
+//            //countMap.merge(b1, 1, (Integer a, Integer b) -> a+b );
+//        }
+//
+//        for(int b2 : basket2){
+//            countMap.merge(b2, -1, Integer::sum);
+//            //countMap.merge(b2, 1, (Integer a, Integer b) -> a+b );
+//        }
 
-        for(int b2 : basket2){
-            countMap.merge(b2, -1, Integer::sum);
-            //countMap.merge(b2, 1, (Integer a, Integer b) -> a+b );
+        // same as above
+        for (int i = 0; i < basket1.length; i++) {
+            countMap.put(basket1[i], countMap.getOrDefault(basket1[i], 0) - 1);
+            countMap.put(basket2[i], countMap.getOrDefault(basket2[i], 0) - 1);
         }
 
         List<Integer> swaps = new ArrayList<>();
@@ -72,22 +78,23 @@ public class RearrangingFruits {
     // https://leetcode.com/problems/rearranging-fruits/solutions/3147420/greedy-solution-in-java/
     public static long minCost_impl2(int[] basket1, int[] basket2) {
         //0. create a freqMap for both bastkets into 1
-        Map<Integer, Integer> freqMap = new HashMap<>();
+        // goal is to have a freqMap of even
+        Map<Integer, Integer> freqMap = new HashMap<>();    // key=num, val=frequency
         long min = Long.MAX_VALUE;
 
         for (int i = 0; i < basket2.length; i++) {
             freqMap.put(basket1[i], freqMap.getOrDefault(basket1[i], 0) + 1);
             freqMap.put(basket2[i], freqMap.getOrDefault(basket2[i], 0) - 1);
 
-            min = Math.min(min, basket1[i]);
-            min = Math.min(min, basket2[i]);
+            //0.1 while simulateneously calculating the min
+            //min = Math.min(min, basket1[i]);
+            min = Math.min(Math.min(min, basket1[i]), basket2[i]);
         }
 
-        //1.
-        long result = 0;
+        //1. populate the swaps
         List<Integer> swaps = new ArrayList<>();
         for(int key : freqMap.keySet()){
-            // if frequency !even .. can't be swapped
+            //1.1 if there's a frequency that's !even .. can't be swapped -> return -1;
             if(freqMap.get(key) % 2 != 0){
                 return -1;
             }
@@ -101,8 +108,10 @@ public class RearrangingFruits {
             }
         }
 
-        //2.
+        //2. sort the swaps
         Collections.sort(swaps);
+
+        long result = 0;
         for (int i = 0; i < (swaps.size() / 2); i++) {
             result += Math.min(2 * min, swaps.get(i));
         }

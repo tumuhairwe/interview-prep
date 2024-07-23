@@ -3,7 +3,7 @@ package com.tumuhairwe.prep.segmenttree;
 /**
  * Given an integer array nums. Handle multiple queries as follows
  * - update(int index, int val) - updates the value of the element in numbs
- * - calculate the sum of the elements of nums between indices lewft and right (inclusive)
+ * - calculate the sum of the elements of nums between indices left and right (inclusive)
  *
  * LeetCode 307
  * ref: https://leetcode.com/problems/range-sum-query-mutable/description/
@@ -25,15 +25,15 @@ public class SegmentTree {
     }
 
     // TC = I(n)
-    public static SegmentTree build(int[] nums, int L, int R){
-        if (L == R){
-            return new SegmentTree(nums[L],L, R );
+    public static SegmentTree build(int[] nums, int left, int right){
+        if (left == right){
+            return new SegmentTree(nums[left], left, right );
         }
 
-        int mid = (L + R) / 2;
-        SegmentTree root = new SegmentTree(0, L, R);
-        root.left = build(nums, L, mid);
-        root.right = build(nums, mid + 1, R);
+        int mid = (left + right) / 2;
+        SegmentTree root = new SegmentTree(0, left, right);
+        root.left = build(nums, left, mid);
+        root.right = build(nums, mid + 1, right);
         root.sum = root.left.sum + root.right.sum;
         return root;
     }
