@@ -1,7 +1,6 @@
 package com.tumuhairwe.prep.graphs;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * LeetCode 547 (medium)
@@ -35,9 +34,10 @@ public class NumberOfProvinces {
         int[][] region = new int[][]{
                 {1,1,0},{1,1,0},{0,0,1}
         };
-        System.out.println("Should be 2 -> " + findCircleNum(region));
+        System.out.println("Should be 2 -> " + findCircleNum_bfs(region));
     }
-    public static int findCircleNum(int[][] connectedEdges){
+
+    public static int findCircleNum_bfs(int[][] connectedEdges){
         Set<Integer> visited = new HashSet<>();
         int count = 0;
 
@@ -58,7 +58,7 @@ public class NumberOfProvinces {
     }
 
     private static void doDFS(int[][] connectedEdges, Set<Integer> visited, int cityId) {
-        // if a for each city in prpvinces, if UNVISITED and CONNECTED ... visit
+        // if a for each city in provinces, if UNVISITED and CONNECTED ... visit
         for (int neighbor = 0; neighbor < connectedEdges.length; neighbor++) {
             if(connectedEdges[cityId][neighbor] == IS_CONNECTED
                     && !visited.contains(neighbor)){
@@ -66,5 +66,93 @@ public class NumberOfProvinces {
                 doDFS(connectedEdges, visited, neighbor);
             }
         }
+    }
+
+    int CONNECTED = 1;
+    public int findCircleNum(int[][] edges) {
+        int numProvinces = 0;
+        int numEdges = edges.length;
+
+        boolean[] visited = new boolean[numEdges];
+        for(int i=0; i<numEdges; i++){
+            if(!visited[i]){
+                visited[i] = true;
+                numProvinces++;
+                bfs(edges, visited, i);
+            }
+        }
+
+        return numProvinces;
+    }
+
+    void bfs(int[][] adjList, boolean[] visited, int nodeId){
+        //1. do dfs
+        Queue<Integer> que = new ArrayDeque<>();
+        que.offer(nodeId);
+        visited[nodeId] = true;
+
+        while (!que.isEmpty()) {
+            int node = que.poll();
+
+            for (int neighbor = 0; neighbor < adjList.length; neighbor++) {
+                if(!visited[neighbor] && adjList[node][neighbor] == CONNECTED){
+                    visited[neighbor] = true;
+                    que.offer(neighbor);
+                }
+            }
+        }
+    }
+    /**
+     * Solution summary (UnionFind impl)
+     * - create parent[] & fill with UNCONNECTED
+     * - loop thru 2D array ... and union(i, j)
+     * - after 2D array loop, loop thru parent[] and count all nodes still UNCONNECTED
+     * - return count
+     */
+    int[] parent;
+    int UNCONNECTED = -1;
+    int findCircleNum_unionFind(int[][] connectedEdges){
+        int CONNECTED = 1;
+
+        //0. declare vars
+        parent = new int[connectedEdges.length];
+        Arrays.fill(parent, UNCONNECTED);
+
+        // 1. union all connected edges
+        for (int i = 0; i < connectedEdges.length; i++) {
+            for (int j = 0; j < connectedEdges[0].length; j++) {
+                if(connectedEdges[i][j] == CONNECTED){
+                    union(i, i);
+                }
+            }
+        }
+
+        //3. find all unconnected nodes in parent
+        int count = 0;
+        for (int i = 0; i < parent.length; i++) {
+            if(parent[i] == UNCONNECTED){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    int find(int nodeA){
+        while (parent[nodeA] != UNCONNECTED){
+            nodeA = find(parent[nodeA]);
+        }
+
+        return nodeA;
+    }
+    boolean union(int nodeA, int nodeB){
+        int parentOfA = find(nodeA);
+        int parentOfB = find(nodeB);
+
+        if(parentOfA != parentOfB){
+            parent[parentOfA] = parentOfB;
+        }
+
+        return true;
     }
 }

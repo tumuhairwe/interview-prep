@@ -32,28 +32,31 @@ import java.util.Arrays;
  * output: [1, 4]
  *
  * ref: https://leetcode.com/problems/redundant-connection/
+ * ref: https://leetcode.com/problems/redundant-connection/solutions/2278999/union-find-concept-and-multiple-solutions-java/
  */
 public class RedundantConnections {
 
     public static void main(String[] args) {
-        int[][] edges = new int[][]{{1,2},{1,3},{2,3}};
+        int[][] edges = new int[][]{{1, 2}, {1, 3}, {2, 3}};
         int[] connections = findRedundantConnection(edges);
         System.out.println("The redundant connections are " + Arrays.toString(connections));
     }
+
     static int[] parent;
 
     /**
      * Solution Summary
+     * ref: https://www.youtube.com/watch?v=FXWRE67PLL0
      * - Implement UnionFind
-     *      - create an int[] parent
-     *      - findParent() -> a node's parent is the value at the [x-1] position
-     *          - if its not x, recursively call find parent of parent (findParent( parent[x -1] )
-     *      - union() -> assign node_A's parent to parent[ indexOfParentOfNode_B)
+     * - create an int[] parent
+     * - findParent() -> a node's parent is the value at the [x-1] position
+     * - if its not x, recursively call find parent of parent (findParent( parent[x -1] )
+     * - union() -> assign node_A's parent to parent[ indexOfParentOfNode_B)
      * - loop thru the 2D array of edges
-     *      - if both nodes have different parents, union them
-     *      - if both nodes have the same parent, return that edge
+     * - if both nodes have different parents, union them
+     * - if both nodes have the same parent, return that edge
      */
-    public static int[] findRedundantConnection(int[][] edges){
+    public static int[] findRedundantConnection(int[][] edges) {
         // 0. initialize parent
         parent = new int[edges.length];
 
@@ -63,14 +66,13 @@ public class RedundantConnections {
         }
 
         // 2. for each edge, if both nodes have the same parent, return it ... else union them ( union(nodeA, nodeB)) & return empty array
-        for (int[] edge : edges){
+        for (int[] edge : edges) {
             // if they have they same parent
             int nodeA = edge[0];
             int nodeB = edge[1];
-            if(find(nodeA) == find(nodeB)){
+            if (find(nodeA) == find(nodeB)) {
                 return edge;    // the node is pointing to itself -> return self-pointing edge
-            }
-            else {  // else nodeA.parent != nodeB.parent -> union them
+            } else {  // else nodeA.parent != nodeB.parent -> union them
                 union(edge[0], edge[1]);
             }
         }
@@ -78,9 +80,9 @@ public class RedundantConnections {
         return new int[2];
     }
 
-    public static int find(int x){
+    static int find(int x) {
         // 0. if x is has a parent -> return it
-        if(x == parent[x - 1]){
+        if (x == parent[x - 1]) {
             return x;
         }
 
@@ -89,7 +91,15 @@ public class RedundantConnections {
     }
 
     // Union both nodes (i.e. set nodeB's parent be nodeA
-    public static void union(int nodeA, int nodeB){
-        parent[find(nodeB) - 1 ] = find(nodeA);
+    static boolean union(int nodeA, int nodeB) {
+        int parentOfA = find(nodeA);
+        int parentOfB = find(nodeB);
+
+        if (parentOfA == parentOfB) { // they already have the same parent
+            return false;
+        }
+
+        parent[parentOfB - 1] = parentOfA;
+        return true;
     }
 }

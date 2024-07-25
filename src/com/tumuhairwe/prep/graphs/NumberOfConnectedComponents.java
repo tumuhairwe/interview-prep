@@ -76,4 +76,57 @@ public class NumberOfConnectedComponents {
 
         }
     }
+
+    /**
+     * Solution summary
+     * - Create adjList of edges
+     * - Create boolean visited[] of size n
+     * - perform DFS for each univisited node & mark all neighbors as visited
+     * - increment count by 1;
+     * - return count when for loop exits
+     */
+    public int countComponents_impl2(int n, int[][] edges) {
+        //0. create adjList
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for(int[] edge : edges){
+            adjList.putIfAbsent(edge[0], new ArrayList<>());
+            adjList.putIfAbsent(edge[1], new ArrayList<>());
+
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]);
+        }
+
+        //
+        int count = 0;
+        boolean[] visited = new boolean[n];
+        for(int node=0; node < n; node++){
+            if(!visited[node]){
+                doDfs(adjList, visited, node);
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    void doDfs(Map<Integer, List<Integer>> adjList, boolean[] visited, int nodeId){
+        Queue<Integer> que = new ArrayDeque<>();
+        que.add(nodeId);
+
+        while (!que.isEmpty()) {
+            int n = que.poll();
+            visited[n] = true;
+
+            if(!adjList.containsKey(n)){
+                continue;
+            }
+
+            for(int neighbor : adjList.get(n)){
+                if(!visited[neighbor]){
+                    que.add(neighbor);
+                    visited[neighbor] = true;
+                }
+            }
+        }
+    }
 }

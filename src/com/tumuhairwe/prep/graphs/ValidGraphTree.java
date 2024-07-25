@@ -65,4 +65,55 @@ public class ValidGraphTree {
         }
         return true;
     }
+
+    // TC: O(E + V)
+    // SC: (E + V)
+
+    /**
+     * Solution summary
+     * - a graph is not valid it has < n-1 nodes (not full connected)
+     * - a graph is not valid it has > n-1 nodes (has cycle)
+     * - Create adjList
+     * - create and seed queue with startingNode (0)
+     * - create and seed seen/visited set with startingNode (0)
+     * - Perform DFS on each unvisited node's neighbors
+     * - At the end, all visitedNodes.size() should equal n-1 (if the graph is valid)
+     */
+    public boolean validTree_queueBasedIMpl(int n, int[][] edges) {
+        if(edges.length != n - 1){
+            return false;
+        }
+
+        //0. create adjList
+        Map<Integer, List<Integer>> adjList = new HashMap<>();
+        for(int[] edge : edges){
+            adjList.putIfAbsent(edge[0], new ArrayList<>());
+            adjList.putIfAbsent(edge[1], new ArrayList<>());
+
+            adjList.get(edge[0]).add(edge[1]);
+            adjList.get(edge[1]).add(edge[0]);
+        }
+
+        Set<Integer> seen = new HashSet<>();
+        Queue<Integer> que = new ArrayDeque<>();
+        que.add(0);
+        seen.add(0);
+
+        while (!que.isEmpty()) {
+            int node = que.poll();
+
+            if(!adjList.containsKey(node)){
+                continue;
+            }
+
+            for(int neighbor : adjList.get(node)){
+                if(!seen.contains(neighbor)){
+                    seen.add(neighbor);
+                    que.offer(neighbor);
+                }
+            }
+        }
+
+        return seen.size() == n;
+    }
 }
