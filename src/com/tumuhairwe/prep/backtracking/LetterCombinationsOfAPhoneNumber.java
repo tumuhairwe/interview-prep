@@ -44,7 +44,7 @@ public class LetterCombinationsOfAPhoneNumber {
         return  result;
     }
 
-    private static void letterCombinations_backtrack(Map<Integer, String> digitToChatMap, String digits, List<String> result, String current, int index) {
+    private static void letterCombinations_backtrack(Map<Integer, String> digitToCharMap, String digits, List<String> result, String current, int index) {
         if(current.length() == digits.length()){
             result.add(current);
             return;
@@ -54,9 +54,9 @@ public class LetterCombinationsOfAPhoneNumber {
         }
 
         Integer currentDigit = Integer.parseInt(digits.charAt(index) + "");
-        String letters = digitToChatMap.get(currentDigit);
+        String letters = digitToCharMap.get(currentDigit);
         for (char c : letters.toCharArray()){
-            letterCombinations_backtrack(digitToChatMap, digits, result, current + c, index + 1);
+            letterCombinations_backtrack(digitToCharMap, digits, result, current + c, index + 1);
         }
     }
 
@@ -68,15 +68,14 @@ public class LetterCombinationsOfAPhoneNumber {
      * - for each character in the mapped string,
      */
     public static List<String> letterCombinations_traversal(String digits) {
-        Queue<String> output = new LinkedList<>();
-
         // 0. base case
         if(digits.length() == 0){
             return new ArrayList<>();
         }
 
-        //1. seed with ""
-        output.add("");
+        //1. create que and seed with ""
+        Queue<String> results = new LinkedList<>();
+        results.add("");
 
         // 1. define mapping
         String[] charMap = new String[]{
@@ -91,14 +90,14 @@ public class LetterCombinationsOfAPhoneNumber {
             //int index = Character.getNumericValue(currentDigit);
             int number = Integer.parseInt(digits.charAt(i) + "");
 
-            while (output.peek().length() == i) {   // goal: make sure to produce perms with same length as input
-                String permutation = output.remove();
+            while (results.peek().length() == i) {   // goal: make sure to produce perms with same length as input
+                String permutation = results.remove();
                 for(char ch : charMap[number].toCharArray()){
-                    output.add(permutation + ch);
+                    results.add(permutation + ch);
                 }
             }
         }
 
-        return new ArrayList<>(output);
+        return new ArrayList<>(results);
     }
 }

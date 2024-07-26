@@ -13,21 +13,29 @@ public class IsSubsequence {
         boolean isSubsequence = isSubsequence("abcge", "ace");
         System.out.println("Is Subsequence = " + isSubsequence);
     }
+
+    /**
+     * Solution summary
+     * - initialize 2 pointers to 0 (p1 -> subsequence ptr, p2 -> entireString ptr)
+     * - while each pointer is less than its String's length ...
+     *      - if the characters at each pointer match .. increment the subsequencePointer
+     *      - increment the entireString pointer regardless
+     * - At the end, subsequence pointer should be equal to subsequence length if isSubsequece, false otherwise
+     *
+     * SC: O(1)
+     * TC: O( T ) where T is the
+     */
     private static boolean isSubsequence(String entireString, String subsequence){
-        if(subsequence.length() == 0) return true;
+       int p1= 0;
+       int p2= 0;
 
-        int subPointer = 0;
-        int entirePointer = 0;
-        while (entirePointer < entireString.length()){
-            if(entireString.charAt(entirePointer) == subsequence.charAt(subPointer)){
-                subPointer++;
-                if(subPointer == subsequence.length()){
-                    return true;
-                }
-            }
-        }
+       while (p1 < subsequence.length() && p2 < entireString.length()){
+           if(subsequence.charAt(p1) == entireString.charAt(p2)){
+               p1++;
+           }
+           p2++;
+       }
 
-
-        return false;
+       return p1 == subsequence.length();
     }
 }

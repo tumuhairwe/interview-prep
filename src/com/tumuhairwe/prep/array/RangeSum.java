@@ -12,24 +12,6 @@ import java.util.Map;
 public class RangeSum {
 
     private int[] prefixSums;
-    // implementation 2 uses pre-calculated sum in a map as opposed to array
-    private Map<Integer, Integer> prefixSumMap;    // map of key=array_index, value=sumUpUntilThatPoint
-    public RangeSum(int[] nums){
-        int cumulativeSum = 0;
-        prefixSums = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            cumulativeSum += nums[i];
-            prefixSums[i] = cumulativeSum;
-        }
-    }
-    public void RangeSums2(int[] nums){
-        int cumulativeSum = 0;
-        // implementation 2
-        for (int i = 0; i < nums.length; i++) {
-            cumulativeSum += nums[i];
-            prefixSumMap.put(i, cumulativeSum);
-        }
-    }
 
     /**
      * Solution Summary
@@ -38,6 +20,14 @@ public class RangeSum {
      * - get the prefix[left] (make left 0 if out of bounds)
      * - return rightSum - leftSum
      */
+    public RangeSum(int[] nums){
+        int cumulativeSum = 0;
+        prefixSums = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            cumulativeSum += nums[i];
+            prefixSums[i] = cumulativeSum;
+        }
+    }
     public int sumRange(int left, int right){
         int rightSum = prefixSums[right];
         int leftSum = left > 0 ? prefixSums[left - 1] : 0;
@@ -49,6 +39,16 @@ public class RangeSum {
      * - pre-calculate the prefix sums at instantiation and store them in a map
      * - when retrieving, cost is cheaper, return sumUpToTheRight sumUpToTheLeft
      */
+    // implementation 2 uses pre-calculated sum in a map as opposed to array
+    private Map<Integer, Integer> prefixSumMap;    // map of key=array_index, value=sumUpUntilThatPoint
+    public void RangeSums2(int[] nums){
+        int cumulativeSum = 0;
+        // implementation 2
+        for (int i = 0; i < nums.length; i++) {
+            cumulativeSum += nums[i];
+            prefixSumMap.put(i, cumulativeSum);
+        }
+    }
     public int sumRange2(int left, int right) {
         if(left == 0){
             return prefixSumMap.get(right);

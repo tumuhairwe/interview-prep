@@ -15,7 +15,7 @@ import java.util.Map;
  * - calculate cumulative sum (as you traverse array)
  * - calculate diff (cumulativeSum - k)
  * - if diff exists in, map -> set as result (to be returned)
- * - add cummulativeSum to amp (with existingCount updated + 1)
+ * - add cummulativeSum to map (with existingCount updated + 1)
  * ref: https://leetcode.com/problems/subarray-sum-equals-k/description/
  * ref: https://www.youtube.com/watch?v=fFVZt-6sgyo
  */
@@ -27,14 +27,16 @@ public class SubArraySumWithSumEqualsK {
         System.out.println(subarraySum(nums, k));
     }
 
+    //TC: O(n)
+    //SC: O(n)
     public static int subarraySum(int[] nums, int k) {
         int result = 0;
         int currentSum = 0;     // number of cont
 
         // 0. Declare vars (prefixSums map) and seed it
-        // key = prefixSum, val=count-of-numerOfTimes We've see that prefixSum
+        // key = prefixSum, val=count-of-numberOfTimes We've seen that prefixSum
         Map<Integer, Integer> prefixSums = new HashMap<>();
-        prefixSums.put(0, 1);   // there's at least 1 sub-array with sum = 0;
+        prefixSums.put(0, 1);   // there's at least 1 sub-array with sum = 0; (i.e. empty sub-array)
 
         for (int i = 0; i < nums.length; i++) {
             // 2. calculate current sum
