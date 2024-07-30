@@ -86,7 +86,7 @@ public class LetterCombinationsOfAPhoneNumber {
         // for each digit provided
         for (int i = 0; i < digits.length(); i++) {
             // get numeric value of given character
-            //char currentDigit = digits.charAt(i);
+            // char currentDigit = digits.charAt(i);
             //int index = Character.getNumericValue(currentDigit);
             int number = Integer.parseInt(digits.charAt(i) + "");
 
