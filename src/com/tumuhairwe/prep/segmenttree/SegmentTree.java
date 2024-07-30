@@ -7,6 +7,11 @@ package com.tumuhairwe.prep.segmenttree;
  *
  * LeetCode 307
  * ref: https://leetcode.com/problems/range-sum-query-mutable/description/
+ *
+ * A segment tree is a binary tree where each node represents and interval. Generally a node woiuld store one or more
+ * properties of an interval which can be queried later
+ *
+ * ref: https://leetcode.com/articles/a-recursive-approach-to-segment-trees-range-sum-queries-lazy-propagation/
  */
 public class SegmentTree {
 

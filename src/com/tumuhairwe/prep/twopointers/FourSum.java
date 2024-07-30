@@ -12,36 +12,45 @@ import java.util.*;
  * - they sum up to target i.e. nums[a] + nums[b] + nums[c] + nums[d] == target
  *
  * ref: https://leetcode.com/problems/4sum/
+ * ref: https://leetcode.com/problems/4sum/solutions/5464256/brute-force-better-solutions-and-optimal-approach-for-interview-preparation/
+ * ref: https://www.youtube.com/watch?v=EYeR-_1NRlQ
  */
 public class FourSum {
 
-    public List<List<Integer>> fourSum_impl2(int[] nums, int target){
-        //0. create freqMap
-        Map<Integer, Integer> freqMap = new HashMap<>();
-        for (int i = 0; i < nums.length; i++) {
-            freqMap.put(nums[i], freqMap.getOrDefault(nums[i], 0) + 1);
-        }
+//    public List<List<Integer>> fourSum_impl2(int[] nums, int target){
+//        //0. create freqMap
+//        Map<Integer, Integer> freqMap = new HashMap<>();
+//        for (int i = 0; i < nums.length; i++) {
+//            freqMap.put(nums[i], freqMap.getOrDefault(nums[i], 0) + 1);
+//        }
+//
+//        List<List<Integer>> result = new ArrayList<>();
+//        for (int i = 0; i < nums.length; i++) {
+//            for (int j = i+1; j < nums.length; j++) {
+//                for (int k = j+1; k < nums.length; k++) {
+//                    int desired = target - nums[i] - nums[j] - nums[k];
+//                    if(freqMap.containsKey(desired) && isDistinct(nums[i], nums[j], nums[k], desired)){
+//                        result.add(List.of(desired, nums[i], nums[j], nums[k]));
+//                    }
+//                }
+//            }
+//        }
+//
+//        return result;
+//    }
+//    static boolean isDistinct(int a, int b, int c, int d){
+//        return (a != b) && (a != c) && (a != d)
+//                && (b != c) && (b != d)
+//                && (c != d);
+//    }
 
-        List<List<Integer>> result = new ArrayList<>();
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i+1; j < nums.length; j++) {
-                for (int k = j+1; k < nums.length; k++) {
-                    int desired = target - nums[i] - nums[j] - nums[k];
-                    if(freqMap.containsKey(desired) && isDistinct(nums[i], nums[j], nums[k], desired)){
-                        result.add(List.of(desired, nums[i], nums[j], nums[k]));
-                    }
-                }
-            }
-        }
+    public static void main(String[] args) {
+        int[]arr = {1,0,-1,0,-2,2};
+        System.out.println(fourSum(arr, 0));
 
-        return result;
+        int[] arr2 = {2,2,2,2,2};
+        System.out.println(fourSum(arr2, 8));
     }
-    static boolean isDistinct(int a, int b, int c, int d){
-        return (a != b) && (a != c) && (a != d)
-                && (b != c) && (b != d)
-                && (c != d);
-    }
-
     /**
      * TC: O(n^3)
      * SC: O(n)
@@ -59,62 +68,44 @@ public class FourSum {
      *      - if sum < target ... move p3 forward
      *      - if sum > target ... move p4 backward
      */
-    public List<List<Integer>> fourSum(int[] nums, int target){
-        // declare vars
-        List<List<Integer>> result = new ArrayList<>();
+    public static List<List<Integer>> fourSum(int[] nums, int target){
+        if(nums == null || nums.length < 4){
+            return new ArrayList<>();
+        }
 
-        //0. sort array (so we don't have to keep track of seen/unseen
+        //1. sort
         Arrays.sort(nums);
 
-        //1. iterate over nums & skip dupes
-        for (int i = 0; i < nums.length; i++) {
-            if(i > 1 && nums[i] == nums[i-1]){
-                continue;
-            }
+        //0. declare vars
+        Set<List<Integer>> result = new HashSet<>();
+        for (int i = 0; i < nums.length - 3; i++) {
+            for (int j = i + 1; j < nums.length - 2; j++) {
 
-            //2. iterate over nums & skip dupes
-            for (int j = i+1; j < nums.length; j++) {
-                if(j > i+1 && nums[j] == nums[j+1]){
-                    continue;
-                }
-
-                //3. create 2 pointers low && high
-                int low = j+1;
-                int high = nums.length -1;
-
-                //4. move pointers in-ward until you find a sum == target
-                while (low < high){
-                    int sum = nums[i] + nums[j] + nums[low] + nums[high];
-
-                    // 5if sum == target .. add to resultList ... and move the 2 pointers in ward
+                // int low = j+1;
+                // int high = nums.length - 1;
+                int left = j + 1;
+                int right = nums.length - 1;
+                while (left < right) {
+                    //int sum = nums[i] + nums[j] + nums[low] + nums[high];
+                    long sum = (long) nums[i] + (long) nums[j] + (long) nums[left] + (long) nums[right];
                     if(sum == target){
-                        result.add(List.of(nums[i], nums[j], nums[low], nums[high]));
+                        //result.add(List.of(nums[i], nums[j], nums[low], nums[high]));
+                        result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
 
-                        // move pointers inward
-                        low++;
-                        high--;
-
-                        // move low pointer forward to avoid dupes
-                        while (low < high && nums[low] == nums[low + 1]){
-                            low++;
-                        }
-
-                        // move high pointer backward to avoid dupes
-                        while (low < high && nums[high] == nums[high - 1]){
-                            high--;
-                        }
+                        // move pointers
+                        left++;
+                        right--;
                     }
-                    // if sum was too low ... move low ptr forward
-                    if(sum < target){
-                        low++;
+                    else if(sum < target){
+                        left++;
                     }
-                    else {
-                        //if sum was too high ... move high ptr backward
-                        high--;
+                    else{
+                        right--;
                     }
                 }
             }
         }
-        return result;
+
+        return new ArrayList<>(result);
     }
 }
