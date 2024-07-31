@@ -30,12 +30,11 @@ Each row of this table indicates that the user with ID user_id requested a confi
   confirmation message was either confirmed ('confirmed') or expired without confirming ('timeout').
 */
 
- SELECT
-    s.user_id
-    ROUND(
-          AVG(IF(c.action = "confirmed", 1, 0))
-          ,2) AS confirmation_rate
-FROM Signups s
-LEFT JOIN Confirmations c
-ON s.user_id = c.user_id
+SELECT s.user_id,
+       ROUND(
+                count(c.action) FILTER (WHERE c.action = 'confirmed')::numeric
+            / count(*)::numeric
+           , 2) AS confirmation_rate
+FROM leetcode.signups_1934 s
+LEFT JOIN leetcode.confirmation_1934 c ON c.user_id = s.user_id
 GROUP BY s.user_id
