@@ -35,6 +35,7 @@ public class PalindromicSubstrings {
         return maxLength;
     }
 
+    // expand from the middle
     static int getMaxLength(int left, int right, String s){
         int maxLength = 0;
         while (left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)){
