@@ -41,25 +41,25 @@ public class MergeSortedArrays {
     /**
      * Solution Summary
      * - Use 3 pointers (starting from end)
-     * - find the bigger of the 2 (nums1[r1] & nums2[r2] -> assign to nums2[reader]
+     * - find the bigger of the 2 (nums1[r1] & nums2[r2] -> assign to num1[p3]
      * - i.e. goal is to find the largest, 2 nd largest, ... and put them at the end of the output array ... while decrementing
      * - do this as long as writer > 0
      * TC: n (m + n) - m = space of nums1, n = space of nums2
      * SPC: O (1) -- done in place
      */
     public static void merge__3_pointers(int[] nums1, int m, int[] nums2, int n){
-        int reader_1 = m - 1;
-        int reader_2 = n - 1;
+        int p1 = m - 1;
+        int p2 = n - 1;
 
         for (int writer = (m + n) - 1; writer > 0 ; writer--) {
-            if(reader_1 >= 0 && reader_2 >= 0){
-                nums1[writer] = nums1[reader_1] > nums2[reader_2] ? nums1[reader_1--] : nums2[reader_2--];
+            if(p1 >= 0 && p2 >= 0){
+                nums1[writer] = nums1[p1] > nums2[p2] ? nums1[p1--] : nums2[p2--];
             }
-            else if(reader_1 > 0){
-                nums1[writer] = nums1[reader_1--];
+            else if(p1 > 0){
+                nums1[writer] = nums1[p1--];
             }
             else {
-                nums1[writer] = nums2[reader_2--];
+                nums1[writer] = nums2[p2--];
             }
         }
 

@@ -13,35 +13,35 @@ public class MergeSortedArray2 {
 
     // Merge arr1 and arr2 into resultantArray
     public static int[] mergeArrays(int[] arr1, int[] arr2) {
-        int lengthOfArray1 = arr1.length;
-        int lengthOfArray2 = arr2.length;
+        //int lengthOfArray1 = arr1.length;
+        //int lengthOfArray2 = arr2.length;
 
         // 0. create output_array
-        int[] resultantArray = new int[lengthOfArray1 + lengthOfArray2];
-        int firstArrayIndex = 0, secondArrayIndex = 0, k = 0;
+        int[] output = new int[arr1.length + arr2.length];
+        int p1 = 0, p2 = 0, idx = 0;
 
         // 1. Traverse both arrays -> merge both arrays into output_array
-        while (firstArrayIndex < lengthOfArray1 && secondArrayIndex < lengthOfArray2) {
+        while (p1 < arr1.length && p2 < arr2.length) {
             // Check if current element of first
             // array is smaller than current element
             // of second array. If yes, store first
             // array element and increment first array
             // index. Otherwise do same with second array
-            if (arr1[firstArrayIndex] < arr2[secondArrayIndex])
-                resultantArray[k++] = arr1[firstArrayIndex++];
+            if (arr1[p1] < arr2[p2])
+                output[idx++] = arr1[p1++];
             else
-                resultantArray[k++] = arr2[secondArrayIndex++];
+                output[idx++] = arr2[p2++];
         }
 
         // 2. Store remaining elements of first array
-        while (firstArrayIndex < lengthOfArray1)
-            resultantArray[k++] = arr1[firstArrayIndex++];
+        while (p1 < arr1.length)
+            output[idx++] = arr1[p1++];
 
         // 3.Store remaining elements of second array
-        while (secondArrayIndex < lengthOfArray2)
-            resultantArray[k++] = arr2[secondArrayIndex++];
+        while (p2 < arr2.length)
+            output[idx++] = arr2[p2++];
 
-        return resultantArray;
+        return output;
     }
 
     public static void main(String args[]) {

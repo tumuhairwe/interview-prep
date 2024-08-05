@@ -31,25 +31,34 @@ public class MergeSortedArray {
         System.out.println(Arrays.toString(result));
     }
 
+    /**
+     * Merge 2 arrays into 1 -> return the result (same as MergeSortedArray2)
+     * Solution summary
+     * - Create result[] of combined length
+     * - Init 2 pointers to 0 (p1 -> arr1, p2 -> arr2)
+     * - while both pointers are less than length of their respsective arrays,
+     *      copy + paste the value from arrX - result based on whichever is smallers
+     * - copy + paste trailing vals from arr1 into result[]
+     * - copy + paste trailing vals from arr2 into result[]
+     */
     private static int[] merge(int[] arr1, int[] arr2) {
         int[] result = new int[arr1.length + arr2.length];
-        //int arrIndex = arr1.length >= arr2.length ? arr1.length : arr2.length;
-        int firstArrayCounter =0, secondArrayCounter = 0, resultIndexCounter = 0;
+        int p1 = 0, p2 = 0, resultIdx = 0;
 
-        while (firstArrayCounter < arr1.length && secondArrayCounter < arr2.length){
-            if (arr1[firstArrayCounter] < arr2[secondArrayCounter]){
-                result[resultIndexCounter++] = arr1[firstArrayCounter++];
+        while (p1 < arr1.length && p2 < arr2.length){
+            if (arr1[p1] < arr2[p2]){
+                result[resultIdx++] = arr1[p1++];
             }
             else
-                result[resultIndexCounter++] = arr2[secondArrayCounter++];
+                result[resultIdx++] = arr2[p2++];
         }
 
         // store the remaining elements of first array
-        while (firstArrayCounter < arr1.length){
-            result[resultIndexCounter++] = arr1[firstArrayCounter++];
+        while (p1 < arr1.length){
+            result[resultIdx++] = arr1[p1++];
         }
-        while (secondArrayCounter < arr2.length){
-            result[resultIndexCounter++] = arr2[secondArrayCounter++];
+        while (p2 < arr2.length){
+            result[resultIdx++] = arr2[p2++];
         }
         return result;
     }
