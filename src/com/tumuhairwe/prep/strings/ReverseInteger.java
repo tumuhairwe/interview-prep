@@ -22,30 +22,40 @@ public class ReverseInteger {
         System.out.println("should be 0 -> " + reverse(-2147483648));
     }
     public static int reverse(int x) {
-        Character sign = x < 0 ? '-' : '+';
+        //0. determine multiplier from 1st char
+        int multiplier = x > 0 ? 1 : -1;
+        //Character sign = x < 0 ? '-' : '+';
+        //int multiplier = sign.equals('-') ? -1 : 1;
 
+        //1. convert Math.abs(number) to String -> store sting in stack
         String num = String.valueOf(Math.abs(x));
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < num.length(); i++) {
             stack.push(num.charAt(i));
         }
 
+        //2. reconstruct String from stack -> stringBuilder
         StringBuilder sb = new StringBuilder();
         while (!stack.isEmpty()) {
             sb.append(stack.pop());
         }
 
-        int multiplier = sign.equals('-') ? -1 : 1;
-        if(sb.toString() == ""){
+        //3. if empty, return 0
+        if(sb.toString().equals("")){
             return 0;
         }
 
+        //4. cut off the negative sign if its there
         num = sb.toString().endsWith("-") ? sb.substring(0, sb.toString().length()-1) : sb.toString();
-        Double l = Double.parseDouble(num) * multiplier;
+
+        //5. convert to number
+        double l = Double.parseDouble(num) * multiplier;
+
+        //6. check if its out of bounds ... return 0
         if(l > Integer.MAX_VALUE || l < Integer.MIN_VALUE){
             return 0;
         }
 
-        return l.intValue();
+        return (int) l;
     }
 }
