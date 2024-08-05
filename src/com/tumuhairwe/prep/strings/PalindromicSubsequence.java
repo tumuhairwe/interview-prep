@@ -10,7 +10,7 @@ package com.tumuhairwe.prep.strings;
  *
  * ref: https://leetcode.com/problems/longest-palindromic-subsequence/description/
  */
-public class PalindromicSubstrings {
+public class PalindromicSubsequence {
     public static void main(String[] args) {
         System.out.println(countSubstrings("abc"));
         System.out.println(countSubstrings("aaa"));

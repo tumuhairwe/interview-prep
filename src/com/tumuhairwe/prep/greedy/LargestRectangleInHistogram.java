@@ -9,6 +9,7 @@ import java.util.Stack;
  * where the width of each bar is 1, return the area of largest rectangle in the
  * histogram
  *
+ * ref: https://www.youtube.com/watch?v=ZGMw8Bvpwd4
  * ref: https://www.youtube.com/watch?v=zx5Sw9130L0
  * ref: https://leetcode.com/problems/largest-rectangle-in-histogram/?envType=problem-list-v2&envId=plakya4j
  */
@@ -39,18 +40,20 @@ public class LargestRectangleInHistogram {
      *      - calculate area
      *      - update maxArea accordingly
      * return maxArea
+     * TC: O(n)
+     * SC: O(n)
      */
     public int largestRectangle(int[] heights){
         int maxArea = 0;
-        Stack<Pair> stack = new Stack<>();  // key=index, value=width
+        Stack<Pair> monotonicStack = new Stack<>();  // key=index, value=width
 
         for (int i = 0; i < heights.length; i++) {
             int _prevWidth = i;
             int _height = heights[i];
 
             // if height/top-of-stack.val > _height
-            while (!stack.isEmpty() && stack.peek().value > _height){
-                Pair entry = stack.pop();
+            while (!monotonicStack.isEmpty() && monotonicStack.peek().value > _height){
+                Pair entry = monotonicStack.pop();
                 int currentWidth = entry.key;
                 int currentHeight = entry.value;
 
@@ -61,11 +64,11 @@ public class LargestRectangleInHistogram {
                 _prevWidth = currentWidth;
             }
 
-            stack.push(new Pair(_prevWidth, _height));
+            monotonicStack.push(new Pair(_prevWidth, _height));
         }
 
-        while (!stack.isEmpty()){
-            Pair entry = stack.pop();
+        while (!monotonicStack.isEmpty()){
+            Pair entry = monotonicStack.pop();
             int _prevWidth = entry.key;
             int currentHeight = entry.value;
 

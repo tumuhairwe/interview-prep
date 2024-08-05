@@ -35,9 +35,10 @@ public class LongestPalindromicSubstring {
 
         int maxLength = 0;
         String sub = "";
+        //0. iterate thru string
         for (int i = 0; i < s.length(); i++) {
 
-            // for even numbered strings
+            //expand from middle : even numbered String
             int left = i;
             int right = i;
             while (left >=0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
@@ -49,7 +50,7 @@ public class LongestPalindromicSubstring {
                 right++;
             }
 
-            // for odd numbered strings
+            //expand from middle : odd numbered strings
             left = i;
             right = i + 1;
             while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
