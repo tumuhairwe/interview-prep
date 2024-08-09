@@ -3,9 +3,9 @@ package com.tumuhairwe.prep.strings;
 public class BracketMatcher {
     static int bracketMatch(String text) {
         // 1. read the text as characters
-        // 2. out the charactes on to a stack
-        // 3. opengin Stack
-        // 4.. closing stack
+        // 2. out the characters on to a stack
+        // 3. opening Stack
+        // 4 .. closing stack
         // stack.size() == matched
         // leftStack < rightStack == find the diff in size of stqack
 

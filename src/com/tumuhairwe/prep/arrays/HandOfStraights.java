@@ -1,6 +1,5 @@
 package com.tumuhairwe.prep.arrays;
 
-import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -12,6 +11,7 @@ import java.util.TreeMap;
  * return true if she can rearrange the cards, or false otherwise.
  *
  * ref: https://leetcode.com/problems/hand-of-straights/description/?envType=problem-list-v2&envId=plakya4j
+ * ref: https://www.youtube.com/watch?v=6JF-fxiDjIc
  */
 public class HandOfStraights {
 
@@ -38,14 +38,15 @@ public class HandOfStraights {
         }
 
         //1. create treeFreqMap
-        Map<Integer, Integer> treeFreqMap = new TreeMap<>();
+        TreeMap<Integer, Integer> treeFreqMap = new TreeMap<>();
         for (int i = 0; i < hand.length; i++) {
             treeFreqMap.put(hand[i], treeFreqMap.getOrDefault(hand[i], 0) + 1);
         }
 
         while (!treeFreqMap.isEmpty()){
-            int currentHand = treeFreqMap.keySet().iterator().next();
-
+            //int currentHand = treeFreqMap.keySet().iterator().next();
+            int currentHand = treeFreqMap.firstKey();
+            //for (int key=currentHand; key=currentHand + groupSize; key++){
             for (int i = 0; i < groupSize; i++) {
                 int key = currentHand + i;
 

@@ -34,8 +34,8 @@ public class LetterCombinationsOfAPhoneNumber {
         digitToChatMap.put(6, "mno");
 
         digitToChatMap.put(7, "pqrs");
-        digitToChatMap.put(5, "tuv");
-        digitToChatMap.put(5, "wxyz");
+        digitToChatMap.put(8, "tuv");
+        digitToChatMap.put(9, "wxyz");
 
         //2. seed initial result list
         List<String> result = new ArrayList<>();

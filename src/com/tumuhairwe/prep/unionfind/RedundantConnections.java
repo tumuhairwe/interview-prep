@@ -31,6 +31,7 @@ import java.util.Arrays;
  * Given: [ [1,2],[2,3],[3,4],[1,4],[1,5] ]
  * output: [1, 4]
  *
+ * ref: https://www.youtube.com/watch?v=FXWRE67PLL0
  * ref: https://leetcode.com/problems/redundant-connection/
  * ref: https://leetcode.com/problems/redundant-connection/solutions/2278999/union-find-concept-and-multiple-solutions-java/
  */
@@ -46,7 +47,6 @@ public class RedundantConnections {
 
     /**
      * Solution Summary
-     * ref: https://www.youtube.com/watch?v=FXWRE67PLL0
      * - Implement UnionFind
      * - create an int[] parent
      * - findParent() -> a node's parent is the value at the [x-1] position

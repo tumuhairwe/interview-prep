@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * LeetCode 296 Hard
  *
- * Given an m x n binary grid grid where each 1 marks the home of one friend, return the minimal total travel distance.
+ * Given an m x n binary grid where each 1 marks the home of one friend, return the minimal total travel distance.
  *
  * The total travel distance is the sum of the distances between the houses of the friends and the meeting point.
  *
@@ -40,13 +40,20 @@ public class BestMeetingPoint {
             }
         }
 
-        //3. calc avg dist to "shared center"
+        //2. calc avg dist to "shared center"
         Collections.sort(colsWithHomes);
         //Collections.sort(rowsWithHomes);
+
+        //3 find meaRow and meanCol
         int meanRow = rowsWithHomes.get(rowsWithHomes.size() / 2);
         int meanCol = colsWithHomes.get(colsWithHomes.size() / 2);
 
-        return minDistance1D(rowsWithHomes, meanRow) + minDistance1D(colsWithHomes, meanCol);
+        //4. calc min stance to shared row && col
+        int minDistanceToSharedRow = minDistance1D(rowsWithHomes, meanRow);
+        int minDistanceToSharedCol = minDistance1D(colsWithHomes, meanCol);
+
+        //5. return min distance
+        return minDistanceToSharedRow + minDistanceToSharedCol;
     }
 
     private int minDistance1D(List<Integer> points, int origin){

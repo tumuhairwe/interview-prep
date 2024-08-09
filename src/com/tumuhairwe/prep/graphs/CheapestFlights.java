@@ -113,21 +113,36 @@ public class CheapestFlights {
 
     /**
      * BFS = Find shortest path for weighted graphs
+     * Goal (populate prices[] .. return price of dest)
+     *
+     * - init prices[] & seed with prices[src]=0
+     * - create que & seed with startingNode (price = 0);
+     * - iterate while !que.isEmpty() & numStops < k
+     * - for each level, poll from queue, visit neighbors
+     * - for each neighbor, if cost is cheaper that distance[neighbor.id], create new node (with neighbor.id & newCost) and add to queue
+     *
+     * - at the end, if cost/dist is not MAX/default, return, else return -1;
+     *
+     * SC: O(N +E x K)
+     * TC: O(N +E x K)
+     * k = num steps
+     * E =  num edges
+     * n = num citiesnodes
      */
-    public int findCheapestPrice_BFS_wrong(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
+    public int findCheapestPrice_BFS(int numberOfCities, int[][] flightSchedule, int source, int targetDestination, int k_maxNumberOfStops){
         // 0. create adjacency list
         // key = departingCity, value = List<Node> where class Node( id:int -> destination, val:double: cost)
-        Map<Integer, List<Node>> city_to_destination_adjList = new HashMap<>();
+        Map<Integer, List<Node>> adjList = new HashMap<>();
         for (int[] flight  : flightSchedule) {
             Integer departingCity = flight[0];
             int destinationCity = flight[1];
             int priceToDestination = flight[2]; // weight
 
             // 1a) pre-fill the whole adj list
-            if (!city_to_destination_adjList.containsKey(departingCity)) {
-                city_to_destination_adjList.put(departingCity, new ArrayList<>());
+            if (!adjList.containsKey(departingCity)) {
+                adjList.put(departingCity, new ArrayList<>());
             }
-            city_to_destination_adjList.get(targetDestination).add(new Node(destinationCity, priceToDestination));
+            adjList.get(targetDestination).add(new Node(destinationCity, priceToDestination));
         }
 
         //2. set default distances[] from src to $destination [index = cityId, value = actual_cost_or_distance_from_src]
@@ -150,18 +165,19 @@ public class CheapestFlights {
             while (qDepth-- > 0){
                 Node currentNode = queue.poll();
 
-                if (!city_to_destination_adjList.containsKey(currentNode.cityId)){
+                if (!adjList.containsKey(currentNode.cityId)){
                     continue;   // we haven't reached it yet ... might be an intermediate destination
                 }
 
                 // 5. loop over neighbors of current/popped node
                 //  -> compute distance & add to global [] of distances
                 //  -> add neighbor to queue
-                for (Node neighbor : city_to_destination_adjList.get(currentNode.cityId)){
-                    if(neighbor.distance + currentNode.distance >= destinations[neighbor.cityId]){
+                for (Node neighbor : adjList.get(currentNode.cityId)){
+                    int newPrice = currentNode.distance + neighbor.distance;
+                    if(newPrice >= destinations[neighbor.cityId]){
                         continue;
                     }
-                    destinations[neighbor.cityId] = currentNode.distance + neighbor.distance;
+                    destinations[neighbor.cityId] = newPrice;
                     queue.offer(new Node(neighbor.cityId, destinations[neighbor.distance]));
                 }
             }

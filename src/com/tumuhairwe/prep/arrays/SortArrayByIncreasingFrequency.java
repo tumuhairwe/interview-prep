@@ -1,6 +1,5 @@
 package com.tumuhairwe.prep.arrays;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**

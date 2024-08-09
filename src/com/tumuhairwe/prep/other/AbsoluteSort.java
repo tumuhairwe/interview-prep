@@ -20,17 +20,6 @@ import java.util.Arrays;
  * where you can only use the spatula to flip some of the top pancakes in the plate.
  * To read more about the problem, see the Pancake Sorting Wikipedia page.
  *
- * Constraints:
- *
- * [time limit] 5000ms
- *
- * [input] array.integer arr
- *
- * [input] integer k
- *
- * 0 ≤ k
- * [output] array.integer
- *
  * ref: https://medium.com/problem-solving-coding/absolute-value-array-sort-174df7272ee
  * ref: https://www.pramp.com/challenge/4E4NW7NjbnHQEx1AxoXE
  */
@@ -57,6 +46,7 @@ public class AbsoluteSort {
                 if(val_a > val_b){
                     return -1;
                 }
+                else return 0;
             }
             return 1;
         });
@@ -86,6 +76,7 @@ public class AbsoluteSort {
                 if(val_a > val_b){
                     return -1;
                 }
+                else return 0;
             }
             return 1;
         });

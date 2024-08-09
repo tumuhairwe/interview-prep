@@ -3,6 +3,7 @@ package com.tumuhairwe.prep.stack;
 import java.util.*;
 
 /**
+ * LeetCode 17 (letter combinations of a number)
  *  Given a string containing digits [2-9], return all possible letter combinations that the number could represent
  *  in any order
  *
@@ -70,9 +71,54 @@ public class Backtrack {
         return outputArray;
     }
 
+    /**
+     * Solution summary
+     * - Create dictionary mapping between key & their letter values
+     * - pass fragment "" && empty list to collect results
+     * - base case of backtrack: if fragment.length == digits.length, add fragment to result list
+     * - if index >= digit.length ... return
+     * - forEach char in mapping ... call backtrack recursively and pass fragment + 1 option && index + 1
+     */
+    public List<String> letterCombinations_backtrack(String digits) {
+        if(digits.length() == 0){
+            return new ArrayList<>();
+        }
+
+        Map<Character, List<Character>> dictionary = new HashMap<>();
+        dictionary.put('1', List.of());
+        dictionary.put('2', List.of('a', 'b', 'c'));
+        dictionary.put('3', List.of('d', 'e', 'f'));
+        dictionary.put('4', List.of('g', 'h', 'i'));
+        dictionary.put('5', List.of('j', 'k', 'l'));
+        dictionary.put('6', List.of('m', 'n', 'o'));
+        dictionary.put('7', List.of('p', 'q', 'r', 's'));
+        dictionary.put('8', List.of('t', 'u', 'v'));
+        dictionary.put('9', List.of('w', 'x', 'y', 'z'));
+
+        List<String> results = new ArrayList<>();
+        String fragmant = "";
+        backtrack(dictionary, digits, results, fragmant, 0);
+        return results;
+    }
+
+    public void backtrack(Map<Character, List<Character>> dictionary, String digits, List<String> results, String fragment, int index ){
+        if(fragment.length() == digits.length()){
+            results.add(fragment);
+        }
+
+        if(index >= digits.length()){
+            return;
+        }
+
+        List<Character> options = dictionary.get(digits.charAt(index));
+        for(Character ch : options){
+            backtrack(dictionary, digits, results, fragment + ch, index + 1);
+        }
+    }
+
 //    private void helper(Stack<Character> stack, int index) {
 //        // check if we reach the bottom of the branch
-//        char[] charMap = new char[26];  // maps numbers to characer
+//        char[] charMap = new char[26];  // maps numbers to character
 //
 //        if(index == arr.length){
 //            results.add(convertStackToString(stack));

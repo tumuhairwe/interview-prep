@@ -6,7 +6,7 @@ import java.util.Arrays;
  * LeetCode 18 (Easy)
  * Find the words that can be formed by an array of characters
  * ... return the sum of the length of the "good" words in array words.
- * A word is "good" if it can be formed by characters rom chars (each character can only be used once)
+ * A word is "good" if it can be formed by characters from chars (each character can only be used once)
  *
  * ref: https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/
  * ref: https://www.youtube.com/watch?v=M2HFao-zgk8
@@ -40,18 +40,18 @@ public class CountCharacters {
 
         // 1.
         for(String word : words){
-            int[] temp_char_counts = Arrays.copyOf(global_char_counts, global_char_counts.length);
+            int[] local_char_counts = Arrays.copyOf(global_char_counts, global_char_counts.length);
             int valid_char_count = 0;
 
             for(char asciiValueOfCharacter : word.toCharArray()){
                 int indexOfLetter = asciiValueOfCharacter - asciiValueOfA;
-                if(temp_char_counts[indexOfLetter] > 0){
+                if(local_char_counts[indexOfLetter] > 0){
                     valid_char_count++;     // increment valid-char-count -- will check if its size == word.length()
-                    temp_char_counts[indexOfLetter]--;
+                    local_char_counts[indexOfLetter]--;
                 }
 
                 if(valid_char_count == word.length()){  // all chars in word were in global global_char_counts
-                    goodWordsLengthSum += word.length();    // increment return var
+                    goodWordsLengthSum += word.length();    // increment return var by word.length
                 }
             }
         }

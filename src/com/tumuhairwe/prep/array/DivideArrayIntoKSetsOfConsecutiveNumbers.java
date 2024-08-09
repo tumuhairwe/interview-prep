@@ -6,6 +6,8 @@ import java.util.TreeMap;
  * LeetCode 1296 (medium)
  * Divide array into sets of k consecutive numbers
  *
+ * This is very similar to Hand of Straights (LeetCode 846)
+ *
  * ref: https://leetcode.com/problems/divide-array-in-sets-of-k-consecutive-numbers/description/
  * ref: https://www.youtube.com/watch?v=6JF-fxiDjIc
  */
@@ -26,7 +28,7 @@ public class DivideArrayIntoKSetsOfConsecutiveNumbers {
          *
          * 0. create a frequencyMap
          * 1. iterate the freqMap until its empty
-         *   - from: lowestKey -> key + k
+         *   - for [0 to (key + k)]
          *         - if key is not in Map, return false
          *        - otherwise, decrement by 1 & update key
          *        - if frequency is 1 (would be 0 if you decremented), remove key

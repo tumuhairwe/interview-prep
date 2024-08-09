@@ -4,11 +4,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * LeetCode 753
+ *
  * You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots (0 to 9).
  * The wheels can rotate freely and wrap around e.g. '9' to '0' and '0' to '9'.
  * Each move consists of turning one wheel slot.
  *
  * The lock initially starts at '0000
+ *
+ * ref: https://leetcode.com/problems/open-the-lock/description/
  */
 public class OpenLock {
     //TC: O(1000)
@@ -25,6 +29,10 @@ public class OpenLock {
      *      - if combo/key == target, return stepCount
      *      - get all possible combo permutations from currentState
      *      - for reach possibleCombo, -> add to que if unvisited
+     *
+     *  SC: O(4 (d + 10^4))
+     *  SC: O(4 (d + 10^4))
+     *  ref: https://leetcode.com/problems/open-the-lock/editorial/
      */
     public int openLock(String[] deadends, String target){
         //0. declare vars
