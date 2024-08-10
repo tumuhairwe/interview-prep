@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * LeetCode 753
+ * LeetCode 752 (medium)
  *
  * You have a lock in front of you with 4 circular wheels. Each wheel has 10 slots (0 to 9).
  * The wheels can rotate freely and wrap around e.g. '9' to '0' and '0' to '9'.
@@ -37,9 +37,9 @@ public class OpenLock {
     public int openLock(String[] deadends, String target){
         //0. declare vars
         String startingPoint = "0000";
-        Set<String> visit = Arrays.stream(deadends).collect(Collectors.toSet());
+        Set<String> visited = Arrays.stream(deadends).collect(Collectors.toSet());
 
-        if(visit.contains(startingPoint)){
+        if(visited.contains(startingPoint)){
             return -1;
         }
 
@@ -56,15 +56,15 @@ public class OpenLock {
             }
 
             //2. if already visited .. skip
-            if(visit.contains(curr.getKey())){
+            if(visited.contains(curr.getKey())){
                 continue;
             }
 
             //3. get permutations of combo based on currentState
             Set<String> comboStates = getPossibleCombinations(curr.getKey());
             for (String combo : comboStates){
-                if(!visit.contains(combo)){
-                    visit.add(combo);
+                if(!visited.contains(combo)){
+                    visited.add(combo);
                     que.offer(new AbstractMap.SimpleEntry<>(combo, curr.getValue() + 1));
                 }
             }
@@ -81,11 +81,16 @@ public class OpenLock {
             String post = lockState.substring(i+1);
 
             //mid char -> toInt-> +1 -> mod 10
-            String mid = String.valueOf((Integer.parseInt(String.valueOf(ch)) + 1) % 10);
+            // for the mid char: "(increment by 1) mod 10", "decrement by 1 mod 10"
+            Integer n = Integer.parseInt(String.valueOf(ch));
+            String mid = String.valueOf((n + 1) % 10);
             comboSet.add(pre + mid + post);
+            //Map.entry()
 
             //mid char -> toInt-> -1 -> mod 10
-            mid = String.valueOf(((Integer.parseInt(String.valueOf(ch)) - 1 ) + 10) % 10 );
+            // for the mid char: "(decrement by 1) mod 10"
+            n = Integer.parseInt(String.valueOf(ch));
+            mid = String.valueOf(((n - 1) + 10) % 10 );
             comboSet.add(pre + mid + post);
         }
 
