@@ -11,7 +11,7 @@ import java.util.*;
  * - they're distinct
  * - they sum up to target i.e. nums[a] + nums[b] + nums[c] + nums[d] == target
  *
- * ref: https://leetcode.com/problems/4sum/
+ * ref: https://leetcode.com/problems/4sum/ (see FourSumII: input=4 arrays, target = 0)
  * ref: https://leetcode.com/problems/4sum/solutions/5464256/brute-force-better-solutions-and-optimal-approach-for-interview-preparation/
  * ref: https://www.youtube.com/watch?v=EYeR-_1NRlQ
  */

@@ -27,8 +27,16 @@ public class SubArraySumWithSumEqualsK {
         System.out.println(subarraySum(nums, k));
     }
 
-    //TC: O(n)
-    //SC: O(n)
+    /**
+     * Solution summary
+     * - Create prefixSum frequency map and seed with 0
+     * - iterate over array and accumulate currentSum
+     * - calculate duff (currentSum -k)  and check if exists in prefixSum map -> get frequency to result
+     * - update prefixSum freqMap with currentSum
+     *
+     * TC: O(n) - we iterate over the array and no other data structure is used
+     * SC: O(n) -- because we store the currentSum in a map
+     */
     public static int subarraySum(int[] nums, int k) {
         int result = 0;
         int currentSum = 0;     // number of cont
