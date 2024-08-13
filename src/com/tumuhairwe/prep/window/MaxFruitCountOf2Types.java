@@ -20,25 +20,44 @@ import java.util.Map;
  */
 public class MaxFruitCountOf2Types {
     public static void main(String[] args) {
-        System.out.println("Maximum number of fruits: " + findLength(new char[] { 'A', 'B', 'C', 'A', 'C' }));
-        System.out.println("Maximum number of fruits: " + findLength(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
+        System.out.println("Maximum number of fruits: " + totalFruit(new char[] { 'A', 'B', 'C', 'A', 'C' }));
+        System.out.println("Maximum number of fruits: " + totalFruit(new char[] { 'A', 'B', 'C', 'B', 'B', 'C' }));
     }
-    public static int findLength(char[] fruits){
+
+    /**
+     * Solution summary
+     * - create frequency Map
+     * - while freqMap.keys > boundary => decrement frequency  & slide window forward
+     * - remove from map if key's freq == 1
+     * - update max every iteration
+     * - return max
+     *
+     * TC: O(n) -- we iterate thru the [] once & the 2 pointers (windowStart/windowEnd) are monotonically increasing
+     * SC: O(1) -- there are (at most) n/numBaskets types of fruits in the window/hashMap -> SC: (1)
+     */
+    public static int totalFruit(char[] fruits){
+        //0 declare vars
         int numberOfBaskets = 2;;
-        int windowStart = 0, maxLength = 0;
-        Map<Character, Integer> fruitFrequencyMap = new HashMap<>();
+        int windowStart = 0;
+        int maxLength = 0;
 
+        //1. create freqMap
+        Map<Character, Integer> freqMap = new HashMap<>();
         for (int windowEnd = 0; windowEnd < fruits.length; windowEnd++) {
-            fruitFrequencyMap.put(fruits[windowEnd], fruitFrequencyMap.getOrDefault(fruits[windowEnd], 0)+1);
+            freqMap.put(fruits[windowEnd], freqMap.getOrDefault(fruits[windowEnd], 0)+1);
 
+            // while freqMap.keys.size < boundary (in this case numberOfBaskets)
+            // decrement frequency & slide window forward (remove from map if key's frequency == 0)
             // shrink the sliding window until size = 2
-            while (fruitFrequencyMap.size() > numberOfBaskets){
-                fruitFrequencyMap.put(fruits[windowStart], fruitFrequencyMap.get(fruits[windowStart]) -1);
-                if(fruitFrequencyMap.get(fruits[windowStart]) == 0){
-                    fruitFrequencyMap.remove(fruits[windowStart]);
+            while (freqMap.size() > numberOfBaskets){
+                freqMap.put(fruits[windowStart], freqMap.get(fruits[windowStart]) -1);
+                if(freqMap.get(fruits[windowStart]) == 0){
+                    freqMap.remove(fruits[windowStart]);
                 }
 
-                windowStart++;  // shrink the window
+                windowStart++;  // move the window forward
+
+                //3. update max every iteration
                 maxLength = Math.max(maxLength, windowEnd - windowStart + 1);
             }
         }

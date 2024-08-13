@@ -55,8 +55,8 @@ public class FindAllAnagrams {
         // true if (loopP creation of pfreqMap has included sFreqMap
         int begin = 0;
         for(int end=0; end<s.length(); end++){
-            char sChar_at_rp = s.charAt(end);
-            sFrequencyMap.put(sChar_at_rp, sFrequencyMap.getOrDefault(sChar_at_rp, 0) + 1);
+            char charAtEnd = s.charAt(end);
+            sFrequencyMap.put(charAtEnd, sFrequencyMap.getOrDefault(charAtEnd, 0) + 1);
 
             // shrink the window by removing char at left begin
             if(end >= p.length() - 1){
@@ -64,12 +64,12 @@ public class FindAllAnagrams {
                     result.add(begin);
                 }
 
-                char sChar_at_lp = s.charAt(begin);
-                if(sFrequencyMap.containsKey(sChar_at_lp)){
-                    sFrequencyMap.put(sChar_at_lp, sFrequencyMap.getOrDefault(sChar_at_lp, 0) - 1);
+                char charAtBegin = s.charAt(begin);
+                if(sFrequencyMap.containsKey(charAtBegin)){
+                    sFrequencyMap.put(charAtBegin, sFrequencyMap.getOrDefault(charAtBegin, 0) - 1);
 
-                    if(sFrequencyMap.get(sChar_at_lp) == 0){
-                        sFrequencyMap.remove(sChar_at_lp);
+                    if(sFrequencyMap.get(charAtBegin) == 0){
+                        sFrequencyMap.remove(charAtBegin);
                     }
                 }
 
