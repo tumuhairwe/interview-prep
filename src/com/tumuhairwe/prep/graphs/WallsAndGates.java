@@ -5,23 +5,28 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * LeetCode 286
+ * You are given m by n grid (rooms) initialized with 3 possible values
+ * -1 = WALL or obstacle
+ * -0 = GATE
+ * -INF = Integer.MAX_VALUE
  * ref: https://www.youtube.com/watch?v=e69C6xhiSQE
  */
 public class WallsAndGates {
     static int WALL = -1;
     static int GATE = 0;
-
-    static class Room{
-        int row;
-        int col;
-        int dist;
-
-        public Room(int r, int c, int d){
-            this.row = r;
-            this.col = c;
-            this.dist = d;
-        }
-    }
+//
+//    static class Room{
+//        int row;
+//        int col;
+//        int dist;
+//
+//        public Room(int r, int c, int d){
+//            this.row = r;
+//            this.col = c;
+//            this.dist = d;
+//        }
+//    }
 
     public static void main(String[] args) {
         int[][] rooms = new int[][]{
@@ -32,15 +37,14 @@ public class WallsAndGates {
         };
         wallsAndGates(rooms);
         Arrays.stream(rooms).forEach(r -> System.out.println(Arrays.toString(r)));
-
     }
 
     /**
      * Solution summary (DFS)
      * - traverse 2D array and collect all GATES into queue
      * - while !que.isEmpty() ... for each in-bounds neighbor ... if value
-     *      - INFinity, add to queue
-     *      - set value = rooms[row][col] + 1;
+     *      == INFinity, add to queue
+     *      ELSE - set value = rooms[row][col] + 1;
      */
     public static void wallsAndGates(int[][] rooms) {
         Queue<int[]> que = new LinkedList<>();
@@ -65,8 +69,8 @@ public class WallsAndGates {
                     {-1, 0}, {0, -1}
             };
             for(int[] direction : offsets){
-                int x = room[0] + direction[0];
-                int y = room[1] + direction[1];
+                int x = row + direction[0];
+                int y = col + direction[1];
 
                 boolean isRowInBounds = x >= 0 && x < rooms.length;
                 boolean isColInBounds = y >= 0 && y < rooms[0].length;

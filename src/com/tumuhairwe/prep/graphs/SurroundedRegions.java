@@ -67,7 +67,7 @@ public class SurroundedRegions {
     static void flipNeighbors(char[][] board, int row, int col){
 
         boolean rowIsWithinBounds = 0 <= row && row < board.length;
-        boolean colIsWithinBounds = 0 <= row && col < board[col].length;
+        boolean colIsWithinBounds = 0 <= col && col < board[col].length;
         boolean cellIsWithinBounds = rowIsWithinBounds && colIsWithinBounds;
         if(!cellIsWithinBounds){
             return;

@@ -24,6 +24,13 @@ import java.util.Arrays;
 public class MoveZerosToEnd {
 
     // method signature == do this in place
+
+    /**
+     * Solution summary
+     * - iterate arr with 2 pointers
+     * - when you encounter a non-zero number, swap with p1 & increment p1
+     * - p1 will always point the latest non-zero number & p2 will always point to a zero
+     */
     static void moveZerosToEnd(int[] arr) {
 
         int leftPointer = 0;
