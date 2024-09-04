@@ -25,11 +25,44 @@ public class JumpGameII {
     }
 
     /**
+     * Solution summary
+     * - Main idea is to be greedy. Say the range of the current jump is [curBegin, curEnd], and curFarthest s the farthest
+     * all points i [curBegin, curEnd] can reach,
+     * - iterate over all the points and find the max/farthest,
+     * - once the current point reached curEnd, trigger another jump and set the new curEnd to curFarthest
+     * - keep iterating until you reach the nums.length-1
+     * - return the number of jumps
+     *
+     * @param nums
+     * ref: https://leetcode.com/problems/jump-game-ii/solutions/3758457/java-0ms-100-easy-solution/
+     */
+    public static int jump2(int[] nums){
+        int minJumps = 0;
+        int curEnd = 0;
+
+        //the furthest point that all points in [curBegin, curEnd] can reach
+        int curFarthest = 0;
+
+        for (int i = 0; i < nums.length - 1; i++) {
+            // update the farthest reachable index of this jump
+            curFarthest = Math.max(curFarthest, i + nums[i]);
+
+            // if we finish the starting-range of this jump. move on to the starting range of the next jump
+            if(i == curEnd){
+                minJumps++;
+                curEnd = curFarthest;
+            }
+        }
+
+        return minJumps;
+    }
+
+    /**
      * Solution Summary
      * - initialize 3 vars (numSteps, p1, and p2)
-     * - Traverse the array using 2 pointers
-     * - calculate the FARTHEST each iteration can go (farthest = max(farthest, nums[i)
-     * - update both pointers( l = r+1, and r = farthest, and numSteps++
+     * - Traverse the array using 2 pointers (fast & slow)
+     * - calculate the FARTHEST each iteration can go (farthest = max(farthest, nums[i) )
+     * - update both pointers( l = r+1, and r = farthest), and numSteps++
      * - return totalNumSteps
      */
     public static int jump(int[] nums){
