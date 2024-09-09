@@ -1,6 +1,8 @@
 package com.tumuhairwe.prep.window;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,6 +50,33 @@ public class ContainsDuplicate {
             }
 
             windowOfSizeK.add(nums[right]);
+        }
+
+        return false;
+    }
+
+    /**
+     * Solution summary
+     * - Loop thru nums, if nums[i] is not in map, add
+     * - if nums[i] is in map, get index of previous occurrence
+     * - get Math.abs(currentIndex - previousIndex) ... if <= k, return true
+     * - else add to Map
+     */
+    static boolean containsDuplicate(int[] nums, int k){
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if(map.containsKey(nums[i])){   // is dupe
+                int pastIdx = map.get(nums[i]);
+                if(Math.abs(i - pastIdx) <= k){
+                    return true;
+                }
+                else {
+                    map.put(nums[i], i);
+                }
+            }
+            else {
+                map.put(nums[i], i);
+            }
         }
 
         return false;

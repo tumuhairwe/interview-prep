@@ -46,34 +46,22 @@ public class RottingOranges {
         System.out.println("should be 2: Number of minutes == " + orangesRotting(board));
     }
 
-    public static int orangesRotting_impl2(int[][] grid){
-        int numFreshOranges = 0;
-        int numMinutes = 0;
-
-        int EMPTY = 0;
-        int ROTTEN = 2;
-        int FRESH = 1;
-
-        Queue<int[]> rottenOranges = new LinkedList<>();
-
-        // 0. compile list of rotten oranges
-        for (int i = 0; i < grid.length; i++) {
-            for (int j = 0; j < grid[0].length; j++) {
-                if(grid[i][j] == ROTTEN){
-                    rottenOranges.add(new int[]{i, j});
-                }
-                else if(grid[i][j] == FRESH){
-                    numFreshOranges++;
-                }
-            }
-        }
-
-        //
-        return 0;
-    }
-
     // TC = O(m x n) == where m, n = dimensions of the grid
     // SC =  O(m x n) in the worst case bcoz all cells could be rotten and we need to put them in teh queue
+
+    /**
+     * Solution summary
+     * - create queue & seed it with coords of rotten oranges
+     * - count numFreshOranges
+     * - while numFresh != 0 && !rottenOranges.isEmpty()
+     * - do level-by-level BFS to
+     * - increment numberOfMinutes
+     * - for each direction
+     * --- poll() from queue
+     * --- visit neighbors of each coord/rotten-orange
+     * --- for each fresh orange, add to que
+     * - at the end if numFresh != 0, return numMinutes, else return -1
+     */
     public static int orangesRotting(int[][] grid){
         Queue<int[]> rottenOranges = new LinkedList<>();
         int freshCount = 0;

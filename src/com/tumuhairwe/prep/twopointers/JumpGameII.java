@@ -33,7 +33,8 @@ public class JumpGameII {
      * - keep iterating until you reach the nums.length-1
      * - return the number of jumps
      *
-     * @param nums
+     * SC: O(n)
+     * TC: O(1)
      * ref: https://leetcode.com/problems/jump-game-ii/solutions/3758457/java-0ms-100-easy-solution/
      */
     public static int jump2(int[] nums){
