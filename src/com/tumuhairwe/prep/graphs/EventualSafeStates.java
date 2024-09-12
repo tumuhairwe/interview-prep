@@ -15,6 +15,16 @@ import java.util.*;
  */
 public class EventualSafeStates {
 
+    /**
+     * Solution summary
+     * - Create adjList from graph[][] and init in_degree[] while at it
+     * - create bfs queue
+     * - find all nodes with in_degree count == 0 && seed bfs queue with them
+     * - do cycle-detection bfs and add an node with in_degree_count == 0 to que until que is empty
+     * - at end, traverse entire graph and collect all safeNodes into a list
+     * - sort safeNode ASC
+     * - return safeNodes
+     */
     public List<Integer> eventualSafeNodes(int[][] graph) {
         //0. build adjList
         Map<Integer, List<Integer>> adjList = new HashMap<>();
@@ -22,8 +32,10 @@ public class EventualSafeStates {
 
         for (int i = 0; i < graph.length; i++) {
             adjList.put(i, new ArrayList<>());
+        }
 
-            for (int node = 0; node < graph[i].length; node++) {
+        for (int i = 0; i < graph.length; i++) {
+            for (int node : graph[i]) {
                 adjList.get(node).add(i);
                 in_degree[i]++;
             }
@@ -46,7 +58,7 @@ public class EventualSafeStates {
             safe[curr] = true;  // mark node as true since it has 0 in_degree count
 
             for(int neighbor : adjList.get(curr)){
-                // decrease in_degree count per loop
+                // decrease in_degree count per loop (Delete the edge "node -> neighbor".)
                 in_degree[neighbor]--;
 
                 // if 0 -> to que -> mark as safe

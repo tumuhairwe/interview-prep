@@ -27,11 +27,11 @@ public class FloodFill {
 
     /**
      * Solution Summary
-     * - We'll used DFS .. so create visited 2D array to mark all cells that visited
+     * - We'll use DFS .. so create visited 2D array to mark all cells that visited
      * - Create Queue and see it with starting cell (row, col)
      * - while !que.isEmpty() .. poll() current cell , mark as visited ... and 4-directionally mark neighboring cell with newColor ... a
-     * - Repeat until queue is emtpy
-     * - return upated 2-D array
+     * - Repeat until queue is empty
+     * - return updated 2-D array
      */
     public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         final int[] directions = new int[]{0, 1, 0, -1, 0};
@@ -40,7 +40,7 @@ public class FloodFill {
         int originalValue = image[sr][sc];
         image[sr][sc] = newColor;
 
-        // 0. create visited 2D array to track cells that are visted
+        // 0. create visited 2D array to track cells that are visited
         boolean[][] visited = new boolean[rowLength][colLength];
 
         // 1. gonna use DFS so create queue and seed with starting cell

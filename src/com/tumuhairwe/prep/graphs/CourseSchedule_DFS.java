@@ -44,7 +44,7 @@ public class CourseSchedule_DFS {
      * Solution summary
      * - Create adjList
      * - populate in-degree array with count of in_coming nodes to a source
-     * - seed queue with 0 in-degree nodes
+     * - create & seed Queue with 0 in-degree nodes
      * - do BFS to count all visited nodes with 0 degrees
      * - match count of visitedNodes with numCourses
      *
@@ -61,7 +61,7 @@ public class CourseSchedule_DFS {
         //1. create adjList
         for (int i = 0; i < prerequisites.length; i++) {
             int src = prerequisites[i][0];
-            int dest = prerequisites[i][0];
+            int dest = prerequisites[i][1];
 
             //2. populate in-degree array
             in_degree[src]++;
@@ -135,9 +135,9 @@ public class CourseSchedule_DFS {
     /**
      * Solution Summary
      * - to determine if cyclic, if state IS_IN_PATH, return true, if its not even in adjList, return falss
-     * - make visted[ courseid ] = IS_IN_PATH
+     * - make visited[ courseId ] = IS_IN_PATH
      * - recursively call isCyclic() on each prereq (if state is not HAS_BEEN_TRAVERSED) ... return true
-     * - at the end, marke viste[ courseId ] = HAS_BEEN_TRAVERSED
+     * - at the end, mark visited[ courseId ] = HAS_BEEN_TRAVERSED
      */
     private static boolean isCyclic(List<List<Integer>> adjList, int[] visited, int courseId) {
         // check if already visited

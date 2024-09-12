@@ -39,7 +39,7 @@ public class CountNodesEqualToAvgOfSubtree {
      * Solution summary
      * - Make method return a Pair/Map.Entry (key = countOfNodes, val=sumOfNode)
      * - do recursive calls on node.left and node.right (plus null checks)
-     * - to compute the sum: node.val + left.val + right.val
+     * - to compute the sum: node.val + left.getValue() + right.getValue()
      * - to compute the count: 1 + left.key + right.key
      * - compute average
      * - if a node's value == avg, increment result

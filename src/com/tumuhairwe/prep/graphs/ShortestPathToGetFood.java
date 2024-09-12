@@ -28,6 +28,8 @@ public class ShortestPathToGetFood {
      *      - check all 4 neighbors (if !isVisited && !is_obstacle)
      *      - add cell to que
      * - increment stepCount after each iteration
+     * - if you reach food cell, return length
+     * - if you exit while loop, return -1 (i.e. no food cell)
      */
     public int getFood(char[][] grid){
         char STARTING_POINT = '*';
