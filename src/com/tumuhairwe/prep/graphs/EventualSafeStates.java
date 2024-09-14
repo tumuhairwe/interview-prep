@@ -26,7 +26,7 @@ public class EventualSafeStates {
      * - return safeNodes
      */
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        //0. build adjList
+        //0. build adjListLe
         Map<Integer, List<Integer>> adjList = new HashMap<>();
         int[] in_degree = new int[graph.length];
 
