@@ -68,6 +68,7 @@ public class CityWithSmallestNeighbors {
         return cityId;
     }
 
+    //dijkstra's == shortest path with weighted edges
     public int getCountOfAccessibleNeighborsWithinDistance(int nodeId, int distanceThreshold, Map<Integer, List<Node>> adjList){
         // create pq (cityId, distance) that stores nodes by weight
         Comparator<Node> comp = Comparator.comparingInt(p -> p.distance);

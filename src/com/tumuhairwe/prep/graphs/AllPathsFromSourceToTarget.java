@@ -13,7 +13,7 @@ public class AllPathsFromSourceToTarget {
     public static void main(String[] args) {
 
     }
-    public static List<List<Integer>> allPahtsSourceToTarget(int[][] graph){
+    public static List<List<Integer>> allPathsSourceToTarget(int[][] graph){
         //0. init vars
         List<List<Integer>> results = new ArrayList<>();
         int startingIndex = 0;
@@ -29,7 +29,7 @@ public class AllPathsFromSourceToTarget {
     }
 
     private static void backtracking(List<List<Integer>> results, List<Integer> sourcePath, int[][] graph, int startingIndex) {
-        // since graph is n x n, if index reaches graph.length,we've accummulated all results in sourcePath -> add to global resuls set
+        // since graph is n x n, if index reaches graph.length,we've accumulated all results in sourcePath -> add to global resuls set
         if(startingIndex == graph.length - 1){
             results.add(new ArrayList<>(sourcePath));
             return;

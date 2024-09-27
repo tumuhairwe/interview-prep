@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.graphs;
 
 import java.util.*;
 import java.util.stream.Collectors;

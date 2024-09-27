@@ -20,19 +20,19 @@ import java.util.Set;
  * See also LeetCode 1162
  */
 public class ShortestBridge {
-    static class Pair<K, V>{
-        K key;
-        V value;
-        public Pair(K k, V v){
+    static class Pair{
+        int key;
+        int value;
+        public Pair(Integer k, Integer v){
             this.key = k;
             this.value = v;
         }
 
-        public K getKey() {
+        public Integer getKey() {
             return key;
         }
 
-        public V getValue() {
+        public Integer getValue() {
             return value;
         }
 
@@ -52,7 +52,7 @@ public class ShortestBridge {
             {1, 0}, {0, 1},
             {-1, 0}, {0, -1}
     };
-    Set<Pair<Integer, Integer>> visited;
+    Set<Pair> visited;
 
     public static void main(String[] args) {
         int[][] grid = {
@@ -76,7 +76,7 @@ public class ShortestBridge {
         for(int i=0; i< grid.length; i++)    {
             for(int j=0; j<grid[0].length; j++){
                 if(grid[i][j] == LAND){
-                    dfs(grid, i, j);    // fill up visited set with cells
+                    dfs_toCollectAllWaterCells(grid, i, j);    // fill up visited set with cells
                     return bfs(grid, visited);   // take visited cells & return numCells
                 }
             }
@@ -93,19 +93,19 @@ public class ShortestBridge {
      * - repeat until you arrive at a LAND cell
      * - return number of steps
      */
-    int bfs(int[][] grid, Set<Pair<Integer, Integer>> visited){
+    int bfs(int[][] grid, Set<Pair> visited){
         int result = 0;
-        Deque<Pair<Integer, Integer>> deque = new ArrayDeque<>(visited);
+        Deque<Pair> deque = new ArrayDeque<>(visited);
 
         while(!deque.isEmpty()){
             int queDepth = deque.size();
-            Pair<Integer, Integer> coord = deque.pop();
+            Pair coord = deque.pop();
 
             while(queDepth-- > 0){
                 for(int[] dir : offsets){
                     int row = coord.getKey() + dir[0];
                     int col = coord.getValue() + dir[1];
-                    Pair<Integer, Integer> cell = new Pair<>(row, col);
+                    Pair cell = new Pair(row, col);
 
                     if(!isValid(row, col) || visited.contains(cell)){
                         continue;
@@ -131,24 +131,23 @@ public class ShortestBridge {
 
     /**
      * method summary
-     * - if a cell is !WATER, isValid and is not net visited,
-     * - add to visited set
+     * - if a cell is !WATER && isValid() && !visited -> add to visited set
      * - recursively 4-diagonally traverse grid until you meet a WATER cell
      */
-    void dfs(int[][] grid, int row, int col ){
-        if(!isValid(row, col) || grid[row][col] == WATER || visited.contains(new Pair<>(row, col))){
+    void dfs_toCollectAllWaterCells(int[][] grid, int row, int col ){
+        if(!isValid(row, col) || grid[row][col] == WATER || visited.contains(new Pair(row, col))){
             return;
         }
 
         // add to visited Set
-        visited.add(new Pair<>(row, col));
+        visited.add(new Pair(row, col));
 
         //bfs
         for(int[] direction : offsets){
             int r = row + direction[0];
             int c = col + direction[1];
 
-            dfs(grid, r, c);
+            dfs_toCollectAllWaterCells(grid, r, c);
         }
     }
 

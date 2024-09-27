@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * LeetCode 78 (subsets)
+ * ref: https://leetcode.com/problems/subsets/solutions/27281/a-general-approach-to-backtracking-questions-in-java-subsets-permutations-combination-sum-palindrome-partitioning/
+ *
+ * Given an integer array nums, of unique elements, return all possible subsets.
+ * The solution must not contain duplicates. Return in any order
+ *
  * TC: O (2^n) -- when is the size of the array
  * SC: O(2^n) -- bcoz we need store all the subsets, we'll need 2^n memory to store each subset
  */
@@ -28,7 +34,7 @@ public class Subsets {
 
         // 1. generate subsets by recursively including ad excluding elements
         for (int i = index; i < superset.size(); i++) {
-            // 2..include the current element in the subset
+            // 2. include the current element in the subset
             subset.add(superset.get(i));
 
             // 3. recursively generate subsets with the current element

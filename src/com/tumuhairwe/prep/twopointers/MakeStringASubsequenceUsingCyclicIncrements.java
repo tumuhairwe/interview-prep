@@ -20,7 +20,19 @@ package com.tumuhairwe.prep.twopointers;
  * ref: https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/solutions/4064945/simple-and-easy-java-solution-100-beats/
  * ref: https://leetcode.com/problems/make-string-a-subsequence-using-cyclic-increments/solutions/3933697/java-two-pointers-o-n-solution-fully-explained-simple-and-easy-to-understand/
  */
-public class MakeStingASubsequenceUsingCyclicIncrements {
+public class MakeStringASubsequenceUsingCyclicIncrements {
+    /**
+     * Solution summary
+     * - if str2 is longer, return false
+     * - init 2 pointers to track chars in each str
+     * - grab the chars at each pointer in each respective string
+     * - if the chars match or if char1 is next to char2 (front or back), increment both pointers
+     * - else increment just the shorter pointer
+     * - return true if p2 has reached the end of str2
+     *
+     * TC: O(n)
+     * SC: O(n)
+     */
     public static boolean canMakeSubsequence(String str1, String str2){
         //0. base case: its not possible for a longer string to be a subsequenc of a shorter string
         if(str2.length() > str1.length()){

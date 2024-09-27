@@ -1,5 +1,7 @@
 package com.tumuhairwe.prep.strings;
 
+import java.util.Stack;
+
 /**
  * LeetCode 2390. Removing Stars From a String
  *
@@ -8,7 +10,7 @@ package com.tumuhairwe.prep.strings;
  * In one operation, you can:
  *
  * Choose a star in s.
- * Remove the closest non-star character to its left, as well as remove the star itself.
+ * Remove the closest NON-STAR character to its left, as well as remove the star itself.
  * Return the string after all stars have been removed.
  *
  * Note:
@@ -19,7 +21,30 @@ package com.tumuhairwe.prep.strings;
  * ref: https://leetcode.com/problems/removing-stars-from-a-string/description/
  */
 public class RemoveStartFromString {
-    public String removeStars(String s) {
+    public String removeStars(String s){
+        //0. Create stack to track all chars in order
+        Stack<Character> st = new Stack<>();
+
+        //1. populate stack
+        for(char ch : st){
+            if(ch == '*'){
+                st.pop();
+            }
+            else {
+                st.push(ch);
+            }
+        }
+
+        //2. re-construct string & return
+        StringBuilder sb = new StringBuilder();
+        for(char ch : st){
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+    //TLE
+    public String removeStars_tle(String s) {
         //char[] result = new char[l.length()];
         StringBuilder result = new StringBuilder();
 

@@ -35,7 +35,7 @@ public class RangeSum {
     }
 
     /**
-     * Solution summaryF
+     * Solution summary
      * - pre-calculate the prefix sums at instantiation and store them in a map
      * - when retrieving, cost is cheaper, return sumUpToTheRight sumUpToTheLeft
      */
