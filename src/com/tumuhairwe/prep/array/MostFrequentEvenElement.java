@@ -40,25 +40,24 @@ public class MostFrequentEvenElement {
         }
 
         //1. find maxFrequency
-        int maxFreq = Integer.MIN_VALUE;
-        for(Map.Entry<Integer, Integer> entry : freqMap.entrySet()){
-            //int key = entry.getKey();
-            int val = entry.getValue();
-
-            if(maxFreq < val){
-                maxFreq = val;
-                //ans = key;
+        int mostFrequentValue = Integer.MIN_VALUE;
+        for (Map.Entry<Integer, Integer> entry : freqMap.entrySet()) {
+            if(mostFrequentValue < entry.getValue()){
+                mostFrequentValue = entry.getValue();
             }
         }
 
         // "if there's a tie, return the smallest one"
-        final int maxFrequency = maxFreq;
+        final int maxFrequency = mostFrequentValue;
         Optional<Integer> smallestKeyWithHighestFrequency = freqMap.entrySet().stream()
                 .filter(e -> e.getValue() == maxFrequency)
                 .map(e -> e.getKey())
                 .sorted()
                 .findFirst();
 
-        return (smallestKeyWithHighestFrequency.isEmpty()) ? -1 : smallestKeyWithHighestFrequency.get();
+        if(smallestKeyWithHighestFrequency.isEmpty()){
+            return -1;
+        }
+        return smallestKeyWithHighestFrequency.get();
     }
 }

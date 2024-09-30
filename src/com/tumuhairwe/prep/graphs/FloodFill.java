@@ -28,7 +28,7 @@ public class FloodFill {
     /**
      * Solution Summary
      * - We'll use DFS .. so create visited 2D array to mark all cells that visited
-     * - Create Queue and see it with starting cell (row, col)
+     * - Create Queue and seed it with starting cell (row, col)
      * - while !que.isEmpty() .. poll() current cell , mark as visited ... and 4-directionally mark neighboring cell with newColor ... a
      * - Repeat until queue is empty
      * - return updated 2-D array

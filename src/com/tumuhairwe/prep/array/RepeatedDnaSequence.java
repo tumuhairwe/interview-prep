@@ -32,6 +32,9 @@ public class RepeatedDnaSequence {
      * - add to globalSet
      * - increment both pointers
      * - return resultList
+     * 
+     * TC: O(n)
+     * SC: O(n)
      */
     public static List<String> findRepeatedDnaSequences(String s) {
         //0. init vars

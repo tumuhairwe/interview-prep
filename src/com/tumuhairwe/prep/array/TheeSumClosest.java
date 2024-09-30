@@ -38,6 +38,7 @@ public class TheeSumClosest {
      * - Set initial sum (e.g. sum = nums[0] + nums[1] + nums[nums.length]
      * - Sort the array
      *
+     * - sort array
      * - iterate thru array with 2 pointers (p1=i + 1, p2=nums.length -1)
      * - initialize currentSum = nums[i] + nums[p1] + nums[p2]
      * - while(p1 < p2) ... increment p1 if currentSum > target ... decrement p2 if currentSum < target
