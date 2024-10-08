@@ -1,5 +1,8 @@
 package com.tumuhairwe.prep.strings;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * LeetCode 2083(medium)
  * Substring that begin and end with the same character
@@ -8,23 +11,22 @@ public class NumberOfSubstrings {
     /**
      * Solution summary
      *
-     * - create array based frequency counter of all chars in String as you interate thru the entire string
-     * - for each characters, add its count to the globalCount/result
+     * - create array based frequency counter of all chars in String as you iterate thru the entire string
+     * - for each character, add its count to the globalCount/result
      *
      * SC: O(n)
      * TC: O(1) because freqCount = 26 at max
      */
     public long numberOfSubstrings(String s) {
         int result = 0;
-        long[] freqCount = new long[26];
+        Map<Character, Integer> freqMap = new HashMap<>();
 
         char[] chars = s.toCharArray();
         for(char c : chars){
-            freqCount[c - 'a']++;
+            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
 
-            // Current letter can be paired with all the occurrences of it that
-            // comes before, including itself, to form a valid
-            result += freqCount[c - 'a'];
+            //2. pair current letter with all occurrences of it that came before (to form a valid substring)
+            result += freqMap.get(c);
         }
         return result;
     }

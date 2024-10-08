@@ -20,7 +20,8 @@ public class TopVotedCandidate {
 
     /**
      * Solution Summary
-     * - Create and pre-populate the time_by_leadingCandidate map
+     * - Create and populate a voteTally_freqMap
+     * - Create and pre-populate the time_by_leadingCandidate treeMap
      * - Update the majorityVotGetter if necessary
      * - Since times is sorted, put() key=time, value=majorityVoteGetter into map
      */

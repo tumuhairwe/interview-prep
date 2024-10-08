@@ -42,6 +42,8 @@ public class MeetingRoomsII {
      * - Sort both arrays (goal is to track used_number_of_rooms)
      * - Use 2 pointers to track indices of each array ( increment usedRooms counter if startTimes[p1] < endTimes[p2]
      * - Increment p2 only when we need another room
+     * TC: O(n)
+     * SC: O(n)
      */
     public static int findMinimumNumberOfRoomsRequired_2Pointers_chronologicalOrdering__LC253(int[][] intervals){
         Integer[] start_times = new Integer[intervals.length];
@@ -146,7 +148,7 @@ public class MeetingRoomsII {
         return minHeap.size();
     }
 
-    // this just counts intersections ... just doesn't mean they rquire sepate rooms e.g. if intersections are at different times
+    // this just counts intersections ... just doesn't mean they require separate rooms e.g. if intersections are at different times
     public static int findMinimumNumberOfRoomsRequired(int[][] slotsA, int[][] slotsB){
         // unnecessary since Interval implements Comparable
         // Comparator<Interval> comp = Comparator.comparingInt(a -> a.start);
