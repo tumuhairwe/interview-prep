@@ -34,7 +34,7 @@ public class JumpsToReachHome {
 
     /**
      * Solution summary; (bidirectional BFS)
-     * - Create and see visited/forbidden position (with flag for backwards/forward)
+     * - Create and seed visited/forbidden position (with flag for backwards/forward)
      * - seed BFS que with initial starting point (position=0, forward=true);
      * - while !que.isEmpty()
      *      - pull from que

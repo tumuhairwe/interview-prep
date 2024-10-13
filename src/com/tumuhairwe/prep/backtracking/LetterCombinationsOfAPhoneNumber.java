@@ -62,7 +62,7 @@ public class LetterCombinationsOfAPhoneNumber {
 
     /**
      * Solution Summary
-     * - base-case: digits is emptu -> return empty list
+     * - base-case: digits is empty -> return empty list
      * - Create a mapping of [digit -> String] with the characters that correspond to that string
      * - for each digit the number, get the mapping (String)
      * - for each character in the mapped string,

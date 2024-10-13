@@ -1,6 +1,5 @@
 package com.tumuhairwe.prep.array;
 
-import java.io.*;
 import java.util.*;
 
 /**
