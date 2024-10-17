@@ -7,7 +7,7 @@ import java.util.Comparator;
  * LeetCode 646 (medium)
  * ref: https://leetcode.com/problems/maximum-length-of-pair-chain/description/
  *
- * You are given an array of n pairs pairs where pairs[i] = [lefti, righti] and lefti < righti.
+ * You are given an array of n pairs where pairs[i] = [left_i, right_i] and left_i < right_i.
  *
  * A pair p2 = [c, d] follows a pair p1 = [a, b] if b < c. A chain of pairs can be formed in this fashion.
  *
