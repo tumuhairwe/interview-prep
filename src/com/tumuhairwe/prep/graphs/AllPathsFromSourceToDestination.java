@@ -19,7 +19,7 @@ public class AllPathsFromSourceToDestination {
     /**
      * Solution summary
      *
- thera    * SC: O(V + E)
+     * SC: O(V + E)
      * TC: (V + E)
      */
     public boolean leadsToDestination(int n, int[][] edges, int source, int destination) {

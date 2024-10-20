@@ -222,7 +222,7 @@ public class CheapestFlights {
         // use Queue to track the intermediate airports
         // build a queue to store the Nodes/Cities,
         Queue<Node> queue = new PriorityQueue<>(reverseComp);   // sorted by HIGHEST distance
-        Queue<Node> queue_maxHeap = new PriorityQueue<>(comp);          // sorted by LOWEST distance
+        Queue<Node> queue_maxHeap = new PriorityQueue<>(comp);  // sorted by LOWEST distance
 
         // 2a) Seed PQ with route to self
         queue.add(new Node(source, 0));

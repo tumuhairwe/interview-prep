@@ -1,6 +1,10 @@
 package com.tumuhairwe.prep.strings;
 
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
+
 /**
  * LeetCode 2287 (easy)
  * You are given two 0-indexed strings s and target. You can take some letters from s and rearrange them to form new strings.
@@ -25,6 +29,9 @@ public class RearrangeCharactersToMakeTarget {
         for (char ch : target.toCharArray()){
             freqCount_target[ch - 'a']++;
         }
+
+        //Deque<Integer> deque = new ArrayDeque<>();
+        //Queue<Integer> queue = new ArrayDeque<>();
 
         //2. divide frequency of  s/target -> track min
         int result = Integer.MAX_VALUE;
