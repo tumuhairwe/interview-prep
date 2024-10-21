@@ -26,7 +26,9 @@ import java.util.*;
  * Return the least number of moves required to reach the square n2.
  * If it is not possible to reach the square, return -1.
  * Squares 1 and n2 are not the starting points of any snake or ladder.
+ *
  * ref: https://leetcode.com/problems/snakes-and-ladders/description/
+ * re: https://nileshblog.tech/leetcode-solving-snakes-and-ladders-with-bfs-algorithm/
  */
 public class SnakesAndLadders {
 
