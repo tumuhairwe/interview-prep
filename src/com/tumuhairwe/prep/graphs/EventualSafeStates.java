@@ -12,6 +12,8 @@ import java.util.*;
  * A node is a safe node if every possible path starting from that node ... leas to a terminal node (or another safe node)
  *
  * Return an array containing all the safeNodes of the graph (sorted in ascending order)
+ *
+ * ref: https://leetcode.com/problems/find-eventual-safe-states/description/
  */
 public class EventualSafeStates {
 
@@ -19,7 +21,7 @@ public class EventualSafeStates {
      * Solution summary
      * - Create adjList from graph[][] and init in_degree[] while at it
      * - create bfs queue
-     * - find all nodes with in_degree count == 0 && seed bfs queue with them
+     * - find (all nodes with in_degree count == 0) i.e. terminalNodes && seed bfs queue with them
      * - do cycle-detection bfs and add an node with in_degree_count == 0 to que until que is empty
      * - at end, traverse entire graph and collect all safeNodes into a list
      * - sort safeNode ASC
@@ -42,10 +44,10 @@ public class EventualSafeStates {
         }
 
         //1. do bfs on all unvisited nodes
-        Queue<Integer> que = new ArrayDeque<>();
+        Queue<Integer> terminalNodes = new ArrayDeque<>();
         for (int i = 0; i < graph.length; i++) {
             if(in_degree[i] == 0){
-                que.add(i);
+                terminalNodes.add(i);
             }
         }
 
@@ -53,17 +55,17 @@ public class EventualSafeStates {
         boolean[] safe = new boolean[graph.length];
         Arrays.fill(safe, false);
 
-        while (!que.isEmpty()){
-            int curr = que.poll();
+        while (!terminalNodes.isEmpty()){
+            int curr = terminalNodes.poll();
             safe[curr] = true;  // mark node as true since it has 0 in_degree count
 
             for(int neighbor : adjList.get(curr)){
                 // decrease in_degree count per loop (Delete the edge "node -> neighbor".)
                 in_degree[neighbor]--;
 
-                // if 0 -> to que -> mark as safe
+                // if 0 -> to que -> mark as terminal
                 if(in_degree[neighbor] == 0){
-                    que.add(neighbor);
+                    terminalNodes.add(neighbor);
                 }
             }
         }

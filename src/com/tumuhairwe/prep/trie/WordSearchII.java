@@ -27,6 +27,16 @@ public class WordSearchII {
 
     List<String> results;
     char[][] _board;
+
+    /**
+     * 1. Create TrieNode class + construct a Trie for words[]
+     *   a). For each word in words[]
+     *      - add each char to trieNode
+     * 3. init vars List<String> results && 2D char[])
+     * 4. Traverse 2D array, by checking all 4 neighbors when you find char -> call recursively
+     * 5. when you find terminalNode where node.word != null, add word to resultList
+     * 6. Remember to mark ON_PATH with char & to unset it after returning
+     */
     public List<String> findWords(char[][] board, String[] words) {
         //0. construct a Trie for words[]
         TrieNode root = new TrieNode();
@@ -54,7 +64,7 @@ public class WordSearchII {
             for (int col = 0; col < board[0].length; col++) {
                 Character firstChar = board[row][col];
                 if(root.children.containsKey(firstChar)){
-                    backtrack(row, col, root);
+                    recursiveDfs(row, col, root);
                 }
             }
         }
@@ -63,7 +73,7 @@ public class WordSearchII {
         return this.results;
     }
 
-    private void backtrack(int row, int col, TrieNode parent) {
+    private void recursiveDfs(int row, int col, TrieNode parent) {
         Character letter = _board[row][col];
         TrieNode currentNode = parent.children.get(letter);
 
@@ -89,7 +99,7 @@ public class WordSearchII {
             }
 
             if(currentNode.children.containsKey(letter)){
-                backtrack(newRow, newCol, currentNode);
+                recursiveDfs(newRow, newCol, currentNode);
             }
         }
 

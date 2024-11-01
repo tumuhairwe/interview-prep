@@ -17,7 +17,7 @@ public class SplitStringIntoMaxNumOfUniqSubstrings {
      * - traverse string from start to end(inclusive)
      * - build substring (start, end]
      * - skip if already seen, else add to seen set
-     * - backtrack & update max
+     * - backtrack & update maxmin
      * - remove from seen set
      * - return max
      */
