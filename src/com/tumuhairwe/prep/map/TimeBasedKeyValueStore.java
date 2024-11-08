@@ -18,27 +18,34 @@ import java.util.TreeMap;
  * If there are no values, it returns "".
  */
 public class TimeBasedKeyValueStore {
-    private Map<String, TreeMap<Integer, String>> map;
+    private Map<String, TreeMap<Integer, String>> backingMap;
 
     /**
      * Solution summary
-     * - initialize backing map to have String as key-type and a TreeMap as the value (TreeMap sorts keys in thte map by default)
+     * - initialize backing map to have String as key-type and a TreeMap as the value (TreeMap sorts keys in the map by default)
      */
     public TimeBasedKeyValueStore(){
-        this.map = new HashMap<>();
+        this.backingMap = new HashMap<>();
     }
 
     /**
      * Solution summary
      * - if key exists, simple add key-value pair as entry in the TreeMap that is the value of that key
+     * 
+     * TC: O(l log m) bcoz internal impl of sorted maps using some kind os balanced binary tree
+     * & in the worst case we might have to compare log_m nodes (height of tree) of Length L (with our key)
+     * Thus for M calls, it will take O(L x M x log_m)
+     *
+     * SC:In each function call, we store the Length of a string (L)
+     * So in the worst case, we'll we store M unique values for M calls ...taking up O(M x L)
      */
     public void set(String key, String value, int timestamp){
-        if(map.containsKey(key)){
-            map.get(key).put(timestamp, value);
+        if(backingMap.containsKey(key)){
+            backingMap.get(key).put(timestamp, value);
         }
         else {
-            map.put(key, new TreeMap<>());
-            map.get(key).put(timestamp, value);
+            backingMap.put(key, new TreeMap<>());
+            backingMap.get(key).put(timestamp, value);
         }
     }
 
@@ -50,22 +57,19 @@ public class TimeBasedKeyValueStore {
      * - if closest-key key exists, get its value
      */
     public String get(String key, int timestamp){
-        if(!map.containsKey(key)){
+        if(!backingMap.containsKey(key)){
             return "";
         }
 
-        TreeMap<Integer, String> values = map.get(key);
+        TreeMap<Integer, String> values = backingMap.get(key);
         if(values.containsKey(timestamp)){
             return values.get(timestamp);
         }
-        else {
-            Integer closest = values.floorKey(timestamp);
-            if(closest == null){
-                return null;
-            }
-            else {
-                return values.get(closest);
-            }
+
+        Integer closest = values.floorKey(timestamp);
+        if(closest == null){
+            return "";
         }
+        return values.get(closest);
     }
 }

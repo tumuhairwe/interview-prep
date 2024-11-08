@@ -57,23 +57,23 @@ public class CarFleet {
         }
 
         //2. create monotonic stack to keep track of time-to-reach target
-        Stack<Double> stack = new Stack<>();
+        Stack<Double> monotonicStack = new Stack<>();
         for (Map.Entry<Integer, Integer> entry : map.entrySet()){
             int pos = entry.getKey();
             int spd = entry.getValue();
 
             //3. skip any entry that has a time less than the stack.peek()
             double timeToReachTarget = (double)(target - pos) / spd;
-            if(!stack.isEmpty() && timeToReachTarget <= stack.peek()){
+            if(!monotonicStack.isEmpty() && timeToReachTarget <= monotonicStack.peek()){
                 continue;
             }
 
             //4. if time-to-reach-target is greater than stack.peek() ... add it to stack
-            stack.push(timeToReachTarget);
+            monotonicStack.push(timeToReachTarget);
         }
 
         // return total size of stack (i.e. all cars moving at separate speeds) i.e. not crashed
-        return stack.size();
+        return monotonicStack.size();
     }
 
     /**

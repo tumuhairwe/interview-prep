@@ -34,6 +34,9 @@ public class LastStoneWeight {
      *      - remove top 2 stones ... if their weights are not equal, create new stone with the diff and add it to the pq
      *      - repeat until pq.size() > 1
      * - if pq is !empty .. reeturn size of last remaining stone, else return 0
+     *
+     * TYC: O (n log n)
+     * SC: O(n)
      */
     public static int lastStoneWeight(int[] stones) {
         // same
