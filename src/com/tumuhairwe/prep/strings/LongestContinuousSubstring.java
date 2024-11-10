@@ -7,6 +7,8 @@ package com.tumuhairwe.prep.strings;
  *
  * For example, "abc" is an alphabetical continuous string, while "acb" and "za" are not.
  * Given a string s consisting of lowercase letters only, return the length of the longest alphabetical continuous substring.
+ *
+ * ref: https://leetcode.com/problems/length-of-the-longest-alphabetical-continuous-substring/description/
  */
 public class LongestContinuousSubstring {
     /**
