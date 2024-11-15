@@ -61,12 +61,6 @@ public class LastStoneWeight {
             }
         }
 
-//        if(maxHeap.size() == 0){
-//            return 0;
-//        }
-//        else {
-//            return maxHeap.remove();    // return Math.abs(maxHeap.remove() ) when using default comparator
-//        }
         return maxHeap.size() == 0 ? 0 : maxHeap.remove();
     }
 }

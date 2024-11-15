@@ -52,7 +52,7 @@ public class FindIfPathExistsInGraph {
         // 1. create adjList
         for (int i = 0; i < edges.length; i++) {
             int src = edges[i][0];
-            int dest = edges[i][0];
+            int dest = edges[i][1];
 
             adjList.putIfAbsent(src, new ArrayList<>());
             adjList.putIfAbsent(dest, new ArrayList<>());
