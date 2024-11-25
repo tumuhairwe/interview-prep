@@ -13,7 +13,7 @@ import java.util.Map;
  *  Solution:
  *  - Create a frequency-map that stores all the values of t and the frequency of their
  *  occurrence (look-up = O(1))
- *  - Looks thru the string ... check if CURRENT_CHAR is in the frequency-map
+ *  - Loop thru the string ... check if CURRENT_CHAR is in the frequency-map
  *  - if it is, decrement the value associated with that letter
  *  - Once the frequency map is all == 0, then we know we've found the substring
  *  Constraint: O(m + n )
@@ -37,48 +37,52 @@ public class MinimumSlidingWindow {
 
     // time complexity = O( t + s)
     public static String minWindow(String s, String t) {
-        Map<Character, Integer> freqMap = new HashMap<>();
-
-        // 0. populate frequency map
+        //0. create freqMap of t
+        Map<Character, Integer> t_freqMap = new HashMap<>();
         for(int i=0; i<t.length(); i++){
-            Character c = t.charAt(i);
-            freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+            char ch = t.charAt(i);
+            t_freqMap.put(ch, t_freqMap.getOrDefault(ch, 0) + 1);
         }
 
-        // 1. declare pointers + count
-        int leftPointer = 0, rightPointer = 0;
-        int count = freqMap.size();
-        int length = Double.valueOf(Double.POSITIVE_INFINITY).intValue();
+        //1. declare vars
+        int slow = 0;
+        int fast = 0;
+        int numUniqueChars = t_freqMap.size();
+        double windowLength = Double.POSITIVE_INFINITY;
         String minWindow = "";
+        int count = 0;
 
-        // 2. iterate over the long string
-        while(rightPointer < s.length()){
-            char letter = s.charAt(rightPointer);
-            if(freqMap.containsKey(letter)){
-                freqMap.put(letter, freqMap.get(letter) - 1);
-                if(freqMap.get(letter) == 0){
-                    count--;
+        while (fast < s.length()){
+            char fastCh = s.charAt(fast);
+
+            //3 decrement ch from t_freqMap
+            if(t_freqMap.containsKey(fastCh)){
+                t_freqMap.put(fastCh, t_freqMap.get(fastCh) - 1);
+                if(t_freqMap.get(fastCh) == 0 ){
+                    numUniqueChars--;
                 }
             }
 
-            // move right pointer
-            rightPointer++;
+            //4. move fast at regular speed
+            fast++;
 
-            while(count == 0){
-                if(rightPointer - leftPointer < length){
-                    length = rightPointer - leftPointer;
-                    minWindow = s.substring(leftPointer, rightPointer);
+            while(numUniqueChars == 0){
+                if (fast - slow < windowLength){
+                    windowLength = fast - slow;
+                    minWindow = s.substring(slow, fast);
                 }
 
-                char leftLetter = s.charAt(leftPointer);
-                if(freqMap.containsKey(leftLetter)){
-                    freqMap.put(leftLetter, freqMap.get(leftLetter) + 1);
-                    if(freqMap.get(leftLetter) > 0){
-                        count++;
+                //5. put slowCh in window & add to freqMap
+                char slowCh = s.charAt(slow);
+                if(t_freqMap.containsKey(slowCh)){
+                    t_freqMap.put(slowCh, t_freqMap.get(slowCh) + 1);
+                    if(t_freqMap.get(slowCh) > 0){
+                        numUniqueChars++;
                     }
                 }
 
-                leftPointer++;
+                //. forward fast ptr
+                slow++;
             }
         }
 

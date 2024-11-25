@@ -5,8 +5,10 @@ import java.util.List;
 
 /**
  * LeetCode 22 (medium)
+ * ref: https://leetcode.com/problems/generate-parentheses/description/
  *
  * Given n pair of parenthesis, write a function to generate all combinations of well-formed parenthesis
+ * ref: https://leetcode.com/problems/generate-parentheses/solutions/10100/easy-to-understand-java-backtracking-solution/
  */
 public class GenerateParenthesis {
     public static void main(String[] args) {
@@ -19,39 +21,35 @@ public class GenerateParenthesis {
         actual = generateParenthesis(1);
         System.out.println(actual.equals(expected));
     }
+
+    /**
+     * Solution summary
+     * - create return list for backtracking to append to when fragment.length == max*2
+     * - call backtracking();
+     * - return results
+     */
     static public List<String> generateParenthesis(int n){
         List<String> results = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-
-        backtrack(results, sb, 0, 0, n);
-
+        backtrack(results, "", 0, 0, n);
         return  results;
     }
 
-    static void backtrack(List<String> results, StringBuilder sb, int leftCount, int rightCount, int n){
-        // 0. base case
-        if(sb.length() == (2 * n)){
-            results.add(sb.toString());
+    /**
+     * - if fragment.length == max * 2 -> add it to result
+     * - if open < max, a) append open_parenthesis, increment openCount by 1 and call backtracking
+     * - if close < open a) append close_parenthesis, increment closeCount by 1 and call backtracking
+     */
+    static void backtrack(List<String> result, String fragment, int open, int close, int max){
+        if(fragment.length() == max * 2){
+            result.add(fragment);
             return;
         }
 
-        // if we can add a left (i.e. leftCount == rightCount
-        if(leftCount < n){
-            // add char
-            sb.append("(");
-            backtrack(results, sb, leftCount + 1, rightCount, n);
-
-            // backtrack
-            sb.deleteCharAt(sb.length() - 1);
+        if(open < max){
+            backtrack(result, fragment + "(", open + 1, close , max);
         }
-        // if we can add a right (i.e. left
-        if (rightCount < leftCount){
-            sb.append(")");
-            backtrack(results, sb, leftCount, rightCount + 1, n);
-
-            //backtrack
-            sb.deleteCharAt(sb.length() - 1);
+        if(close < open){
+            backtrack(result, fragment + ")", open, close + 1, max);
         }
     }
-
 }

@@ -34,11 +34,11 @@ public class KMostFrequentElements {
         System.out.println(Arrays.toString(result));
     }
 
-    public static int[] topKFrequent(int[] arr, int k) {
+    public static int[] topKFrequent(int[] nums, int k) {
         //0. create frequency map
         Map<Integer, Integer> numFrequencyMap = new HashMap<>();
 
-        for (int number : arr){
+        for (int number : nums){
             int existingFreq = numFrequencyMap.getOrDefault(number, 0);
             numFrequencyMap.put(number, existingFreq + 1);
         }
@@ -59,13 +59,16 @@ public class KMostFrequentElements {
         }
 
         // 3. convert remaining entries of pq into array (if pq is not empty)
-//        int i = k;
-//        int[] result = new int[k];
-//        while(!topKElements_pq.isEmpty()){
-//            result[--i] = topKElements_pq.poll().getKey();
-//        }
-        List<Integer> results = topKElements_pq.stream().map(e -> e.getKey()).collect(Collectors.toList());
-        int[] result = results.stream().mapToInt(e -> e).toArray();
-        return result;
+        List<Integer> list = new ArrayList<>();
+        while(!topKElements_pq.isEmpty()){
+            list.add(topKElements_pq.poll().getKey());
+        }
+
+        // convert list to array
+        int[] arr = new int[list.size()];
+        for(int i=0; i<list.size(); i++){
+            arr[i] = list.get(i);
+        }
+        return arr;
     }
 }

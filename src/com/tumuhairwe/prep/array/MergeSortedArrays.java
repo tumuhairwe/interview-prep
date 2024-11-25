@@ -18,7 +18,7 @@ public class MergeSortedArrays {
         int[] arr2 = new int[]{2,5,6}; int n = 3;
 
         System.out.println("Before : " + Arrays.toString(arr1));
-        merge__3_pointers(arr1, m, arr2, n);
+        merge_3_pointers(arr1, m, arr2, n);
         System.out.println("After : " + Arrays.toString(arr1));
     }
 
@@ -47,9 +47,10 @@ public class MergeSortedArrays {
      * TC: n (m + n) - m = space of nums1, n = space of nums2
      * SPC: O (1) -- done in place
      */
-    public static void merge__3_pointers(int[] nums1, int m, int[] nums2, int n){
+    public static void merge_3_pointers(int[] nums1, int m, int[] nums2, int n){
         int p1 = m - 1;
         int p2 = n - 1;
+        //int writer = m + n - 1;
 
         for (int writer = (m + n) - 1; writer > 0 ; writer--) {
             if(p1 >= 0 && p2 >= 0){
