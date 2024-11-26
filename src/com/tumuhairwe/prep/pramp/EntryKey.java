@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.pramo;
+package com.tumuhairwe.prep.pramp;
 
 import java.util.Objects;
 

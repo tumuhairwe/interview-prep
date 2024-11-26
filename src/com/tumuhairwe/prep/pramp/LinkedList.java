@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.pramo;
+package com.tumuhairwe.prep.pramp;
 
 public class LinkedList<T>  {
     private LinkedListNode head;

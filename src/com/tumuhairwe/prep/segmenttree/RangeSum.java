@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.segmenttree;
 
 import java.util.Map;
 

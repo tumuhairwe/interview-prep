@@ -1,6 +1,5 @@
-package com.tumuhairwe.prep.pramo;
+package com.tumuhairwe.prep.pramp;
 
-import java.io.*;
 import java.util.*;
 
 class PancakeSort {

@@ -15,7 +15,7 @@ public class EmployeeFreeTime {
 
     /**
      * Solution summary
-     * - Flatten the list of of list of intervals && sort by start time
+     * - Flatten the list of intervals && sort by start time
      * - iterate thru allIntervals list starting with 1 (prev = index=0, curr=1)
      * - if prev ends before curr, create a new interval of that free time and add to the return-list
      * - else update prev (based on whichever ends 1st, curr or prev)

@@ -1,7 +1,6 @@
-package com.tumuhairwe.prep.pramo;
+package com.tumuhairwe.prep.pramp;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
