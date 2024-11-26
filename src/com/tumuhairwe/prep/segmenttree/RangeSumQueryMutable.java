@@ -1,75 +1,106 @@
 package com.tumuhairwe.prep.segmenttree;
 
-public class RangeSumQueryMutable {
-    private SegmentTree root; // Root of the segment tree
+/**
+ * LeetCode 307 - RangeSumQuery - mutable
+ *
+ * Given an integer array nums, handle multiple queries of the following types:
+ *
+ *     Update the value of an element in nums.
+ *     Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+ *
+ * Implement the NumArray class:
+ *
+ *     NumArray(int[] nums) Initializes the object with the integer array nums.
+ *     void update(int index, int val) Updates the value of nums[index] to be val.
+ *     int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+ *
+ * ref: https://leetcode.com/problems/range-sum-query-mutable/
+ */
+class RangeSumQueryMutable {
 
-        // public NumArray
+    private SegmentTree root;
     public RangeSumQueryMutable(int[] nums) {
-        if (nums.length > 0) {
-            root = buildSegmentTree(nums, 0, nums.length - 1); // Build the segment tree
+        if(nums.length > 0){
+            root = build(nums, 0, nums.length -1);
         }
     }
 
-    // Class representing a segment tree node
-    class SegmentTree {
-        SegmentTree left, right;
-        int start, end, sum;
-
-        SegmentTree(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
-    }
-
-    // Function to build the segment tree
-    private SegmentTree buildSegmentTree(int[] nums, int start, int end) {
+    private SegmentTree build(int[] nums, int start, int end){
         SegmentTree node = new SegmentTree(start, end);
-        if (start == end) {
+        if(start == end){
             node.sum = nums[start];
-        } else {
+        }
+        else{
+            // recursively build tree
             int mid = start + (end - start) / 2;
-            node.left = buildSegmentTree(nums, start, mid);
-            node.right = buildSegmentTree(nums, mid + 1, end);
+            node.left = build(nums, start, mid);
+            node.right = build(nums, mid + 1, end);
+
+            // set sum
             node.sum = node.left.sum + node.right.sum;
         }
+
         return node;
     }
 
-    // Function to update an element in the segment tree
-    public void update(int index, int val) {
-        update(root, index, val);
+    public void update(int index, int value) {
+        updateRecursive(root, index, value);
     }
 
-    private void update(SegmentTree node, int index, int val) {
-        if (node.start == node.end) {
-            node.sum = val;
-        } else {
-            int mid = node.start + (node.end - node.start) / 2;
-            if (index <= mid) {
-                update(node.left, index, val);
-            } else {
-                update(node.right, index, val);
+    void updateRecursive(SegmentTree node, int index, int value){
+        if(node.start == node.end){
+            node.sum = value;
+        }
+        else{
+            int mid = node.start + (node.end  - node.start)/2;
+            if(index <= mid){
+                updateRecursive(node.left, index, value);
             }
+            else{
+                updateRecursive(node.right, index, value);
+            }
+
             node.sum = node.left.sum + node.right.sum;
         }
     }
 
-    // Function to get the sum of elements in the given range
     public int sumRange(int left, int right) {
-        return sumRange(root, left, right);
+        return sumRangeRecursive(root, left, right);
     }
 
-    private int sumRange(SegmentTree node, int start, int end) {
-        if (node.start == start && node.end == end) {
+    int sumRangeRecursive(SegmentTree node, int start, int end){
+        if(node.start == start && node.end == end){
             return node.sum;
         }
-        int mid = node.start + (node.end - node.start) / 2;
-        if (end <= mid) {
-            return sumRange(node.left, start, end);
-        } else if (start > mid) {
-            return sumRange(node.right, start, end);
-        } else {
-            return sumRange(node.left, start, mid) + sumRange(node.right, mid + 1, end);
+
+        int mid = node.start + (node.end - node.start)/2;
+        if(end <= mid){
+            return sumRangeRecursive(node.left, start, end);
+        }
+        else if(start > mid){
+            return sumRangeRecursive(node.right, start, end);
+        }
+        else{
+            int leftSum = sumRangeRecursive(node.left, start, mid);
+            int rightSum = sumRangeRecursive(node.right, mid + 1, end);
+            return leftSum + rightSum;
+        }
+    }
+
+    public static class SegmentTree{
+        // children
+        SegmentTree left;
+        SegmentTree right;
+
+        // boundaries
+        int start;
+        int end;
+
+        // scalar (could be avg, sum, etc.)
+        int sum;
+        public SegmentTree(int start, int end){
+            this.start = start;
+            this.end = end;
         }
     }
 }
