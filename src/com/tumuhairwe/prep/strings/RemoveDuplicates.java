@@ -1,6 +1,6 @@
 package com.tumuhairwe.prep.strings;
 
-import java.util.Stack;
+import java.util.*;
 
 /**
  * LeetCode 316 (medium)
@@ -82,5 +82,40 @@ public class RemoveDuplicates {
         }
 
         return sb.reverse().toString();
+    }
+
+    public String removeDuplicateLetters(String s) {
+        //0. declare vars
+        Stack<Character> st = new Stack<>();
+        Set<Character> seen = new HashSet<>();
+        Map<Character, Integer> last_seen = new HashMap<>();
+
+        //1.populate last_seen
+        for (int i = 0; i < s.length(); i++) {
+            last_seen.put(s.charAt(i), i);
+        }
+
+        //2. traverse string, put in seen & stack;
+        for (int i = 0; i < s.length(); i++) {
+            char theChar = s.charAt(i);
+
+            //remove from top-of-stack if char was last seen earlier than i
+            while(!st.isEmpty() && theChar > st.peek()
+                    && last_seen.get(theChar) > i){
+                seen.remove(st.pop());
+            }
+
+            //2.5 re-add to stack & seenSet
+            seen.add(theChar);
+            st.push(theChar);
+        }
+
+        //3. convert stack to st
+        StringBuilder sb = new StringBuilder();
+        st.stream().forEach(ch -> {
+            sb.append(ch);
+        });
+
+        return sb.toString();
     }
 }

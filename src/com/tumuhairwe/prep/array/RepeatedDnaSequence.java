@@ -59,28 +59,28 @@ public class RepeatedDnaSequence {
 
     /**
      * Solution summary
-     * - Use sliding window to a create frequency map of each 10 character string
+     * - Use sliding window to create frequency map of each 10 character string
      * - return each DNA-string/entry that has a frequency of more than 1
      */
-//    public static List<String> findRepeatedDnaSequences_map_based(String s){
-//        //0. init vars
-//        Map<String, Integer> freqCount = new HashMap<>();   // key = dna_string, val = frequency
-//
-//        //1. traverse string with 2 pointers
-//        int start = 0;
-//        for(int end = 10; end <= s.toCharArray().length; end++){
-//            String dna = s.substring(start, end);
-//
-//            int existingCount = freqCount.getOrDefault(dna, 0);
-//            freqCount.put(dna, existingCount + 1);
-//            start++;
-//        }
-//
-//        List<String> dnaThatOccursMoreThanOnce = freqCount.entrySet()
-//                .stream()
-//                .filter(entry -> entry.getValue() > 1)
-//                .map(entry -> entry.getKey())
-//                .collect(Collectors.toList());
-//        return dnaThatOccursMoreThanOnce;
-//    }
+    public static List<String> findRepeatedDnaSequences_map_based(String s){
+        //0. init vars
+        Map<String, Integer> freqCount = new HashMap<>();   // key = dna_string, val = frequency
+
+        //1. traverse string with 2 pointers
+        int start = 0;
+        for(int end = 10; end <= s.length(); end++){
+            String dna = s.substring(start, end);
+
+            int existingCount = freqCount.getOrDefault(dna, 0);
+            freqCount.put(dna, existingCount + 1);
+            start++;
+        }
+
+        List<String> dnaThatOccursMoreThanOnce = freqCount.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 1)
+                .map(entry -> entry.getKey())
+                .collect(Collectors.toList());
+        return dnaThatOccursMoreThanOnce;
+    }
 }
