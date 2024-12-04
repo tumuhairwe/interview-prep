@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

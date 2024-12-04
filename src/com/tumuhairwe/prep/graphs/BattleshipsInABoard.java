@@ -1,7 +1,7 @@
 package com.tumuhairwe.prep.graphs;
 
 /**
- * LeetCdode 419. Battleships in a Board (medium)
+ * LeetCdode 419 (medium)
  *
  * Given an m x n matrix board where each cell is a battleship 'X' or empty '.',
  * return the number of the battleships on board.
@@ -10,6 +10,8 @@ package com.tumuhairwe.prep.graphs;
  * they can only be made of the shape 1 x k (1 row, k columns) or k x 1 (k rows, 1 column),
  * where k can be of any size.
  * At least one horizontal or vertical cell separates between two battleships (i.e., there are no adjacent battleships).
+ *
+ * ref: https://leetcode.com/problems/battleships-in-a-board/description/
  */
 public class BattleshipsInABoard {
 

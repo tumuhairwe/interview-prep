@@ -1,10 +1,10 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**
- * LeetCode 2577 (hard)
+ * LeetCode 2577 (dijkstra::hard)
  *
  * You are given a m x n matrix grid consisting of non-negative integers where grid[row][col] represents the minimum time
  * required to be able to visit the cell (row, col), which means you can visit the cell (row, col) only when the time you

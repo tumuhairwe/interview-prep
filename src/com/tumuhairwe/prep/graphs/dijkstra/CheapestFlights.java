@@ -1,6 +1,7 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *

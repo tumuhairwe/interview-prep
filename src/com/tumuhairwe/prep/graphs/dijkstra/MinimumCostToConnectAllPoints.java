@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.Comparator;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.PriorityQueue;
 import java.util.Set;
 
 /**
- * LeetCode 1584 (medium)
+ * LeetCode 1584 (dijkstra::medium)
  * Given an array of points of some points on a 2D plane where
  * points[i] = [x, y]
  *

@@ -20,7 +20,7 @@ import java.util.Set;
  * See also LeetCode 1162
  */
 public class ShortestBridge {
-    static class Pair{
+    public static class Pair{
         int key;
         int value;
         public Pair(Integer k, Integer v){

@@ -1,9 +1,9 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.*;
 
 /**
- * LeetCode 505 (medium)
+ * LeetCode 505 (medium) (dijkstra)
  * There is a ball in a maze with empty_spaces (0) and walls (1).
  * The ball can go thru the empty spaces rolling up, down, left and right but it won't stop util it hits a wall
  * When the ball stops it could choose the next direction.

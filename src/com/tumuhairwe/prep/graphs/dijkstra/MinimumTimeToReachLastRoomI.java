@@ -1,10 +1,10 @@
-package com.tumuhairwe.prep.graphs;
+package com.tumuhairwe.prep.graphs.dijkstra;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
- * LeetCode 3341
+ * LeetCode 3341 (dijkstra::medium()
  *
  * There is a dungeon with n x m rooms arranged in a grid.
  * You're given 2D array moveTime of size n x m where moveTime[i][j] represents

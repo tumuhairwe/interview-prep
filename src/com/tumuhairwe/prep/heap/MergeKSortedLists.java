@@ -119,6 +119,9 @@ public class MergeKSortedLists {
                     }
                 }
         );
+//        Comparator<ListNode> comp = (ListNode l1, ListNode l2) -> {
+//            return Integer.compare(l1.val, l2.val);
+//        };
         Queue<ListNode> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> a.val));
         //Queue<ListNode> minHeap = new PriorityQueue<>((a, b) -> a.val - b.val);
 
