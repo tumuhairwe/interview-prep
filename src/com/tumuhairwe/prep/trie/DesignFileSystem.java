@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * LeetCode 1166 Design File System
+ * LeetCode 1166 (medium)
  * You are asked to design a file system that allows you to create new paths and associate them with different values.
  *
  * The format of a path is one or more concatenated strings of the form: / followed by one or more lowercase English letters. For example, "/leetcode" and "/leetcode/problems" are valid paths while an empty string "" and "/" are not.

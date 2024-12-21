@@ -20,7 +20,7 @@ import java.util.Stack;
  */
 public class QueueImplUsingStacks {
 
-    private Stack<Integer> primary;
+    private Stack<Integer> primary; // front
     private Stack<Integer> secondary;
 
     public QueueImplUsingStacks(){

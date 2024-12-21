@@ -4,6 +4,17 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
+ * LeetCode 2737 (medium)
+ * You are given a positive integer n which is the number of nodes of a 0-indexed directed weighted graph
+ * and a 0-indexed 2D array edges where edges[i] = [ui, vi, wi] indicates that there is an edge from node ui
+ * to node vi with weight wi.
+ *
+ * You are also given a node s and a node array marked; your task is to find the minimum distance from s to
+ * any of the nodes in marked.
+ *
+ * Return an integer denoting the minimum distance from s to any node in marked or -1 if there are no paths
+ * from s to any of the marked nodes.
+ *
  * ref: https://leetcode.com/problems/find-the-closest-marked-node/?envType=problem-list-v2&envId=shortest-path
  */
 public class ClosestMarkedNode {

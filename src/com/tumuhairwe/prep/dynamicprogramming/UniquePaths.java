@@ -12,6 +12,7 @@ package com.tumuhairwe.prep.dynamicprogramming;
  * ref: https://leetcode.com/problems/unique-paths/description/
  */
 public class UniquePaths {
+    // This has a graph-based solution as well
 
     /**
      * Solution summary

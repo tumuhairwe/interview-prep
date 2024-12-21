@@ -14,25 +14,6 @@ import java.util.*;
  */
 public class LongestSubstring {
 
-    public void bruteForce(String input, int k){
-        // find all the substring from input && check whether t
-        // hey have length K
-        // whether they have duplicate characters
-        Set<Character> set = new HashSet<>();
-        // time-complexity = O(n^3);
-        // space complexity = O(n)
-        for (int i = 0; i < input.toCharArray().length; i++) {
-            for (int j = 0; j < 9; j++) {
-
-            }
-            Character c = Character.valueOf(input.charAt(i));
-            if(!set.contains(c)){
-                set.add(c);
-            }
-            else continue;
-        }
-    }
-
     /**
      * Keep 2 pointers to encompass the biggest valid solution that we can
      */

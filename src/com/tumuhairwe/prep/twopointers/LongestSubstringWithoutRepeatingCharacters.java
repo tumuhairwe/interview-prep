@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.strings;
+package com.tumuhairwe.prep.twopointers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,9 @@ import java.util.List;
  *   - Pointer 2 (slow) only moves when pointer-1 encounters a character that's already been seen
  *   - Need to keep track to of Map<Character, Integer> that counts/increments the occurrence of each character
  *   and if occurenceCount exceeds threshold e.g. 1 ... move pointer 2
+ *
  * ref: https://www.youtube.com/watch?v=3IETreEybaA&t=3s
+ * ref: https://www.youtube.com/watch?v=wiGpQwVHdE0
  * ref: https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
  */
 public class LongestSubstringWithoutRepeatingCharacters {
@@ -23,24 +25,29 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     // use set to track character & index of character
-    private static int lengthOfLongestSubstring(String str) {
-        List<Character> substring = new ArrayList<>();
-        int maxLength = Integer.MIN_VALUE;
-        for (int right = 0; right < str.length(); right++) {
-            Character c = str.charAt(right);
+    public static int lengthOfLongestSubstring(String s) {
+        //0. create list
+        List<Character> list = new ArrayList<>();
 
-            if(substring.contains(c)){
-                // get index of char
-                int index = substring.indexOf(c);
-                substring.remove(index);
+        //1. iterate thru str -> add char to list -> re-calc maxLength
+        int maxLength = 0;
+        for(int i=0; i<s.length(); i++){
+            Character ch = s.charAt(i);
 
-                // clear all chars up until that point
-                if(index > 0){
-                    substring.subList(0, index).clear();
+            //2. if already included -> find & remove -> clear substring up to that char
+            if(list.contains(ch)){
+                int index = list.indexOf(ch);
+                list.remove(index);
+                if(i > 0){
+                    list.subList(0, index).clear();
                 }
             }
-            substring.add(c);
-            maxLength = Math.max(maxLength, substring.size());
+
+            //3. add to list
+            list.add(ch);
+
+            //4. update maxLength
+            maxLength = Math.max(maxLength, list.size());
         }
 
         return maxLength;

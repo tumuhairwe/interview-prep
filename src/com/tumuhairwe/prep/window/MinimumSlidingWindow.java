@@ -10,6 +10,8 @@ import java.util.Map;
  * is included in the window
  *
  * Template: https://leetcode.com/problems/find-all-anagrams-in-a-string/solutions/92007/sliding-window-algorithm-template-to-solve-all-the-leetcode-substring-search-problem/
+ * article: https://medium.com/@nikhil.cse16/mastering-the-sliding-window-technique-a-comprehensive-guide-6bb5e1e86f99
+ *
  *  Solution:
  *  - Create a frequency-map that stores all the values of t and the frequency of their
  *  occurrence (look-up = O(1))
