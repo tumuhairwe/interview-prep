@@ -4,10 +4,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * LeetCode 1695 (medium)
  * Given an array of positive integers (nums) and want to erase a subarray
  * containing unique elements. The score you get by erasing the sub-array is equal
  * to the sum of its elements.
  * Return the maximum score you can get by erasing exactly one sub-array
+ *
+ * ref: https://leetcode.com/problems/maximum-erasure-value/description/
  */
 public class MaximumErasureValue {
 
