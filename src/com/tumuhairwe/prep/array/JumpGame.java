@@ -28,17 +28,26 @@ public class JumpGame {
     }
 
     //TC: O(n)
+
+    /**
+     * Solution summary
+     * - traverse array from the end (set nums[i] = jumpDistance)
+     * - foreach jumpDistance: if jumpDistance+i >= jumpGoal (i.e. you'll overshoot the target)
+     * - update the jumpGoal to be i
+     * - At the end, i must be 0 (zero-th index) -- if you can go from beginning to end
+     * - Else return false
+     */
     public static boolean canJump(int[] nums){
-        int goalIndex = 0;  // aka lastGoodIndexPosition
+        int jumpGoal = 0;  // aka lastGoodIndexPosition
 
         for (int i = nums.length - 1; i >0; i--) {
             int jumpDistance = nums[i];
 
-            if(i + jumpDistance >= goalIndex){
-                goalIndex = i;
+            if(i + jumpDistance >= jumpGoal){
+                jumpGoal = i;
             }
         }
 
-        return goalIndex == 0;
+        return jumpGoal == 0;
     }
 }

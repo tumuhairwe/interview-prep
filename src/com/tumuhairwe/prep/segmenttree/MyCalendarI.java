@@ -1,7 +1,9 @@
 package com.tumuhairwe.prep.segmenttree;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * LeetCode 729 (medium)
@@ -19,11 +21,8 @@ import java.util.TreeMap;
  * ref: https://leetcode.com/problems/my-calendar-i/
  */
 public class MyCalendarI {
-    private TreeMap<Integer, Integer> treeMap;
+    private TreeMap<Integer, Integer> treeMap = new TreeMap<>();
 
-    public MyCalendarI(){
-        this.treeMap = new TreeMap<>();
-    }
 
     /**
      * Solution summary (before each insert, check if there is a conflict with neighboring intervals) on each side with.
@@ -59,6 +58,38 @@ public class MyCalendarI {
         }
 
         treeMap.put(startTime, endTime);
+        return true;
+    }
+
+    private TreeSet<int[]> eventsSet;
+    public MyCalendarI(){
+        Comparator<int[]> orderByStart = Comparator.comparingInt((int[] a) -> a[0]);
+        //Comparator<int[]> events = (int[] a, int[] b) -> Integer.compare(a[0], b[0]); // same
+        eventsSet = new TreeSet<>(orderByStart);
+    }
+    //SC: O(n)
+    //TC: O(log_n) to add -- since we don't need to iterate the set every time
+
+    /**
+     * Solution summary
+     * - initialize set to TreeSet that sorts by start (event[0]
+     * - on insert:
+     *      - get the treeSet.floor() of the event -> prev
+     *      - get the treeSet.ceiling() of the event -> next
+     *      - if the prev.endTime is AFTER the new events's startTime -> return false
+     *      - if the next.startTime is BEFORE the new events's endTime -> return fale
+     * - add event to eventSet
+     * - return true
+     */
+    boolean book_3(int startTime, int endTime){
+        int[] event = new int[]{startTime, endTime};
+        int[] prev = eventsSet.floor(event);
+        int[] next = eventsSet.ceiling(event);
+
+        if((prev != null && prev[1] > startTime) || (next != null && next[0] < endTime)){
+            return false;
+        }
+        eventsSet.add(event);
         return true;
     }
 }

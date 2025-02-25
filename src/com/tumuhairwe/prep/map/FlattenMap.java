@@ -24,6 +24,8 @@ import java.util.Map;
  * Key1 : a
  * Key2.c : 122
  * key2.d.e = 777
+ *
+ * ref: https://github.com/maiquynhtruong/algorithms-and-problems/blob/master/flatten-dictionary.java
  */
 public class FlattenMap {
 

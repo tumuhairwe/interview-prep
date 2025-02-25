@@ -23,6 +23,10 @@ public class MapSumPairs_PrefixMap {
         score = new HashMap<>();
     }
 
+    /**
+     * Time Complexity: Every insert operation is O(K^2)
+     * where K is the length of the key, as K strings are made of an average length of K.
+     */
     public void insert(String key, int val){
         int delta = val - map.getOrDefault(key, 0);
         map.put(key, val);
@@ -34,6 +38,10 @@ public class MapSumPairs_PrefixMap {
         }
     }
 
+    /**
+     * TC: Every sum operation is O(1).
+     * SC: O(n)
+     */
     public int sum(String prefix){
         return score.getOrDefault(prefix, 0);
     }
