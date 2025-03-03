@@ -42,7 +42,7 @@ public class MeetingRoomsII {
      * - Sort both arrays (goal is to track used_number_of_rooms)
      * - Use 2 pointers to track indices of each array ( increment usedRooms counter if startTimes[p1] < endTimes[p2]
      * - Increment p2 only when we need another room
-     * TC: O(n)
+     * TC: O(n log_n) - because of sorting
      * SC: O(n)
      */
     public static int findMinimumNumberOfRoomsRequired_2Pointers_chronologicalOrdering__LC253(int[][] intervals){
@@ -78,7 +78,7 @@ public class MeetingRoomsII {
      * Solution summary
      * - Sort intervals
      * - Track end times in PQ
-     * - b4 adding new end-time, check to see if soonest ending meeting ends before new/current one stats, if so, pq.poll()
+     * - b4 adding new end-time, check to see if soonest ending meeting ends before new/current one starts, if so, pq.poll()
      * - return size of pq
      */
     // TC: sorting == O(n logn) .. checking top of heap = constant time O(1) (inserting = O log_n)
@@ -103,7 +103,7 @@ public class MeetingRoomsII {
 
             // 3a) if queue of end-time is not empty() and soonest-ending is ending sooner that current, remove it
             int currentStartTime = current[0];
-            int currentEndTime = current[0];
+            int currentEndTime = current[1];
             if(!endTime_pq.isEmpty() && endTime_pq.peek() <= currentStartTime){
                 endTime_pq.poll();
             }

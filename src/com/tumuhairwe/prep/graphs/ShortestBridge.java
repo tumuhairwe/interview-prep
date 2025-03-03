@@ -132,7 +132,7 @@ public class ShortestBridge {
     /**
      * method summary
      * - if a cell is !WATER && isValid() && !visited -> add to visited set
-     * - recursively 4-diagonally traverse grid until you meet a WATER cell
+     * - recursively 4-diagonally traverse grid until you meet WATER cell
      */
     void dfs_toCollectAllWaterCells(int[][] grid, int row, int col ){
         if(!isValid(row, col) || grid[row][col] == WATER || visited.contains(new Pair(row, col))){

@@ -16,7 +16,7 @@ public class MaxAreaOfIsland {
     static int LAND = 1;
     static int WATER = 0;
     public int maxAreaOfIsland(int[][] grid) {
-        //0. base case
+        //0. base casee
         if(grid.length == 0 || grid[0].length == 0){
             return 0;
         }

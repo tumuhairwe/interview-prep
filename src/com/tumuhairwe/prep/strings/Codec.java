@@ -15,20 +15,22 @@ public class Codec {
     char pi = '\u03c0';
     /**
      * Solution summary
-     * - map: use StringBuilder to append a delimiter to each String
+     * - map: combine each entry with pi/delimiter
      * - join: Collect all the strings (str + delimiter) to a single string
      */
     public String encode(List<String> strs){
         char delimiter = pi;
         return strs.stream()
-                .map(str -> new StringBuilder(str).append(delimiter).toString())
+                .map(str -> str + delimiter)
                 .collect(Collectors.joining());
     }
 
     /**
      * Solution summary
      * - split the encoded string at each occurrence of the delimiter
-     * - convert the array to list and return it
+     * - convert the array to list
+     * - remove last entry in list (empty string)
+     * - return list
      */
     public List<String> decode(String str){
         String delimiter = "" + pi;
@@ -38,6 +40,9 @@ public class Codec {
 
         //1. convert the array to list and return it
         //NB: we remove the last element because its an empty string resulting from the final character
-        return Arrays.asList(decodedStrings).subList(0, decodedStrings.length -1);
+        //return Arrays.asList(decodedStrings).subList(0, decodedStrings.length -1);
+        List<String> ll = Arrays.asList(decodedStrings);
+        ll = ll.subList(0, ll.size() - 1);
+        return ll;
     }
 }

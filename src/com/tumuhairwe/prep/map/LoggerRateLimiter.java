@@ -4,6 +4,7 @@ import java.util.*;
 
 /**
  * LeetCode 359 (easy)
+ * ref: https://leetcode.com/problems/logger-rate-limiter/
  *
  * Design a logger system that receives a stream of messages along with their timestamps. E
  * ach unique message should only be printed at most every 10 seconds
@@ -54,6 +55,7 @@ public class LoggerRateLimiter {
             throw new RuntimeException("1 of the server names is invalid");
         }
         this.cache = new HashMap<>();
+        initializeCache(serverNames);
     }
 
     boolean isValid(String serverName){
@@ -102,7 +104,7 @@ public class LoggerRateLimiter {
             cache.put(prefix, new TreeSet<>());
         }
 
-        // find lowest missing number
+        // find the lowest missing number
         int lowestMissingNumber = Integer.MIN_VALUE;
         int[] nums = cache.get(prefix).stream().mapToInt(a -> a).toArray();
         for (int i = 1; i < nums.length; i++) {

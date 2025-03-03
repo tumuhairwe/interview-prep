@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.array;
+package com.tumuhairwe.prep.linesweep;
 
 import java.util.Arrays;
 import java.util.Comparator;

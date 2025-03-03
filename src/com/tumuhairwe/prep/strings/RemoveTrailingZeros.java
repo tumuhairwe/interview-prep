@@ -28,4 +28,23 @@ public class RemoveTrailingZeros {
 
         return num.substring(0, idx+1);
     }
+
+    /**
+     * Solution summary
+     * - Create a new stringBuilder seeded with the integer "num"
+     * - iterate "num" backward ...
+     * - for each character==0, sb.deleteCharAt(idx)
+     * - return sb.toString()
+     */
+    public String removeTrailingZeros2(String num) {
+
+        StringBuilder sb = new StringBuilder(num);
+        int idx = num.length() - 1;
+        while(idx >=0 && num.charAt(idx) == '0'){
+            sb.deleteCharAt(idx);
+            idx--;
+        }
+
+        return sb.toString();
+    }
 }

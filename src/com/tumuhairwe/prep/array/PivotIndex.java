@@ -1,6 +1,7 @@
 package com.tumuhairwe.prep.array;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * LeetCode 724 (easy)
@@ -28,6 +29,8 @@ public class PivotIndex {
         //0. calc rightSum
         int rightSum = 0, leftSum = 0;
         rightSum = Arrays.stream(nums).sum();
+        boolean[] res = new boolean[1];
+        List<boolean[]> xx = Arrays.asList(res);
         //rightSum= Arrays.asList(nums).stream().mapToInt(a -> a).sum();
 //        for(int num : nums){
 //            rightSum += num;

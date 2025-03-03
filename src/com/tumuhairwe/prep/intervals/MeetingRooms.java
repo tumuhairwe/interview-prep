@@ -4,12 +4,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * LeetCode
+ * LeetCode 252 (easy)
  *
  * Solution Summary:
  * - Sort the interval[] by start time == O(n log_n)
  * - iterate and compare adjacent intervals (if 1 int[][])
  *
+ * ref: https://leetcode.com/problems/meeting-rooms/description/
  * ref: Geekific: https://www.youtube.com/watch?v=Iz5GZbvpxqo
  * ref: NeetCode: https://www.youtube.com/watch?v=PaJxqZVPhbg
   */
@@ -44,17 +45,29 @@ public class MeetingRooms {
         return result;
     }
 
-    // LeetCode 252 (easy)
+    /**
+     * Solution summary
+     * 0. sort intervals by start (given arr[i] = [start, end] configuration
+     * 1. iterate the slots starting from index=1, check if prev.end > curr.start
+     *
+     * TC: O(n log n) -- because of sorting
+     * sc: O(1) (no extra space used)
+     */
     // LC Summary: sort intervals by start time, if second interval doesn’t overlap with first, then third def wont overlap with first;
-    public static boolean canAPersonAttendAllTheMeetings(int[][] slotsA) {
+    public static boolean canAttendMeetings(int[][] slotsA) {
         // approach 1: sort slots by start time -> iterate comparing next-to-each-other slot (for loop starts at i= 1)
         // FALSE: sorting is necessary only if collection is array
+        //0. sort array
         Comparator<int[]> comp = Comparator.comparingInt(a -> a[0]);
         Arrays.sort(slotsA, comp);
-        for (int i = 0; i < slotsA.length; i++) {
-            int[] i1 = slotsA[i];
-            int[] i2 = slotsA[i + 1];
-            if(i1[1] > i2[0]) {
+
+        //1.
+        for (int i = 1; i < slotsA.length; i++) {
+            int[] prev = slotsA[i-1];
+            int[] curr = slotsA[i];
+
+            if(prev[1] > curr[0]){
+            //if(slotsA[i-1][1] > slotsA[i][0]){
                 return false;
             }
         }
@@ -63,7 +76,7 @@ public class MeetingRooms {
     }
 
     // LeetCode 252 (easy)
-    // LC Summary: sort intervals by start time, if second interval doesn’t overlap with first, then third def wont overlap with first;
+    // LC Summary: sort intervals by start time, if second interval doesn’t overlap with first, then third def won't overlap with first;
     public static boolean canAPersonAttendAllTheMeetings2(int[][] slotsA) {
         // approach 2
         // 0. transform into array of intervals

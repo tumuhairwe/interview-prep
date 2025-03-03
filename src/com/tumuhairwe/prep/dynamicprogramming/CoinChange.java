@@ -29,7 +29,7 @@ public class CoinChange {
         System.out.println("Should be 0: " + result);
     }
     static int coinChange(int[] coins, int amount){
-        // 0. handle base case
+        // 0. handle base c
         if(amount < 0 || coins.length == 0){
             return 0;
         }

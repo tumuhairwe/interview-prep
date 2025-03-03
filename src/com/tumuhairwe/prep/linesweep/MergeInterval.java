@@ -1,4 +1,4 @@
-package com.tumuhairwe.prep.intervals;
+package com.tumuhairwe.prep.linesweep;
 
 import java.util.*;
 
@@ -97,7 +97,7 @@ public class MergeInterval {
     }
 
     /**
-     * Solution Summaru
+     * Solution summary
      * sort each interval,
      * - overlapping intervals should be adjacent,
      * - iterate and build solution; also graph method, less efficient, more complicated

@@ -1,0 +1,7 @@
+ref: https://leetcode.com/problems/target-sum/solutions/455024/dp-is-easy-5-steps-to-think-through-dp-questions/?envType=problem-list-v2&envId=plakya4j
+
+1. 0/1 Knapsack
+2. Unbounded knapsack
+3. Shortest path (e.g. unique paths I and II -- LeetCode 62 & 63)
+4. Fibonacci sequence (e.g. house thief and jump game (LeetCode 45)
+5. Longest Common Substring/subsequence
