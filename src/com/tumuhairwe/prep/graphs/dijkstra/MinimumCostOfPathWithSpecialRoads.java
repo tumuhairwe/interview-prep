@@ -1,7 +1,5 @@
 package com.tumuhairwe.prep.graphs.dijkstra;
 
-import com.tumuhairwe.prep.graphs.ShortestBridge;
-
 import java.util.*;
 
 /**
@@ -38,7 +36,7 @@ public class MinimumCostOfPathWithSpecialRoads {
         minHeap.offer(new int[]{startRow, startCol, 0});
 
         //2. create visited set (DON'T SEED)
-        Set<ShortestBridge.Pair> visited = new HashSet<>();
+        boolean[][] visited = new boolean[specialRoads.length][specialRoads[0].length];
 
         //3. traverse space
         while (!minHeap.isEmpty()){
@@ -48,7 +46,7 @@ public class MinimumCostOfPathWithSpecialRoads {
             int currCost = curr[2];
 
             //4. check if visited
-            if(visited.contains(new ShortestBridge.Pair(currRow, currCol))){
+            if(visited[currRow][currCol]){
                 continue;
             }
 
@@ -69,7 +67,7 @@ public class MinimumCostOfPathWithSpecialRoads {
                 int destCol = road[3];
                 int roadCost = road[4];
 
-                if(!visited.contains(new ShortestBridge.Pair(destRow, destCol))){
+                if(!visited[destRow][destCol]){
                     int costToDest = Math.abs(srcRow - currRow) + Math.abs(srcCol - currCol) + currCost + roadCost;
                     minHeap.offer(new int[]{destRow, destCol, costToDest});
                 }

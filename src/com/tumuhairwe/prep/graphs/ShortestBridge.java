@@ -1,9 +1,6 @@
 package com.tumuhairwe.prep.graphs;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 934. Shortest Bridge (medium)
@@ -69,15 +66,16 @@ public class ShortestBridge {
      */
     public int shortestBridge(int[][] grid) {
         // board is n x n
-        numRows = grid.length;
-        numCols = grid.length;
-        visited = new HashSet<>();
+        int numRows = grid.length;
+        int numCols = grid.length;
+        Queue<int[]> landCells = new LinkedList<>();
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
 
         for(int i=0; i< grid.length; i++)    {
             for(int j=0; j<grid[0].length; j++){
                 if(grid[i][j] == LAND){
-                    dfs_toCollectAllWaterCells(grid, i, j);    // fill up visited set with cells
-                    return bfs(grid, visited);   // take visited cells & return numCells
+                    collectLandCells(grid, i, j, landCells, visited);    // fill up visited set with cells
+                    return dfs(grid, visited, landCells);   // take visited cells & return numCells
                 }
             }
         }
@@ -93,38 +91,37 @@ public class ShortestBridge {
      * - repeat until you arrive at a LAND cell
      * - return number of steps
      */
-    int bfs(int[][] grid, Set<Pair> visited){
-        int result = 0;
-        Deque<Pair> deque = new ArrayDeque<>(visited);
+    int dfs(int[][] grid, boolean[][] visited, Queue<int[]> landCells){
+        int numberOfCellsToFlip = 0;
 
-        while(!deque.isEmpty()){
-            int queDepth = deque.size();
-            Pair coord = deque.pop();
+        while(!landCells.isEmpty()){
+            int queDepth = landCells.size();
 
             while(queDepth-- > 0){
-                for(int[] dir : offsets){
-                    int row = coord.getKey() + dir[0];
-                    int col = coord.getValue() + dir[1];
-                    Pair cell = new Pair(row, col);
+                int[] cell = landCells.poll();
 
-                    if(!isValid(row, col) || visited.contains(cell)){
+                for(int[] dir : offsets){
+                    int row = cell[0] + dir[0];
+                    int col = cell[1] + dir[1];
+
+                    if(!isValid(grid, row, col) || visited[row][col]){
                         continue;
                     }
 
-                    if(grid[row][col] == LAND){ // we've reached another island
-                        return result;
+                    // we've found the neighboring/2nd land mass
+                    if(grid[row][col] == LAND){
+                        return numberOfCellsToFlip;
                     }
-                    else{   // its water -> mark visited and add to que
-                        visited.add(cell);
-                        deque.add(cell);
-                    }
+                    // its water -> mark visited and add to que
+                    visited[row][col] = true;
+                    landCells.add(new int[]{row, col});
                 }
             }
 
-            result++;
+            numberOfCellsToFlip++;
         }
 
-        return result;
+        return -1;
     }
 
     // goal is to fill up the visit hashSet with land cells
@@ -134,24 +131,31 @@ public class ShortestBridge {
      * - if a cell is !WATER && isValid() && !visited -> add to visited set
      * - recursively 4-diagonally traverse grid until you meet WATER cell
      */
-    void dfs_toCollectAllWaterCells(int[][] grid, int row, int col ){
-        if(!isValid(row, col) || grid[row][col] == WATER || visited.contains(new Pair(row, col))){
+    void collectLandCells(int[][] grid, int row, int col, Queue<int[]> landCells, boolean[][] visited){
+        if(!isValid(grid, row, col) || grid[row][col] == WATER || visited[row][col]){
             return;
         }
 
         // add to visited Set
-        visited.add(new Pair(row, col));
+        visited[row][col]= true;
+        landCells.add(new int[]{row, col});
 
         //bfs
+        int[][] offsets = {
+                {1, 0}, {0, 1},
+                {-1, 0}, {0, -1}
+        };
         for(int[] direction : offsets){
             int r = row + direction[0];
             int c = col + direction[1];
 
-            dfs_toCollectAllWaterCells(grid, r, c);
+            collectLandCells(grid, r, c, landCells, visited);
         }
     }
 
-    boolean isValid(int row, int col){
-        return row >= 0 && row < numRows && col >= 0 && col < numCols;
+    boolean isValid(int[][] grid, int row, int col){
+        boolean rowIsValid = row >= 0 && row < grid.length;
+        boolean colIsValid = col >= 0 && col < grid[0].length;
+        return rowIsValid && colIsValid;
     }
 }
