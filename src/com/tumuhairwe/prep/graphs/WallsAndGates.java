@@ -11,22 +11,13 @@ import java.util.Queue;
  * -0 = GATE
  * -INF = Integer.MAX_VALUE
  * ref: https://www.youtube.com/watch?v=e69C6xhiSQE
+ * ref: https://leetcode.com/problems/walls-and-gates/
+ * ref: https://leetcode.com/discuss/post/1876688/286-walls-and-gates-using-multi-source-b-3j5y/
+ * ref: https://medium.com/geekculture/spot-graphs-in-your-coding-interviews-354c49732b4e
  */
 public class WallsAndGates {
     static int WALL = -1;
     static int GATE = 0;
-//
-//    static class Room{
-//        int row;
-//        int col;
-//        int dist;
-//
-//        public Room(int r, int c, int d){
-//            this.row = r;
-//            this.col = c;
-//            this.dist = d;
-//        }
-//    }
 
     public static void main(String[] args) {
         int[][] rooms = new int[][]{

@@ -34,7 +34,7 @@ public class FrequentWords {
      * - collect K elements remaining in pq into a List
      * - map list to [] and return
      *
-     * TC = in O(n + klogn) == where n = size or words array, k = number-of-top-k
+     * TC = in O(n log k ) == where n = size or words array, k = number-of-top-k
      * SC = O(n) space
      */
     public int[] topKFrequent(int[] nums, int k) {

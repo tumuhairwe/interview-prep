@@ -19,6 +19,24 @@ import java.util.Map;
  */
 public class CourseScheduleIV {
 
+    /**
+     * Solution summary
+     * - Create & populate adjacency list of each course and its prereq
+     * - Loop thru queries, forEach query, call isPrereq() and add answer to returnList
+     * - in isPrereq() : implement recursive DFS fo reach dependent (returning true if there's a path from src-to-dest and false otherwise
+     * - return resultList
+     *
+     * TC: O(Q X N^2):
+     *  - creating the adjList = O(n^2) because we iterate over the prereqs.
+     *  - iterate over the queries & do DFS (which takes O(V + E) -- which is equivalent to O(n^2)
+     *  - so given number-of-queries = Q and DFS=n^2, Total TC=O(Q x n^2)
+     *
+     * sc: O(V + E)
+     *  - adjList stores every edge in the list of prereqs -> requires O(n ^ 2) in the worst case
+     *  - For DFS, we need the visited array of size N
+     *  - recursive stack of DFS calls = O(N)
+     * ref: https://leetcode.com/problems/course-schedule-iv/solutions/660839/java-topological-sorting/
+     */
     public List<Boolean> checkIfPrerequisite(int numCourses, int[][] prerequisites, int[][] queries){
         //0. create graph
         Map<Integer, List<Integer>> adjList = new HashMap<>();

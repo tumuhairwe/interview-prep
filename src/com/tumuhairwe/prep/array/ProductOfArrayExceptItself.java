@@ -14,6 +14,10 @@ public class ProductOfArrayExceptItself {
 
     /**
      * Solution Summary
+     *      (2 passes: left-to-right -> store product of both neighbors in right_prod[i]
+     *      - & right-to-left both -> store product of both neighbors in left_prod[i]
+     *      - final pass -> ans[i] = left_prod[i] * right_prod[i]
+     *      - return ans
      * - Calculate products of all numbers to the left of i -> store in array (seed left[0] with 1)
      * - Calculate products of all numbers to the right of i -> store in array (seed right[nums.length- 1] with 1
      * - populate output[i] by multiplying left[i] * right[i]

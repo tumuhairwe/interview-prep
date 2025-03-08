@@ -13,31 +13,11 @@ import java.util.*;
  *
  * ref: https://www.youtube.com/watch?v=gkINMhbbIbU
  * ref: https://leetcode.com/problems/shortest-bridge/description/
- *
+ * ref: https://leetcode.com/discuss/post/1833581/bfs-and-its-variations-by-c0d3m-o47u/ <-- multi-source BFS (BFS and its variations)
  * See also LeetCode 1162
  */
 public class ShortestBridge {
-    public static class Pair{
-        int key;
-        int value;
-        public Pair(Integer k, Integer v){
-            this.key = k;
-            this.value = v;
-        }
 
-        public Integer getKey() {
-            return key;
-        }
-
-        public Integer getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return "r="+key+ ", c=" + value;
-        }
-    }
     //TC: n^2
     //SC: n^2
     int LAND = 1;
@@ -49,7 +29,6 @@ public class ShortestBridge {
             {1, 0}, {0, 1},
             {-1, 0}, {0, -1}
     };
-    Set<Pair> visited;
 
     public static void main(String[] args) {
         int[][] grid = {

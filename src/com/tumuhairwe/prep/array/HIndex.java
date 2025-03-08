@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Given an array of integers (citations) where citations[i] is the number of citations
  * a researcher received for their i-th paper, return the H-index
  *
- * def: H-indez is defined as the maximum value of H such that the given researchers
+ * def: H-index is defined as the maximum value of H such that the given researchers
  * has published at least H papers that have each been cited at least H times
  *
  * ref: https://leetcode.com/problems/h-index/description/
