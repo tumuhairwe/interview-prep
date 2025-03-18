@@ -30,6 +30,16 @@ public class MapSumPairs_Trie {
         this.map = new HashMap<>();
         this.root = new TrieNode();
     }
+
+    /**
+     * Solution summary
+     *      - (create backingMap where key=sString and value=int score)
+     *      - recalculate all scores on insert
+     *      - to get sum, just navigate from rootTrie to end of prefix and return score
+     * on insert:
+     * - create backing map & insert key & value
+     * -
+     */
     public void insert(String key, int val){
         // add to map
         map.put(key, val);

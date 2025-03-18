@@ -1,16 +1,23 @@
 package com.tumuhairwe.prep.strings;
 
 /**
- * LeetCode 980 (easy) -- Valid Palindrome II
+ * LeetCode 680 (easy) -- Valid Palindrome II
  *
  * Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+ *
+ * ref: https://www.youtube.com/watch?v=JrxRYBwG6EI
+ * ref: https://leetcode.com/problems/valid-palindrome-ii/description/
  */
 public class ValidPalindromeII {
 
     /**
      * Solution Summary
      * - iterate string with 2 pointers
-     * - if its not a palindrome so far (i.e. character_at_end != character_at_start -> test by changinG the boundary to start+1 and end-1
+     * - if its not a palindrome so far (i.e. character_at_end != character_at_start -> test by changing
+     * the boundary to start+1 and end-1
+     *
+     * TC: O(n)
+     * SC: O(1)
      */
     public boolean isValidPalindrome(String s){
         int left = 0;

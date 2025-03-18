@@ -45,7 +45,8 @@ public class TrieHashMapImpl {
         curr.endOfWord = true;   // mark end-of-word
     }
 
-    // TC = O(1) == where n = length of word
+    // TC = O(n) == where n = length of word
+    // SC: O(W * L): where W == number of works and L = avg length of word
     public boolean search(String word){
         TrieNode result = getLast(word);
         return (result != null && result.endOfWord);
@@ -62,6 +63,8 @@ public class TrieHashMapImpl {
         return curr;
     }
 
+    //TC: O(m) where m == length of prefix
+    //SC: O(W * L): where W == number of works and L = avg length of word
     public boolean startsWith(String prefix){
         TrieNode curr = this.root;
         for(char c : prefix.toCharArray()){
