@@ -12,11 +12,11 @@ package com.tumuhairwe.prep.strings;
  * A common subsequence of two strings is a subsequence that is common to both strings.
  *
  * ref: https://leetcode.com/problems/longest-common-subsequence/description/
+ * ref: https://www.youtube.com/watch?v=Ua0GhsJSlWM
+ * ref: https://leetcode.com/problems/longest-common-subsequence/solutions/351689/java-python-3-two-dp-codes-of-o-mn-o-min-m-n-spaces-w-picture-and-analysis/
  */
 public class LongestCommonSubsequence {
-    public static void main(String[] args) {
 
-    }
     public int longestCommonSubsequence(String s1, String s2){
         int[][] dp = new int[s1.length()][s2.length()];
         return dynamicDP_recursive(s1, s2, 0, 0, dp);

@@ -28,6 +28,9 @@ public class WordBreak {
      *      - if dictionary.contains(substring) && recursiveCall() -> update memo[i] = true, return true
      *      - update memo[i] = false
      *      - return false;
+     *
+     * TC: O(n ^ 3) -- where n == length of string
+     * SC: O(N) -- n == size of string
      */
     public boolean wordBreak(String s, List<String> wordDict){
         return topDown(s, new HashSet<>(wordDict),  0, new Boolean[s.length()]);
