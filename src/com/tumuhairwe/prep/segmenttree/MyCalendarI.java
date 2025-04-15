@@ -21,13 +21,14 @@ import java.util.TreeSet;
  * ref: https://leetcode.com/problems/my-calendar-i/
  */
 public class MyCalendarI {
+    // https://leetcode.com/problems/my-calendar-i/?envType=problem-list-v2&envId=segment-tree
     private TreeMap<Integer, Integer> treeMap = new TreeMap<>();
 
 
     /**
      * Solution summary (before each insert, check if there is a conflict with neighboring intervals) on each side with.
      * - Check if there's an end that is greater than incomingStartTime -> if so we have overlap (is illegal)
-     * - check if there's a start tha tis less than the incomingEndTime -> if we have an overlap (is illegal)
+     * - check if there's a start that is less than the incomingEndTime -> if we have an overlap (is illegal)
      *
      * TC: O(n log n) because for each new event, we search the to make sure the event is not illegal.
      * The search costs log_N and is performed N times -> total cost = O(N log_N)
@@ -61,11 +62,11 @@ public class MyCalendarI {
         return true;
     }
 
-    private TreeSet<int[]> eventsSet;
+    private TreeSet<int[]> calendar;
     public MyCalendarI(){
         Comparator<int[]> orderByStart = Comparator.comparingInt((int[] a) -> a[0]);
         //Comparator<int[]> events = (int[] a, int[] b) -> Integer.compare(a[0], b[0]); // same
-        eventsSet = new TreeSet<>(orderByStart);
+        calendar = new TreeSet<>(orderByStart);
     }
     //SC: O(n)
     //TC: O(log_n) to add -- since we don't need to iterate the set every time
@@ -83,13 +84,13 @@ public class MyCalendarI {
      */
     boolean book_3(int startTime, int endTime){
         int[] event = new int[]{startTime, endTime};
-        int[] prev = eventsSet.floor(event);
-        int[] next = eventsSet.ceiling(event);
+        int[] prev = calendar.floor(event);
+        int[] next = calendar.ceiling(event);
 
         if((prev != null && prev[1] > startTime) || (next != null && next[0] < endTime)){
             return false;
         }
-        eventsSet.add(event);
+        calendar.add(event);
         return true;
     }
 }

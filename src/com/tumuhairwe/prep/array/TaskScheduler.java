@@ -92,18 +92,7 @@ public class TaskScheduler {
         return cycles;
     }
 
-    static class Pair<K, V>{
-        K key;
-        V val;
-        public Pair(K k, V v){
-            this.key = k;
-            this.val = v;
-        }
 
-        public K getKey() {
-            return key;
-        }
-    }
     public int leastInterval_pq(char[] tasks, int n) {
         // 0. base case
         if(n == 0){
@@ -113,7 +102,7 @@ public class TaskScheduler {
         // 1. Create maxHeap to track most frequently occurring tasks
         Comparator<Integer> reversedComp = (a, b) -> b - a;
         PriorityQueue<Integer> maxHeap = new PriorityQueue<>(reversedComp);
-        Queue<Pair<Integer, Integer>> que = new LinkedList<>();
+        Queue<Map.Entry<Integer, Integer>> que = new LinkedList<>();
 
         // 2. create task-frequency array
         int[] taskFrequency = new int[26];
@@ -141,7 +130,7 @@ public class TaskScheduler {
                 tFreq--;
 
                 if(tFreq > 0){
-                    que.add(new Pair(tFreq, time + n)); // pair keep tFreq + timeTaken + idleTime
+                    que.add(new AbstractMap.SimpleEntry<>(tFreq, time + n)); // pair keep tFreq + timeTaken + idleTime
                 }
 
                 if(!que.isEmpty() && que.peek().getKey() == time){
